@@ -1,3 +1,32 @@
 body {
-    color: blue;
+    margin: 0px;
+}
+
+.app-banners{
+    margin: 0px;
+    padding: 0px;
+}
+
+.app-title-banner{
+    display:flex;
+    padding:20px;
+    justify-content: center;
+    background-color: lightcyan;
+    color:black;
+    font-size: 30px;
+    align-items: center;
+}
+
+.app-nav-banners {
+    display: flex;
+    padding: 20px;
+    background-color: aquamarine;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-nav-banners li {
+    padding: 15px;
+    list-style-type: none;
 }
