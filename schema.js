@@ -23,13 +23,6 @@ await db.query(`CREATE TABLE users (
                 updated_at DATETIME NOT NULL
                 )`)
 
-await db.query(`CREATE TABLE salts (
-                salt_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER NOT NULL,
-                salt TEXT NOT NULL,
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-                )`)
-
 await db.query(`CREATE TABLE sessions (
                 uuid TEXT PRIMARY KEY,
                 user_id INTEGER NOT NULL,
