@@ -13,10 +13,9 @@ config({ path: `./.env.${DENO_ENV}`, export: true })
 // const client = new Client(Deno.env.get('PG_URL'))
 // await client.connect()
 
+const db = new DB('./atlas.db')
 // turn on foreign key constraints
 db.query('PRAGMA foreign_keys = ON;')
-
-const db = new DB('./atlas.db')
 
 const app = new Application()
 const PORT = Number(Deno.env.get('PORT'))
