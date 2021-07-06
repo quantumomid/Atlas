@@ -158,4 +158,4 @@ dist
 .pnp.*
 
 # ignoring database
-.db
+*.db
