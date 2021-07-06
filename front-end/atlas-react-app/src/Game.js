@@ -20,17 +20,19 @@ class Game extends Component {
 
   async handleSubmitUserCountry(e) {
     e.preventDefault()
+    const {userInput, letter} = this.state
+    console.log('input: ', userInput)
     const response = await fetch('http://localhost:8080/game', {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state.userInput)
+      body: JSON.stringify({userInput,letter})
     })
 
     const parsedResp = await response.json()
-    console.log(parsedResp)
+    console.log('resp: ', parsedResp)
   }
 
   inputError() {
