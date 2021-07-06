@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class Game extends Component {
   state = {
-    letter: ''
+    letter: '',
+    userInput: ''
   }
 
   async startGame() {
@@ -12,13 +13,53 @@ class Game extends Component {
     this.setState({letter: initialLetter.letter})
   }
 
+  handleUserChange(e) {
+    this.setState({userInput: e.target.value})
+    console.log(this.state.userInput)
+  }
+
+  async handleSubmitUserCountry(e) {
+    e.preventDefault()
+    const response = await fetch('http://localhost:8080/game', {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.userInput)
+    })
+
+    const parsedResp = await response.json()
+    console.log(parsedResp)
+  }
+
+  inputError() {
+    if (this.state.userInput.length > 60) return "nope"
+  }
 
   render() {
-    const { letter } = this.state
+    const { letter, userInput } = this.state
+
     return (
       <main>
         <button onClick={() => this.startGame()}>Start game</button>
         {letter}
+        <form>
+          <input 
+            type = "text" 
+            placeholder = "Enter country beginnning with this letter" 
+            name="userInput" 
+            value={userInput} 
+            onChange ={(e) => this.handleUserChange(e)}
+          />
+          <button 
+            type = "submit"
+            onClick = {(e) => this.handleSubmitUserCountry(e)}
+            disabled = {userInput === "" || this.inputError()}
+          >
+            Submit
+          </button>
+        </form>
       </main>
     )
   }
