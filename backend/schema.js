@@ -34,7 +34,7 @@ await db.query(`CREATE TABLE sessions (
 
 await db.query(`CREATE TABLE current_games (
                 game_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT NOT NULL,
+                username TEXT,
                 played_countries TEXT,
                 score INTEGER DEFAULT 0,
                 created_at DATETIME NOT NULL,
