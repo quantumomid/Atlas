@@ -5,7 +5,7 @@ import { cors } from 'https://deno.land/x/abc@v1.3.1/middleware/cors.ts'
 // import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
-// import loginHandler from './loginHandler.js'
+import registerUser from './registerUser.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 
@@ -30,7 +30,7 @@ const headersWhitelist = [
 app.use(cors({ allowHeaders: headersWhitelist, allowCredentials: true, allowOrigins: Deno.env.get('ALLOWED_ORIGINS')}))
 
 app
-    //.post('/login', loginHandler)
+    .post('/users', registerUser)
     .start({ port: PORT })
 
 console.log(`Server running on http://localhost:${PORT}`)
