@@ -6,7 +6,7 @@ import { cors } from 'https://deno.land/x/abc@v1.3.1/middleware/cors.ts'
 import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import letterGenHandler from './handlers/letterGenHandler.js';
-// import loginHandler from './loginHandler.js'
+import loginHandler from './handlers/loginHandler.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 
@@ -31,7 +31,7 @@ const headersWhitelist = [
 app.use(cors({ allowHeaders: headersWhitelist, allowCredentials: true, allowOrigins: Deno.env.get('ALLOWED_ORIGINS')}))
 
 app
-    //.post('/login', loginHandler)
+    .post('/sessions', loginHandler)
     .get('/letter', letterGenHandler)
     .start({ port: PORT })
 
