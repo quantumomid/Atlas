@@ -13,7 +13,7 @@ async function countryAndCapital() {
 
 const countries = await countryAndCapital()
 
-countries.forEach(country => await db.query("INSERT INTO countries (country_name, capital, created_at) VALUES(?, ?, datetime('now'))", [country.name, country.capital]))
+countries.forEach(async (country) => await db.query("INSERT INTO countries (country_name, capital, created_at) VALUES(?, ?, datetime('now'))", [country.name, country.capital]))
 
 // test doing something to each row/country/capital (for input into postgreSQL table)
 // capitals.forEach(capital => console.log(capital, 'and'))

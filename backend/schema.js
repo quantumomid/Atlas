@@ -18,6 +18,7 @@ await db.query(`CREATE TABLE countries (
 await db.query(`CREATE TABLE users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
                 password_encrypted TEXT NOT NULL,
                 created_at DATETIME NOT NULL,
                 updated_at DATETIME NOT NULL
