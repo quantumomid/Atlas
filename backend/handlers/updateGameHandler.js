@@ -20,8 +20,8 @@ const updateGameHandler = async (server) => {
 
     if (!existingGame) {
         await db.query(`INSERT INTO current_games (username, created_at) VALUES (?, DATETIME('now'));`, [username])    
-    }
-
+    } 
+    
     // validate country input
     const matches = [...db.query(`SELECT country_name 
                                   FROM countries 

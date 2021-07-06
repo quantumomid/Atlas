@@ -3,17 +3,36 @@ import React, { Component } from 'react';
 class Game extends Component {
   state = {
     letter: '',
-    userInput: ''
+    userInput: '',
+    firstTurn: true,
   }
 
-  async startGame() {
+  async buttonChoice() {
+    if (this.state.firstTurn) {
+      console.log('first turn')
+      // on first turn, DELETE request to game (if it exists from prior session)
+      // await fetch(...)
+
+      // then call a new letter
+      await this.callLetter()
+      this.setState({firstTurn: false})
+      
+
+    } else {
+      // otherwise, just call a new letter
+      console.log('not first turn')
+      await this.callLetter()
+    }
+  }
+
+  async callLetter() {
     const response = await fetch(`http://localhost:8080/letter`)
     const initialLetter = await response.json()
     console.log(initialLetter.letter)
     this.setState({letter: initialLetter.letter})
   }
 
-  handleUserChange(e) {
+  handleUserInputChange(e) {
     this.setState({userInput: e.target.value})
     console.log(this.state.userInput)
   }
@@ -44,7 +63,7 @@ class Game extends Component {
 
     return (
       <main>
-        <button onClick={() => this.startGame()}>Start game</button>
+        <button onClick={() => this.buttonChoice()}>Start game</button>
         {letter}
         <form>
           <input 
@@ -52,7 +71,7 @@ class Game extends Component {
             placeholder = "Enter country beginnning with this letter" 
             name="userInput" 
             value={userInput} 
-            onChange ={(e) => this.handleUserChange(e)}
+            onChange ={(e) => this.handleUserInputChange(e)}
           />
           <button 
             type = "submit"
