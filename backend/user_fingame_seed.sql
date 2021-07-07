@@ -9,3 +9,7 @@ INSERT INTO users (username, email, password_encrypted, created_at, updated_at) 
 INSERT INTO finished_games (username, score, created_at) VALUES ('quantumguy', 100, datetime('now'));
 INSERT INTO finished_games (username, score, created_at) VALUES ('quantumjoanna', 90, datetime('now'));
 INSERT INTO finished_games (username, score, created_at) VALUES ('quantumdavid', 120, datetime('now'));
+
+INSERT INTO current_games (username, score, played_countries, created_at) VALUES ('quantumguy', 100, '["Egypt","France"]', datetime('now'));
+INSERT INTO current_games (username, score, played_countries, created_at) VALUES ('quantumguy', 100, '["Egypt","France"]', datetime('now'));
+INSERT INTO current_games (username, score, played_countries, created_at) VALUES ('quantumguy', 100, '["Egypt","France"]', datetime('now'));

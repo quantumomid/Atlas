@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Homepage from './Hompage';
+import Homepage from './Homepage';
 import Game from './Game';
 import Registration from './Registration';
 import Login from './Login';

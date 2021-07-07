@@ -7,6 +7,7 @@ import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import registerUser from './handlers/registerUser.js'
 import letterGenHandler from './handlers/letterGenHandler.js';
+import updateGameHandler from './handlers/updateGameHandler.js';
 // import loginHandler from './loginHandler.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
@@ -35,6 +36,7 @@ app
     .post('/users', registerUser)
     //.post('/login', loginHandler)
     .get('/letter', letterGenHandler)
+    .post('/game', updateGameHandler)
     .start({ port: PORT })
 
 console.log(`Server running on http://localhost:${PORT}`)
