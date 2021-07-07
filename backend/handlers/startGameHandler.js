@@ -1,6 +1,7 @@
 import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import { v4 } from "https://deno.land/std/uuid/mod.ts"
+import getCurrentUser from "./helperFunctions/getCurrentUser.js"
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 config({ path: `./.env.${DENO_ENV}`, export: true })
@@ -12,22 +13,17 @@ const startGameHandler = async (server) => {
     // handles checking the current user, making a temporary user if need be
     // and either creating a new game or accessing one in progress
 
-    const username = undefined // temp hard-coding username
-    
-    // TO DO (IMPORTANT): need to change way of getting username to use cookie?
-
-    const [existingGame] = (await client.queryObject(`SELECT game_id FROM current_games WHERE username=$1;`, username)).rows
-    console.log('game: ', existingGame)
-
-    const [[userExists]] = (await client.queryArray('SELECT COUNT(*)::integer FROM users WHERE username = $1;', username)).rows
-    console.log('userExists: ', userExists)
+    const currentUser = await getCurrentUser(server)
+    let username
+    if (currentUser) username = currentUser.username
+    console.log('username: ', username)
 
     // if user is guest, generate a temporary username for them
-    const trackedName = userExists === 1 ? username : v4.generate()
+    const trackedName = username ? username : v4.generate()
     console.log('trackedName: ', trackedName)
 
     // create a temporary user with the uuid (to account for foreign key constraint on current_games)
-    if (userExists !== 1) {
+    if (!username) {
         await client.queryObject('INSERT INTO users (username, email, password_encrypted, created_at, updated_at) VALUES ($1, $1, $2, NOW(), NOW());', trackedName, v4.generate())
 
         // set a cookie for the temporary user to track their game
@@ -39,7 +35,8 @@ const startGameHandler = async (server) => {
         })
     }
 
-    // TO DO: REMEMBER TO DELETE THIS TEMPORARY USER AFTER GAME ENDS/USER MAYBE REGISTERS (different handler!)
+    const [existingGame] = (await client.queryObject(`SELECT game_id FROM current_games WHERE username=$1;`, trackedName)).rows
+    console.log('game: ', existingGame)
 
     if (existingGame) {
         // delete game if exists
@@ -50,5 +47,7 @@ const startGameHandler = async (server) => {
     await client.queryObject(`INSERT INTO current_games (username, created_at) VALUES ($1, NOW());`, trackedName)
     console.log('created game for user:', trackedName)
 }
+
+// TO DO: REMEMBER TO DELETE THIS TEMPORARY USER AFTER GAME ENDS/USER MAYBE REGISTERS (different handler!)
 
 export default startGameHandler
