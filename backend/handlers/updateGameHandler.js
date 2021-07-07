@@ -23,7 +23,8 @@ const updateGameHandler = async (server) => {
     let user
     if (sessionID) {
         const userData = await getCurrentUser(server)
-        user = userData.username
+        if (userData) user = userData.username
+        if (!userData) throw new Error('Session has expired. Please log back in to continue or refresh to play as guest.')
     } else if (tempUser) {
         user = tempUser
     } else {
