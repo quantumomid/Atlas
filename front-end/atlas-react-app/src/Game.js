@@ -26,7 +26,7 @@ class Game extends Component {
   }
 
   async callLetter() {
-    const response = await fetch(`http://localhost:8080/letter`)
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/letter`)
     const initialLetter = await response.json()
     console.log(initialLetter.letter)
     this.setState({letter: initialLetter.letter})
@@ -41,7 +41,7 @@ class Game extends Component {
     e.preventDefault()
     const {userInput, letter} = this.state
     console.log('input: ', userInput)
-    const response = await fetch('http://localhost:8080/game', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
       method: "POST",
       credentials: "include",
       headers: {

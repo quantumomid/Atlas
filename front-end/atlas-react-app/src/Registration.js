@@ -21,7 +21,7 @@ class Registration extends Component {
     
     //data sent back from POST fetch request in backend (includes any errors and whether registration was a success)
     // const responseData = await responseFromPostFetch(`${process.env.REACT_APP_API_URL}/users`, { username, password, passwordConfirmation})
-    const postFetch = await fetch('http://localhost:8080/users', 
+    const postFetch = await fetch(`${process.env.REACT_APP_API_URL}/users`, 
     {
       method: 'POST', 
       headers: {
