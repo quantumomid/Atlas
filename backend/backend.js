@@ -5,6 +5,7 @@ import { cors } from 'https://deno.land/x/abc@v1.3.1/middleware/cors.ts'
 // import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
+import registerUser from './handlers/registerUser.js'
 import letterGenHandler from './handlers/letterGenHandler.js';
 import updateGameHandler from './handlers/updateGameHandler.js';
 // import loginHandler from './loginHandler.js'
@@ -32,6 +33,7 @@ const headersWhitelist = [
 app.use(cors({ allowHeaders: headersWhitelist, allowCredentials: true, allowOrigins: Deno.env.get('ALLOWED_ORIGINS')}))
 
 app
+    .post('/users', registerUser)
     //.post('/login', loginHandler)
     .get('/letter', letterGenHandler)
     .post('/game', updateGameHandler)
