@@ -4,6 +4,7 @@ import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import registerUser from './handlers/registerUser.js'
 import letterGenHandler from './handlers/letterGenHandler.js';
+import startGameHandler from './handlers/startGameHandler.js';
 import loginHandler from './handlers/loginHandler.js';
 import updateGameHandler from './handlers/updateGameHandler.js';
 import sessionsHandler from './handlers/sessionsHandler.js'
@@ -33,6 +34,7 @@ app
     .post('/users', registerUser)
     .get('/sessions/exists', sessionsHandler)
     .get('/letter', letterGenHandler)
+    .post('/game/new', startGameHandler)
     .post('/game', updateGameHandler)
     .delete('/sessions', logoutHandler)
     .start({ port: PORT })

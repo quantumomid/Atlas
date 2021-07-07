@@ -4,26 +4,27 @@ class Game extends Component {
   state = {
     letter: '',
     userInput: '',
-    firstTurn: true,
+    // firstTurn: true,
+    needStart: true,
   }
 
-  async buttonChoice() {
-    if (this.state.firstTurn) {
-      console.log('first turn')
-      // on first turn, DELETE request to game (if it exists from prior session)
-      // await fetch(...)
+  // async buttonChoice() {
+  //   if (this.state.firstTurn) {
+  //     console.log('first turn')
+  //     // on first turn, DELETE request to game (if it exists from prior session)
+  //     // await fetch(...)
 
-      // then call a new letter
-      await this.callLetter()
-      this.setState({firstTurn: false})
+  //     // then call a new letter
+  //     await this.callLetter()
+  //     this.setState({firstTurn: false})
       
 
-    } else {
-      // otherwise, just call a new letter
-      console.log('not first turn')
-      await this.callLetter()
-    }
-  }
+  //   } else {
+  //     // otherwise, just call a new letter
+  //     console.log('not first turn')
+  //     await this.callLetter()
+  //   }
+  // }
 
   async callLetter() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/letter`)
@@ -37,6 +38,16 @@ class Game extends Component {
     console.log(this.state.userInput)
   }
 
+  async handleStartGame() {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/game/new`, {
+      method: "POST",
+      credentials: "include",
+    })
+
+    this.callLetter()
+    this.setState({needStart: false})
+  }
+
   async handleSubmitUserCountry(e) {
     e.preventDefault()
     const {userInput, letter} = this.state
@@ -47,7 +58,7 @@ class Game extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({userInput,letter})
+      body: JSON.stringify({userInput, letter})
     })
 
     const parsedResp = await response.json()
@@ -66,7 +77,8 @@ class Game extends Component {
 
     return (
       <main>
-        <button onClick={() => this.buttonChoice()}>Start game</button>
+        {/* <button onClick={() => this.buttonChoice()}>Start game</button> */}
+        {this.state.needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         {letter}
         <form>
           <input 
