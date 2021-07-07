@@ -81,7 +81,8 @@ class App extends Component {
             </Route>
             }
             <Route path="/">
-              <Homepage />
+              <Homepage
+              isLoggedIn={isLoggedIn} />
             </Route>
           </Switch>
           </main>
