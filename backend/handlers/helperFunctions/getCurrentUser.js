@@ -9,11 +9,17 @@ await client.connect()
 export default async function getCurrentUser(server){
     const { sessionID } = await server.cookies
     // const [user] = (await client.queryObject("SELECT users.id FROM users JOIN sessions ON users.id = sessions.user_id WHERE sessions.created_at > datetime('now', '-7 days') AND uuid=$1", sessionId)).rows
-    const [user] = (await client.queryObject(`
+    try {
+        const [user] = (await client.queryObject(`
         SELECT users.* FROM users 
         JOIN sessions 
         ON users.id = sessions.user_id 
         WHERE uuid=$1 AND NOW() < expires_at`
         , sessionID)).rows
-    return user
+        return user
+    } catch {
+        return null
+    }
+    
+    
   }

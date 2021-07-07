@@ -4,27 +4,8 @@ class Game extends Component {
   state = {
     letter: '',
     userInput: '',
-    // firstTurn: true,
     needStart: true,
   }
-
-  // async buttonChoice() {
-  //   if (this.state.firstTurn) {
-  //     console.log('first turn')
-  //     // on first turn, DELETE request to game (if it exists from prior session)
-  //     // await fetch(...)
-
-  //     // then call a new letter
-  //     await this.callLetter()
-  //     this.setState({firstTurn: false})
-      
-
-  //   } else {
-  //     // otherwise, just call a new letter
-  //     console.log('not first turn')
-  //     await this.callLetter()
-  //   }
-  // }
 
   async callLetter() {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/letter`)
@@ -61,8 +42,8 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const parsedResp = await response.json()
-    console.log('resp: ', parsedResp)
+    const {correct} = await response.json()
+    console.log('resp: ', correct)
 
     // if response is no... end game
     
@@ -77,7 +58,6 @@ class Game extends Component {
 
     return (
       <main>
-        {/* <button onClick={() => this.buttonChoice()}>Start game</button> */}
         {this.state.needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         {letter}
         <form>

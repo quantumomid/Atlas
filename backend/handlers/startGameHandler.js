@@ -12,18 +12,24 @@ await client.connect()
 const startGameHandler = async (server) => {
     // handles checking the current user, making a temporary user if need be
     // and either creating a new game or accessing one in progress
+    
+    const { sessionID, tempUser } = await server.cookies
 
-    const currentUser = await getCurrentUser(server)
-    let username
-    if (currentUser) username = currentUser.username
-    console.log('username: ', username)
+    // find logged in user, prioritising registered log ins
+    let user
+    const userData = await getCurrentUser(server)
+    if (userData) {
+        user = userData.username
+    } else if (tempUser) {
+        user = tempUser
+    } 
 
-    // if user is guest, generate a temporary username for them
-    const trackedName = username ? username : v4.generate()
+    // if user is NEW guest, generate a temporary username for them
+    const trackedName = user ? user : v4.generate()
     console.log('trackedName: ', trackedName)
 
     // create a temporary user with the uuid (to account for foreign key constraint on current_games)
-    if (!username) {
+    if (!user) {
         await client.queryObject('INSERT INTO users (username, email, password_encrypted, created_at, updated_at) VALUES ($1, $1, $2, NOW(), NOW());', trackedName, v4.generate())
 
         // set a cookie for the temporary user to track their game
@@ -46,6 +52,15 @@ const startGameHandler = async (server) => {
 
     await client.queryObject(`INSERT INTO current_games (username, created_at) VALUES ($1, NOW());`, trackedName)
     console.log('created game for user:', trackedName)
+
+    // delete old games from current_games
+    // const tester = (await client.queryObject("SELECT created_at, NOW() - interval '20 seconds' AS time FROM current_games;")).rows
+    // console.log(tester)
+
+    await client.queryObject("DELETE FROM current_games WHERE created_at < NOW() - interval '1 day';")
+
+    // delete old temporary users from users
+    await client.queryObject("DELETE FROM users WHERE created_at < NOW() - interval '1 day' AND username = email;")
 }
 
 // TO DO: REMEMBER TO DELETE THIS TEMPORARY USER AFTER GAME ENDS/USER MAYBE REGISTERS (different handler!)
