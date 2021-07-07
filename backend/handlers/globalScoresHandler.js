@@ -9,7 +9,7 @@ await client.connect()
 
 export default async function globalScoresHandler(server) {
     const tableLength = 20
-    const gameData = (await client.queryObject(`
+    let gameData = (await client.queryObject(`
         SELECT username, score, created_at
         FROM finished_games
         ORDER BY score DESC

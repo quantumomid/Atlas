@@ -11,14 +11,15 @@ await client.connect()
 export default async function personalTopScoresHandler(server) {
     const tableLength = 20
     const currentUser = await getCurrentUser(server)
+    let gameData = []
     if (currentUser) {
-        const gameData = (await client.queryObject(`
-        SELECT username, score, created_at
-        FROM finished_games
-        WHERE username = $1
-        ORDER BY score DESC
-        LIMIT $2`,
-        currentUser.username, tableLength)).rows
-    await server.json({gameData})
-    } 
+        gameData = (await client.queryObject(`
+            SELECT username, score, created_at
+            FROM finished_games
+            WHERE username = $1
+            ORDER BY score DESC
+            LIMIT $2`,
+            currentUser.username, tableLength)).rows
+    }
+    await server.json({gameData}) 
 }
