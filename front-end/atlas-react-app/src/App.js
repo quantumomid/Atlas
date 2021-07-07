@@ -13,51 +13,82 @@ import {
 
 
 class App extends Component {
-    render() {
-      return (
-        <Router>
-          <div>
-          <main>
-            <nav>
-              <ul className="app-banners">
-                <li className="app-title-banner">
-                <Link to="/">Homepage</Link>
+
+  state = {
+    isLoggedIn: false
+  }
+
+  async componentDidMount() {
+    this.isUserLoggedIn()
+  }
+
+  // checks if user successfully logged in and cookie set
+  async isUserLoggedIn() {
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/sessions/exists`,
+      {
+        credentials: 'include'
+      }
+    )
+    const { isLoggedIn } = await response.json()
+    this.setState({isLoggedIn})
+  }
+
+  render() {
+    const { isLoggedIn } = this.state
+    return (
+      <Router>
+        <div>
+        <main>
+          <nav>
+            <ul className="app-banners">
+              <li className="app-title-banner">
+              <Link to="/">Homepage</Link>
+              </li>
+              <div className="app-nav-banners">
+                <li>
+                <Link to="/game">Game</Link>
                 </li>
-                <div className="app-nav-banners">
-                  <li>
-                  <Link to="/game">Game</Link>
-                  </li>
-                  <li>
-                  <Link to="/register">Register</Link>
-                  </li>
-                  <li>
-                  <Link to="/login">Login</Link>
-                  </li>
-                  <div>
-                    <Logout />
-                  </div>
+                {!isLoggedIn && 
+                <li>
+                <Link to="/register">Register</Link>
+                </li>}
+                <li>
+                {!isLoggedIn && <Link to="/login">Login</Link>}
+                </li>
+                {isLoggedIn && 
+                <div>
+                  <Logout
+                  handleLogout={() => this.isUserLoggedIn()} />
                 </div>
-              </ul>
-            </nav>
-            <Switch>
-              <Route path="/game">
-                <Game />
-              </Route>
-              <Route path="/register">
-                <Registration />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/">
-                <Homepage />
-              </Route>
-            </Switch>
-            </main>
-          </div>
-        </Router>
-      )
-    }
+                }
+              </div>
+            </ul>
+          </nav>
+          <Switch>
+            <Route path="/game">
+              <Game />
+            </Route>
+            { !isLoggedIn &&
+            <Route path="/register">
+              <Registration />
+            </Route>
+            }
+            { !isLoggedIn &&
+            <Route path="/login">
+              <Login
+              handleLogin={() => this.isUserLoggedIn()} />
+            </Route>
+            }
+            <Route path="/">
+              <Homepage />
+            </Route>
+          </Switch>
+          </main>
+        </div>
+      </Router>
+    )
+  }
 }
 
 export default App
