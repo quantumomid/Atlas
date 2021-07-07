@@ -58,7 +58,7 @@ class Game extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({userInput,letter})
+      body: JSON.stringify({userInput, letter})
     })
 
     const parsedResp = await response.json()
