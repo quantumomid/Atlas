@@ -1,6 +1,11 @@
-import { DB } from 'https://deno.land/x/sqlite/mod.ts'
+import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
+import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
 
-const db = new DB('./atlas.db')
+const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
+config({ path: `./.env.${DENO_ENV}`, export: true })
+
+const client = new Client(Deno.env.get("PG_URL"))
+await client.connect()
 
 // fetches country capital cities
 async function countryAndCapital() {
@@ -13,8 +18,5 @@ async function countryAndCapital() {
 
 const countries = await countryAndCapital()
 
-countries.forEach(async (country) => await db.query("INSERT INTO countries (country_name, capital, created_at) VALUES(?, ?, datetime('now'))", [country.name, country.capital]))
-
-// test doing something to each row/country/capital (for input into postgreSQL table)
-// capitals.forEach(capital => console.log(capital, 'and'))
+countries.forEach(async (country) => await client.queryObject("INSERT INTO countries (country_name, capital, created_at) VALUES($1, $2, NOW())", country.name, country.capital))
 
