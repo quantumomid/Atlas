@@ -19,6 +19,7 @@ const updateGameHandler = async (server) => {
     const { sessionID, tempUser } = await server.cookies
     // console.log('sessionID: ', sessionID, 'tempUser: ', tempUser)
 
+    // finds user, prioritising registered log in over temporary users
     let user
     if (sessionID) {
         const userData = await getCurrentUser(server)
@@ -30,6 +31,7 @@ const updateGameHandler = async (server) => {
     }
     // console.log('user: ', user)
 
+    // take user input
     const { userInput, letter } = await server.body
 
     console.log('userInput: ', userInput)
@@ -38,32 +40,51 @@ const updateGameHandler = async (server) => {
     // basic validations mirroring front end validations
     if (typeof userInput !== 'string' || userInput.length > 60 || userInput.length === 0) throw new Error('Bad userInput.')
 
+    // find already played countries in this game
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
     console.log('countryArray: ', countryArray)
 
-    if (!countryArray) countryArray = []
+    if (!countryArray) countryArray = [] // if null (first turn), initialise as empty array
     
-    // add most recent input to list
+    // add most recent input to array
     countryArray.push(userInput)
     console.log('after push', countryArray)
 
-    // re-stringify and update current_game
+    // re-stringify and update current_game table
     await client.queryObject(`UPDATE current_games
                               SET played_countries = $1
                               WHERE username = $2;`, JSON.stringify(countryArray), user)
 
-    // validate country input and disregard case
+    // check correctness of suggested country answer (disregarding case)
     const [matches] = (await client.queryArray(`SELECT country_name 
                                                 FROM countries 
                                                 WHERE LOWER(country_name) = $1
                                                 AND SUBSTRING(country_name, 1, 1) = $2;`, userInput.toLowerCase(), letter)).rows
     console.log('matches: ', matches)
 
+    const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
+    console.log('current score: ', score)
+
     if (!matches) {
-        // if answer is incorrect, add to finished_games, delete from current_games, and return some response
+        // if answer is incorrect, add to finished_games, delete from current_games, and return some response ***ADD SCORE***
+        await client.queryObject(`INSERT INTO finished_games (username, score, created_at) VALUES ($1, $2, NOW());`, user, score)
+        await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, user)
+        console.log('wrong answer, current game moved to finished game')
+        
+        await server.json({correct: false})
 
     } else {
         // return some other response
+        // update score in current_games
+        // 1 is placeholder for whatever we decide a correct answer is worth!
+        await client.queryObject(`UPDATE current_games
+                                  SET score = $1
+                                  WHERE username = $2;`, score + 1, user)
+        // test:                                  
+        // let [[scoreYes]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
+        // console.log('correct! ', scoreYes)
+
+        await server.json({correct: true})
     }
 }
 
