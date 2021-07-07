@@ -12,7 +12,7 @@ const startGameHandler = async (server) => {
     // handles checking the current user, making a temporary user if need be
     // and either creating a new game or accessing one in progress
 
-    const username = 'quantumguy' // temp hard-coding username
+    const username = undefined // temp hard-coding username
     
     // TO DO (IMPORTANT): need to change way of getting username to use cookie?
 
@@ -27,14 +27,28 @@ const startGameHandler = async (server) => {
     console.log('trackedName: ', trackedName)
 
     // create a temporary user with the uuid (to account for foreign key constraint on current_games)
-    if (userExists !== 1) await client.queryObject('INSERT INTO users (username, email, password_encrypted, created_at, updated_at) VALUES ($1, $1, $1, NOW(), NOW());', trackedName)
-    
-    // TO DO: REMEMBER TO DELETE THIS TEMPORARY USER AFTER GAME ENDS/USER MAYBE REGISTERS
+    if (userExists !== 1) {
+        await client.queryObject('INSERT INTO users (username, email, password_encrypted, created_at, updated_at) VALUES ($1, $1, $2, NOW(), NOW());', trackedName, v4.generate())
 
-    if (!existingGame) {
-        // create new game if one doesn't exist
-        await client.queryObject(`INSERT INTO current_games (username, created_at) VALUES ($1, NOW());`, trackedName)
+        // set a cookie for the temporary user to track their game
+        server.setCookie({
+            name: "tempUser",
+            value: trackedName,
+            path: "/",
+            expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24) // a day
+        })
+    }
+
+    // TO DO: REMEMBER TO DELETE THIS TEMPORARY USER AFTER GAME ENDS/USER MAYBE REGISTERS (different handler!)
+
+    if (existingGame) {
+        // delete game if exists
+        await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, trackedName)
+        console.log('deleted existing game for user:', trackedName)        
     } 
+
+    await client.queryObject(`INSERT INTO current_games (username, created_at) VALUES ($1, NOW());`, trackedName)
+    console.log('created game for user:', trackedName)
 }
 
 export default startGameHandler
