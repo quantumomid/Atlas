@@ -7,6 +7,8 @@ import letterGenHandler from './handlers/letterGenHandler.js';
 import loginHandler from './handlers/loginHandler.js';
 import updateGameHandler from './handlers/updateGameHandler.js';
 import sessionsHandler from './handlers/sessionsHandler.js'
+import logoutHandler from './handlers/logoutHandler.js'
+
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 
@@ -32,6 +34,7 @@ app
     .get('/sessions/exists', sessionsHandler)
     .get('/letter', letterGenHandler)
     .post('/game', updateGameHandler)
+    .delete('/sessions', logoutHandler)
     .start({ port: PORT })
 
 console.log(`Server running on http://localhost:${PORT}`)

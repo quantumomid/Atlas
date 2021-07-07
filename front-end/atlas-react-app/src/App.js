@@ -34,11 +34,8 @@ class App extends Component {
     this.setState({isLoggedIn})
   }
 
-  handleLogin() {
-    this.isUserLoggedIn()
-  }
-
   render() {
+    const { isLoggedIn } = this.state
     return (
       <Router>
         <div>
@@ -52,15 +49,19 @@ class App extends Component {
                 <li>
                 <Link to="/game">Game</Link>
                 </li>
+                {!isLoggedIn && 
                 <li>
                 <Link to="/register">Register</Link>
-                </li>
+                </li>}
                 <li>
-                <Link to="/login">Login</Link>
+                {!isLoggedIn && <Link to="/login">Login</Link>}
                 </li>
+                {isLoggedIn && 
                 <div>
-                  <Logout />
+                  <Logout
+                  handleLogout={() => this.isUserLoggedIn()} />
                 </div>
+                }
               </div>
             </ul>
           </nav>
@@ -68,13 +69,17 @@ class App extends Component {
             <Route path="/game">
               <Game />
             </Route>
+            { !isLoggedIn &&
             <Route path="/register">
               <Registration />
             </Route>
+            }
+            { !isLoggedIn &&
             <Route path="/login">
               <Login
-              handleLogin={() => this.handleLogin()} />
+              handleLogin={() => this.isUserLoggedIn()} />
             </Route>
+            }
             <Route path="/">
               <Homepage />
             </Route>
