@@ -70,8 +70,9 @@ const updateGameHandler = async (server) => {
         await client.queryObject(`INSERT INTO finished_games (username, score, created_at) VALUES ($1, $2, NOW());`, user, score)
         await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, user)
         console.log('wrong answer, current game moved to finished game')
-        
-        await server.json({correct: false})
+
+        const correct = false
+        await server.json({correct})
 
     } else {
         // return some other response
@@ -84,7 +85,8 @@ const updateGameHandler = async (server) => {
         // let [[scoreYes]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
         // console.log('correct! ', scoreYes)
 
-        await server.json({correct: true})
+        const correct = true
+        await server.json({correct})
     }
 }
 

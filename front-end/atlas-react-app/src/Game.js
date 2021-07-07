@@ -61,8 +61,8 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const parsedResp = await response.json()
-    console.log('resp: ', parsedResp)
+    const {correct} = await response.json()
+    console.log('resp: ', correct)
 
     // if response is no... end game
     
