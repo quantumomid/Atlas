@@ -63,7 +63,7 @@ const updateGameHandler = async (server) => {
     console.log('matches: ', matches)
 
     const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
-    console.log('current score: ', score)
+    // console.log('current score: ', score)
 
     if (!matches) {
         // if answer is incorrect, add to finished_games, delete from current_games, and return some response ***ADD SCORE***
