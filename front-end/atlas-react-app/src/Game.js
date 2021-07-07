@@ -52,6 +52,9 @@ class Game extends Component {
 
     const parsedResp = await response.json()
     console.log('resp: ', parsedResp)
+
+    // if response is no... end game
+    
   }
 
   inputError() {
