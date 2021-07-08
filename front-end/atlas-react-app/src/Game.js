@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 
 class Game extends Component {
-  state = {
+  
+  initialState = {
     letter: '',
     userInput: '',
     needStart: true,
@@ -11,6 +12,8 @@ class Game extends Component {
     aiCountryChoice: '',
     gameOver: false,
   }
+
+  state = this.initialState
 
   async callLetter() {
     // calls a random letter that a country starts with
@@ -70,7 +73,8 @@ class Game extends Component {
 
     // TO DO: if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
-      //render endgame
+      // render endgame
+      this.setState({gameOver: true})
     }
   }
 
@@ -110,12 +114,17 @@ class Game extends Component {
     }
   }
 
+  handleGameReset() {
+    this.setState(this.initialState)
+  }
+
   render() {
     const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
                           isLoggedIn={this.props.isLoggedIn}
+                          handleGameReset = {() => this.handleGameReset()}
                          />
     
     return (

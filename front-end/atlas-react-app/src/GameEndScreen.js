@@ -42,6 +42,7 @@ class GameEndScreen extends Component {
                     <h2>Your played countries</h2>
                     <p>{playedCountryArray}</p>
                 </div>
+                <button onClick={() => this.props.handleGameReset()}> Play again</button>
             </div>
         )
     }
