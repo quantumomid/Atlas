@@ -115,7 +115,7 @@ class Game extends Component {
       body: JSON.stringify({lastLetter})
     })
     //returns country name that AI plays
-    const { aiCountryChoice, allCountriesPlayed } = await response.json()
+    const { aiCountryChoice, allCountriesPlayed, letter } = await response.json()
 
     if (allCountriesPlayed) {
       console.log('game ends due to no more countries')
@@ -125,7 +125,7 @@ class Game extends Component {
       console.log('ai country pick: ', aiCountryChoice)
 
       // trigger next player turn, displaying new lastLetter
-      this.setState({isPlayerTurn: true, aiCountryChoice, letter: aiCountryChoice.slice(-1).toUpperCase()})
+      this.setState({isPlayerTurn: true, aiCountryChoice, letter})
     }
   }
 

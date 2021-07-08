@@ -106,8 +106,46 @@ async function aiTurnHandler(server) {
                                 WHERE username = $2;`, JSON.stringify(countryArray), user)
 
         // return the AI's chosen country to the frontend
-        await server.json({aiCountryChoice})
+        timesTried = 0
+        let foundLetter = false
+        do {
+            // find all possible right answers for this letter
+            let aiCountries = (await client.queryArray(`SELECT country_name
+                                                        FROM countries 
+                                                        WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, lastLetter.toLowerCase())).rows
+    
+            // turn array of arrays into 1D array of strings                                                  
+            aiCountries = aiCountries.flat()                                                  
+            // console.log('aiCountries not filtered: ', aiCountries)
+    
+            const filteredAiCountries = aiCountries.filter(country => !countryArray.includes(country))
+            console.log('aiCountries filtered: ', filteredAiCountries)
+    
+            if (filteredAiCountries.length > 0) {
+                foundLetter = true
+            
+            } else {
+                // if (filteredAiCountries.length === 0) throw new Error('no possible countries remaining')
+                
+                let letterIndex = alphabet.findIndex(lastLetter.toLowerCase())
+                if (letterIndex === -1) throw new Error("How did you get here?")
+                if (letterIndex === 25) letterIndex = -1 // accounts for ending with Z
+                lastLetter = alphabet[letterIndex + 1] // set lastLetter equal to new letter, to loop back through and check
+                
+            }
+    
+            timesTried += 1
+            if (timesTried > 25) break // after checking every letter once, break out of loop with foundSolution still false
+        } while (!foundLetter)
 
+        if (!foundLetter) {
+            console.log('No more countries left!')
+            const allCountriesPlayed = true
+            await server.json({allCountriesPlayed})
+        }
+
+        await server.json({aiCountryChoice, letter: lastLetter})
+        
 
         // TO DO: CHECK FOR ANSWERS TO LAST LETTER OF AI RESPONSE, CHANGE SENT LETTER BACK IF NEED BE
     }
