@@ -7,6 +7,9 @@ function RegisterForm(props){
         signUpValidator(email, username, password, passwordConfirmation)
         validSignup = true
     } catch (err) {}
+    
+    const [usernameError, passwordError, passwordConfirmationError] = createErrorMessages(username, password, passwordConfirmation)
+   
     return (
         <div>
             <h1>Register!!!</h1>
@@ -29,6 +32,7 @@ function RegisterForm(props){
                         value={username}
                     />
                 </label>
+                <p>{usernameError}</p>
 
                 <label>Password:
                     <input 
@@ -39,6 +43,7 @@ function RegisterForm(props){
                         minLength="8" required  
                     />
                 </label>
+                <p>{passwordError}</p>
 
                 <label>Password Confirmation:
                     <input 
@@ -49,6 +54,8 @@ function RegisterForm(props){
                         minLength="8" required  
                     />
                 </label>
+                <p>{passwordConfirmationError}</p>
+
 
                 <button 
                 type="submit"
@@ -67,16 +74,16 @@ export default RegisterForm
 function signUpValidator(email, username, password, passwordConfirmation) {
     emailValidator(email)
     usernameValidator(username)
-    passwordValidator(password, passwordConfirmation)
+    passwordValidator(password)
+    if (password !== passwordConfirmation) throw new Error('Passwords must be equal')
   }
   
-  function passwordValidator(password, passwordConfirmation) {
+  function passwordValidator(password) {
     const numbers = '1234567890'
     const letters = 'qwertyuiopasdfghjklzxcvbnm'
     if (!(password.split('').some(character => numbers.includes(character.toLowerCase())))) throw new Error('Password must include at least one number')
     if (!(password.split('').some(character => letters.includes(character.toLowerCase())))) throw new Error('Password must include at least one letter')
     if (password.length < 8 || password.length > 30) throw new Error('Passwords must be between 8 and 30 characters')
-    if (password !== passwordConfirmation) throw new Error('Passwords must be equal')
   }
   
   function usernameValidator(username){
@@ -88,4 +95,20 @@ function signUpValidator(email, username, password, passwordConfirmation) {
   
   function emailValidator(email) {
     if (email.length === 0) throw new Error('Email cannot be blank')
+  }
+
+  function createErrorMessages(username, password, passwordConfirmation) {
+    let usernameError, passwordError, passwordConfirmationError
+    try {
+        if (username) usernameValidator(username)
+    } catch (err) {
+        usernameError = err.message
+    }
+    try {
+        if (password) passwordValidator(password)
+    } catch (err) {
+        passwordError = err.message
+    }
+    if (passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
+    return [usernameError, passwordError, passwordConfirmationError]
   }
