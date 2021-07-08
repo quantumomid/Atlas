@@ -66,10 +66,11 @@ class Game extends Component {
       if (this.state.isPlayerTurn && !this.state.needStart) {
         // non-first player turns
         console.log('non-first player turn is called')
+
       } else if (!this.state.isPlayerTurn) {
         // ai turn
         console.log('ai turn is called')
-        this.triggerAiTurn()
+        await this.triggerAiTurn()
       }
     }
   }

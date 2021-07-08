@@ -31,11 +31,22 @@ async function aiTurnHandler(server) {
                                                   FROM countries 
                                                   WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, lastLetter.toLowerCase())).rows
 
-    const aiCountryChoice = aiCountries[Math.floor(Math.random() * aiCountries.length)]
+    const [aiCountryChoice] = aiCountries[Math.floor(Math.random() * aiCountries.length)]
     console.log('ai country choice: ', aiCountryChoice)
 
+    let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
+    countryArray = JSON.parse(countryArray)
+    console.log('ai turn countryArray: ', countryArray)
+    // console.log('country array is a ' + (typeof countryArray))
+    countryArray.push(aiCountryChoice)
+    
+    // re-stringify and update current_game table
+    await client.queryObject(`UPDATE current_games
+                              SET played_countries = $1
+                              WHERE username = $2;`, JSON.stringify(countryArray), user)
+
     const aiFinished = true
-    await server.json({aiFinished})
+    await server.json({aiFinished, aiCountryChoice})
 }
 
 export default aiTurnHandler
