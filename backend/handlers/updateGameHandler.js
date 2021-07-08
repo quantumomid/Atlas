@@ -53,9 +53,9 @@ const updateGameHandler = async (server) => {
 
     if (!matches) {
         // if answer is incorrect, add to finished_games, delete from current_games, and return some response ***ADD SCORE***
-        if (user.length <= 20) await client.queryObject(`INSERT INTO finished_games (username, score, created_at) VALUES ($1, $2, NOW());`, user, score)
-        await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, user)
-        console.log('wrong answer, current game moved to finished game')
+        //if (user.length <= 20) await client.queryObject(`INSERT INTO finished_games (username, score, created_at) VALUES ($1, $2, NOW());`, user, score)
+        //await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, user)
+        //console.log('wrong answer, current game moved to finished game')
 
         const correct = false
         await server.json({correct})

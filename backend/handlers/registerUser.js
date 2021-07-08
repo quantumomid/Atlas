@@ -79,19 +79,23 @@ const registerUser = async (server) => {
     username, email, passwordEncrypted);
   
 
-  // saving game to finished games if user signing up from game end screen
+  // saving game to finished games if user signing up from game end screen and deleting from current games
   if (saveScore) {
     const { tempUser } = await server.cookies
     try {
-      const [[score]] = await client.queryArray(`
+      const [[score]] = (await client.queryArray(`
         SELECT score
         FROM current_games
         WHERE username = $1`,
-        tempUser)
+        tempUser)).rows
       await client.queryObject(`
         INSERT INTO finished_games(username, score, created_at)
         VALUES($1, $2, NOW())`,
         username, score)
+      await client.queryObject(`
+        DELETE FROM current_games
+        WHERE username = $1`,
+        tempUser)
       await server.setCookie({
         name: "tempUser",
         value: "",

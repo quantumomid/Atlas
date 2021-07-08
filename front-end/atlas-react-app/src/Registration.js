@@ -40,16 +40,17 @@ class Registration extends Component {
   }
   
   render() {
+    const { username, password, passwordConfirmation, message } = this.state
     return (
       <div>
       <RegisterForm
       handleChange={(event) => this.handleChange(event)}
       handleSubmit={(event) => this.handleSubmit(event)} 
-      username={this.state.username}
-      password={this.state.password}
-      passwordConfirmation={this.state.passwordConfirmation}
+      username={username}
+      password={password}
+      passwordConfirmation={passwordConfirmation}
       />
-      <div>{this.state.message}</div>
+      <div>{message}</div>
       </div>     )
     }
     

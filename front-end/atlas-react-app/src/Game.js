@@ -9,6 +9,7 @@ class Game extends Component {
     isPlayerTurn: true,
     lastLetter: '',
     aiCountryChoice: '',
+    gameOver: false,
   }
 
   async callLetter() {
@@ -113,7 +114,7 @@ class Game extends Component {
     const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver } = this.state
   
     if (gameOver) return <GameEndScreen
-                          score={0}
+                          currentGameID={0}
                           isLoggedIn={this.props.isLoggedIn}
                          />
     
