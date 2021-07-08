@@ -67,7 +67,9 @@ class App extends Component {
           </nav>
           <Switch>
             <Route path="/game">
-              <Game />
+              <Game 
+              isLoggedIn={isLoggedIn}
+              />
             </Route>
             { !isLoggedIn &&
             <Route path="/register">

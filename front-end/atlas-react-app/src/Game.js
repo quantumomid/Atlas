@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GameEndScreen from './GameEndScreen';
 
 class Game extends Component {
   state = {
@@ -54,7 +55,12 @@ class Game extends Component {
   }
 
   render() {
-    const { letter, userInput } = this.state
+    const { letter, userInput, gameOver } = this.state
+  
+    if (gameOver) return <GameEndScreen
+                          score={0}
+                          isLoggedIn={this.props.isLoggedIn}
+                         />
 
     return (
       <main>
