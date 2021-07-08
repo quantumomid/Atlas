@@ -1,4 +1,5 @@
 import React from 'react'
+import UniqueUsernameError from './UniqueUsernameError'
 
 function RegisterForm(props){
     const { handleSubmit, handleChange, email, username, password, passwordConfirmation } = props
@@ -33,6 +34,7 @@ function RegisterForm(props){
                     />
                 </label>
                 <p>{usernameError}</p>
+                <UniqueUsernameError username={username}/>
 
                 <label>Password:
                     <input 
