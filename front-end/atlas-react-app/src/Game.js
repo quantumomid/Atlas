@@ -54,11 +54,14 @@ class Game extends Component {
       this.setState({isPlayerTurn: false})
     }
 
-    // if response is no... end game
+    // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(_prevProps, prevState) {
+    // triggers toggling between player and AI turns
+
+    // only runs when isPlayerTurn state changes (which is when they give a right answer)
     if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
       if (this.state.isPlayerTurn && !this.state.needStart) {
         // non-first player turns
@@ -66,6 +69,7 @@ class Game extends Component {
       } else if (!this.state.isPlayerTurn) {
         // ai turn
         console.log('ai turn is called')
+        this.triggerAiTurn()
       }
     }
   }
