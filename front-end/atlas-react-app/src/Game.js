@@ -7,6 +7,7 @@ class Game extends Component {
     needStart: true,
     isPlayerTurn: true,
     lastLetter: '',
+    aiCountryChoice: '',
   }
 
   async callLetter() {
@@ -47,7 +48,7 @@ class Game extends Component {
     const {correct, lastLetter} = await response.json()
     console.log('correct: ', correct)
     console.log('lastLetter response:', lastLetter)
-    this.setState({lastLetter})
+    this.setState({lastLetter, userInput: ''})
 
     if (correct) {
       // only want to trigger ai turn if player was correct (otherwise ends game)
@@ -56,23 +57,6 @@ class Game extends Component {
 
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     
-  }
-
-  async componentDidUpdate(_prevProps, prevState) {
-    // triggers toggling between player and AI turns
-
-    // only runs when isPlayerTurn state changes (which is when they give a right answer)
-    if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
-      if (this.state.isPlayerTurn && !this.state.needStart) {
-        // non-first player turns
-        console.log('non-first player turn is called')
-
-      } else if (!this.state.isPlayerTurn) {
-        // ai turn
-        console.log('ai turn is called')
-        await this.triggerAiTurn()
-      }
-    }
   }
 
   async triggerAiTurn() {
@@ -85,7 +69,27 @@ class Game extends Component {
       },
       body: JSON.stringify({lastLetter})
     })
-    this.setState({isPlayerTurn: true})
+    const { aiCountryChoice } = await response.json()
+    console.log('ai country pick: ', aiCountryChoice)
+    this.setState({isPlayerTurn: true, aiCountryChoice, letter: aiCountryChoice.slice(-1).toUpperCase()})
+  }
+
+  async componentDidUpdate(_prevProps, prevState) {
+    // triggers toggling between player and AI turns
+
+    // only runs when isPlayerTurn state changes (which is when they give a right answer)
+    if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
+      if (this.state.isPlayerTurn && !this.state.needStart) {
+        // non-first player turns
+        console.log('non-first player turn is called')
+
+
+      } else if (!this.state.isPlayerTurn) {
+        // ai turn
+        console.log('ai turn is called')
+        await this.triggerAiTurn()
+      }
+    }
   }
 
   inputError() {
@@ -93,12 +97,13 @@ class Game extends Component {
   }
 
   render() {
-    const { letter, userInput } = this.state
-
+    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn } = this.state
+    
     return (
       <main>
-        {this.state.needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
-        {letter}
+        {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
+        {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
+        {letter && <div>Name a country beginning with {letter} </div>}
         <form>
           <input 
             type = "text" 
@@ -106,6 +111,7 @@ class Game extends Component {
             name="userInput" 
             value={userInput} 
             onChange ={(e) => this.handleUserInputChange(e)}
+            autoComplete = 'off'
           />
           <button 
             type = "submit"

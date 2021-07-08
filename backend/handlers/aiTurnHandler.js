@@ -45,8 +45,7 @@ async function aiTurnHandler(server) {
                               SET played_countries = $1
                               WHERE username = $2;`, JSON.stringify(countryArray), user)
 
-    const aiFinished = true
-    await server.json({aiFinished, aiCountryChoice})
+    await server.json({aiCountryChoice})
 }
 
 export default aiTurnHandler

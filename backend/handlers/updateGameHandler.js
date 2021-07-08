@@ -45,8 +45,9 @@ const updateGameHandler = async (server) => {
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
     console.log('countryArray: ', countryArray)
 
+    if (countryArray) countryArray = JSON.parse(countryArray) // parse the JSON stringified array
     if (!countryArray) countryArray = [] // if null (first turn), initialise as empty array
-    
+
     // add most recent input to array
     countryArray.push(userInput)
     console.log('after push', countryArray)
