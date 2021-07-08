@@ -115,11 +115,18 @@ class Game extends Component {
       body: JSON.stringify({lastLetter})
     })
     //returns country name that AI plays
-    const { aiCountryChoice } = await response.json()
-    console.log('ai country pick: ', aiCountryChoice)
+    const { aiCountryChoice, allCountriesPlayed } = await response.json()
 
-    // trigger next player turn, displaying new lastLetter
-    this.setState({isPlayerTurn: true, aiCountryChoice, letter: aiCountryChoice.slice(-1).toUpperCase()})
+    if (allCountriesPlayed) {
+      console.log('game ends due to no more countries')
+      this.handleLoss() // if all countries have been played
+
+    } else {
+      console.log('ai country pick: ', aiCountryChoice)
+
+      // trigger next player turn, displaying new lastLetter
+      this.setState({isPlayerTurn: true, aiCountryChoice, letter: aiCountryChoice.slice(-1).toUpperCase()})
+    }
   }
 
   async componentDidUpdate(_prevProps, prevState) {
