@@ -12,6 +12,7 @@ class Registration extends Component {
   async handleSubmit(event){
     event.preventDefault()
     const { email, username, password, passwordConfirmation } = this.state
+    const { saveScore } = this.props
     
     try {
       signUpValidator(email, username, password, passwordConfirmation) 
@@ -28,7 +29,7 @@ class Registration extends Component {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
-      body: JSON.stringify({ username, email, password, passwordConfirmation})
+      body: JSON.stringify({ username, email, password, passwordConfirmation, saveScore})
     })
     const { message } = await postFetch.json()
     this.setState({message})
@@ -39,16 +40,17 @@ class Registration extends Component {
   }
   
   render() {
+    const { username, password, passwordConfirmation, message } = this.state
     return (
       <div>
       <RegisterForm
       handleChange={(event) => this.handleChange(event)}
       handleSubmit={(event) => this.handleSubmit(event)} 
-      username={this.state.username}
-      password={this.state.password}
-      passwordConfirmation={this.state.passwordConfirmation}
+      username={username}
+      password={password}
+      passwordConfirmation={passwordConfirmation}
       />
-      <div>{this.state.message}</div>
+      <div>{message}</div>
       </div>     )
     }
     

@@ -52,7 +52,7 @@ async function signUpValidator(email, username, password, confirmedPassword) {
 const registerUser = async (server) => {
   
   //retrieve typed details from form elements from front-end
-  const { email, username, password, passwordConfirmation } = await server.body;
+  const { email, username, password, passwordConfirmation, saveScore } = await server.body;
   // console.log('registerrrrrinnnnnggg......... :)')
   // console.log(username, password, passwordConfirmation)
   
@@ -73,7 +73,40 @@ const registerUser = async (server) => {
   // console.log(passwordEncrypted)
   
   //save encrypted password with username into users table
-  await client.queryObject(`INSERT INTO users(username, email, password_encrypted, created_at, updated_at) VALUES ($1, $2, $3, NOW(), NOW());`, username, email, passwordEncrypted); 
+  await client.queryObject(`
+    INSERT INTO users(username, email, password_encrypted, created_at, updated_at) 
+    VALUES ($1, $2, $3, NOW(), NOW());`,
+    username, email, passwordEncrypted);
+  
+
+  // saving game to finished games if user signing up from game end screen and deleting from current games
+  if (saveScore) {
+    const { tempUser } = await server.cookies
+    try {
+      const [[score]] = (await client.queryArray(`
+        SELECT score
+        FROM current_games
+        WHERE username = $1`,
+        tempUser)).rows
+      await client.queryObject(`
+        INSERT INTO finished_games(username, score, created_at)
+        VALUES($1, $2, NOW())`,
+        username, score)
+      await client.queryObject(`
+        DELETE FROM current_games
+        WHERE username = $1`,
+        tempUser)
+      await server.setCookie({
+        name: "tempUser",
+        value: "",
+        path: "/",
+        secure: Deno.env.get('DENO_ENV') === 'production',
+        sameSite: Deno.env.get('DENO_ENV') === 'production' ? 'none' : 'lax',
+        expires: new Date(0),
+      });
+    }
+    catch { return await server.json({message: 'Successful signup but score not saved'})}
+  }
   
   await server.json({message: 'Success'}) //return to stories page after submission
   
