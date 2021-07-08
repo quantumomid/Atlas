@@ -9,7 +9,9 @@ const client = new Client(Deno.env.get("PG_URL"))
 await client.connect()
 
 export default async function loginHandler(server) {
-    const { username, password } = await server.body
+    let { username, password } = await server.body
+    // make username non case sensitive
+    username = username.toLowerCase()
     const [userInfo] = (await client.queryObject('SELECT id, password_encrypted FROM users WHERE username = $1', username)).rows
 
     try{

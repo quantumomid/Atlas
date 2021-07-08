@@ -34,25 +34,28 @@ async function usernameValidator(username){
   if (!(username.split('').every(character => acceptedCharacters.includes(character.toLowerCase())))) throw new Error('Username can only include numbers and letters')
 }
 
-function passwordValidator(password, confirmedPassword) {
+function passwordValidator(password, passwordConfirmation) {
   const numbers = '1234567890'
   const letters = 'qwertyuiopasdfghjklzxcvbnm'
   if (!(password.split('').some(character => numbers.includes(character.toLowerCase())))) throw new Error('Password must include at least one number')
   if (!(password.split('').some(character => letters.includes(character.toLowerCase())))) throw new Error('Password must include at least one letter')
   if (password.length < 8 || password.length > 30) throw new Error('Passwords must be between 8 and 30 characters')
-  if (password !== confirmedPassword) throw new Error('Passwords must be equal')
+  if (password !== passwordConfirmation) throw new Error('Passwords must be equal')
 }
 
-async function signUpValidator(email, username, password, confirmedPassword) {
+async function signUpValidator(email, username, password, passwordConfirmation) {
   await emailValidator(email)
   await usernameValidator(username)
-  passwordValidator(password, confirmedPassword)
+  passwordValidator(password, passwordConfirmation)
 }
 
 const registerUser = async (server) => {
   
   //retrieve typed details from form elements from front-end
-  const { email, username, password, passwordConfirmation, saveScore } = await server.body;
+  let { email, username, password, passwordConfirmation, saveScore } = await server.body;
+  //make email and username non case sensitive
+  email = email.toLowerCase()
+  username = username.toLowerCase()
   // console.log('registerrrrrinnnnnggg......... :)')
   // console.log(username, password, passwordConfirmation)
   
