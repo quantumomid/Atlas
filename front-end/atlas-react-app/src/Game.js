@@ -17,20 +17,23 @@ class Game extends Component {
   
   state = this.initialState
   
-  handleStart(){
+  handleStart() {
     this.timerInterval = setInterval(() => {
         this.setState(prevState => {
             return {time: prevState.time - 1}
         })
     }, 1000)
   }
-  handleStop(){
+
+  handleRestart() {
     clearInterval(this.timerInterval)
-  }
-  handleRestart(){
-    this.handleStop()
     this.setState({time: 20})
     this.handleStart()
+  }
+
+  handleLoss() {
+    clearInterval(this.timerInterval)
+    this.setState({gameOver: true})
   }
 
   async callLetter() {
@@ -91,11 +94,11 @@ class Game extends Component {
       this.handleRestart()
     }
 
-    // TO DO: if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
+    // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
       //render endgame
-      this.handleStop()
-      this.setState({gameOver: true})
+      this.handleLoss()
+      
     }
   }
 
@@ -119,8 +122,10 @@ class Game extends Component {
   }
 
   async componentDidUpdate(_prevProps, prevState) {
-    // triggers toggling between player and AI turns
+    // handles time running out
+    if (this.state.time === 0 && !this.state.gameOver) this.handleLoss()
 
+    // triggers toggling between player and AI turns
     // only runs when isPlayerTurn state changes (which is when they give a right answer)
     if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
       if (this.state.isPlayerTurn && !this.state.needStart) {
@@ -151,8 +156,6 @@ class Game extends Component {
     return (
       <main>
         <h2>Time remaining: {this.state.time}</h2>
-        {this.state.time===0 && this.handleStop()}
-        {this.state.time===0 && <h2 style={{color: 'red'}}>You lose</h2>}
         {/* conditionally show flow of game as is appropriate */}
         {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
