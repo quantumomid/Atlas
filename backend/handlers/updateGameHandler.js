@@ -53,12 +53,12 @@ const updateGameHandler = async (server) => {
 
     if (!matches) {
         // if answer is incorrect, add to finished_games, delete from current_games, and return some response ***ADD SCORE***
-        if (user.length <= 20) await client.queryObject(`INSERT INTO finished_games (username, score, created_at) VALUES ($1, $2, NOW());`, user, score)
-        await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, user)
-        console.log('wrong answer, current game moved to finished game')
+        // if (user.length <= 20) await client.queryObject(`INSERT INTO finished_games (username, score, created_at) VALUES ($1, $2, NOW());`, user, score)
+        // await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, user)
+        // console.log('wrong answer, current game moved to finished game')
 
         const correct = false
-        await server.json({correct})
+        await server.json({correct, score})
 
     } else {
         // return a response with the letter for the next AI turn
@@ -68,13 +68,13 @@ const updateGameHandler = async (server) => {
                                   SET score = $1
                                   WHERE username = $2;`, score + 1, user)
         // test:                                  
-        let [[scoreYes]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
-        console.log('correct! updated score: ', scoreYes)
+        // let [[update]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
+        // console.log('correct! updated score: ', scoreYes)
 
         const correct = true
         const lastLetter = userInput.slice(-1)
         // console.log('lastLetter: ', lastLetter)
-        await server.json({correct, lastLetter})
+        await server.json({correct, lastLetter, score: score + 1})
     }
 }
 
