@@ -8,7 +8,11 @@ export default class PersonalScoreBoard extends Component{
     }
     
     async componentDidMount(){
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/personaltopscores`)
+        const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/personaltopscores`,
+            {
+                credentials: 'include'
+            })
         const { gameData } = await response.json()
         this.setState({gameData})
     }
