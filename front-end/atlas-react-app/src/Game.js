@@ -8,6 +8,22 @@ class Game extends Component {
     isPlayerTurn: true,
     lastLetter: '',
     aiCountryChoice: '',
+    time: 20,
+  }
+  handleStart(){
+    this.timerInterval = setInterval(() => {
+        this.setState(prevState => {
+            return {time: prevState.time - 1}
+        })
+    }, 1000)
+  }
+  handleStop(){
+    clearInterval(this.timerInterval)
+  }
+  handleRestart(){
+    this.handleStop()
+    this.setState({time: 20})
+    this.handleStart()
   }
 
   async callLetter() {
@@ -29,6 +45,7 @@ class Game extends Component {
 
     this.callLetter()
     this.setState({needStart: false})
+    this.handleStart()
   }
 
   handleUserInputChange(e) {
@@ -64,11 +81,13 @@ class Game extends Component {
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
       this.setState({isPlayerTurn: false})
+      this.handleRestart()
     }
 
     // TO DO: if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
       //render endgame
+      this.handleStop()
     }
   }
 
@@ -113,6 +132,9 @@ class Game extends Component {
     
     return (
       <main>
+        <h2>Time remaining: {this.state.time}</h2>
+        {this.state.time===0 && this.handleStop()}
+        {this.state.time===0 && <h2 style={{color: 'red'}}>You lose</h2>}
         {/* conditionally show flow of game as is appropriate */}
         {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
