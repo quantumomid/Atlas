@@ -38,9 +38,19 @@ const updateGameHandler = async (server) => {
     // add most recent input to array
     countryArray.push(userInput)
 
+    // New backend timer
+    const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '10 seconds';",user)).rows
+    const backendTimer1 = (await client.queryObject("SELECT (updated_at - NOW()) as timeElapsed FROM current_games WHERE username = $1;",user)).rows
+    console.log(backendTimer1)
+    console.log('backendTimer length',backendTimer.length)
+    if (backendTimer.length === 0){
+        console.log('backendTimer',backendTimer)
+        throw new Error("You took too long")
+    }
+
     // re-stringify and update current_game table
     await client.queryObject(`UPDATE current_games
-                              SET played_countries = $1
+                              SET played_countries = $1, updated_at = NOW()
                               WHERE username = $2;`, JSON.stringify(countryArray), user)
 
     // check correctness of suggested country answer (disregarding case)
@@ -62,7 +72,7 @@ const updateGameHandler = async (server) => {
         // update score in current_games
         // 1 is placeholder for whatever we decide a correct answer is worth!
         await client.queryObject(`UPDATE current_games
-                                  SET score = $1
+                                  SET score = $1, updated_at = NOW()
                                   WHERE username = $2;`, score + 1, user)
         // test:                                  
         // let [[update]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
