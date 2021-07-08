@@ -13,9 +13,6 @@ await client.connect()
 const startGameHandler = async (server) => {
     // handles checking the current user, making a temporary user if need be
     // and either creating a new game or accessing one in progress
-    
-    // const { sessionID } = await server.cookies
-
     // find logged in user, prioritising registered log ins
     const user = await getCurrentUser(server)
     console.log('user:', user)
@@ -28,7 +25,7 @@ const startGameHandler = async (server) => {
     if (!user) {
         await client.queryObject('INSERT INTO users (username, email, password_encrypted, created_at, updated_at) VALUES ($1, $1, $2, NOW(), NOW());', trackedName, v4.generate())
 
-        // set a cookie for the temporary user to track their game
+        // set a cookie for the temporary user to track their game //
         server.setCookie({
             name: "tempUser",
             value: trackedName,

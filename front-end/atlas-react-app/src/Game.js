@@ -11,6 +11,7 @@ class Game extends Component {
     lastLetter: '',
     aiCountryChoice: '',
     gameOver: false,
+    score: 0
   }
 
   state = this.initialState
@@ -58,13 +59,13 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct, lastLetter} = await response.json()
+    const {correct, lastLetter, score} = await response.json()
     // if user input correct, returns true else returns false
     console.log('correct: ', correct)
     // console.log('lastLetter response:', lastLetter)
 
     // reset the input form to empty and update the lastLetter for the AI turn
-    this.setState({lastLetter, userInput: ''})
+    this.setState({lastLetter, userInput: '', score})
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
@@ -119,7 +120,7 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver } = this.state
+    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
@@ -133,10 +134,11 @@ class Game extends Component {
         {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
         {letter && <div>Name a country beginning with {letter} </div>}
+        {!needStart && <div>Your score: {score}</div>}
         <form>
           <input 
             type = "text" 
-            placeholder = "Enter country beginnning with this letter" 
+            placeholder = "Enter country beginning with this letter" 
             name="userInput" 
             value={userInput} 
             onChange ={(e) => this.handleUserInputChange(e)}
