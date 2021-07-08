@@ -1,6 +1,7 @@
 import getCurrentUser from "./getCurrentUser.js"
 
 async function getUserFromCookies(server) {
+    // finds the user from any cookies, prioritising registered log-ins over temporary users
     let user
     const { sessionID, tempUser } = await server.cookies
     if (sessionID) {
@@ -9,8 +10,6 @@ async function getUserFromCookies(server) {
         if (!userData) throw new Error('Session has expired. Please log back in to continue or refresh to play as guest.')
     } else if (tempUser) {
         user = tempUser
-    } else {
-        throw new Error("You should not be here!")
     }
 
     if (user) return user

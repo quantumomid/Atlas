@@ -19,6 +19,7 @@ const updateGameHandler = async (server) => {
 
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server)
+    if (!user) throw new Error ('No user detected')
 
     // take user input and letter assigned to check it's a correct answer
     const { userInput, letter } = await server.body

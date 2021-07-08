@@ -2,6 +2,7 @@ import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import { v4 } from "https://deno.land/std/uuid/mod.ts"
 import getCurrentUser from "./helperFunctions/getCurrentUser.js"
+import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 config({ path: `./.env.${DENO_ENV}`, export: true })
@@ -16,13 +17,7 @@ const startGameHandler = async (server) => {
     const { sessionID, tempUser } = await server.cookies
 
     // find logged in user, prioritising registered log ins
-    let user
-    const userData = await getCurrentUser(server)
-    if (userData) {
-        user = userData.username
-    } else if (tempUser) {
-        user = tempUser
-    } 
+    const user = await getUserFromCookies(server)
     console.log('user:', user)
 
     // if user is NEW guest, generate a temporary username for them

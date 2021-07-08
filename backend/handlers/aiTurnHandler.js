@@ -14,7 +14,8 @@ async function aiTurnHandler(server) {
     // console.log('AI turn triggered with ', lastLetter)
 
     // finds user, prioritising registered log in over temporary users
-    let user = await getUserFromCookies(server)
+    const user = await getUserFromCookies(server)
+    if (!user) throw new Error("You shouldn't be here!")
 
     // find all possible right answers for this letter
     const aiCountries = (await client.queryArray(`SELECT country_name
