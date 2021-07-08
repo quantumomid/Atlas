@@ -13,22 +13,19 @@ await client.connect()
 const startGameHandler = async (server) => {
     // handles checking the current user, making a temporary user if need be
     // and either creating a new game or accessing one in progress
-    
-    const { sessionID, tempUser } = await server.cookies
-
     // find logged in user, prioritising registered log ins
-    const user = await getUserFromCookies(server)
+    const user = await getCurrentUser(server)
     console.log('user:', user)
 
     // if user is NEW guest, generate a temporary username for them
-    const trackedName = user ? user : v4.generate()
+    const trackedName = user ? user.username : v4.generate()
     console.log('trackedName: ', trackedName)
 
     // create a temporary user with the uuid (to account for foreign key constraint on current_games)
     if (!user) {
         await client.queryObject('INSERT INTO users (username, email, password_encrypted, created_at, updated_at) VALUES ($1, $1, $2, NOW(), NOW());', trackedName, v4.generate())
 
-        // set a cookie for the temporary user to track their game
+        // set a cookie for the temporary user to track their game //
         server.setCookie({
             name: "tempUser",
             value: trackedName,
