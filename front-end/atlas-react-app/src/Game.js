@@ -5,6 +5,8 @@ class Game extends Component {
     letter: '',
     userInput: '',
     needStart: true,
+    isPlayerTurn: true,
+    lastLetter: '',
   }
 
   async callLetter() {
@@ -14,19 +16,19 @@ class Game extends Component {
     this.setState({letter: initialLetter.letter})
   }
 
-  handleUserInputChange(e) {
-    this.setState({userInput: e.target.value})
-    console.log(this.state.userInput)
-  }
-
   async handleStartGame() {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/game/new`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/game/new`, {
       method: "POST",
       credentials: "include",
     })
 
     this.callLetter()
     this.setState({needStart: false})
+  }
+
+  handleUserInputChange(e) {
+    this.setState({userInput: e.target.value})
+    // console.log(this.state.userInput)
   }
 
   async handleSubmitUserCountry(e) {
@@ -42,11 +44,43 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct} = await response.json()
-    console.log('resp: ', correct)
+    const {correct, lastLetter} = await response.json()
+    console.log('correct: ', correct)
+    console.log('lastLetter response:', lastLetter)
+    this.setState({lastLetter})
+
+    if (correct) {
+      // only want to trigger ai turn if player was correct (otherwise ends game)
+      this.setState({isPlayerTurn: false})
+    }
 
     // if response is no... end game
     
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
+      if (this.state.isPlayerTurn && !this.state.needStart) {
+        // non-first player turns
+        console.log('non-first player turn is called')
+      } else if (!this.state.isPlayerTurn) {
+        // ai turn
+        console.log('ai turn is called')
+      }
+    }
+  }
+
+  async triggerAiTurn() {
+    const {lastLetter} = this.state
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/game/ai`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({lastLetter})
+    })
+    this.setState({isPlayerTurn: true})
   }
 
   inputError() {

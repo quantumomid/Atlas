@@ -11,6 +11,7 @@ import sessionsHandler from './handlers/sessionsHandler.js'
 import logoutHandler from './handlers/logoutHandler.js'
 import globalScoresHandler from './handlers/globalScoresHandler.js'
 import personalTopScoresHandler from './handlers/personalTopScoresHandler.js'
+import aiTurnHandler from './handlers/aiTurnHandler.js'
 
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
@@ -41,6 +42,7 @@ app
     .delete('/sessions', logoutHandler)
     .get('/globalscores', globalScoresHandler)
     .get('/personaltopscores', personalTopScoresHandler)
+    .post('/game/ai', aiTurnHandler)
     .start({ port: PORT })
 
 console.log(`Server running on http://localhost:${PORT}`)

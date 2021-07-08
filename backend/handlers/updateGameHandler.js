@@ -87,7 +87,9 @@ const updateGameHandler = async (server) => {
         // console.log('correct! ', scoreYes)
 
         const correct = true
-        await server.json({correct})
+        const lastLetter = userInput.slice(-1)
+        // console.log('lastLetter: ', lastLetter)
+        await server.json({correct, lastLetter})
     }
 }
 
