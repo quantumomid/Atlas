@@ -1,7 +1,5 @@
 import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
-import { v4 } from "https://deno.land/std/uuid/mod.ts"
-import getCurrentUser from "./helperFunctions/getCurrentUser.js"
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'

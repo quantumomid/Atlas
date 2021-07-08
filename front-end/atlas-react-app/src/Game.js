@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
-
+const timeGiven = 300
 class Game extends Component {
+  
   
   initialState = {
     letter: '',
@@ -12,7 +13,7 @@ class Game extends Component {
     aiCountryChoice: '',
     gameOver: false,
     score: 0,
-    time: 20,
+    time: timeGiven,
   }
   
   state = this.initialState
@@ -27,7 +28,7 @@ class Game extends Component {
 
   handleRestart() {
     clearInterval(this.timerInterval)
-    this.setState({time: 20})
+    this.setState({time: timeGiven})
     this.handleStart()
   }
 

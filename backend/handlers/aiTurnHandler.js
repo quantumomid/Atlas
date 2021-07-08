@@ -1,6 +1,5 @@
 import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
-import getCurrentUser from "./helperFunctions/getCurrentUser.js"
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
@@ -17,20 +16,31 @@ async function aiTurnHandler(server) {
     const user = await getUserFromCookies(server)
     if (!user) throw new Error("You shouldn't be here!")
 
+    // get current countries that have been played
+    let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
+    countryArray = JSON.parse(countryArray)
+    // console.log('countryArray: ', countryArray)
+
     // find all possible right answers for this letter
-    const aiCountries = (await client.queryArray(`SELECT country_name
+    let aiCountries = (await client.queryArray(`SELECT country_name
                                                   FROM countries 
                                                   WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, lastLetter.toLowerCase())).rows
 
+    aiCountries = aiCountries.flat()                                                  
+    // console.log('aiCountries not filtered: ', aiCountries)
+
+    const filteredAiCountries = aiCountries.filter(country => !countryArray.includes(country))
+    console.log('aiCountries filtered: ', filteredAiCountries)
+
+    if (filteredAiCountries.length === 0) throw new Error('no possible countries remaining')
+
     //select random country from possible right answers
-    const [aiCountryChoice] = aiCountries[Math.floor(Math.random() * aiCountries.length)]
+    const aiCountryChoice = filteredAiCountries[Math.floor(Math.random() * filteredAiCountries.length)]
     console.log('ai country choice: ', aiCountryChoice)
 
     // add it to the array of played countries
-    let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
-    countryArray = JSON.parse(countryArray)
     countryArray.push(aiCountryChoice)
-    console.log('ai turn countryArray: ', countryArray)
+    // console.log('ai turn countryArray: ', countryArray)
     
     // re-stringify and update current_game table
     await client.queryObject(`UPDATE current_games
