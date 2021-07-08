@@ -53,10 +53,11 @@ async function aiTurnHandler(server) {
     let timesTried = 0
     let foundSolution = false
     const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    
+    let aiCountries = []
+    let filteredAiCountries = []
     do {
         // find all possible right answers for this letter
-        let aiCountries = (await client.queryArray(`SELECT country_name
+        aiCountries = (await client.queryArray(`SELECT country_name
                                                     FROM countries 
                                                     WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, lastLetter.toLowerCase())).rows
 
@@ -64,7 +65,7 @@ async function aiTurnHandler(server) {
         aiCountries = aiCountries.flat()                                                  
         // console.log('aiCountries not filtered: ', aiCountries)
 
-        const filteredAiCountries = aiCountries.filter(country => !countryArray.includes(country))
+        filteredAiCountries = aiCountries.filter(country => !countryArray.includes(country))
         console.log('aiCountries filtered: ', filteredAiCountries)
 
         if (filteredAiCountries.length > 0) {
@@ -106,11 +107,14 @@ async function aiTurnHandler(server) {
                                 WHERE username = $2;`, JSON.stringify(countryArray), user)
 
         // return the AI's chosen country to the frontend
+        lastLetter = aiCountryChoice.slice(-1)
         timesTried = 0
         let foundLetter = false
+        aiCountries = []
+        filteredAiCountries = []
         do {
             // find all possible right answers for this letter
-            let aiCountries = (await client.queryArray(`SELECT country_name
+            aiCountries = (await client.queryArray(`SELECT country_name
                                                         FROM countries 
                                                         WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, lastLetter.toLowerCase())).rows
     
@@ -143,7 +147,6 @@ async function aiTurnHandler(server) {
             const allCountriesPlayed = true
             await server.json({allCountriesPlayed})
         }
-
         await server.json({aiCountryChoice, letter: lastLetter})
         
 

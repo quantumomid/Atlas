@@ -33,7 +33,7 @@ const updateGameHandler = async (server) => {
     // take user input and letter assigned to check it's a correct answer
     const { userInput, letter } = await server.body
 
-    console.log('userInput: ', userInput, 'for letter: ', letter)
+    //console.log('userInput: ', userInput, 'for letter: ', letter)
 
     // basic validations mirroring front end validations
     if (typeof userInput !== 'string' || userInput.length > 60 || userInput.length === 0) throw new Error('Bad userInput.')
@@ -47,7 +47,6 @@ const updateGameHandler = async (server) => {
 
     if (countryArray) countryArray = JSON.parse(countryArray) // parse the JSON stringified array
     if (!countryArray) countryArray = [] // if null (first turn), initialise as empty array
-
     if (countryArray.includes(userInput)) {
         // if country has already been used this game, end the game
 
@@ -57,18 +56,16 @@ const updateGameHandler = async (server) => {
         await server.json({correct, score})
 
     } else {
-
         await insertToTable(countryArray, userInput, user)
-
         // check correctness of suggested country answer (disregarding case)
+        console.log('userInput: ', userInput.toLowerCase(), 'for letter: ', letter)
         const [matches] = (await client.queryArray(`SELECT country_name 
                                                     FROM countries 
                                                     WHERE LOWER(country_name) = $1
-                                                    AND SUBSTRING(country_name, 1, 1) = $2;`, userInput.toLowerCase(), letter)).rows
-
+                                                    AND LOWER(SUBSTRING(country_name, 1, 1)) = $2;`, userInput.toLowerCase(), letter.toLowerCase())).rows
+        console.log('matches: ', matches)
         if (!matches) {
             // if answer is incorrect, add to finished_games, delete from current_games, and return some response ***ADD SCORE***
-
             const correct = false
             await server.json({correct, score})
 
@@ -85,7 +82,7 @@ const updateGameHandler = async (server) => {
 
             const correct = true
             const lastLetter = userInput.slice(-1)
-            // console.log('lastLetter: ', lastLetter)
+            //console.log('lastLetter: ', lastLetter)
             await server.json({correct, lastLetter, score: score + 1})
         }
     }
