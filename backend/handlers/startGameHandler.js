@@ -23,6 +23,7 @@ const startGameHandler = async (server) => {
     } else if (tempUser) {
         user = tempUser
     } 
+    console.log('user:', user)
 
     // if user is NEW guest, generate a temporary username for them
     const trackedName = user ? user : v4.generate()
@@ -42,7 +43,7 @@ const startGameHandler = async (server) => {
     }
 
     const [existingGame] = (await client.queryObject(`SELECT game_id FROM current_games WHERE username=$1;`, trackedName)).rows
-    console.log('game: ', existingGame)
+    // console.log('game: ', existingGame)
 
     if (existingGame) {
         // delete game if exists
@@ -54,15 +55,10 @@ const startGameHandler = async (server) => {
     console.log('created game for user:', trackedName)
 
     // delete old games from current_games
-    // const tester = (await client.queryObject("SELECT created_at, NOW() - interval '20 seconds' AS time FROM current_games;")).rows
-    // console.log(tester)
-
     await client.queryObject("DELETE FROM current_games WHERE created_at < NOW() - interval '1 day';")
 
     // delete old temporary users from users
     await client.queryObject("DELETE FROM users WHERE created_at < NOW() - interval '1 day' AND username = email;")
 }
-
-// TO DO: REMEMBER TO DELETE THIS TEMPORARY USER AFTER GAME ENDS/USER MAYBE REGISTERS (different handler!)
 
 export default startGameHandler
