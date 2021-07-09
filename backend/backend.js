@@ -14,6 +14,7 @@ import personalTopScoresHandler from './handlers/personalTopScoresHandler.js'
 import aiTurnHandler from './handlers/aiTurnHandler.js'
 import endgameDataHandler from './handlers/endgameDataHandler.js'
 import usernameExistanceCheckerHandler from './handlers/usernameExistenceCheckerHandler.js'
+import emailExistanceCheckerHandler from './handlers/emailExistenceCheckerHandler.js'
 
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
@@ -47,6 +48,8 @@ app
     .post('/game/ai', aiTurnHandler)
     .post('/endgamedata', endgameDataHandler)
     .post('/usernameexists', usernameExistanceCheckerHandler)
+    .post('/emailexists', emailExistanceCheckerHandler)
+
     .start({ port: PORT })
 
 console.log(`Server running on http://localhost:${PORT}`)
