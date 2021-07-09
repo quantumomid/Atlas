@@ -34,7 +34,7 @@ async function aiTurnHandler(server) {
     
     // re-stringify and update current_game table
     await client.queryObject(`UPDATE current_games
-                              SET played_countries = $1
+                              SET played_countries = $1, updated_at = NOW()
                               WHERE username = $2;`, JSON.stringify(countryArray), user)
 
     // return the AI's chosen country to the frontend

@@ -43,10 +43,10 @@ const startGameHandler = async (server) => {
         console.log('deleted existing game for user:', trackedName)        
     } 
 
-    await client.queryObject(`INSERT INTO current_games (username, created_at) VALUES ($1, NOW());`, trackedName)
+    await client.queryObject(`INSERT INTO current_games (username, created_at, updated_at) VALUES ($1, NOW(), NOW());`, trackedName)
     console.log('created game for user:', trackedName)
 
-    // delete old games from current_games
+    // delete old games from current_games    (IMPORTANT CODE FOR LATER)
     await client.queryObject("DELETE FROM current_games WHERE created_at < NOW() - interval '1 day';")
 
     // delete old temporary users from users

@@ -12,7 +12,7 @@ class Game extends Component {
     aiCountryChoice: '',
     gameOver: false,
     score: 0,
-    time: 20,
+    time: 15,
   }
   
   state = this.initialState
@@ -27,7 +27,7 @@ class Game extends Component {
 
   handleRestart() {
     clearInterval(this.timerInterval)
-    this.setState({time: 20})
+    this.setState({time: 15})
     this.handleStart()
   }
 
