@@ -158,35 +158,35 @@ class Game extends Component {
       <div className = 'centre'>
       <main className = 'page'>
         <section>
-        <h2 className = 'timer'>Time remaining: {this.state.time}</h2>
-        {/* conditionally show flow of game as is appropriate */}
-        {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
-        {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
-        {letter && <div>Name a country beginning with {letter} </div>}
-        {!needStart && <div>Your score: {score}</div>}
+          <h2 className = 'timer'>Time remaining: {this.state.time}</h2>
+          {/* conditionally show flow of game as is appropriate */}
+          {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
+          {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
+          {letter && <div>Name a country beginning with {letter} </div>}
+          {!needStart && <div>Your score: {score}</div>}
         </section>
         <section>
-        <form>
-          <section>
-          <input 
-            type = "text" 
-            placeholder = "Enter country beginning with this letter" 
-            name="userInput" 
-            value={userInput} 
-            onChange ={(e) => this.handleUserInputChange(e)}
-            autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
-          />
-          </section>
-          <section>
-          <button
-            type = "submit"
-            onClick = {(e) => this.handleSubmitUserCountry(e)}
-            disabled = {userInput === "" || userInput.length > 60}
-          >
-            Submit
-          </button>
-          </section>
-        </form>
+          <form>
+            <section>
+            <input 
+              type = "text" 
+              placeholder = "Enter country beginning with this letter" 
+              name="userInput" 
+              value={userInput} 
+              onChange ={(e) => this.handleUserInputChange(e)}
+              autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+            />
+            </section>
+            <section>
+            <button
+              type = "submit"
+              onClick = {(e) => this.handleSubmitUserCountry(e)}
+              disabled = {userInput === "" || userInput.length > 60}
+            >
+              Submit
+            </button>
+            </section>
+          </form>
         </section>
       </main>
     </div>
