@@ -14,7 +14,7 @@ async function insertToTable(countryArray, userInput, user) {
 
     // re-stringify and update current_game table
     await client.queryObject(`UPDATE current_games
-                              SET played_countries = $1
+                              SET played_countries = $1, updated_at = NOW()
                               WHERE username = $2;`, JSON.stringify(countryArray), user)
 
 }
@@ -29,6 +29,15 @@ const updateGameHandler = async (server) => {
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server)
     if (!user) throw new Error ('No user detected')
+
+    // backend timer to prevent them hacking the frontend clock to gain more time
+    const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '20 seconds';",user)).rows
+    //console.log('backendTimer length',backendTimer.length)
+    
+    if (backendTimer.length === 0){
+        //console.log('backendTimer',backendTimer)
+        throw new Error('backend timeout')
+    } 
 
     // take user input and letter assigned to check it's a correct answer
     const { userInput, letter } = await server.body

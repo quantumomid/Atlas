@@ -8,6 +8,6 @@ INSERT INTO finished_games (username, score, created_at) VALUES ('quantumguy', 1
 INSERT INTO finished_games (username, score, created_at) VALUES ('quantumjoanna', 90, NOW());
 INSERT INTO finished_games (username, score, created_at) VALUES ('quantumdavid', 120, NOW());
 
-INSERT INTO current_games (username, score, played_countries, created_at) VALUES ('quantumguy', 100, '["Egypt","France"]', NOW());
-INSERT INTO current_games (username, score, played_countries, created_at) VALUES ('quantumjoanna', 100, '["Egypt","France"]', NOW());
-INSERT INTO current_games (username, score, played_countries, created_at) VALUES ('quantumdavid', 100, '["Egypt","France"]', NOW());
+INSERT INTO current_games (username, score, played_countries, created_at, updated_at) VALUES ('quantumguy', 100, '["Egypt","France"]', NOW(), NOW());
+INSERT INTO current_games (username, score, played_countries, created_at, updated_at) VALUES ('quantumjoanna', 100, '["Egypt","France"]',NOW(), NOW());
+INSERT INTO current_games (username, score, played_countries, created_at, updated_at) VALUES ('quantumdavid', 100, '["Egypt","France"]',NOW(), NOW());

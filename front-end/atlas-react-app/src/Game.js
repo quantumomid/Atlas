@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
-const timeGiven = 20
+const timeGiven = 15
 class Game extends Component {
   
   

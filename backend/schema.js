@@ -51,6 +51,7 @@ await client.queryObject(`CREATE TABLE current_games (
                 played_countries TEXT,
                 score INTEGER DEFAULT 0,
                 created_at TIMESTAMP NOT NULL,
+                updated_at TIMESTAMP NOT NULL,
                 FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
                 )`)
 

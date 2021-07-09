@@ -14,7 +14,7 @@ async function aiTurnHandler(server) {
 
     // finds user, prioritising registered log in over temporary users
     const user = await getUserFromCookies(server)
-    if (!user) throw new Error("You shouldn't be here!")
+    if (!user) throw new Error("Game started without user")
 
     // get current countries that have been played
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows

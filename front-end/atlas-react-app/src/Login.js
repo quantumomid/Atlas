@@ -12,7 +12,6 @@ class Login extends Component {
   async handleSubmit(event) {
     event.preventDefault()
     const { username, password } = this.state
-    if (username.length === 0 || password.length < 8) return
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/sessions`,
       {
@@ -42,7 +41,7 @@ class Login extends Component {
         <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
           <div className='login-variable'>Username: <input className='login-input' name='username' type="text" value={username} onChange={(event) => this.setState({username: event.target.value})} /></div>
           <div className='login-variable'>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
-          <input className='submit-button' type='submit' value='Login'/>
+          <input className='submit-button' type='submit' value='Login' disabled={ username.length === 0 || password.length < 8 }/>
         </form>
         <div className='login-response'>{message}</div>
       </div>
