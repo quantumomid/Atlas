@@ -87,9 +87,22 @@ const updateGameHandler = async (server) => {
                                                     AND LOWER(SUBSTRING(country_name, 1, 1)) = $2;`, userInput.toLowerCase(), letter.toLowerCase())).rows
         console.log('matches: ', matches)
         if (!matches) {
-            // if answer is incorrect, add to finished_games, delete from current_games, and return some response ***ADD SCORE***
+            // if answer is incorrect, add to finished_games, delete from current_games, and return some response
+
+             // also pass through list of what countries would have been correct answers
+             // NOTE: the edge case of no correct answers is not possible, as we check that on the AI turn before giving the letter
+             let allMatches = (await client.queryArray(`SELECT country_name
+                                                        FROM countries
+                                                        WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, letter.toLowerCase())).rows
+            // console.log('allMatches: ', allMatches)
+            
+            // filter out those that have been played
+            allMatches = allMatches.flat()
+            allMatches = allMatches.filter(country => !countryArray.includes(country))
+            // console.log('filtered allMatches: ', allMatches)
+
             const correct = false
-            await server.json({correct, score})
+            await server.json({correct, score, allMatches})
 
         } else {
             // return a response with the letter for the next AI turn
