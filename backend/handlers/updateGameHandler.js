@@ -39,12 +39,10 @@ const updateGameHandler = async (server) => {
     countryArray.push(userInput)
 
     // New backend timer
-    const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '10 seconds';",user)).rows
-    const backendTimer1 = (await client.queryObject("SELECT (updated_at - NOW()) as timeElapsed FROM current_games WHERE username = $1;",user)).rows
-    console.log(backendTimer1)
-    console.log('backendTimer length',backendTimer.length)
+    const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '20 seconds';",user)).rows
+    //console.log('backendTimer length',backendTimer.length)
     if (backendTimer.length === 0){
-        console.log('backendTimer',backendTimer)
+        //console.log('backendTimer',backendTimer)
         throw new Error("You took too long")
     }
 
