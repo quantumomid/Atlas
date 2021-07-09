@@ -184,7 +184,7 @@ class Game extends Component {
         <div className="letter">{letter}</div>
         </div>
         <section>
-          <form classname = 'gameform'>
+          <form className = 'gameform'>
             <section>
             <input 
               type = "text" 
