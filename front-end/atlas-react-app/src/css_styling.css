@@ -89,6 +89,11 @@ table td, table th {
     text-align: center;
 }
 
+table thead {
+    position: sticky;
+    top: 0px;
+}
+
 .page button{
     display: flex;
     width: 50 px;
@@ -132,3 +137,14 @@ table td, table th {
     font-size: 20px;
 }
 
+.registerform{
+    display: flex;
+    width: 50vw;
+    height: 40vh;
+    border: solid black 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow:scroll;
+
+}
