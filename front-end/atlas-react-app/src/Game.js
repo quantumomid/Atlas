@@ -116,7 +116,7 @@ class Game extends Component {
     })
     //returns country name that AI plays
     const { aiCountryChoice, allCountriesPlayed, letter } = await response.json()
-
+    console.log(allCountriesPlayed) //undefined
     if (allCountriesPlayed) {
       console.log('game ends due to no more countries')
       this.handleLoss() // if all countries have been played
