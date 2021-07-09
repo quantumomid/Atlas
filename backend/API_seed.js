@@ -19,7 +19,7 @@ async function countryAndCapital() {
 let countries = await countryAndCapital()
 
 // test country letter loop
-//countries = [{name: 'France', capital: 'Paris'}, {name: 'Germany', capital: 'Berlin'}, {name: 'UK', capital: 'London'},  {name: 'USA', capital: 'Washington'}]
+// countries = [{name: 'France', capital: 'Paris'}, {name: 'Germany', capital: 'Berlin'}, {name: 'Uk', capital: 'London'}]
 
 countries.forEach(async (country) => await client.queryObject("INSERT INTO countries (country_name, capital, created_at) VALUES($1, $2, NOW())", country.name, country.capital))
 

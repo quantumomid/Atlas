@@ -19,6 +19,15 @@ async function insertToTable(countryArray, userInput, user) {
 
 }
 
+function capitalizeCountry(userInput) {
+    // hard codes capitalisation for all inputs, accounting for those with 'of', 'the' and 'and' (all edge cases)
+    const nonCapitalizedWords = ['and', 'of', 'the']
+    userInput = userInput.toLowerCase()
+    userInput = userInput.split(' ').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ')
+    userInput = userInput.split('-').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join('-')
+    return userInput
+}
+
 const updateGameHandler = async (server) => {
     // takes user country input
     // updates entry in current_games table
@@ -40,8 +49,10 @@ const updateGameHandler = async (server) => {
     } 
 
     // take user input and letter assigned to check it's a correct answer
-    const { userInput, letter } = await server.body
+    let { userInput, letter } = await server.body
 
+    userInput = capitalizeCountry(userInput)
+    console.log('fixed userInput: ', userInput)
     //console.log('userInput: ', userInput, 'for letter: ', letter)
 
     // basic validations mirroring front end validations
