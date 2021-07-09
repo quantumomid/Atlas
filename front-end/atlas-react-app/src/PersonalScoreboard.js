@@ -8,6 +8,10 @@ export default class PersonalScoreBoard extends Component{
     }
     
     async componentDidMount(){
+        this.fetchScores()
+    }
+
+    async fetchScores() {
         const response = await fetch(
             `${process.env.REACT_APP_API_URL}/personaltopscores`,
             {
@@ -15,6 +19,10 @@ export default class PersonalScoreBoard extends Component{
             })
         const { gameData } = await response.json()
         this.setState({gameData})
+    }
+
+    async componentDidUpdate(prevProps) {
+        if (this.props.score !== prevProps.score) this.fetchScores()
     }
 
     render(){

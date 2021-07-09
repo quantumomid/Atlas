@@ -26,7 +26,10 @@ class GameEndScreen extends Component {
         const { score, playedCountryArray } = this.state
         return (
             <div>
-                {isLoggedIn ? <PersonalScoreBoard /> : (
+                {isLoggedIn ? 
+                <PersonalScoreBoard 
+                score={score} /> 
+                : (
                     <div>
                         <h2>Register to save your score</h2>
                         <Registration
