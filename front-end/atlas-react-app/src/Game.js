@@ -148,6 +148,10 @@ class Game extends Component {
     }
   }
 
+  async componentWillUnmount() {
+    clearInterval(this.timerInterval)
+  }
+
   handleGameReset() {
     this.setState(this.initialState)
   }
