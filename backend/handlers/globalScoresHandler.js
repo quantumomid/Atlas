@@ -10,9 +10,9 @@ await client.connect()
 export default async function globalScoresHandler(server) {
     const tableLength = 20
     let gameData = (await client.queryObject(`
-        SELECT username, score, created_at
+        SELECT (RANK() OVER (ORDER BY score DESC))::integer AS ranking, username, score, created_at
         FROM finished_games
-        ORDER BY score DESC
+        ORDER BY ranking
         LIMIT $1`,
         tableLength)).rows
     await server.json({gameData})
