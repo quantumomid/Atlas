@@ -30,7 +30,7 @@ function TableBody(props) {
     const rows = props.gameData.map((row, index) => {
         return (
             <tr key={index}>
-                <td>{ row.ranking || 'temp' }</td>
+                <td>{ row.ranking }</td>
                 <td>{ row.username }</td>
                 <td>{ row.score }</td>
                 <td>{ (new Date(row.created_at)).toLocaleDateString() }</td>
