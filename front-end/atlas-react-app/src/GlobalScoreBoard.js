@@ -16,9 +16,11 @@ export default class globalScoresBoard extends Component{
     render(){
         const { gameData } = this.state
         return (
-        <div>
+        <div className = 'scoreboard'>
             <h2>Global Scoreboard</h2>
+            <div>
             {gameData.length === 0 ? <p>No global scores</p> : <ScoreBoard gameData={gameData} />}
+            </div>
         </div>
         )
     }

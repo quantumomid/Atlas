@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
-const timeGiven = 15
-class Game extends Component {
-  
+import './css_styling.css'
+
+const timeGiven = 150
+
+class Game extends Component {  
   
   initialState = {
     letter: '',
@@ -166,31 +168,46 @@ class Game extends Component {
                          />
     
     return (
-      <main>
-        <h2>Time remaining: {this.state.time}</h2>
-        {/* conditionally show flow of game as is appropriate */}
+      <div className = 'centre'>
+      <section className="top-game-bar">
+          {!needStart && <div className = 'timer'>Time remaining: {this.state.time}</div>}
+          {/* conditionally show flow of game as is appropriate */}
+          {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
+          {!needStart && <div>Your score: {score}</div>}
+        </section>
+      <main className = 'page'>
+        <div className="start-button-container">
         {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
-        {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
-        {letter && <div>Name a country beginning with {letter} </div>}
-        {!needStart && <div>Your score: {score}</div>}
-        <form>
-          <input 
-            type = "text" 
-            placeholder = "Enter country beginning with this letter" 
-            name="userInput" 
-            value={userInput} 
-            onChange ={(e) => this.handleUserInputChange(e)}
-            autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
-          />
-          <button 
-            type = "submit"
-            onClick = {(e) => this.handleSubmitUserCountry(e)}
-            disabled = {userInput === "" || userInput.length > 60}
-          >
-            Submit
-          </button>
-        </form>
+        </div>
+        <div className="letter-question-container">
+        {letter && <div>Name a country beginning with:</div>}
+        <div className="letter">{letter}</div>
+        </div>
+        <section>
+          <form className = 'gameform'>
+            <section>
+            <input 
+              type = "text" 
+              placeholder = "Enter country beginning with this letter" 
+              name="userInput" 
+              value={userInput} 
+              onChange ={(e) => this.handleUserInputChange(e)}
+              autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+            />
+            </section>
+            <section>
+            <button
+              type = "submit"
+              onClick = {(e) => this.handleSubmitUserCountry(e)}
+              disabled = {userInput === "" || userInput.length > 60}
+            >
+              Submit
+            </button>
+            </section>
+          </form>
+        </section>
       </main>
+     </div>
     )
   }
 }

@@ -12,10 +12,10 @@ function RegisterForm(props){
     const [usernameError, passwordError, passwordConfirmationError] = createErrorMessages(username, password, passwordConfirmation)
    
     return (
-        <div>
-            <h1>Register!!!</h1>
+        <div className = 'centre'>
+            <div className = 'page'>
+            <div className = 'title' >Register!!!</div>
             <form onSubmit={handleSubmit}>
-
                 <label>Email:
                         <input 
                             onChange={handleChange}
@@ -67,6 +67,7 @@ function RegisterForm(props){
                 </button>
 
             </form>
+            </div>
         </div>
     )
 }

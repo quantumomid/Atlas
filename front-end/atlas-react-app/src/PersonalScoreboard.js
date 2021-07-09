@@ -28,9 +28,11 @@ export default class PersonalScoreBoard extends Component{
     render(){
         const { gameData } = this.state
         return (
-        <div>
+        <div className = 'scoreboard' >
             <h2>Personal Scoreboard</h2>
+            <div>
             {gameData.length === 0 ? <p>No personal scores</p> : <ScoreBoard gameData={gameData} />}
+            </div>
         </div>
         )
     }
