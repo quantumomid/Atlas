@@ -16,19 +16,10 @@ async function countryAndCapital() {
     return countries
 }
 
-const countries = await countryAndCapital()
+let countries = await countryAndCapital()
 
-// // countries.filter()
-// let countriesSame = []
-// for (let i=0; i<countries.length; i++){
-//     for(let j=0; j<countries.length; j++){
-//         if(countries[i].name === countries[j].name) {
-//             countriesSame.push(countries[i].name)
-//             console.log(countries[i].name)
-//     }
-// }
-// }
-// console.log(countriesSame.length)
-// console.log(countries.length)
+// test country letter loop
+// countries = [{name: 'France', capital: 'Paris'}, {name: 'Germany', capital: 'Berlin'}, {name: 'Uk', capital: 'London'}]
+
 countries.forEach(async (country) => await client.queryObject("INSERT INTO countries (country_name, capital, created_at) VALUES($1, $2, NOW())", country.name, country.capital))
 

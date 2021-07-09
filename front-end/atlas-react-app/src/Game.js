@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
-
+const timeGiven = 15
 class Game extends Component {
+  
   
   initialState = {
     letter: '',
@@ -12,7 +13,7 @@ class Game extends Component {
     aiCountryChoice: '',
     gameOver: false,
     score: 0,
-    time: 15,
+    time: timeGiven,
   }
   
   state = this.initialState
@@ -27,7 +28,7 @@ class Game extends Component {
 
   handleRestart() {
     clearInterval(this.timerInterval)
-    this.setState({time: 15})
+    this.setState({time: timeGiven})
     this.handleStart()
   }
 
@@ -114,11 +115,18 @@ class Game extends Component {
       body: JSON.stringify({lastLetter})
     })
     //returns country name that AI plays
-    const { aiCountryChoice } = await response.json()
-    console.log('ai country pick: ', aiCountryChoice)
+    const { aiCountryChoice, allCountriesPlayed, letter } = await response.json()
+    console.log(allCountriesPlayed) //undefined
+    if (allCountriesPlayed) {
+      console.log('game ends due to no more countries')
+      this.handleLoss() // if all countries have been played
 
-    // trigger next player turn, displaying new lastLetter
-    this.setState({isPlayerTurn: true, aiCountryChoice, letter: aiCountryChoice.slice(-1).toUpperCase()})
+    } else {
+      console.log('ai country pick: ', aiCountryChoice)
+
+      // trigger next player turn, displaying new lastLetter
+      this.setState({isPlayerTurn: true, aiCountryChoice, letter})
+    }
   }
 
   async componentDidUpdate(_prevProps, prevState) {
@@ -138,6 +146,10 @@ class Game extends Component {
         await this.triggerAiTurn()
       }
     }
+  }
+
+  async componentWillUnmount() {
+    clearInterval(this.timerInterval)
   }
 
   handleGameReset() {
