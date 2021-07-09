@@ -35,13 +35,13 @@ await client.queryObject(`
 // change palestinian terrotories to palestine
 await client.queryObject(`
     UPDATE countries
-    SET country_name = 'Palestinian Territory'
-    WHERE country_name = 'Palestine'`)
+    SET country_name = 'Palestine'
+    WHERE country_name = 'Palestinian Territory'`)
     
 await client.queryObject(`
     UPDATE countries
-    SET country_name = 'Swaziland'
-    WHERE country_name = 'Eswatini'`)
+    SET country_name = 'Eswatini'
+    WHERE country_name = 'Swaziland'`)
 
 // deleting all countries that aren't on the UNs website of official countries
 nonUNCountries.forEach(async (country) => await client.queryObject(`
