@@ -44,6 +44,7 @@ class App extends Component {
             <ul className="app-banners">
               <li className="app-title-banner">
               <Link to="/">Homepage</Link>
+              <div>Trendy Slogan</div>
               </li>
               <div className="app-nav-banners">
                 <li>

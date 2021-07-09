@@ -9,16 +9,9 @@ class Homepage extends Component {
         <div className ='centre'>
         <div className = 'page'>
           <section className = 'centre'>
-          <h1 className = 'title'>This is the Homepage</h1>
-          </section>
-          <section className = 'centre'>
           <div className = 'scoreboards'>
-          <section className = 'scoreboard'>
           <GlobalScoresBoard />
-          </section>
-          <section className = 'scoreboard'>
           { this.props.isLoggedIn && <PersonalScoreboard /> }
-          </section>
           </div>
           </section>
         </div>

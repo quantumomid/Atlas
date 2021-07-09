@@ -1,9 +1,10 @@
 .centre{
 display: flex;
+flex-direction: column;
 justify-content: center;
 }
 
-.scoreboards{
+/* .scoreboards{
     display: flex;
     align-content: center;
     justify-content: space-around;
@@ -17,6 +18,31 @@ justify-content: center;
     display: flex;
     border: solid black 5px;
     padding: 20px;
+} */
+
+.scoreboards{
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    min-width: 800px;
+    height: 400px;
+    border: solid black 5px;
+    padding: 20px;
+    margin: 0px;
+}
+
+.scoreboard{
+    display: flex;
+    border: solid black 5px;
+    padding: 20px;
+    margin: 0px 40px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scoreboard div {
+    height: 350px;
+    overflow: scroll;
 }
 
 .title{
@@ -27,13 +53,25 @@ justify-content: center;
     color: green;
 }
 
-.page{
+/* .page{
     display: flex;
     width: 1300px;
     flex-direction: column;
     border: solid black 5px;
-}
+    align-items: center;
+} */
 
+.page{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    width: 1430px;
+    flex-direction: column;
+    border: solid black 5px;
+    height: 480px;
+    justify-content: center;
+    align-items: center;
+}
 
 table, td, th {
     border: 1px solid black;
@@ -44,6 +82,11 @@ table{
     width: 100%;
     border-collapse: collapse;
     width: 300px;
+}
+
+table td, table th {
+    padding: 10px 50px;
+    text-align: center;
 }
 
 .page button{
@@ -62,6 +105,8 @@ table{
     height: 300px;
     border: solid black 5px;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -72,9 +117,18 @@ table{
     border: solid black 5px;
 }
 
-.timer{
+/* .timer{
     display: flex;
     width: 500px;
     height: 100px;
     border: solid black 5px;
+} */
+
+.top-game-bar {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 20px;
+    align-items: center;
+    font-size: 20px;
 }
+

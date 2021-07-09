@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './css_styling.css'
 
-const timeGiven = 15
+const timeGiven = 150
 
 class Game extends Component {  
   
@@ -169,15 +169,20 @@ class Game extends Component {
     
     return (
       <div className = 'centre'>
-      <main className = 'page'>
-        <section>
-          <h2 className = 'timer'>Time remaining: {this.state.time}</h2>
+      <section className="top-game-bar">
+          {!needStart && <div className = 'timer'>Time remaining: {this.state.time}</div>}
           {/* conditionally show flow of game as is appropriate */}
-          {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
           {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
-          {letter && <div>Name a country beginning with {letter} </div>}
           {!needStart && <div>Your score: {score}</div>}
         </section>
+      <main className = 'page'>
+        <div className="start-button-container">
+        {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
+        </div>
+        <div className="letter-question-container">
+        {letter && <div>Name a country beginning with:</div>}
+        <div className="letter">{letter}</div>
+        </div>
         <section>
           <form>
             <section>
@@ -202,7 +207,7 @@ class Game extends Component {
           </form>
         </section>
       </main>
-    </div>
+     </div>
     )
   }
 }
