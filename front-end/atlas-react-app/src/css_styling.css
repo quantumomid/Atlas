@@ -1,0 +1,80 @@
+.centre{
+display: flex;
+justify-content: center;
+}
+
+.scoreboards{
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    width: 800px;
+    height: 500px;
+    border: solid black 5px;
+    padding: 20px;
+}
+
+.scoreboard{
+    display: flex;
+    border: solid black 5px;
+    padding: 20px;
+}
+
+.title{
+    display: flex;
+    border: solid black 5px;
+    padding: 20 px;
+    size:20 px;
+    color: green;
+}
+
+.page{
+    display: flex;
+    width: 1300px;
+    flex-direction: column;
+    border: solid black 5px;
+}
+
+
+table, td, th {
+    border: 1px solid black;
+    text-align: left;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    width: 300px;
+}
+
+.page button{
+    display: flex;
+    width: 50 px;
+    height: 20 px;
+    border-radius: 5px;
+    border-color: green;
+    color:black;
+    background-color: chartreuse;
+}
+
+.page form{
+    display: flex;
+    width: 900px;
+    height: 300px;
+    border: solid black 5px;
+    flex-direction: column;
+
+}
+
+.page input{
+    display: flex;
+    width: 500px;
+    height: 50px;
+    border: solid black 5px;
+}
+
+.timer{
+    display: flex;
+    width: 500px;
+    height: 100px;
+    border: solid black 5px;
+}
