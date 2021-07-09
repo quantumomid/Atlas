@@ -30,15 +30,18 @@ let nonUNCountries = ['Wallis and Futuna', 'Saint Barthelemy', 'Bermuda', 'Bouve
 await client.queryObject(`
     UPDATE countries
     SET country_name = 'North Macedonia'
-    WHERE country_name = 'Macedonia'`,
-    )
+    WHERE country_name = 'Macedonia'`)
 
 // change palestinian terrotories to palestine
 await client.queryObject(`
     UPDATE countries
     SET country_name = 'Palestinian Territory'
-    WHERE country_name = 'Palestine'`,
-    )
+    WHERE country_name = 'Palestine'`)
+    
+await client.queryObject(`
+    UPDATE countries
+    SET country_name = 'Swaziland'
+    WHERE country_name = 'Eswatini'`)
 
 // deleting all countries that aren't on the UNs website of official countries
 nonUNCountries.forEach(async (country) => await client.queryObject(`
