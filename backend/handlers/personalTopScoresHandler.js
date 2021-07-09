@@ -13,10 +13,10 @@ export default async function personalTopScoresHandler(server) {
     let gameData = []
     if (currentUser) {
         gameData = (await client.queryObject(`
-            SELECT username, score, created_at
+            SELECT (RANK() OVER (ORDER BY score DESC))::integer AS ranking, username, score, created_at
             FROM finished_games
             WHERE username = $1
-            ORDER BY score DESC
+            ORDER BY ranking
             LIMIT $2`,
             currentUser.username, tableLength)).rows
     }
