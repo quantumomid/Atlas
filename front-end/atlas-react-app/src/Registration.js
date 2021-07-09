@@ -2,13 +2,16 @@ import { Component } from 'react';
 import RegisterForm from './RegisterForm'
 
 class Registration extends Component {
-  state ={
+  initialState ={
     username: '',
     password: '',
     passwordConfirmation: '',
     email: '',
     message: '',
   }
+
+  state = this.initialState
+
   async handleSubmit(event){
     event.preventDefault()
     const { email, username, password, passwordConfirmation } = this.state
@@ -26,6 +29,11 @@ class Registration extends Component {
       body: JSON.stringify({ username, email, password, passwordConfirmation, saveScore})
     })
     const { message } = await postFetch.json()
+
+    if (message === 'Success') {
+      this.setState(this.initialState)
+    }
+
     this.setState({message})
   }
   handleChange(event){
