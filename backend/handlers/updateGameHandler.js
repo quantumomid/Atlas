@@ -21,6 +21,7 @@ async function insertToTable(countryArray, userInput, user) {
 
 function formatCountryInput(userInput) {
     // hard codes capitalisation for all inputs, accounting for those with 'of', 'the' and 'and' (all edge cases)
+    userInput = userInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     userInput = userInput.trim()
     const nonCapitalizedWords = ['and', 'of', 'the']
     userInput = userInput.toLowerCase()
