@@ -22,7 +22,8 @@ class GameEndScreen extends Component {
     }
 
     render() {
-        const { isLoggedIn } = this.props
+        const { isLoggedIn, allMatches } = this.props
+        console.log('in end screen allMatches: ', allMatches)
         const { score, playedCountryArray } = this.state
         return (
             <div>
@@ -44,6 +45,10 @@ class GameEndScreen extends Component {
                 <div>
                     <h2>Your played countries</h2>
                     <p>{playedCountryArray}</p>
+                </div>
+                <div>
+                    <h2>You could have played these!</h2>
+                    <p>{allMatches}</p>
                 </div>
                 <button onClick={() => this.props.handleGameReset()}> Play again</button>
             </div>

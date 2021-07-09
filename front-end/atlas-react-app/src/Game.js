@@ -14,6 +14,7 @@ class Game extends Component {
     gameOver: false,
     score: 0,
     time: timeGiven,
+    allMatches: []
   }
   
   state = this.initialState
@@ -99,6 +100,7 @@ class Game extends Component {
     if (!correct) {
       //render endgame
       console.log('allMatches: ', allMatches)
+      this.setState({allMatches})
       this.handleLoss()
 
       
@@ -159,12 +161,13 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score } = this.state
+    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
                           isLoggedIn={this.props.isLoggedIn}
                           handleGameReset = {() => this.handleGameReset()}
+                          allMatches = {allMatches}
                          />
     
     return (

@@ -99,7 +99,7 @@ const updateGameHandler = async (server) => {
             // filter out those that have been played
             allMatches = allMatches.flat()
             allMatches = allMatches.filter(country => !countryArray.includes(country))
-            // console.log('filtered allMatches: ', allMatches)
+            console.log('filtered allMatches: ', allMatches)
 
             const correct = false
             await server.json({correct, score, allMatches})
