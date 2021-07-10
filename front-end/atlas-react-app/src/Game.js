@@ -93,14 +93,20 @@ class Game extends Component {
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
-      this.setState({isPlayerTurn: false})
-      this.handleRestart()
+      this.setState({letter: '✓'})
+      setTimeout(() => {
+        this.setState({isPlayerTurn: false})
+        this.handleRestart()
+      }, 1000)      
     }
 
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
       //render endgame
-      this.handleLoss()
+      this.setState({letter: 'X'})
+      setTimeout(() => {
+        this.handleLoss()
+      }, 1000)
       
     }
   }
@@ -182,6 +188,8 @@ class Game extends Component {
         <div className="letter-question-container">
         {letter && <div>Name a country beginning with:</div>}
         <div className="letter">{letter}</div>
+
+        {/* <GivenLetter letter={letter}/> */}
         </div>
         <section>
           <form className = 'gameform'>
