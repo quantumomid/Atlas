@@ -102,7 +102,6 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
   function usernameValidator(username, touched){
     if(!touched.username) return 
     if (username.length === 0) throw new Error('Username cannot be blank')
-    console.log(username.length)
     if (username.length > 20) throw new Error('Username must be less than 20 characters')
     const acceptedCharacters = '1234567890qwertyuiopasdfghjklzxcvbnm'
     if (!(username.split('').every(character => acceptedCharacters.includes(character.toLowerCase())))) throw new Error('Username can only include numbers and letters')

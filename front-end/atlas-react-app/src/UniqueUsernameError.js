@@ -24,7 +24,6 @@ class UniqueUsernameError extends Component {
                 }
             )
             const { uniqueUsername } = await response.json()
-            console.log('running')
             this.setState({uniqueUsername})
         }
     }
