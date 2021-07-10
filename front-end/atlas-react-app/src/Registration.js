@@ -18,7 +18,7 @@ class Registration extends Component {
 
   state = this.initialState
 
-  markUsernameAsTouched(field){
+  markAsTouched(field){
     const newTouched = { ...this.state.touched }
     newTouched[field] = true
     this.setState({ touched: newTouched })
@@ -62,7 +62,8 @@ class Registration extends Component {
       <RegisterForm
       handleChange={(event) => this.handleChange(event)}
       handleSubmit={(event) => this.handleSubmit(event)}
-      handleBlur={(event) => this.markUsernameAsTouched(event.target.name)} 
+      handleBlur={(event) => this.markAsTouched(event.target.name)}
+      touched={this.state.touched} 
       email={email}
       username={username}
       password={password}
