@@ -11,7 +11,7 @@ class UniqueUsernameError extends Component {
         if(!touched) return 
 
         // if ( username.length !== 0 && username !== prevProps.username ) {
-        if ( username.length !== prevProps.username.length || touched !== prevProps.touched ) {
+        if ( (username !== prevProps.username) || touched !== prevProps.touched ) {
 
             const response = await fetch(
                 `${process.env.REACT_APP_API_URL}/usernameexists`,
