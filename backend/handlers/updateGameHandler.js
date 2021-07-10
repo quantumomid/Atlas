@@ -67,15 +67,32 @@ const updateGameHandler = async (server) => {
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
     console.log('countryArray: ', countryArray)
 
+    
+
     if (countryArray) countryArray = JSON.parse(countryArray) // parse the JSON stringified array
     if (!countryArray) countryArray = [] // if null (first turn), initialise as empty array
+
+    // also pass through list of what countries would have been correct answers
+    // NOTE: the edge case of no correct answers is not possible, as we check that on the AI turn before giving the letter
+    let allMatches = (await client.queryArray(`
+        SELECT country_name
+        FROM countries
+        WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`,
+         letter.toLowerCase())).rows
+    // console.log('allMatches: ', allMatches)
+    
+    // filter out those that have been played
+    allMatches = allMatches.flat()
+    allMatches = allMatches.filter(country => !countryArray.includes(country))
+    console.log('filtered allMatches: ', allMatches)
+    
     if (countryArray.includes(userInput)) {
         // if country has already been used this game, end the game
 
         await insertToTable(countryArray, userInput, user)
         console.log('this country has been used, ending game')
         const correct = false
-        await server.json({correct, score})
+        await server.json({correct, score, allMatches})
 
     } else {
         await insertToTable(countryArray, userInput, user)
@@ -88,18 +105,6 @@ const updateGameHandler = async (server) => {
         console.log('matches: ', matches)
         if (!matches) {
             // if answer is incorrect, add to finished_games, delete from current_games, and return some response
-
-             // also pass through list of what countries would have been correct answers
-             // NOTE: the edge case of no correct answers is not possible, as we check that on the AI turn before giving the letter
-             let allMatches = (await client.queryArray(`SELECT country_name
-                                                        FROM countries
-                                                        WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`, letter.toLowerCase())).rows
-            // console.log('allMatches: ', allMatches)
-            
-            // filter out those that have been played
-            allMatches = allMatches.flat()
-            allMatches = allMatches.filter(country => !countryArray.includes(country))
-            console.log('filtered allMatches: ', allMatches)
 
             const correct = false
             await server.json({correct, score, allMatches})
