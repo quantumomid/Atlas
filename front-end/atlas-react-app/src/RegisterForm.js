@@ -21,6 +21,7 @@ function RegisterForm(props){
                 <label>Email:
                         <input 
                             onChange={handleChange}
+                            onBlur={(event) => props.handleBlur(event)}
                             name='email' 
                             type='email'
                             value={email}
@@ -32,6 +33,7 @@ function RegisterForm(props){
                 <label>Username:
                     <input 
                         onChange={handleChange}
+                        onBlur={(event) => props.handleBlur(event)}
                         name='username' 
                         type='text'
                         value={username}
@@ -43,6 +45,7 @@ function RegisterForm(props){
                 <label>Password:
                     <input 
                         onChange={handleChange}
+                        onBlur={(event) => props.handleBlur(event)}
                         name='password'
                         type='password'
                         value={password}
@@ -54,6 +57,7 @@ function RegisterForm(props){
                 <label>Password Confirmation:
                     <input 
                         onChange={handleChange}
+                        onBlur={(event) => props.handleBlur(event)}
                         name='passwordConfirmation'
                         type='password'
                         value={passwordConfirmation}
