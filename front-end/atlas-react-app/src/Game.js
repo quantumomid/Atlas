@@ -106,7 +106,7 @@ class Game extends Component {
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
       //render endgame
-      this.setState({letter: 'X'})
+      this.setState({letter: '✗'})
       this.setState({allMatches})
       this.incorrectTimeout = setTimeout(() => {
           this.handleLoss()
@@ -215,7 +215,7 @@ class Game extends Component {
             <button
               type = "submit"
               onClick = {(e) => this.handleSubmitUserCountry(e)}
-              disabled = {userInput === "" || userInput.length > 60 || needStart || 'X✓'.includes(letter)}
+              disabled = {userInput === "" || userInput.length > 60 || needStart || '✗✓'.includes(letter)}
             >
               Submit
             </button>
