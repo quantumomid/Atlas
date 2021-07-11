@@ -215,7 +215,7 @@ class Game extends Component {
             <button
               type = "submit"
               onClick = {(e) => this.handleSubmitUserCountry(e)}
-              disabled = {userInput === "" || userInput.length > 60 || needStart}
+              disabled = {userInput === "" || userInput.length > 60 || needStart || 'X✓'.includes(letter)}
             >
               Submit
             </button>
