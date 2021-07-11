@@ -5,10 +5,10 @@ import Registration from './Registration';
 import Login from './Login';
 import Logout from './Logout';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  withRouter
 } from "react-router-dom";
 
 
@@ -34,10 +34,15 @@ class App extends Component {
     this.setState({isLoggedIn})
   }
 
+  async handleLoginAndLogout() {
+    await this.isUserLoggedIn()
+    //redirects to homepage
+    this.props.history.push("/")
+  }
+
   render() {
     const { isLoggedIn } = this.state
     return (
-      <Router>
         <div>
         <main>
           <nav>
@@ -60,7 +65,7 @@ class App extends Component {
                 {isLoggedIn && 
                 <div>
                   <Logout
-                  handleLogout={() => this.isUserLoggedIn()} />
+                  handleLogout={() => this.handleLoginAndLogout()} />
                 </div>
                 }
               </div>
@@ -80,7 +85,7 @@ class App extends Component {
             { !isLoggedIn &&
             <Route path="/login">
               <Login
-              handleLogin={() => this.isUserLoggedIn()} />
+              handleLogin={() => this.handleLoginAndLogout()} />
             </Route>
             }
             <Route path="/">
@@ -90,9 +95,8 @@ class App extends Component {
           </Switch>
           </main>
         </div>
-      </Router>
     )
   }
 }
 
-export default App
+export default withRouter(App)

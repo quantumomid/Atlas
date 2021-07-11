@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
   
@@ -34,7 +33,6 @@ class Login extends Component {
     
   render() {
     const { username, password, message } = this.state
-    if (message === 'Success') return <Redirect to='/' />
     return ( 
       <div className='login'>
         <h2>Login</h2>
