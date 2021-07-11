@@ -7,8 +7,12 @@ class UniqueUsernameError extends Component {
     }
 
     async componentDidUpdate(prevProps) {
-        const { username } = this.props
-        if ( username.length !== 0 && username !== prevProps.username ) {
+        const { username, touched } = this.props
+        if(!touched) return 
+
+        // if ( username.length !== 0 && username !== prevProps.username ) {
+        if ( (username !== prevProps.username) || touched !== prevProps.touched ) {
+
             const response = await fetch(
                 `${process.env.REACT_APP_API_URL}/usernameexists`,
                 { 

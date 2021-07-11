@@ -7,10 +7,22 @@ class Registration extends Component {
     password: '',
     passwordConfirmation: '',
     email: '',
+    touched: {
+      username: false,
+      password: false,
+      passwordConfirmation: false,
+      email: false
+    },
     message: '',
   }
 
   state = this.initialState
+
+  markAsTouched(field){
+    const newTouched = { ...this.state.touched }
+    newTouched[field] = true
+    this.setState({ touched: newTouched })
+  }
 
   async handleSubmit(event){
     event.preventDefault()
@@ -49,7 +61,9 @@ class Registration extends Component {
       {/* <div className = 'registerform'> */}
       <RegisterForm
       handleChange={(event) => this.handleChange(event)}
-      handleSubmit={(event) => this.handleSubmit(event)} 
+      handleSubmit={(event) => this.handleSubmit(event)}
+      handleBlur={(event) => this.markAsTouched(event.target.name)}
+      touched={this.state.touched} 
       email={email}
       username={username}
       password={password}
