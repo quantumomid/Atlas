@@ -173,46 +173,48 @@ class Game extends Component {
                          />
     
     return (
-      <div className = 'centre'>
-      <section className="top-game-bar">
-          {!needStart && <div className = 'timer'>Time remaining: {this.state.time}</div>}
-          {/* conditionally show flow of game as is appropriate */}
-          {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
-          {!needStart && <div>Your score: {score}</div>}
-        </section>
       <main className = 'page'>
-        <div className="start-button-container">
-        {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
-        </div>
-        <div className="letter-question-container">
-        {letter && <div>Name a country beginning with:</div>}
-        <div className="letter">{letter}</div>
-        </div>
-        <section>
-          <form className = 'gameform'>
-            <section>
-            <input 
-              type = "text" 
-              placeholder = "Enter country beginning with this letter" 
-              name="userInput" 
-              value={userInput} 
-              onChange ={(e) => this.handleUserInputChange(e)}
-              autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
-            />
-            </section>
-            <section>
-            <button
-              type = "submit"
-              onClick = {(e) => this.handleSubmitUserCountry(e)}
-              disabled = {userInput === "" || userInput.length > 60}
-            >
-              Submit
-            </button>
-            </section>
-          </form>
-        </section>
-      </main>
-     </div>
+        <div className = 'centre'>
+        {!needStart && <section className="top-game-bar">
+            <div className = 'timer'>Time remaining:
+              <div>{this.state.time}</div>
+            </div>
+            {/* conditionally show flow of game as is appropriate */}
+            <div className="player-score">Your score: 
+              <div>{score}</div>
+            </div>
+          </section>}
+          {isPlayerTurn && aiCountryChoice && <div className="ai-response">The AI picked {aiCountryChoice}</div>}
+          <div className="start-button-container">
+          {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
+          </div>
+          { !needStart && <div className="letter-question-container">
+          {letter && <div>Name a country beginning with:</div>}
+          <div className="letter">{letter}</div>
+          </div> }
+          <section>
+          {!needStart && <form className = 'game-form'>
+              <div className="game-input-container">
+              <input className="game-input-bar"
+                type = "text" 
+                placeholder = "Enter country beginning with this letter" 
+                name="userInput" 
+                value={userInput} 
+                onChange ={(e) => this.handleUserInputChange(e)}
+                autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+              />
+              <button className="game-submit"
+                type = "submit"
+                onClick = {(e) => this.handleSubmitUserCountry(e)}
+                disabled = {userInput === "" || userInput.length > 60}
+              >
+                Submit
+              </button>
+              </div>
+            </form> }
+          </section>
+      </div>
+     </main>
     )
   }
 }
