@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './css_styling.css'
 
-const timeGiven = 150
+const timeGiven = 15
 
 class Game extends Component {  
   
@@ -35,7 +35,19 @@ class Game extends Component {
     this.handleStart()
   }
 
-  handleLoss() {
+  async handleLoss() {
+    const {letter} = this.state
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/getmatches`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({letter})
+    })
+    const {allMatches} = await response.json()
+    console.log('allMatches: ', allMatches)
+    this.setState({allMatches})
     clearInterval(this.timerInterval)
     this.setState({gameOver: true})
   }
@@ -84,7 +96,7 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct, lastLetter, score, allMatches} = await response.json()
+    const {correct, lastLetter, score} = await response.json()
     // if user input correct, returns true else returns false
     console.log('correct: ', correct)
     // console.log('lastLetter response:', lastLetter)
@@ -101,11 +113,9 @@ class Game extends Component {
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
       //render endgame
-      console.log('allMatches: ', allMatches)
-      this.setState({allMatches})
+      // console.log('allMatches: ', allMatches)
+      // this.setState({allMatches})
       this.handleLoss()
-
-      
     }
   }
 
