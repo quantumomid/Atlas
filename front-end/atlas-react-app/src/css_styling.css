@@ -1,14 +1,10 @@
-/* .page {
-    margin: 0px;
-    padding: 0px;
-}
 .centre{
 display: flex;
 flex-direction: column;
 justify-content: center;
 margin: 0px;
 padding: 0px;
-} */
+}
 
 /* .scoreboards{
     display: flex;
@@ -61,15 +57,7 @@ padding: 0px;
     justify-content:center;
 }
 
-/* .page{
-    display: flex;
-    width: 1300px;
-    flex-direction: column;
-    border: solid black 5px;
-    align-items: center;
-} */
-
-.page{
+.page, .game-page {
     padding: 0px;
     margin: 0px;
     display: flex;
@@ -111,7 +99,7 @@ thead {
     border: 1px solid black;
 }
 
-.page button{
+.page button, .game-page button{
     display: flex;
     width: 50 px;
     height: 20 px;
@@ -135,6 +123,7 @@ thead {
 .page input{
     display: flex;
     width: 500px;
+    height: 50px;
     border: solid black 5px;
 }
 
@@ -144,14 +133,6 @@ thead {
     height: 100px;
     border: solid black 5px;
 } */
-
-.top-game-bar {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 80px;
-    align-items: center;
-    font-size: 20px;
-}
 
 .registerform{
     display: flex;
@@ -226,4 +207,21 @@ thead {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.game-container {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-game-bar {
+    width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 80px;
+    align-items: center;
+    font-size: 20px;
 }

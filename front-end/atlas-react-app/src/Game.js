@@ -173,8 +173,8 @@ class Game extends Component {
                          />
     
     return (
-      <main className = 'page'>
-        <div className = 'centre'>
+      <main className = 'game-page'>
+        <div className = 'game-container'>
         {!needStart && <section className="top-game-bar">
             <div className = 'timer'>Time remaining:
               <div>{this.state.time}</div>
