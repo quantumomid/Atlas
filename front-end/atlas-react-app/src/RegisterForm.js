@@ -94,9 +94,9 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
     if(!touched.password) return 
     const numbers = '1234567890'
     const letters = 'qwertyuiopasdfghjklzxcvbnm'
+    if (password.length < 8 || password.length > 30) throw new Error('Passwords must be between 8 and 30 characters')
     if (!(password.split('').some(character => numbers.includes(character.toLowerCase())))) throw new Error('Password must include at least one number')
     if (!(password.split('').some(character => letters.includes(character.toLowerCase())))) throw new Error('Password must include at least one letter')
-    if (password.length < 8 || password.length > 30) throw new Error('Passwords must be between 8 and 30 characters')
   }
   
   function usernameValidator(username, touched){
@@ -126,10 +126,12 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
         usernameError = err.message
     }
     try {
-        if (password) passwordValidator(password, touched)
+        // if (password) passwordValidator(password, touched)
+        passwordValidator(password, touched)
     } catch (err) {
         passwordError = err.message
     }
-    if (touched.passwordConfirmation && passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
+    // if (touched.passwordConfirmation && passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
+    if (touched.passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
     return [emailError, usernameError, passwordError, passwordConfirmationError]
   }
