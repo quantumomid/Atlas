@@ -16,6 +16,7 @@ class Game extends Component {
     gameOver: false,
     score: 0,
     time: timeGiven,
+    allMatches: []
   }
   
   state = this.initialState
@@ -83,7 +84,8 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct, lastLetter, score} = await response.json()
+    let {correct, lastLetter, score, allMatches} = await response.json()
+    allMatches = allMatches ? allMatches : []
     // if user input correct, returns true else returns false
     console.log('correct: ', correct)
     // console.log('lastLetter response:', lastLetter)
@@ -105,11 +107,12 @@ class Game extends Component {
     if (!correct) {
       //render endgame
       this.setState({letter: 'X'})
+      this.setState({allMatches})
       this.incorrectTimeout = setTimeout(() => {
           this.handleLoss()
           this.incorrectTimeout = 0
         }, 1000)
-      
+      console.log('allMatches: ', allMatches)
     }
   }
 
@@ -169,12 +172,13 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score } = this.state
+    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
                           isLoggedIn={this.props.isLoggedIn}
                           handleGameReset = {() => this.handleGameReset()}
+                          allMatches = {allMatches}
                          />
     
     return (
@@ -211,7 +215,7 @@ class Game extends Component {
             <button
               type = "submit"
               onClick = {(e) => this.handleSubmitUserCountry(e)}
-              disabled = {userInput === "" || userInput.length > 60}
+              disabled = {userInput === "" || userInput.length > 60 || needStart}
             >
               Submit
             </button>

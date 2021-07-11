@@ -4,14 +4,14 @@ import UniqueEmailError from './UniqueEmailError'
 
 
 function RegisterForm(props){
-    const { handleSubmit, handleChange, email, username, password, passwordConfirmation } = props
+    const { handleSubmit, handleChange, email, username, password, passwordConfirmation, handleBlur, touched } = props
     let validSignup 
    try {
-        signUpValidator(email, username, password, passwordConfirmation)
+        signUpValidator(email, username, password, passwordConfirmation, touched)
         validSignup = true
     } catch (err) {}
     
-    const [usernameError, passwordError, passwordConfirmationError] = createErrorMessages(username, password, passwordConfirmation)
+    const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
    
     return (
         <div className = 'centre'>
@@ -21,28 +21,32 @@ function RegisterForm(props){
                 <label>Email:
                         <input 
                             onChange={handleChange}
+                            onBlur={(event) => handleBlur(event)}
                             name='email' 
                             type='email'
                             value={email}
                         />
                     </label>
-                <UniqueEmailError email={email}/>
+                <p>{emailError}</p>
+                <UniqueEmailError email={email} touched={touched.email}/>
 
 
                 <label>Username:
                     <input 
                         onChange={handleChange}
+                        onBlur={(event) => handleBlur(event)}
                         name='username' 
                         type='text'
                         value={username}
                     />
                 </label>
                 <p>{usernameError}</p>
-                <UniqueUsernameError username={username}/>
+                <UniqueUsernameError username={username} touched={touched.username}/>
 
                 <label>Password:
                     <input 
                         onChange={handleChange}
+                        onBlur={(event) => handleBlur(event)}
                         name='password'
                         type='password'
                         value={password}
@@ -54,6 +58,7 @@ function RegisterForm(props){
                 <label>Password Confirmation:
                     <input 
                         onChange={handleChange}
+                        onBlur={(event) => handleBlur(event)}
                         name='passwordConfirmation'
                         type='password'
                         value={passwordConfirmation}
@@ -78,44 +83,55 @@ function RegisterForm(props){
 
 export default RegisterForm
 
-function signUpValidator(email, username, password, passwordConfirmation) {
-    emailValidator(email)
-    usernameValidator(username)
-    passwordValidator(password)
+function signUpValidator(email, username, password, passwordConfirmation, touched) {
+    emailValidator(email, touched)
+    usernameValidator(username, touched)
+    passwordValidator(password, touched)
     if (password !== passwordConfirmation) throw new Error('Passwords must be equal')
   }
   
-  function passwordValidator(password) {
+  function passwordValidator(password, touched) {
+    if(!touched.password) return 
     const numbers = '1234567890'
     const letters = 'qwertyuiopasdfghjklzxcvbnm'
+    if (password.length < 8 || password.length > 30) throw new Error('Passwords must be between 8 and 30 characters')
     if (!(password.split('').some(character => numbers.includes(character.toLowerCase())))) throw new Error('Password must include at least one number')
     if (!(password.split('').some(character => letters.includes(character.toLowerCase())))) throw new Error('Password must include at least one letter')
-    if (password.length < 8 || password.length > 30) throw new Error('Passwords must be between 8 and 30 characters')
   }
   
-  function usernameValidator(username){
+  function usernameValidator(username, touched){
+    if(!touched.username) return 
     if (username.length === 0) throw new Error('Username cannot be blank')
     if (username.length > 20) throw new Error('Username must be less than 20 characters')
     const acceptedCharacters = '1234567890qwertyuiopasdfghjklzxcvbnm'
     if (!(username.split('').every(character => acceptedCharacters.includes(character.toLowerCase())))) throw new Error('Username can only include numbers and letters')
   }
   
-  function emailValidator(email) {
+  function emailValidator(email, touched) {
+    if(!touched.email) return 
     if (email.length === 0) throw new Error('Email cannot be blank')
   }
 
-  function createErrorMessages(username, password, passwordConfirmation) {
-    let usernameError, passwordError, passwordConfirmationError
+  function createErrorMessages(email, username, password, passwordConfirmation, touched) {  
+    let emailError, usernameError, passwordError, passwordConfirmationError
     try {
-        if (username) usernameValidator(username)
+        emailValidator(email, touched)
+    } catch (err) {
+        emailError = err.message
+    }
+    try {
+        // if (username) usernameValidator(username, touched)
+        usernameValidator(username, touched)
     } catch (err) {
         usernameError = err.message
     }
     try {
-        if (password) passwordValidator(password)
+        // if (password) passwordValidator(password, touched)
+        passwordValidator(password, touched)
     } catch (err) {
         passwordError = err.message
     }
-    if (passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
-    return [usernameError, passwordError, passwordConfirmationError]
+    // if (touched.passwordConfirmation && passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
+    if (touched.passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
+    return [emailError, usernameError, passwordError, passwordConfirmationError]
   }
