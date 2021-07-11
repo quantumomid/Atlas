@@ -36,6 +36,7 @@ class Game extends Component {
   }
 
   async handleLoss() {
+    //get possible solutions to display on end game page
     const {letter} = this.state
     const response = await fetch(`${process.env.REACT_APP_API_URL}/getmatches`, {
       method: "POST",
@@ -48,6 +49,8 @@ class Game extends Component {
     const {allMatches} = await response.json()
     console.log('allMatches: ', allMatches)
     this.setState({allMatches})
+
+    //trigger end game page
     clearInterval(this.timerInterval)
     this.setState({gameOver: true})
   }
@@ -112,9 +115,13 @@ class Game extends Component {
 
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
-      //render endgame
+
+      // *** MOVED TO HANDLELOSS
       // console.log('allMatches: ', allMatches)
       // this.setState({allMatches})
+
+
+      //render endgame
       this.handleLoss()
     }
   }

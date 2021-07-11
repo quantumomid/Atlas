@@ -63,6 +63,7 @@ const updateGameHandler = async (server) => {
     // get current score of this game
     const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
 
+    //MAYBE MAKE A HELPER FUNCTION?? CALLED AGAIN IN GETMATCHESFORLETTER
     // find already played countries in this game
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
     console.log('countryArray: ', countryArray)
@@ -93,6 +94,7 @@ const updateGameHandler = async (server) => {
         await insertToTable(countryArray, userInput, user)
         console.log('this country has been used, ending game')
         const correct = false
+        // *** THIS CODE HAS BEEN MOVED TO GETMATCHESFORLETTER.JS ***
         // await server.json({correct, score, allMatches})
         await server.json({correct, score})
 
@@ -110,6 +112,7 @@ const updateGameHandler = async (server) => {
 
             const correct = false
             await server.json({correct, score})
+            // *** THIS CODE HAS BEEN MOVED TO GETMATCHESFORLETTER.JS ***
             // await server.json({correct, score, allMatches})
 
         } else {

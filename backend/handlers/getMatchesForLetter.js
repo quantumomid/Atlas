@@ -8,6 +8,8 @@ config({ path: `./.env.${DENO_ENV}`, export: true })
 const client = new Client(Deno.env.get("PG_URL"))
 await client.connect()
 
+// *** CODE MOVED FROM UPDATEGAMEHANDLER
+
 export default async function getMatchesForLetter(server) {
     const { letter } = await server.body
 
@@ -19,12 +21,12 @@ export default async function getMatchesForLetter(server) {
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
 
     if (countryArray) countryArray = JSON.parse(countryArray); // parse the JSON stringified array
-    if (!countryArray) countryArray = [] // if null (first turn), initialise as empty array
+    if (!countryArray) countryArray = []
 
     // console.log('country array parsed = ' + countryArray)
 
-    // also pass through list of what countries would have been correct answers
-    // NOTE: the edge case of no correct answers is not possible, as we check that on the AI turn before giving the letter
+    // pass through list of what countries would have been correct answers
+    // DAVID'S NOTE: the edge case of no correct answers is not possible, as we check that on the AI turn before giving the letter
     let allMatches = (await client.queryArray(`
         SELECT country_name
         FROM countries
