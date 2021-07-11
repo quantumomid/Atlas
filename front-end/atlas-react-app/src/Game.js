@@ -200,7 +200,7 @@ class Game extends Component {
         {/* <GivenLetter letter={letter}/> */}
         </div>
         <section>
-          <form className = 'gameform'>
+          {!needStart && <form className = 'gameform'>
             <section>
             <input 
               type = "text" 
@@ -220,7 +220,7 @@ class Game extends Component {
               Submit
             </button>
             </section>
-          </form>
+          </form>}
         </section>
       </main>
      </div>
