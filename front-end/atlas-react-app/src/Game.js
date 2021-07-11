@@ -94,19 +94,21 @@ class Game extends Component {
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
       this.setState({letter: '✓'})
-      setTimeout(() => {
-        this.setState({isPlayerTurn: false})
-        this.handleRestart()
-      }, 1000)      
+      this.correctTimeout = setTimeout(() => {
+          this.setState({isPlayerTurn: false})
+          this.handleRestart()
+          this.correctTimeout = 0
+        }, 1000)      
     }
 
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
       //render endgame
       this.setState({letter: 'X'})
-      setTimeout(() => {
-        this.handleLoss()
-      }, 1000)
+      this.incorrectTimeout = setTimeout(() => {
+          this.handleLoss()
+          this.incorrectTimeout = 0
+        }, 1000)
       
     }
   }
@@ -158,6 +160,8 @@ class Game extends Component {
 
   async componentWillUnmount() {
     clearInterval(this.timerInterval)
+    clearTimeout(this.correctTimeout)
+    clearTimeout(this.incorrectTimeout)
   }
 
   handleGameReset() {
