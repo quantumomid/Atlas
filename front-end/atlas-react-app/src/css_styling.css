@@ -142,7 +142,7 @@ thead {
 
 .top-game-bar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 10px 20px;
     align-items: center;
     font-size: 20px;
