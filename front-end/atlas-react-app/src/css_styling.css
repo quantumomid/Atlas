@@ -107,7 +107,7 @@ thead {
 
 .page button{
     display: flex;
-    width: 50px;
+    /* width: 50px; */
     height: 20px;
     border-radius: 5px;
     border-color: green;
@@ -173,7 +173,7 @@ thead {
     justify-content: space-evenly;
 }
 .submit-button{
-
+    width: 50px
 }
 .login-response{
     text-align: center;
