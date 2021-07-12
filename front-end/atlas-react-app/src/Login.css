@@ -5,7 +5,7 @@
     justify-content: space-around;
     align-items: center;
     border: solid black 5px;
-
+    font-family: 'Montserrat', sans-serif;
 }
 .login-form{
     display: flex;
@@ -24,23 +24,23 @@
 .login-form button{
     display: flex;
     width: fit-content;
-    height: 20px;
     border-radius: 5px;
     border-color: green;
     color:black;
     background-color: chartreuse;
 }
-/* #submit-button{
+/* .login-form button{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: fit-content;
     border-radius: 20px;
-	border: 1px solid hsl(133, 100%, 40%);
-	background-color: hsl(133, 100%, 50%);
+	border: 1px solid hsl(133, 97%, 15%);
+	background-color: hsl(133, 100%, 40%);
 	color: #FFFFFF;
 	font-size: 16px;
 	font-weight: bold;
-	padding: 20px 45px;
+	padding: 10px 35px;
 	letter-spacing: 1px;
 } */
 .login-response{
