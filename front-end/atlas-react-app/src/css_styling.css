@@ -1,8 +1,8 @@
-.centre{
+/* .centre{
 display: flex;
 flex-direction: column;
 justify-content: center;
-}
+} */
 
 /* .scoreboards{
     display: flex;
@@ -56,24 +56,16 @@ justify-content: center;
 }
 
 /* .page{
-    display: flex;
-    width: 1300px;
-    flex-direction: column;
-    border: solid black 5px;
-    align-items: center;
-} */
-
-.page{
     padding: 0px;
     margin: 0px;
     display: flex;
-    width: 1430px;
+    width: 1430px; 
     flex-direction: column;
     border: solid black 5px;
-    height: 480px;
+    height: 480px; 
     justify-content: center;
     align-items: center;
-}
+} */
 
 table, td, th {
     border: 1px solid black;
@@ -159,34 +151,4 @@ thead {
     overflow:scroll;
 }
 
-/* Login page */
-.login{
-    display: flex;
-    flex-direction: column;
-    height: 60vh;
-    justify-content: space-around;
-}
-.login-form{
-    display: flex;
-    flex-direction: column;
-    height: 30vh;
-    justify-content: space-evenly;
-}
-/* #submit-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-	border: 1px solid hsl(133, 100%, 40%);
-	background-color: hsl(133, 100%, 50%);
-	color: #FFFFFF;
-	font-size: 16px;
-	font-weight: bold;
-	padding: 20px 45px;
-	letter-spacing: 1px;
-} */
-.login-response{
-    text-align: center;
-    color: red
-}
-/*  */
+

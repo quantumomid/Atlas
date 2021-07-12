@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './Login.css'
 
 class Login extends Component {
   
@@ -34,18 +35,14 @@ class Login extends Component {
   render() {
     const { username, password, message } = this.state
     return (
-      <div className = 'centre'>
-        <div className = 'page'>
-          <div className='login'>
-            <div className='title'>Login</div>
-            <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
-              <div className='login-variable'>Username: <input className='login-input' name='username' type="text" value={username} onChange={(event) => this.setState({username: event.target.value})} /></div>
-              <div className='login-variable'>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
-              <button id='submit-button' type='submit' disabled={ username.length === 0 || password.length < 8 }>Login</button>
-            </form>
-            <div className='login-response'>{message}</div>
-          </div>
-        </div>
+      <div className='login'>
+        <div className='title'>Login</div>
+        <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
+          <div>Username: <input className='login-input' name='username' type="text" value={username} onChange={(event) => this.setState({username: event.target.value})} /></div>
+          <div>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
+          <button type='submit' disabled={ username.length === 0 || password.length < 8 }>Login</button>
+        </form>
+        <div className='login-response'>{message}</div>
       </div>
       )
     }
