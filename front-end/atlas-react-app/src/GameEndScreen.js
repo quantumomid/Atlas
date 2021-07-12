@@ -1,6 +1,7 @@
 import { Component } from "react";
 import PersonalScoreBoard from "./PersonalScoreboard";
 import Registration from "./Registration";
+import './GameEndScreen.css'
 
 class GameEndScreen extends Component {
 
@@ -21,18 +22,27 @@ class GameEndScreen extends Component {
         this.setState({score, playedCountryArray})
     }
 
+    renderCountriesList(countryList) {
+        const countryListElems = countryList.map((country, i) => <p key={i}>{country}</p>)
+        return (
+            <ul className='country-list'>
+                {countryListElems}
+            </ul>
+        )
+    }
+
     render() {
         const { isLoggedIn, allMatches } = this.props
         console.log('in end screen allMatches: ', allMatches)
         const { score, playedCountryArray } = this.state
         return (
-            <div className='endgame-screen'>
+            <div className='endgame-page'>
                 <div className='register-or-scoreboard'>
                     {isLoggedIn ? 
                     <PersonalScoreBoard 
                     score={score} /> 
                     : (
-                        <div>
+                        <div className='end-game-register'>
                             <h2>Register to save your score</h2>
                             <Registration
                             saveScore={true}
@@ -40,21 +50,23 @@ class GameEndScreen extends Component {
                         </div>
                     )}
                 </div>
-                <div>
-                    <h2>Your final score</h2>
-                    <p>{score}</p>
+                <div className='score-and-replay'>
+                    <h2>Final Score</h2>
+                    <p className='final-score'>{score}</p>
+                    <button onClick={() => this.props.handleGameReset()}> Play again</button>
                 </div>
-                {playedCountryArray.length !== 0 && 
-                <div>
-                    <h2>Your played countries</h2>
-                    <p>{playedCountryArray}</p>
-                </div>}
-                { allMatches.length !== 0 && 
-                <div>
-                    <h2>You could have played these!</h2>
-                    <p>{allMatches}</p>
-                </div>}
-                <button onClick={() => this.props.handleGameReset()}> Play again</button>
+                <div className='countries-played-and-could-container'>
+                    {playedCountryArray.length !== 0 && 
+                    <div>
+                        <h2>Your played countries</h2>
+                        {this.renderCountriesList(playedCountryArray)}
+                    </div>}
+                    { allMatches.length !== 0 && 
+                    <div>
+                        <h2>You could have played these!</h2>
+                        {this.renderCountriesList(allMatches)}
+                    </div>}
+                </div>
             </div>
         )
     }

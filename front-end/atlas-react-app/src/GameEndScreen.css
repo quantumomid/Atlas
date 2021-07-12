@@ -1,0 +1,60 @@
+.endgame-page{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    border: solid black 5px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register-or-scoreboard {
+    padding: 10px;
+}
+
+.end-game-register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-and-replay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-and-replay .final-score {
+    font-size: 100px;
+    border: solid 5px;
+    /* padding: 15px 45px; */
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.countries-played-and-could-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.countries-played-and-could-container div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countries-played-and-could-container .country-list {
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    list-style-type: none;
+    margin: 0;
+    padding-left: 5px;
+    overflow: scroll;
+}
