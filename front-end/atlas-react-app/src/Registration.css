@@ -1,0 +1,15 @@
+.register-page{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-page input{
+    display: flex;
+    width: 500px;
+    height: 50px;
+    border: solid black 5px;
+}

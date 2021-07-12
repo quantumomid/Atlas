@@ -1,0 +1,27 @@
+.top-game-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 20px;
+    align-items: center;
+    font-size: 20px;
+}
+
+.game-page{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameform{
+    display: flex;
+    width: 900px;
+    height: 300px;
+    border: solid black 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
