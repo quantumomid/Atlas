@@ -14,7 +14,7 @@
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-    margin: 10vh 20vw;
+    margin: 0vh 20vw;
 }
 .login-form{
     display: flex;
@@ -59,6 +59,7 @@
 	font-weight: bold;
 	padding: 10px 35px;
 	letter-spacing: 1px;
+    cursor: pointer;
 }
 
 .login-form button:active {
