@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
-import './css_styling.css'
+import './Game.css' 
 
 const timeGiven = 15
 
@@ -205,14 +205,14 @@ class Game extends Component {
                          />
     
     return (
-      <div className = 'centre'>
+      <div>
       <section className="top-game-bar">
           {!needStart && <div className = 'timer'>Time remaining: {this.state.time}</div>}
           {/* conditionally show flow of game as is appropriate */}
           {isPlayerTurn && aiCountryChoice && <div>The AI picked {aiCountryChoice}</div>}
           {!needStart && <div>Your score: {score}</div>}
         </section>
-      <main className = 'page'>
+      <main className = 'game-page'>
         <div className="start-button-container">
         {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         </div>

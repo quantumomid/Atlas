@@ -3,6 +3,7 @@ import UniqueUsernameError from './UniqueUsernameError'
 import UniqueEmailError from './UniqueEmailError'
 import Filter from 'bad-words'
 
+
 function RegisterForm(props){
     const { handleSubmit, handleChange, email, username, password, passwordConfirmation, handleBlur, touched } = props
     let validSignup 
@@ -14,9 +15,8 @@ function RegisterForm(props){
     const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
    
     return (
-        <div className = 'centre'>
-            <div className = 'page'>
-            <div className = 'title' >Register!!!</div>
+        <div className = 'register-page'>
+            <div>Register!!!</div>
             <form onSubmit={handleSubmit}>
                 <label>Email:
                         <input 
@@ -76,7 +76,6 @@ function RegisterForm(props){
                 </button>
 
             </form>
-            </div>
         </div>
     )
 }
