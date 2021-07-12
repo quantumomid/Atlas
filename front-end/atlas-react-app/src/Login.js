@@ -36,7 +36,7 @@ class Login extends Component {
     const { username, password, message } = this.state
     return (
       <div className='login'>
-        <h1 className='title'>Sign-in</h1>
+        <h1 className='title'>Sign in</h1>
         <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
           <div>Username: <input className='login-input' name='username' type="text" value={username} onChange={(event) => this.setState({username: event.target.value})} /></div>
           <div>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
