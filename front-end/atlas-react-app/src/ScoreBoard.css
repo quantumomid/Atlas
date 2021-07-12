@@ -21,11 +21,11 @@
     width: 100%;
     white-space: nowrap;
     border-spacing: 0;
-    /* border-collapse: separate; */
+    border-collapse: separate;
     width: 300px;
     position: relative;
 
-    border-collapse: collapse;
+    /* border-collapse: collapse; */
     margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
@@ -63,5 +63,5 @@
 }
 
 .scoreboard tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 4px solid #009879;
 }
