@@ -13,7 +13,7 @@
 }
 
 .scoreboard table, .scoreboard td, .scoreboard th {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     text-align: left;
 }
 
@@ -41,7 +41,7 @@
     position: sticky;
     top: 0px;
     /* background-color: white; */
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .scoreboard thead {
@@ -60,8 +60,4 @@
 
 .scoreboard tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
-}
-
-.scoreboard tbody tr:last-of-type {
-    border-bottom: 4px solid #009879;
 }
