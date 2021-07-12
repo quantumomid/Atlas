@@ -21,6 +21,10 @@ class Game extends Component {
   }
   
   state = this.initialState
+
+  componentDidMount() {
+    this.props.setInGameStatus()
+  }
   
   handleStart() {
     this.timerInterval = setInterval(() => {
@@ -39,7 +43,6 @@ class Game extends Component {
   handleLoss() {
     //trigger end game page
     clearInterval(this.timerInterval)
-    this.props.clearInGameStatus()
     this.setState({gameOver: true})
   }
 
@@ -77,7 +80,6 @@ class Game extends Component {
     })
 
     this.callLetter()
-    this.props.setInGameStatus()
     this.setState({needStart: false})
     this.handleStart()
   }
@@ -191,6 +193,7 @@ class Game extends Component {
     clearInterval(this.timerInterval)
     clearTimeout(this.correctTimeout)
     clearTimeout(this.incorrectTimeout)
+    this.props.clearInGameStatus()
   }
 
   handleGameReset() {

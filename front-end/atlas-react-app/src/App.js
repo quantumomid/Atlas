@@ -57,7 +57,7 @@ class App extends Component {
           <nav>
             <ul className="app-banners">
               <li className="app-title-banner">
-              <Link to="/" onClick={() => this.clearInGameStatus()}>Homepage</Link>
+              <Link to="/">Homepage</Link>
               <div>Trendy Slogan</div>
               </li>
               <div className="app-nav-banners">
@@ -65,15 +65,15 @@ class App extends Component {
                 <li>
                 <Link to="/game">Game</Link>
                 </li>}
-                {!isLoggedIn && !inGame &&
+                {!isLoggedIn &&
                 <li>
                 <Link to="/register">Register</Link>
                 </li>}
-                {!isLoggedIn && !inGame &&
+                {!isLoggedIn &&
                 <li>
                 <Link to="/login">Login</Link>
                 </li>}
-                {isLoggedIn && !inGame &&
+                {isLoggedIn &&
                 <div>
                   <Logout
                   handleLogout={() => this.handleLoginAndLogout()} />
