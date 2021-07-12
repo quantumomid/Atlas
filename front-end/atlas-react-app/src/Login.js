@@ -33,15 +33,19 @@ class Login extends Component {
     
   render() {
     const { username, password, message } = this.state
-    return ( 
+    return (
+      <div className = 'centre'>
+      <div className = 'page'>
       <div className='login'>
-        <h2>Login</h2>
+        <div className='title'>Login</div>
         <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
           <div className='login-variable'>Username: <input className='login-input' name='username' type="text" value={username} onChange={(event) => this.setState({username: event.target.value})} /></div>
           <div className='login-variable'>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
-          <input className='submit-button' type='submit' value='Login' disabled={ username.length === 0 || password.length < 8 }/>
+          <button className='submit-button' type='submit' disabled={ username.length === 0 || password.length < 8 }>Login</button>
         </form>
         <div className='login-response'>{message}</div>
+      </div>
+      </div>
       </div>
       )
     }
