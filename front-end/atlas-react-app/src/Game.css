@@ -24,6 +24,10 @@
     font-size: 20px;
 }
 
+.ai-response-placeholder {
+    height: 23px;
+}
+
 .letter-question-container {
     display: flex;
     flex-direction: column;

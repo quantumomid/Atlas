@@ -184,7 +184,7 @@ class Game extends Component {
               <div>{score}</div>
             </div>
           </section>}
-          {isPlayerTurn && aiCountryChoice && <div className="ai-response">The AI picked {aiCountryChoice}</div>}
+          {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           <div className="start-button-container">
           {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
           </div>
