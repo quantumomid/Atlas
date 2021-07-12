@@ -221,13 +221,13 @@ class Game extends Component {
               <div>{score}</div>
             </div>
           </section>}
-          {isPlayerTurn && aiCountryChoice && aiLooped && <div>No more countries beginning with that last letter!</div>}
+          {isPlayerTurn && aiCountryChoice && aiLooped ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
           {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           <div className="start-button-container">
           {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
           </div>
           { !needStart && <div className="letter-question-container">
-          {letter && nextPlayerLooped && <div>No more countries beginning with the AI's last letter!</div>}
+          {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
           {letter && <div>Name a country beginning with:</div>}
           <div className="letter">{letter}</div>
           </div> }
