@@ -107,8 +107,8 @@ thead {
 
 .page button{
     display: flex;
-    width: 50 px;
-    height: 20 px;
+    width: 50px;
+    height: 20px;
     border-radius: 5px;
     border-color: green;
     color:black;
@@ -142,7 +142,7 @@ thead {
 
 .top-game-bar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 10px 20px;
     align-items: center;
     font-size: 20px;
@@ -158,3 +158,25 @@ thead {
     align-items: center;
     overflow:scroll;
 }
+
+/* Login page */
+.login{
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    justify-content: space-around;
+}
+.login-form{
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    justify-content: space-evenly;
+}
+.submit-button{
+
+}
+.login-response{
+    text-align: center;
+    color: red
+}
+/*  */
