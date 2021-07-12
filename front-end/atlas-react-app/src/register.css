@@ -1,11 +1,9 @@
-CSS for registration form
- */
 
 .registerform{
     display: flex;
     width: 50vw;
     height: 50vh;
-    border: solid black 100px;
+    border: solid black 10px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
