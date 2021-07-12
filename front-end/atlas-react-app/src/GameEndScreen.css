@@ -6,17 +6,26 @@
     border: solid black 5px;
     justify-content: space-between;
     align-items: center;
+    height: 600px;
 }
 
 .register-or-scoreboard {
     padding: 10px;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 .end-game-register{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.end-game-register h2 {
+    margin: 10px;
+}
+
+.end-game-register input {
+    height: 35px;
 }
 
 .score-and-replay {
@@ -44,7 +53,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .countries-played-and-could-container div{
