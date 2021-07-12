@@ -39,6 +39,7 @@ class Game extends Component {
   handleLoss() {
     //trigger end game page
     clearInterval(this.timerInterval)
+    this.props.clearInGameStatus()
     this.setState({gameOver: true})
   }
 
@@ -76,6 +77,7 @@ class Game extends Component {
     })
 
     this.callLetter()
+    this.props.setInGameStatus()
     this.setState({needStart: false})
     this.handleStart()
   }
@@ -207,6 +209,9 @@ class Game extends Component {
     
     return (
       <main className = 'game-page'>
+        <div className="start-button-container">
+          {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
+        </div>
         <div className = 'game-container'>
         {!needStart && <section className="top-game-bar">
             <div className = 'timer'>Time remaining:
@@ -218,9 +223,6 @@ class Game extends Component {
             </div>
           </section>}
           {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
-          <div className="start-button-container">
-          {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
-          </div>
           { !needStart && <div className="letter-question-container">
           {letter && <div>Name a country beginning with:</div>}
           <div className="letter">{letter}</div>

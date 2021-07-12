@@ -15,7 +15,8 @@ import {
 class App extends Component {
 
   state = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    inGame: false
   }
 
   async componentDidMount() {
@@ -40,29 +41,39 @@ class App extends Component {
     this.props.history.push("/")
   }
 
+  setInGameStatus() {
+    this.setState({inGame: true})
+  }
+
+  clearInGameStatus() {
+    this.setState({inGame: false})
+  }
+
   render() {
-    const { isLoggedIn } = this.state
+    const { isLoggedIn, inGame } = this.state
     return (
         <div>
         <main>
           <nav>
             <ul className="app-banners">
               <li className="app-title-banner">
-              <Link to="/">Homepage</Link>
+              <Link to="/" onClick={() => this.clearInGameStatus()}>Homepage</Link>
               <div>Trendy Slogan</div>
               </li>
               <div className="app-nav-banners">
+                {!inGame &&
                 <li>
                 <Link to="/game">Game</Link>
-                </li>
-                {!isLoggedIn && 
+                </li>}
+                {!isLoggedIn && !inGame &&
                 <li>
                 <Link to="/register">Register</Link>
                 </li>}
+                {!isLoggedIn && !inGame &&
                 <li>
-                {!isLoggedIn && <Link to="/login">Login</Link>}
-                </li>
-                {isLoggedIn && 
+                <Link to="/login">Login</Link>
+                </li>}
+                {isLoggedIn && !inGame &&
                 <div>
                   <Logout
                   handleLogout={() => this.handleLoginAndLogout()} />
@@ -75,6 +86,8 @@ class App extends Component {
             <Route path="/game">
               <Game 
               isLoggedIn={isLoggedIn}
+              setInGameStatus={() => this.setInGameStatus()}
+              clearInGameStatus={() => this.clearInGameStatus()}
               />
             </Route>
             { !isLoggedIn &&
