@@ -59,7 +59,6 @@
 	font-weight: bold;
 	padding: 10px 35px;
 	letter-spacing: 1px;
-    cursor: pointer;
 }
 
 .login-form button:active {
