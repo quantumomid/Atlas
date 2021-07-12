@@ -7,7 +7,8 @@ class GameEndScreen extends Component {
 
     state = {
         score: 0,
-        playedCountryArray: []
+        playedCountryArray: [],
+        finalCountry: ''
     }
 
     async componentDidMount() {
@@ -19,11 +20,30 @@ class GameEndScreen extends Component {
             }
         )
         const { score, playedCountryArray } = await response.json()
-        this.setState({score, playedCountryArray})
+        let finalCountry
+        if (this.props.time !== 0) finalCountry = playedCountryArray.pop()
+        this.setState({score, playedCountryArray, finalCountry})
+    }
+
+    renderReasonForLoss() {
+        const { playedCountryArray, finalCountry} = this.state
+        if (this.props.time === 0) {
+            return <h2>You ran out of time!</h2>
+        } else {
+            return (
+            <div>
+                <h2>Your final played country was {finalCountry}</h2>
+                {playedCountryArray.includes(finalCountry) ? 
+                <h2>This country has already been played!</h2> :
+                <h2>That is not a valid country!</h2>}
+            </div> 
+            )
+        }
+        
     }
 
     renderCountriesList(countryList) {
-        const countryListElems = countryList.map((country, i) => <p key={i}>{country}</p>)
+        const countryListElems = countryList.map((country, i) => <li key={i}>{country}</li>)
         return (
             <ul className='country-list'>
                 {countryListElems}
@@ -51,6 +71,7 @@ class GameEndScreen extends Component {
                     )}
                 </div>
                 <div className='score-and-replay'>
+                    {this.renderReasonForLoss()}
                     <h2>Final Score</h2>
                     <p className='final-score'>{score}</p>
                     <button onClick={() => this.props.handleGameReset()}> Play again</button>
