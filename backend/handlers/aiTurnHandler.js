@@ -54,6 +54,7 @@ async function letterSolutionChecker(lastLetter, countryArray) {
 
 async function aiTurnHandler(server) {
     let { lastLetter } = await server.body
+    const savedLastLetter = lastLetter
     // console.log('AI turn triggered with ', lastLetter)
 
     // finds user, prioritising registered log in over temporary users
@@ -101,7 +102,17 @@ async function aiTurnHandler(server) {
             console.log('No more countries left!')
             await server.json({allCountriesPlayed: true})
         } else {
-            await server.json({aiCountryChoice, letter: userLetter.toUpperCase()})
+            let aiLooped
+            let nextPlayerLooped
+            if (savedLastLetter.toLowerCase() != aiCountryChoice[0].toLowerCase()) {
+                // if ai didn't have an answer to the player's last letter
+                aiLooped = true
+            }
+            if (userLetter.toLowerCase() != aiCountryChoice.slice(-1).toLowerCase()) {
+                // if there are no answers to the ai's last letter
+                nextPlayerLooped = true
+            }
+            await server.json({aiCountryChoice, letter: userLetter.toUpperCase(), aiLooped, nextPlayerLooped})
         }
     }
 }
