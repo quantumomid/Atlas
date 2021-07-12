@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
-import './css_styling.css'
+import './Game.css'
 
 const timeGiven = 150
 
