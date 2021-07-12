@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 
-const timeGiven = 150
+const timeGiven = 15
 
 class Game extends Component {  
   
@@ -193,8 +193,7 @@ class Game extends Component {
           <div className="letter">{letter}</div>
           </div> }
           <section>
-          {!needStart && <form className = 'game-form'>
-              <div className="game-input-container">
+          {!needStart && <form className="game-input-container">
               <input className="game-input-bar"
                 type = "text" 
                 placeholder = "Enter country beginning with this letter" 
@@ -210,7 +209,6 @@ class Game extends Component {
               >
                 Submit
               </button>
-              </div>
             </form> }
           </section>
       </div>
