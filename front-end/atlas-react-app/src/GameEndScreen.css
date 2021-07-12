@@ -10,6 +10,7 @@
 
 .register-or-scoreboard {
     padding: 10px;
+    margin-left: 5px;
 }
 
 .end-game-register{
@@ -43,6 +44,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 15px;
 }
 
 .countries-played-and-could-container div{
@@ -54,7 +56,7 @@
 .countries-played-and-could-container .country-list {
     height: 200px;
     width: 200px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     list-style-type: none;
     padding: 0;
     overflow: scroll;
@@ -66,4 +68,14 @@
 
 .countries-played-and-could-container .country-list li:nth-child(2n) {
     background-color: rgb(238, 238, 238) ;
+}
+
+.final-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.final-input-container h2 {
+    margin: 15px;
 }

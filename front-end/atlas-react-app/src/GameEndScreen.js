@@ -31,7 +31,7 @@ class GameEndScreen extends Component {
             return <h2>You ran out of time!</h2>
         } else {
             return (
-            <div>
+            <div className="final-input-container">
                 <h2>Your final played country was {finalCountry}</h2>
                 {playedCountryArray.includes(finalCountry) ? 
                 <h2>This country has already been played!</h2> :
