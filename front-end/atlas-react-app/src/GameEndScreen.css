@@ -6,7 +6,7 @@
     border: solid black 5px;
     justify-content: space-between;
     align-items: center;
-    height: 600px;
+    height: 480px;
 }
 
 .register-or-scoreboard {
@@ -45,7 +45,7 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    margin: 40px;
+    margin: 25px;
 }
 
 .countries-played-and-could-container {
@@ -63,7 +63,7 @@
 }
 
 .countries-played-and-could-container .country-list {
-    height: 200px;
+    height: 140px;
     width: 200px;
     /* border: 1px solid black; */
     list-style-type: none;
