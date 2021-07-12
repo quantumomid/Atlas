@@ -106,9 +106,15 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
     const acceptedCharacters = '1234567890qwertyuiopasdfghjklzxcvbnm'
     if (!(username.split('').every(character => acceptedCharacters.includes(character.toLowerCase())))) throw new Error('Username can only include numbers and letters')
 
-    // profanity check
+    // check all possible substrings for profanity
     const filter = new Filter()
-    if (filter.isProfane(username)) throw new Error('Username cannot include profanity')
+
+    for (let lslicer = 0; lslicer < username.length; lslicer++) {
+        for (let rslicer = 1; rslicer < username.length+1; rslicer++) {
+            const substring = username.slice(lslicer, rslicer)
+            if (filter.isProfane(substring)) throw new Error('Username cannot include profanity')
+        }
+    }
   }
   
   function emailValidator(email, touched) {
