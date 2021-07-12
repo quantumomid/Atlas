@@ -5,6 +5,12 @@
     margin: 0px 30px;
     flex-direction: column;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.scoreboard h2 {
+    color: #009879;
 }
 
 .scoreboard div {
