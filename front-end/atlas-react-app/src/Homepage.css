@@ -15,5 +15,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        border: solid black 5px;
     }
     
