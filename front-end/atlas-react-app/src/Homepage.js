@@ -6,16 +6,12 @@ import './Homepage.css'
 class Homepage extends Component {
     render() {
       return (
-        <div className ='centre'>
-        <div className = 'page'>
-          <section className = 'centre'>
-          <div className = 'scoreboards'>
+        <div className = 'homepage'>
+          <div className = 'scoreboard-container'>
           <GlobalScoresBoard />
           { this.props.isLoggedIn && <PersonalScoreboard /> }
           </div>
-          </section>
         </div>
-      </div>
       )
     }
 }
