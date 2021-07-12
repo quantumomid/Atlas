@@ -2,12 +2,11 @@
     padding: 0px;
     margin: 0px;
     display: flex;
-    width: 1430px;
     flex-direction: column;
     border: solid black 5px;
-    height: 480px;
     justify-content: center;
     align-items: center;
+    height: 480px;
 }
 
 .game-page button{
@@ -85,7 +84,6 @@
 }
 
 .game-container {
-    width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
