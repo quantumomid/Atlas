@@ -1,4 +1,10 @@
 
+.login-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 69vh;
+}
 .login{
     display: flex;
     flex-direction: column;
@@ -14,7 +20,8 @@
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-    margin: 10vh 20vw;
+    margin: 0vh 20vw;
+    padding: 0px 50px;
 }
 .login-form{
     display: flex;
