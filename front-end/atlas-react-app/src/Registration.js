@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import RegisterForm from './RegisterForm'
+import './css_styling.css'
 
 class Registration extends Component {
   initialState ={
@@ -58,7 +59,7 @@ class Registration extends Component {
     return (
       <div className = 'centre'>
       <div className = 'page'>
-      {/* <div className = 'registerform'> */}
+      <div className = 'registerform'>
       <RegisterForm
       handleChange={(event) => this.handleChange(event)}
       handleSubmit={(event) => this.handleSubmit(event)}
@@ -70,6 +71,7 @@ class Registration extends Component {
       passwordConfirmation={passwordConfirmation}
       />
       <div>{message}</div>
+      </div>
       </div>
       </div>
        )

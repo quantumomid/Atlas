@@ -1,6 +1,7 @@
 import React from 'react'
 import UniqueUsernameError from './UniqueUsernameError'
 import UniqueEmailError from './UniqueEmailError'
+import './css_styling.css'
 
 
 function RegisterForm(props){
@@ -26,9 +27,11 @@ function RegisterForm(props){
                             type='email'
                             value={email}
                         />
-                    </label>
+                    </label >
                 <p>{emailError}</p>
+                <div className = 'registerformerrormessage'>
                 <UniqueEmailError email={email} touched={touched.email}/>
+                </div>
 
 
                 <label>Username:
@@ -40,8 +43,10 @@ function RegisterForm(props){
                         value={username}
                     />
                 </label>
+                <div className = 'registerformerrormessage'>
                 <p>{usernameError}</p>
                 <UniqueUsernameError username={username} touched={touched.username}/>
+                </div>
 
                 <label>Password:
                     <input 
@@ -53,7 +58,9 @@ function RegisterForm(props){
                         minLength="8" required  
                     />
                 </label>
+                <div className = 'registerformerrormessage'>
                 <p>{passwordError}</p>
+                </div>
 
                 <label>Password Confirmation:
                     <input 
@@ -65,7 +72,9 @@ function RegisterForm(props){
                         minLength="8" required  
                     />
                 </label>
+                <div className = 'registerformerrormessage'>
                 <p>{passwordConfirmationError}</p>
+                </div>
 
 
                 <button 
