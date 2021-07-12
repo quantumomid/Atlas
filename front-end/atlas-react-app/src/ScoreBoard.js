@@ -1,4 +1,4 @@
-
+import './ScoreBoard.css'
 
 function Table (props) {
     const { gameData } = props

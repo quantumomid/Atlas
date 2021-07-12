@@ -1,6 +1,7 @@
 import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
+import getCountryArray from "./helperFunctions/getCountryArray.js"
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 config({ path: `./.env.${DENO_ENV}`, export: true })
@@ -63,28 +64,9 @@ const updateGameHandler = async (server) => {
     // get current score of this game
     const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
 
+    //MAYBE MAKE A HELPER FUNCTION?? CALLED AGAIN IN GETMATCHESFORLETTER
     // find already played countries in this game
-    let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
-    console.log('countryArray: ', countryArray)
-
-    
-
-    if (countryArray) countryArray = JSON.parse(countryArray) // parse the JSON stringified array
-    if (!countryArray) countryArray = [] // if null (first turn), initialise as empty array
-
-    // also pass through list of what countries would have been correct answers
-    // NOTE: the edge case of no correct answers is not possible, as we check that on the AI turn before giving the letter
-    let allMatches = (await client.queryArray(`
-        SELECT country_name
-        FROM countries
-        WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`,
-         letter.toLowerCase())).rows
-    // console.log('allMatches: ', allMatches)
-    
-    // filter out those that have been played
-    allMatches = allMatches.flat()
-    allMatches = allMatches.filter(country => !countryArray.includes(country))
-    console.log('filtered allMatches: ', allMatches)
+    const countryArray = await getCountryArray(user)
     
     if (countryArray.includes(userInput)) {
         // if country has already been used this game, end the game
@@ -92,7 +74,7 @@ const updateGameHandler = async (server) => {
         await insertToTable(countryArray, userInput, user)
         console.log('this country has been used, ending game')
         const correct = false
-        await server.json({correct, score, allMatches})
+        await server.json({correct, score})
 
     } else {
         await insertToTable(countryArray, userInput, user)
@@ -105,9 +87,8 @@ const updateGameHandler = async (server) => {
         console.log('matches: ', matches)
         if (!matches) {
             // if answer is incorrect, add to finished_games, delete from current_games, and return some response
-
             const correct = false
-            await server.json({correct, score, allMatches})
+            await server.json({correct, score})
 
         } else {
             // return a response with the letter for the next AI turn

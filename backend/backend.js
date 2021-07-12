@@ -15,7 +15,7 @@ import aiTurnHandler from './handlers/aiTurnHandler.js'
 import endgameDataHandler from './handlers/endgameDataHandler.js'
 import usernameExistanceCheckerHandler from './handlers/usernameExistenceCheckerHandler.js'
 import emailExistanceCheckerHandler from './handlers/emailExistenceCheckerHandler.js'
-
+import getMatchesForLetter from './handlers/getMatchesForLetter.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 
@@ -49,6 +49,7 @@ app
     .post('/endgamedata', endgameDataHandler)
     .post('/usernameexists', usernameExistanceCheckerHandler)
     .post('/emailexists', emailExistanceCheckerHandler)
+    .post('/getmatches', getMatchesForLetter)
 
     .start({ port: PORT })
 

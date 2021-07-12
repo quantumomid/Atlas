@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 
+
 const timeGiven = 15
 
 class Game extends Component {  
@@ -36,8 +37,25 @@ class Game extends Component {
   }
 
   handleLoss() {
+    //trigger end game page
     clearInterval(this.timerInterval)
     this.setState({gameOver: true})
+  }
+
+  async getAllMatches() {
+    //get possible solutions to display on end game page
+    const {letter} = this.state
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/getmatches`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({letter})
+    })
+    const {allMatches} = await response.json()
+    console.log('allMatches: ', allMatches)
+    this.setState({allMatches})
   }
 
   async callLetter() {
@@ -84,7 +102,7 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct, lastLetter, score, allMatches} = await response.json()
+    const {correct, lastLetter, score} = await response.json()
     // if user input correct, returns true else returns false
     console.log('correct: ', correct)
     // console.log('lastLetter response:', lastLetter)
@@ -94,18 +112,29 @@ class Game extends Component {
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
-      this.setState({isPlayerTurn: false})
-      this.handleRestart()
+      this.setState({letter: '✓'})
+      this.correctTimeout = setTimeout(() => {
+          this.setState({isPlayerTurn: false})
+          this.handleRestart()
+          this.correctTimeout = 0
+        }, 1000)      
     }
 
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
-      //render endgame
-      console.log('allMatches: ', allMatches)
-      this.setState({allMatches})
-      this.handleLoss()
 
-      
+      // *** MOVED TO HANDLELOSS
+      // console.log('allMatches: ', allMatches)
+      // this.setState({allMatches})
+
+      this.getAllMatches()
+      //render endgame
+      this.setState({letter: '✗'})
+      // this.setState({allMatches})
+      this.incorrectTimeout = setTimeout(() => {
+          this.handleLoss()
+          this.incorrectTimeout = 0
+        }, 1000)
     }
   }
 
@@ -137,8 +166,10 @@ class Game extends Component {
 
   async componentDidUpdate(_prevProps, prevState) {
     // handles time running out
-    if (this.state.time === 0 && !this.state.gameOver) this.handleLoss()
-
+    if (this.state.time === 0 && !this.state.gameOver) {
+      this.getAllMatches()
+      this.handleLoss()
+    }
     // triggers toggling between player and AI turns
     // only runs when isPlayerTurn state changes (which is when they give a right answer)
     if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
@@ -156,6 +187,8 @@ class Game extends Component {
 
   async componentWillUnmount() {
     clearInterval(this.timerInterval)
+    clearTimeout(this.correctTimeout)
+    clearTimeout(this.incorrectTimeout)
   }
 
   handleGameReset() {
