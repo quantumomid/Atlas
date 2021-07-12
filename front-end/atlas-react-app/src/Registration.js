@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import RegisterForm from './RegisterForm'
-import './css_styling.css'
+import './register.css'
 
 class Registration extends Component {
   initialState ={

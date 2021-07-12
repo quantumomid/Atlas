@@ -1,7 +1,7 @@
 import React from 'react'
 import UniqueUsernameError from './UniqueUsernameError'
 import UniqueEmailError from './UniqueEmailError'
-import './css_styling.css'
+import './register.css'
 
 
 function RegisterForm(props){
