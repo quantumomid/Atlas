@@ -15,11 +15,11 @@ function RegisterForm(props){
     const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
    
     return (
-        <div className = 'centre'>
-            <div className = 'page'>
-            <div className = 'title' >Register!!!</div>
-            <form onSubmit={handleSubmit}>
-                <label>Email:
+        <div>
+            <div className = 'titleform' >Register!!!</div>
+            <div className = 'registerform'>
+            <form className = 'innerform' onSubmit={handleSubmit}>
+                <label className = 'registerationlabel'>Email:
                         <input 
                             onChange={handleChange}
                             onBlur={(event) => handleBlur(event)}
@@ -28,13 +28,13 @@ function RegisterForm(props){
                             value={email}
                         />
                     </label >
-                <p>{emailError}</p>
+                <p className = 'registerformerrormessage'>{emailError}</p>
                 <div className = 'registerformerrormessage'>
                 <UniqueEmailError email={email} touched={touched.email}/>
                 </div>
 
 
-                <label>Username:
+                <label className = 'registerationlabel'>Username:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -48,7 +48,7 @@ function RegisterForm(props){
                 <UniqueUsernameError username={username} touched={touched.username}/>
                 </div>
 
-                <label>Password:
+                <label className = 'registerationlabel'>Password:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -62,7 +62,7 @@ function RegisterForm(props){
                 <p>{passwordError}</p>
                 </div>
 
-                <label>Password Confirmation:
+                <label className = 'registerationlabel'>Password Confirmation:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -77,7 +77,7 @@ function RegisterForm(props){
                 </div>
 
 
-                <button 
+                <button className = 'buttonform' 
                 type="submit"
                 disabled= {!validSignup}
                 >
@@ -86,7 +86,7 @@ function RegisterForm(props){
 
             </form>
             </div>
-        </div>
+            </div>
     )
 }
 
