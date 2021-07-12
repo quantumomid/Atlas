@@ -102,8 +102,8 @@ async function aiTurnHandler(server) {
             console.log('No more countries left!')
             await server.json({allCountriesPlayed: true})
         } else {
-            let aiLooped
-            let nextPlayerLooped
+            let aiLooped = false
+            let nextPlayerLooped = false
             if (savedLastLetter.toLowerCase() != aiCountryChoice[0].toLowerCase()) {
                 // if ai didn't have an answer to the player's last letter
                 aiLooped = true

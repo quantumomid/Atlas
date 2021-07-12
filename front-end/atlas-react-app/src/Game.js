@@ -17,7 +17,9 @@ class Game extends Component {
     gameOver: false,
     score: 0,
     time: timeGiven,
-    allMatches: []
+    allMatches: [],
+    aiLooped: false,
+    nextPlayerLooped: false
   }
   
   state = this.initialState
@@ -151,7 +153,8 @@ class Game extends Component {
     })
     //returns country name that AI plays
     const { aiCountryChoice, allCountriesPlayed, letter, aiLooped, nextPlayerLooped } = await response.json()
-    console.log('aiLooped: ', aiLooped, 'nextPlayerLooped: ', nextPlayerLooped)
+    // console.log('aiLooped: ', aiLooped, 'nextPlayerLooped: ', nextPlayerLooped)
+
     // console.log(allCountriesPlayed) //undefined
     if (allCountriesPlayed) {
       console.log('game ends due to no more countries')
@@ -161,7 +164,7 @@ class Game extends Component {
       console.log('ai country pick: ', aiCountryChoice)
 
       // trigger next player turn, displaying new lastLetter
-      this.setState({isPlayerTurn: true, aiCountryChoice, letter})
+      this.setState({isPlayerTurn: true, aiCountryChoice, letter, aiLooped, nextPlayerLooped})
     }
   }
 
@@ -197,7 +200,7 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches } = this.state
+    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
@@ -218,11 +221,13 @@ class Game extends Component {
               <div>{score}</div>
             </div>
           </section>}
+          {isPlayerTurn && aiCountryChoice && aiLooped && <div>No more countries beginning with that last letter!</div>}
           {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           <div className="start-button-container">
           {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
           </div>
           { !needStart && <div className="letter-question-container">
+          {letter && nextPlayerLooped && <div>No more countries beginning with the AI's last letter!</div>}
           {letter && <div>Name a country beginning with:</div>}
           <div className="letter">{letter}</div>
           </div> }
