@@ -121,7 +121,7 @@ class Game extends Component {
     // console.log('lastLetter response:', lastLetter)
 
     // reset the input form to empty and update the lastLetter for the AI turn
-    this.setState({lastLetter, userInput: '', score})
+    this.setState({lastLetter, score})
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
@@ -164,16 +164,16 @@ class Game extends Component {
       body: JSON.stringify({userInputCity})
     })
 
-    const { isCorrectCity, correctCity } = await response.json()
+    const { isCorrectCity, correctCity, country } = await response.json()
     console.log('isCorrectCity: ', isCorrectCity)
 
     if (isCorrectCity) {
       this.setState({letter: '✓'})
       this.correctTimeout = setTimeout(() => {
-          this.setState({isPlayerTurn: false})
+          this.setState({isPlayerTurn: false, userInputCity: '', userInput: '', showCapitalCityQuestion: false})
           this.handleRestart()
           this.correctTimeout = 0
-        }, 1000)   
+        }, 1000) 
 
     } else {
       this.getAllMatches()
@@ -247,13 +247,13 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped } = this.state
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, country } = this.state
   
     if (gameOver) return <GameEndScreen
-                          currentGameID={0}
-                          isLoggedIn={this.props.isLoggedIn}
-                          handleGameReset = {() => this.handleGameReset()}
-                          allMatches = {allMatches}
+                            currentGameID={0}
+                            isLoggedIn={this.props.isLoggedIn}
+                            handleGameReset = {() => this.handleGameReset()}
+                            allMatches = {allMatches}
                          />
     
     return (
@@ -274,46 +274,46 @@ class Game extends Component {
           {isPlayerTurn && aiCountryChoice && aiLooped ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
           {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
-          {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
-          {letter && <div>Name a country beginning with:</div>}
-          <div className="letter">{letter}</div>
+            {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
+            {letter && <div>Name a country beginning with:</div>}
+            <div className="letter">{letter}</div>
           </div> }
           <section>
-          {!needStart && <form className="game-input-container">
+            {!needStart && <form className="game-input-container">
+                <input className="game-input-bar"
+                  type = "text" 
+                  placeholder = "Enter country beginning with this letter" 
+                  name="userInput" 
+                  value={userInput} 
+                  onChange ={(e) => this.handleUserInputChange(e)}
+                  autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+                />
+                <button className="game-submit"
+                  type = "submit"
+                  onClick = {(e) => this.handleSubmitUserCountry(e)}
+                  disabled = {userInput === "" || userInput.length > 60}
+                >
+                  Submit
+                </button>
+              </form> }
+            {/* optional capital city question: */}
+            {showCapitalCityQuestion && <form className="game-input-container">
               <input className="game-input-bar"
                 type = "text" 
-                placeholder = "Enter country beginning with this letter" 
-                name="userInput" 
-                value={userInput} 
+                placeholder = {`For a bonus point, name the capital city of ${country}`}
+                name="userInputCity" 
+                value={userInputCity} 
                 onChange ={(e) => this.handleUserInputChange(e)}
-                autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+                autoComplete = 'off' 
               />
               <button className="game-submit"
                 type = "submit"
-                onClick = {(e) => this.handleSubmitUserCountry(e)}
-                disabled = {userInput === "" || userInput.length > 60}
+                onClick = {(e) => this.checkCapitalCity(e)}
+                disabled = {userInputCity === "" || userInputCity.length > 60}
               >
                 Submit
               </button>
             </form> }
-          {/* optional capital city question: */}
-          {!needStart && <form className="game-input-container">
-            <input className="game-input-bar"
-              type = "text" 
-              placeholder = "For a bonus point, name the capital city of that country" 
-              name="userInputCity" 
-              value={userInputCity} 
-              onChange ={(e) => this.handleUserInputChange(e)}
-              autoComplete = 'off' 
-            />
-            <button className="game-submit"
-              type = "submit"
-              onClick = {(e) => this.checkCapitalCity(e)}
-              disabled = {userInputCity === "" || userInputCity.length > 60}
-            >
-              Submit
-            </button>
-          </form> }
           </section>
       </div>
      </main>
