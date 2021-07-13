@@ -56,6 +56,16 @@ body {
     text-decoration: none;
     font-size: 16px;
     color: #00cc2c;
+    transition: font-weight 0.5s ease-in-out, text-decoration 0.5s ease-in-out;
+}
+
+.app-nav-banners li *:hover {
+    font-weight: 600;
+    color: #019120;
+}
+
+.app-nav-banners li *:active {
+    opacity: 0.5;
 }
 
 button{
@@ -72,12 +82,13 @@ button{
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
-.selected-page {
-    font-weight: 600;
-}
-
 .app-nav-banners button {
     background-color: transparent;
     border: none;
     font-family: 'Ubuntu', sans-serif;
+}
+
+.app-nav-banners li .selected-page {
+    font-weight: 600;
+    color: #019120;
 }
