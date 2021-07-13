@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import RegisterForm from './RegisterForm'
-import './Registration.css'
-
+import './register.css'
 
 class Registration extends Component {
   initialState ={
@@ -58,19 +57,20 @@ class Registration extends Component {
   render() {
     const { username, email, password, passwordConfirmation, message } = this.state
     return (
-      <div className='register-page'>
-        {/* <div className = 'registerform'> */}
-        <RegisterForm
-        handleChange={(event) => this.handleChange(event)}
-        handleSubmit={(event) => this.handleSubmit(event)}
-        handleBlur={(event) => this.markAsTouched(event.target.name)}
-        touched={this.state.touched} 
-        email={email}
-        username={username}
-        password={password}
-        passwordConfirmation={passwordConfirmation}
-        />
-        <div>{message}</div>
+
+      <div className = 'pageform'>
+      <RegisterForm
+      handleChange={(event) => this.handleChange(event)}
+      handleSubmit={(event) => this.handleSubmit(event)}
+      handleBlur={(event) => this.markAsTouched(event.target.name)}
+      touched={this.state.touched} 
+      email={email}
+      username={username}
+      password={password}
+      passwordConfirmation={passwordConfirmation}
+      />
+      <div>{message}</div>
+
       </div>
        )
     }

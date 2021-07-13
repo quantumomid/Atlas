@@ -1,6 +1,7 @@
 import React from 'react'
 import UniqueUsernameError from './UniqueUsernameError'
 import UniqueEmailError from './UniqueEmailError'
+import './register.css'
 import Filter from 'bad-words'
 
 
@@ -15,10 +16,11 @@ function RegisterForm(props){
     const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
    
     return (
-        <div className = 'register-page'>
-            <div>Register!!!</div>
-            <form onSubmit={handleSubmit}>
-                <label>Email:
+        <div>
+            <div className = 'titleform' >Register!!!</div>
+            <div className = 'registerform'>
+            <form className = 'innerform' onSubmit={handleSubmit}>
+                <label className = 'registerationlabel'>Email:
                         <input 
                             onChange={handleChange}
                             onBlur={(event) => handleBlur(event)}
@@ -26,12 +28,14 @@ function RegisterForm(props){
                             type='email'
                             value={email}
                         />
-                    </label>
+                    </label >
+                <div className = 'registerformerrormessage'>
                 <p>{emailError}</p>
                 <UniqueEmailError email={email} touched={touched.email}/>
+                </div>
 
 
-                <label>Username:
+                <label className = 'registerationlabel'>Username:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -40,10 +44,12 @@ function RegisterForm(props){
                         value={username}
                     />
                 </label>
+                <div className = 'registerformerrormessage'>
                 <p>{usernameError}</p>
                 <UniqueUsernameError username={username} touched={touched.username}/>
+                </div>
 
-                <label>Password:
+                <label className = 'registerationlabel'>Password:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -53,9 +59,11 @@ function RegisterForm(props){
                         minLength="8" required  
                     />
                 </label>
+                <div className = 'registerformerrormessage'>
                 <p>{passwordError}</p>
+                </div>
 
-                <label>Password Confirmation:
+                <label className = 'registerationlabel'>Password Confirmation:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -65,10 +73,12 @@ function RegisterForm(props){
                         minLength="8" required  
                     />
                 </label>
+                <div className = 'registerformerrormessage'>
                 <p>{passwordConfirmationError}</p>
+                </div>
 
 
-                <button 
+                <button className = 'buttonform' 
                 type="submit"
                 disabled= {!validSignup}
                 >
@@ -76,7 +86,8 @@ function RegisterForm(props){
                 </button>
 
             </form>
-        </div>
+            </div>
+            </div>
     )
 }
 
