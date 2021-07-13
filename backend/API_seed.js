@@ -18,10 +18,18 @@ async function countryAndCapital() {
 
 let countries = await countryAndCapital()
 
-// test country letter loop
-// countries = [{name: 'France', capital: 'Paris'}, {name: 'Germany', capital: 'Berlin'}, {name: 'Uk', capital: 'London'}]
+async function countryAndFlag() {
+    const response = await fetch("https://countriesnow.space/api/v0.1/countries/flag/images")
+    const parsed = await response.json()
+    // console.log(parsed.data)
+    const flags = parsed.data
+    return flags
+}
+
+let flags = await countryAndFlag()
 
 countries.forEach(async (country) => await client.queryObject("INSERT INTO countries (country_name, capital, created_at) VALUES($1, $2, NOW())", country.name, country.capital))
+flags.forEach(async (flag) => await client.queryObject("UPDATE countries SET flag = $1 WHERE country_name = $2", flag.flag, flag.name))
 
 //let unwantedCountries = ['Bouvet Island', 'Bonaire, Saint Eustatius and Saba ', 'Tokelau', 'Heard Island and McDonald Islands', 'Vatican City State (Holy See)', 'Cocos (Keeling) Islands', 'United States Minor Outlying Islands', 'U.S. Virgin Islands', 'Antarctica' ]
 let nonUNCountries = ['Wallis and Futuna', 'Saint Barthelemy', 'Bermuda', 'Bouvet Island', 'Bonaire, Saint Eustatius and Saba ', 'Réunion', 'Tokelau', 'Guam', 'South Georgia and the South Sandwich Islands', 'Guadeloupe', 'Guernsey', 'Greenland', 'Gibraltar', 'Hong Kong', 'Heard Island and McDonald Islands', 'Vatican City State (Holy See)', 'Svalbard and Jan Mayen', 'French Polynesia', 'Pitcairn', 'Saint Pierre and Miquelon', 'Cocos (Keeling) Islands', 'Saint Martin', 'Macau', 'Martinique', 'Northern Mariana Islands', 'Montserrat', 'Isle of Man', 'British Indian Ocean Territory', 'Saint Helena', 'Falkland Islands', 'Faroe Islands', 'New Caledonia', 'Norfolk Island', 'Cocos Islands', 'Christmas Island', 'Curacao', 'Sint Maarten', 'Cayman Islands', 'British Virgin Islands', 'Mayotte', 'United States Minor Outlying Islands', 'French Southern Territories', 'Turks and Caicos Islands', 'Anguilla', 'U.S. Virgin Islands', 'Antarctica', 'American Samoa', 'Aruba', 'Aland Islands', 'Puerto Rico']
