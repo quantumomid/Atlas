@@ -137,10 +137,6 @@ class Game extends Component {
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
 
-      // *** MOVED TO HANDLELOSS
-      // console.log('allMatches: ', allMatches)
-      // this.setState({allMatches})
-
       this.getAllMatches()
       //render endgame
       this.setState({letter: '✗'})
@@ -258,6 +254,7 @@ class Game extends Component {
                             allMatches = {allMatches}
                             time={time}
                             correctCity={correctCity}
+                            userInputCity={userInputCity}
                          />
     
     return (
