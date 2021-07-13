@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Homepage from './Homepage';
-import Game2 from './Game2';
+import Game from './Game';
 import RegisterPage from './RegisterPage';
 import Login from './Login';
 import Logout from './Logout';
@@ -84,7 +84,7 @@ class App extends Component {
           </nav>
           <Switch>
             <Route path="/game">
-              <Game2 
+              <Game 
               isLoggedIn={isLoggedIn}
               setInGameStatus={() => this.setInGameStatus()}
               clearInGameStatus={() => this.clearInGameStatus()}
