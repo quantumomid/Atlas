@@ -25,7 +25,7 @@ async function capitalCityCheck(server) {
     const countryArray = getCountryArray(user)
     const lastCountry = countryArray.slice(-1)
 
-    const [[correctCity]] = (await client.queryObject(`SELECT capital 
+    const [[correctCity]] = (await client.queryArray(`SELECT capital 
                                                    FROM countries
                                                    WHERE country_name = $1;`, lastCountry)).rows
     
@@ -35,6 +35,7 @@ async function capitalCityCheck(server) {
     if (correctCity === city) {
         isCorrectCity = true
 
+        // increase score for correct answer
         const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
         await client.queryObject(`UPDATE current_games
                                   SET score = $1
