@@ -75,8 +75,8 @@ class App extends Component {
           <nav>
             <ul className="app-banners">
               <div className="app-title-banner">
-              <Link to="/"><div className="homepage-title">Around the World in 100 points</div></Link>
-              <div className="slogan">Can you name every country?</div>
+              <Link to="/"><div className="homepage-title">Atlas</div></Link>
+              <div className="slogan">Around the World in 101 Questions</div>
               </div>
               <div className="app-nav-banners">
                 <li>
