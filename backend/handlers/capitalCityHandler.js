@@ -25,6 +25,15 @@ async function capitalCityCheck(server) {
     let user = await getUserFromCookies(server)
     if (!user) throw new Error ('No user detected')
 
+     // backend timer to prevent them hacking the frontend clock to gain more time
+     const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '20 seconds';",user)).rows
+     //console.log('backendTimer length',backendTimer.length)
+     
+     if (backendTimer.length === 0){
+         //console.log('backendTimer',backendTimer)
+         throw new Error('backend timeout')
+     } 
+
     // finds country (most recent in current_games)
     const countryArray = await getCountryArray(user)
     const [lastCountry] = countryArray.slice(-1)
@@ -45,7 +54,7 @@ async function capitalCityCheck(server) {
 
         // increase score for correct answer
         await client.queryObject(`UPDATE current_games
-                                  SET score = $1
+                                  SET score = $1, updated_at = NOW()
                                   WHERE username = $2;`, score + 1, user)
         score += 1
     }
