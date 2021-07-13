@@ -14,18 +14,23 @@
     margin-left: 15px;
 }
 
-.end-game-register{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .end-game-register h2 {
     margin: 10px;
 }
 
-.end-game-register input {
-    height: 35px;
+.end-game-register{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.end-game-register input{
+    display: flex;
+    width: 500px;
+    height: 30px;
 }
 
 .score-and-replay {
@@ -89,3 +94,4 @@
 .final-input-container h2 {
     margin: 5px;
 }
+

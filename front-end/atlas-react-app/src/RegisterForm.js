@@ -17,7 +17,6 @@ function RegisterForm(props){
    
     return (
         <div>
-            <div className = 'titleform' >Register!!!</div>
             <div className = 'registerform'>
             <form className = 'innerform' onSubmit={handleSubmit}>
                 <label className = 'registerationlabel'>Email:
