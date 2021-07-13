@@ -56,13 +56,14 @@ body {
     text-decoration: none;
     font-size: 16px;
     color: #00cc2c;
-    transition: font-weight 0.5s ease-in-out, text-decoration 0.5s ease-in-out;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
     padding: 10px 20px;
 }
 
 .app-nav-banners li *:hover {
-    font-weight: 600;
-    color: #019120;
+    background-color: #019120;
+    color: white;
+    border-radius: 20px;
 }
 
 .app-nav-banners li *:active {
@@ -95,5 +96,4 @@ button{
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
-
 }
