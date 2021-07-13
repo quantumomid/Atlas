@@ -15,8 +15,7 @@ body {
     display:flex;
     padding:20px;
     justify-content: center;
-    background-color: white;
-    color:black;
+    background-color: #00cc2c;
     font-size: 30px;
     align-items: center;
     flex-direction: column;
@@ -28,22 +27,23 @@ body {
 }
 
 .app-title-banner .homepage-title {
-    color: 	#00cc2c;
+    color: 	white;
     font-size: 65px;
 }
 
 .app-title-banner .slogan {
-    color: 	#00cc2c;
+    color: 	white;
     font-size: 25px;
     margin-top: -10px;
 }
 
 .app-nav-banners {
     display: flex;
-    padding: 8px;
-    background-color: 	#00cc2c;
+    padding: 5px;
+    background-color: white;
     justify-content: space-between;
     align-items: center;
+    border-bottom: solid 3px #00cc2c;
 }
 
 .app-nav-banners li {
@@ -55,7 +55,7 @@ body {
 .app-nav-banners li * {
     text-decoration: none;
     font-size: 16px;
-    color: white;
+    color: #00cc2c;
 }
 
 button{
