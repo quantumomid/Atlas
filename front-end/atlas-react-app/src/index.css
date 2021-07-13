@@ -44,6 +44,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: solid 3px #00cc2c;
+    min-height: 38px;
 }
 
 .app-nav-banners li {
