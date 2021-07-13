@@ -51,7 +51,7 @@ app
     .post('/usernameexists', usernameExistanceCheckerHandler)
     .post('/emailexists', emailExistanceCheckerHandler)
     .post('/getmatches', getMatchesForLetter)
-    .post('/capitalcitycheck', capitalCityCheck)
+    .post('/game/city', capitalCityCheck)
 
     .start({ port: PORT })
 

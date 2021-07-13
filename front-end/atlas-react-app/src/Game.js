@@ -10,6 +10,7 @@ class Game extends Component {
   initialState = {
     letter: '',
     userInput: '',
+    userInputCity: '',
     needStart: true,
     isPlayerTurn: true,
     lastLetter: '',
@@ -88,7 +89,12 @@ class Game extends Component {
 
   handleUserInputChange(e) {
     // handles user input to form element
-    this.setState({userInput: e.target.value})
+
+    const { name, value } = e.target
+
+    this.setState({[name]: value})
+    console.log(name, value)
+    // this.setState({userInput: e.target.value})
     // console.log(this.state.userInput)
   }
 
@@ -137,6 +143,39 @@ class Game extends Component {
       //render endgame
       this.setState({letter: '✗'})
       // this.setState({allMatches})
+      this.incorrectTimeout = setTimeout(() => {
+          this.handleLoss()
+          this.incorrectTimeout = 0
+        }, 1000)
+    }
+  }
+
+  async checkCapitalCity(e) {
+    e.preventDefault()
+    const { userInputCity } = this.state
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({userInputCity})
+    })
+
+    const { isCorrectCity } = await response.json()
+    console.log('isCorrectCity: ', isCorrectCity)
+
+    if (isCorrectCity) {
+      this.setState({letter: '✓'})
+      this.correctTimeout = setTimeout(() => {
+          this.setState({isPlayerTurn: false})
+          this.handleRestart()
+          this.correctTimeout = 0
+        }, 1000)   
+
+    } else {
+      this.getAllMatches()
+      this.setState({letter: '✗'})
       this.incorrectTimeout = setTimeout(() => {
           this.handleLoss()
           this.incorrectTimeout = 0
@@ -205,7 +244,7 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped } = this.state
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
@@ -245,6 +284,24 @@ class Game extends Component {
                 value={userInput} 
                 onChange ={(e) => this.handleUserInputChange(e)}
                 autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+              />
+              <button className="game-submit"
+                type = "submit"
+                onClick = {(e) => this.handleSubmitUserCountry(e)}
+                disabled = {userInput === "" || userInput.length > 60}
+              >
+                Submit
+              </button>
+            </form> }
+            {/* optional capital city question: */}
+            {!needStart && <form className="game-input-container">
+              <input className="game-input-bar"
+                type = "text" 
+                placeholder = "For a bonus point, name the capital city of that country" 
+                name="userInputCity" 
+                value={userInputCity} 
+                onChange ={(e) => this.handleUserInputChange(e)}
+                autoComplete = 'off' 
               />
               <button className="game-submit"
                 type = "submit"
