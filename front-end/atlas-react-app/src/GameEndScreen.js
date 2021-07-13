@@ -21,14 +21,27 @@ class GameEndScreen extends Component {
         )
         const { score, playedCountryArray } = await response.json()
         let finalCountry
-        if (this.props.time !== 0) finalCountry = playedCountryArray.pop()
+        if (this.props.time !== 0 && !this.props.correctCity) {
+            finalCountry = playedCountryArray.pop()
+        } else {
+            finalCountry = playedCountryArray[playedCountryArray.length - 1]
+        }
+        
         this.setState({score, playedCountryArray, finalCountry})
     }
 
     renderReasonForLoss() {
         const { playedCountryArray, finalCountry} = this.state
-        if (this.props.time === 0) {
+        const { time, correctCity, userInputCity } = this.props
+        if (time === 0) {
             return <h2>You ran out of time!</h2>
+        } else if (correctCity) {
+            return (
+                <div className="final-input-container">
+                    <h2>The capital of {finalCountry} is {correctCity}</h2>
+                    <h2>You played {userInputCity}</h2>
+                </div> 
+            )
         } else {
             return (
             <div className="final-input-container">
@@ -79,7 +92,7 @@ class GameEndScreen extends Component {
                 <div className='countries-played-and-could-container'>
                     {playedCountryArray.length !== 0 && 
                     <div>
-                        <h2>Your played countries</h2>
+                        <h2>Played countries</h2>
                         {this.renderCountriesList(playedCountryArray)}
                     </div>}
                     { allMatches.length !== 0 && 

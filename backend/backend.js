@@ -16,6 +16,7 @@ import endgameDataHandler from './handlers/endgameDataHandler.js'
 import usernameExistanceCheckerHandler from './handlers/usernameExistenceCheckerHandler.js'
 import emailExistanceCheckerHandler from './handlers/emailExistenceCheckerHandler.js'
 import getMatchesForLetter from './handlers/getMatchesForLetter.js'
+import capitalCityCheck from './handlers/capitalCityHandler.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 
@@ -50,6 +51,7 @@ app
     .post('/usernameexists', usernameExistanceCheckerHandler)
     .post('/emailexists', emailExistanceCheckerHandler)
     .post('/getmatches', getMatchesForLetter)
+    .post('/game/city', capitalCityCheck)
 
     .start({ port: PORT })
 

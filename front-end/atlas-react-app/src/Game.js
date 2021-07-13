@@ -2,24 +2,27 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 
-
 const timeGiven = 15
+const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 class Game extends Component {  
   
   initialState = {
     letter: '',
     userInput: '',
+    userInputCity: '',
     needStart: true,
     isPlayerTurn: true,
     lastLetter: '',
     aiCountryChoice: '',
+    showCapitalCityQuestion: false,
     gameOver: false,
     score: 0,
     time: timeGiven,
     allMatches: [],
     aiLooped: false,
-    nextPlayerLooped: false
+    nextPlayerLooped: false,
+    correctCity: ''
   }
   
   state = this.initialState
@@ -37,14 +40,12 @@ class Game extends Component {
   }
 
   handleRestart() {
-    clearInterval(this.timerInterval)
     this.setState({time: timeGiven})
     this.handleStart()
   }
 
   handleLoss() {
     //trigger end game page
-    clearInterval(this.timerInterval)
     this.setState({gameOver: true})
   }
 
@@ -88,7 +89,12 @@ class Game extends Component {
 
   handleUserInputChange(e) {
     // handles user input to form element
-    this.setState({userInput: e.target.value})
+
+    const { name, value } = e.target
+
+    this.setState({[name]: value})
+    console.log(name, value)
+    // this.setState({userInput: e.target.value})
     // console.log(this.state.userInput)
   }
 
@@ -97,6 +103,8 @@ class Game extends Component {
     // response marks whether or not the game continues or ends
     
     e.preventDefault()
+    clearInterval(this.timerInterval)
+
     const {userInput, letter} = this.state
     console.log('input: ', userInput)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
@@ -114,13 +122,13 @@ class Game extends Component {
     // console.log('lastLetter response:', lastLetter)
 
     // reset the input form to empty and update the lastLetter for the AI turn
-    this.setState({lastLetter, userInput: '', score})
+    this.setState({lastLetter, score})
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
       this.setState({letter: '✓'})
       this.correctTimeout = setTimeout(() => {
-          this.setState({isPlayerTurn: false})
+          this.setState({showCapitalCityQuestion: true, letter:'?'})
           this.handleRestart()
           this.correctTimeout = 0
         }, 1000)      
@@ -128,10 +136,6 @@ class Game extends Component {
 
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
-
-      // *** MOVED TO HANDLELOSS
-      // console.log('allMatches: ', allMatches)
-      // this.setState({allMatches})
 
       this.getAllMatches()
       //render endgame
@@ -141,6 +145,43 @@ class Game extends Component {
           this.handleLoss()
           this.incorrectTimeout = 0
         }, 1000)
+    }
+  }
+
+  async checkCapitalCity(e) {
+    e.preventDefault()
+    clearInterval(this.timerInterval)
+    const { userInputCity } = this.state
+    console.log(userInputCity)
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({userInputCity})
+    })
+
+    const { isCorrectCity, correctCity, score } = await response.json()
+    console.log('isCorrectCity: ', isCorrectCity)
+    console.log('score from cap city: ', score)
+
+    if (isCorrectCity) {
+      this.setState({letter: '✓', score})
+      this.correctTimeout = setTimeout(() => {
+          this.setState({isPlayerTurn: false, userInputCity: '', userInput: '', showCapitalCityQuestion: false})
+          this.handleRestart()
+          this.correctTimeout = 0
+        }, 1000) 
+
+    } else {
+      this.getAllMatches()
+      this.setState({letter: '✗', correctCity})
+      this.incorrectTimeout = setTimeout(() => {
+          this.handleLoss()
+          this.incorrectTimeout = 0
+        }, 1000)
+      // something to do with correctCity
     }
   }
 
@@ -176,6 +217,7 @@ class Game extends Component {
     // handles time running out
     if (this.state.time === 0 && !this.state.gameOver) {
       this.getAllMatches()
+      clearInterval(this.timerInterval)
       this.handleLoss()
     }
     // triggers toggling between player and AI turns
@@ -204,15 +246,23 @@ class Game extends Component {
     this.setState(this.initialState)
   }
 
+  handleSkip() {
+    this.setState({isPlayerTurn: false, showCapitalCityQuestion: false, userInput: '', userInputCity: ''})
+    clearInterval(this.timerInterval)
+    this.handleRestart()
+  }
+
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, time, aiLooped, nextPlayerLooped } = this.state
-  
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity } = this.state
+    const numbers = [0,1,2,3,4,5,6,7,8,9]
     if (gameOver) return <GameEndScreen
-                          currentGameID={0}
-                          isLoggedIn={this.props.isLoggedIn}
-                          handleGameReset = {() => this.handleGameReset()}
-                          allMatches = {allMatches}
-                          time={time}
+                            currentGameID={0}
+                            isLoggedIn={this.props.isLoggedIn}
+                            handleGameReset = {() => this.handleGameReset()}
+                            allMatches = {allMatches}
+                            time={time}
+                            correctCity={correctCity}
+                            userInputCity={userInputCity}
                          />
     
     return (
@@ -230,31 +280,55 @@ class Game extends Component {
               <div>{score}</div>
             </div>
           </section>}
-          {isPlayerTurn && aiCountryChoice && aiLooped ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
-          {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
+          {isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
+          {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
-          {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
-          {letter && <div>Name a country beginning with:</div>}
-          <div className="letter">{letter}</div>
+            {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
+            {letter && !showCapitalCityQuestion ? <div>Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
+            <div className="letter">{letter}</div>
           </div> }
           <section>
-          {!needStart && <form className="game-input-container">
+            {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
+                <input className="game-input-bar"
+                  type = "text" 
+                  placeholder = "Enter country beginning with this letter" 
+                  name="userInput" 
+                  value={userInput} 
+                  onChange ={(e) => this.handleUserInputChange(e)}
+                  autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+                />
+                <button className="game-submit"
+                  type = "submit"
+                  onClick = {(e) => this.handleSubmitUserCountry(e)}
+                  disabled = {numbers.some(number => userInput.includes(number)) || userInput === "" || !userInput.toLowerCase().split('').some(character => alphabet.includes(character)) || userInput.length > 60}
+                >
+                  Submit
+                </button>
+              </form> }
+            {/* optional capital city question: */}
+            {showCapitalCityQuestion && <div><form className="game-input-container">
               <input className="game-input-bar"
                 type = "text" 
-                placeholder = "Enter country beginning with this letter" 
-                name="userInput" 
-                value={userInput} 
+                placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
+                name="userInputCity" 
+                value={userInputCity} 
                 onChange ={(e) => this.handleUserInputChange(e)}
-                autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+                autoComplete = 'off' 
               />
               <button className="game-submit"
                 type = "submit"
-                onClick = {(e) => this.handleSubmitUserCountry(e)}
-                disabled = {userInput === "" || userInput.length > 60}
+                onClick = {(e) => this.checkCapitalCity(e)}
+                disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
               >
                 Submit
               </button>
-            </form> }
+              <button className="game-skip"
+                  onClick={() => this.handleSkip()}
+                >
+                  Skip
+              </button>
+            </form> 
+            </div> }
           </section>
       </div>
      </main>
@@ -263,3 +337,17 @@ class Game extends Component {
 }
 
 export default Game
+
+function formatUserGameInput(userInput) {
+  if (!userInput) return
+  // hard codes capitalisation for all inputs, accounting for those with 'of', 'the' and 'and' (all edge cases)
+  userInput = userInput.toLowerCase()
+  userInput = userInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+  userInput = userInput.split('').filter(elem => alphabet.includes(elem) || elem === '-' || elem === ' ').join('')
+  userInput = userInput.trim()
+  const nonCapitalizedWords = ['and', 'of', 'the', 'au', 'la']
+  userInput = userInput.split(' ').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ')
+  userInput = userInput.split('-').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join('-')
+  return userInput
+}
