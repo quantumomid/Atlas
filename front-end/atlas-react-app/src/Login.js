@@ -8,6 +8,14 @@ class Login extends Component {
     password: '',
     message: '',
   }
+
+  componentDidMount() {
+    this.props.setOnLoginStatus()
+  }
+
+  componentWillUnmount() {
+    this.props.clearOnLoginStatus()
+  }
   
   async handleSubmit(event) {
     event.preventDefault()

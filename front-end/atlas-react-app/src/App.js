@@ -16,7 +16,9 @@ class App extends Component {
 
   state = {
     isLoggedIn: false,
-    inGame: false
+    inGame: false,
+    onRegister: false,
+    onLogin: false
   }
 
   async componentDidMount() {
@@ -49,35 +51,54 @@ class App extends Component {
     this.setState({inGame: false})
   }
 
+  setOnRegisterStatus() {
+    this.setState({onRegister: true})
+  }
+
+  clearOnRegisterStatus() {
+    this.setState({onRegister: false})
+  }
+
+  setOnLoginStatus() {
+    this.setState({onLogin: true})
+  }
+
+  clearOnLoginStatus() {
+    this.setState({onLogin: false})
+  }
+
   render() {
-    const { isLoggedIn, inGame } = this.state
+    const { isLoggedIn, inGame, onLogin, onRegister } = this.state
     return (
         <div>
         <main>
           <nav>
             <ul className="app-banners">
-              <li className="app-title-banner">
-              <Link to="/">Homepage</Link>
-              <div>Trendy Slogan</div>
-              </li>
+              <div className="app-title-banner">
+              <Link to="/"><div className="homepage-title">Around the World in 100 points</div></Link>
+              <div className="slogan">Can you name every country?</div>
+              </div>
               <div className="app-nav-banners">
+                <li>
                 {!inGame &&
+                <Link to="/game">Game</Link>}
+                {inGame && <div className="selected-page">Game</div>}
+                </li>
                 <li>
-                <Link to="/game">Game</Link>
-                </li>}
-                {!isLoggedIn &&
+                {!isLoggedIn && !onRegister &&
+                <Link to="/register">Register</Link>}
+                {!isLoggedIn && onRegister && <div className="selected-page">Register</div>}
+                </li>
                 <li>
-                <Link to="/register">Register</Link>
-                </li>}
-                {!isLoggedIn &&
-                <li>
-                <Link to="/login">Login</Link>
-                </li>}
+                {!isLoggedIn && !onLogin &&
+                <Link to="/login">Login</Link>}
+                {!isLoggedIn && onLogin && <div className="selected-page">Login</div>}
+                </li>
                 {isLoggedIn &&
-                <div>
+                <li>
                   <Logout
                   handleLogout={() => this.handleLoginAndLogout()} />
-                </div>
+                </li>
                 }
               </div>
             </ul>
@@ -92,13 +113,19 @@ class App extends Component {
             </Route>
             { !isLoggedIn &&
             <Route path="/register">
-              <RegisterPage/>
+              <RegisterPage
+              setOnRegisterStatus={() => this.setOnRegisterStatus()}
+              clearOnRegisterStatus={() => this.clearOnRegisterStatus()}
+              />
             </Route>
             }
             { !isLoggedIn &&
             <Route path="/login">
               <Login
-              handleLogin={() => this.handleLoginAndLogout()} />
+              handleLogin={() => this.handleLoginAndLogout()} 
+              setOnLoginStatus={() => this.setOnLoginStatus()}
+              clearOnLoginStatus={() => this.clearOnLoginStatus()}
+              />
             </Route>
             }
             <Route path="/">
