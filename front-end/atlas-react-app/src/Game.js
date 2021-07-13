@@ -40,14 +40,12 @@ class Game extends Component {
   }
 
   handleRestart() {
-    clearInterval(this.timerInterval)
     this.setState({time: timeGiven})
     this.handleStart()
   }
 
   handleLoss() {
     //trigger end game page
-    clearInterval(this.timerInterval)
     this.setState({gameOver: true})
   }
 
@@ -105,6 +103,8 @@ class Game extends Component {
     // response marks whether or not the game continues or ends
     
     e.preventDefault()
+    clearInterval(this.timerInterval)
+
     const {userInput, letter} = this.state
     console.log('input: ', userInput)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
@@ -150,6 +150,7 @@ class Game extends Component {
 
   async checkCapitalCity(e) {
     e.preventDefault()
+    clearInterval(this.timerInterval)
     const { userInputCity } = this.state
     console.log(userInputCity)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
@@ -216,6 +217,7 @@ class Game extends Component {
     // handles time running out
     if (this.state.time === 0 && !this.state.gameOver) {
       this.getAllMatches()
+      clearInterval(this.timerInterval)
       this.handleLoss()
     }
     // triggers toggling between player and AI turns
@@ -246,6 +248,7 @@ class Game extends Component {
 
   handleSkip() {
     this.setState({isPlayerTurn: false, showCapitalCityQuestion: false, userInput: '', userInputCity: ''})
+    clearInterval(this.timerInterval)
     this.handleRestart()
   }
 
