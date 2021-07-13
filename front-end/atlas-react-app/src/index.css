@@ -75,3 +75,9 @@ button{
 .selected-page {
     font-weight: 600;
 }
+
+.app-nav-banners button {
+    background-color: transparent;
+    border: none;
+    font-family: 'Ubuntu', sans-serif;
+}

@@ -95,10 +95,10 @@ class App extends Component {
                 {!isLoggedIn && onLogin && <div className="selected-page">Login</div>}
                 </li>
                 {isLoggedIn &&
-                <div>
+                <li>
                   <Logout
                   handleLogout={() => this.handleLoginAndLogout()} />
-                </div>
+                </li>
                 }
               </div>
             </ul>
