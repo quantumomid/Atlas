@@ -165,11 +165,12 @@ class Game extends Component {
       body: JSON.stringify({userInputCity})
     })
 
-    const { isCorrectCity, correctCity } = await response.json()
+    const { isCorrectCity, correctCity, score } = await response.json()
     console.log('isCorrectCity: ', isCorrectCity)
+    console.log('score from cap city: ', score)
 
     if (isCorrectCity) {
-      this.setState({letter: '✓'})
+      this.setState({letter: '✓', score})
       this.correctTimeout = setTimeout(() => {
           this.setState({isPlayerTurn: false, userInputCity: '', userInput: '', showCapitalCityQuestion: false})
           this.handleRestart()
@@ -300,7 +301,7 @@ class Game extends Component {
                 </button>
               </form> }
             {/* optional capital city question: */}
-            {showCapitalCityQuestion && <form className="game-input-container">
+            {showCapitalCityQuestion && <div><form className="game-input-container">
               <input className="game-input-bar"
                 type = "text" 
                 placeholder = {`For a bonus point, name the capital city of ${userInput}`}
@@ -316,7 +317,12 @@ class Game extends Component {
               >
                 Submit
               </button>
-            </form> }
+            </form> 
+            <button
+              onClick={() => this.setState({isPlayerTurn: false, showCapitalCityQuestion: false, userInput: '', userInputCity: ''})}
+            >
+              Skip
+            </button></div> }
           </section>
       </div>
      </main>

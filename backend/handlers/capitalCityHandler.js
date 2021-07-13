@@ -37,18 +37,20 @@ async function capitalCityCheck(server) {
 
     console.log('correct city: ', correctCity)
 
+    let [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
+
     let isCorrectCity = false
     if (correctCityForm === city) {
         isCorrectCity = true
 
         // increase score for correct answer
-        const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
         await client.queryObject(`UPDATE current_games
                                   SET score = $1
                                   WHERE username = $2;`, score + 1, user)
+        score += 1
     }
 
-    await server.json({isCorrectCity, correctCity})
+    await server.json({isCorrectCity, correctCity, score})
 }
 
 export default capitalCityCheck
