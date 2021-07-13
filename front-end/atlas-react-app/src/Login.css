@@ -21,7 +21,7 @@
 	position: relative;
 	overflow: hidden;
     margin: 0vh 20vw;
-    padding: 0px 60px;
+    padding: 20px 60px;
 }
 .login-form{
     display: flex;
@@ -34,7 +34,7 @@
 .title{
     display: flex;
     /* border: solid black 5px; */
-    padding: 20px;
+    /* padding: 20px; */
     font-weight: bold;
     color:hsl(133, 100%, 40%);
     align-content: center;
@@ -70,7 +70,7 @@
 	letter-spacing: 1px;
 }
 .login-form button:disabled {
-opacity: 40%;
+    opacity: 40%;
 }
 .login-form button:active {
 	transform: scale(0.95);
