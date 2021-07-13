@@ -2,7 +2,7 @@
 /* new CSS */
 /* ___________________________________________________________________________________________________________________________ */
 
-.register-title{
+.register-page .register-title{
     display: flex;
     /* border: solid black 5px; */
     /* padding: 20px; */
@@ -13,7 +13,7 @@
     font-size: 45px;
 }
 
-.register-container {
+.register-page .register-container {
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -25,7 +25,7 @@
     background-color: whitesmoke;
 }
 
-.register{
+.register-page .register{
     display: flex;
     flex-direction: column;
     height: 62vh;
@@ -46,7 +46,7 @@
 
 }
 
-.register-form{
+.register-page .register-form{
     display: flex;
     flex-direction: column;
     height: 55vh;
@@ -57,12 +57,12 @@
 
 }
 
-.register-inputs{
+.register-page .register-inputs{
     overflow-y: scroll;
 
 }
 
-.register-form input{
+.register-page .register-form input{
     display: flex;
     width: 40vw;
     background-color: #eee;
@@ -74,7 +74,7 @@
 }
 
 
-.register-form button{
+.register-page .register-form button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -90,22 +90,22 @@
 	letter-spacing: 1px;
     margin:25px;
 }
-.register-form button:disabled {
+.register-page .register-form button:disabled {
     opacity: 40%;
 }
-.register-form button:active {
+.register-page .register-form button:active {
 	transform: scale(0.95);
 }
 
-.register-form button:focus {
+.register-page .register-form button:focus {
 	outline: none;
 }
 
-.registerformerrormessage{
+.register-page .registerformerrormessage{
     color: red;
 }
 
-.register-response{
+.register-page .register-response{
     text-align: center;
     color: red
 }
