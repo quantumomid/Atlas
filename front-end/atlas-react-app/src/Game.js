@@ -244,6 +244,11 @@ class Game extends Component {
     this.setState(this.initialState)
   }
 
+  handleSkip() {
+    this.setState({isPlayerTurn: false, showCapitalCityQuestion: false, userInput: '', userInputCity: ''})
+    this.handleRestart()
+  }
+
   render() {
     const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity } = this.state
   
@@ -316,7 +321,7 @@ class Game extends Component {
               </button>
             </form> 
             <button
-              onClick={() => this.setState({isPlayerTurn: false, showCapitalCityQuestion: false, userInput: '', userInputCity: ''})}
+              onClick={() => this.handleSkip()}
             >
               Skip
             </button></div> }
