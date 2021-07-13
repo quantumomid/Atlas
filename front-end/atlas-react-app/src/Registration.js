@@ -57,6 +57,7 @@ class Registration extends Component {
   render() {
     const { username, email, password, passwordConfirmation, message } = this.state
     return (
+
       <div className = 'pageform'>
       <RegisterForm
       handleChange={(event) => this.handleChange(event)}
@@ -69,6 +70,7 @@ class Registration extends Component {
       passwordConfirmation={passwordConfirmation}
       />
       <div>{message}</div>
+
       </div>
        )
     }

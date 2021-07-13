@@ -2,6 +2,7 @@ import React from 'react'
 import UniqueUsernameError from './UniqueUsernameError'
 import UniqueEmailError from './UniqueEmailError'
 import './register.css'
+import Filter from 'bad-words'
 
 
 function RegisterForm(props){
@@ -114,6 +115,16 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
     if (username.length > 20) throw new Error('Username must be less than 20 characters')
     const acceptedCharacters = '1234567890qwertyuiopasdfghjklzxcvbnm'
     if (!(username.split('').every(character => acceptedCharacters.includes(character.toLowerCase())))) throw new Error('Username can only include numbers and letters')
+
+    // check all possible substrings for profanity
+    const filter = new Filter()
+
+    for (let lslicer = 0; lslicer < username.length; lslicer++) {
+        for (let rslicer = 1; rslicer < username.length+1; rslicer++) {
+            const substring = username.slice(lslicer, rslicer)
+            if (filter.isProfane(substring)) throw new Error('Username cannot include profanity')
+        }
+    }
   }
   
   function emailValidator(email, touched) {

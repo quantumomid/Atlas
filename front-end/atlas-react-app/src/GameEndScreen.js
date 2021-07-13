@@ -26,18 +26,20 @@ class GameEndScreen extends Component {
         console.log('in end screen allMatches: ', allMatches)
         const { score, playedCountryArray } = this.state
         return (
-            <div>
-                {isLoggedIn ? 
-                <PersonalScoreBoard 
-                score={score} /> 
-                : (
-                    <div>
-                        <h2>Register to save your score</h2>
-                        <Registration
-                        saveScore={true}
-                        />
-                    </div>
-                )}
+            <div className='endgame-screen'>
+                <div className='register-or-scoreboard'>
+                    {isLoggedIn ? 
+                    <PersonalScoreBoard 
+                    score={score} /> 
+                    : (
+                        <div>
+                            <h2>Register to save your score</h2>
+                            <Registration
+                            saveScore={true}
+                            />
+                        </div>
+                    )}
+                </div>
                 <div>
                     <h2>Your final score</h2>
                     <p>{score}</p>

@@ -1,56 +1,21 @@
-/* .centre{
-    display: flex;
-    justify-content: center;
+.home-page {
     padding: 0px;
     margin: 0px;
-    }
-    
-    .scoreboards{
-        display: flex;
-        align-content: center;
-        justify-content: space-around;
-        width: 800px;
-        height: 400px;
-        border: solid black 5px;
-        padding: 20px;
-        margin: 0px;
-    }
-    
-    .scoreboard{
-        display: flex;
-        border: solid black 5px;
-        padding: 20px;
-        height: 50vh;
-        overflow: scroll;
-        margin: 0px;
-    }
-    
-    .title{
-        display: flex;
-        border: solid black 5px;
-        padding: 20 px;
-        size:20 px;
-        color: green;
-    }
-    
-    .page{
-        padding: 0px;
-        margin: 0px;
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        border: solid black 5px;
-        height: 75vh;
-    }
-    
-    
-    table, td, th {
-        border: 1px solid black;
-        text-align: left;
-    }
-    
-    table{
-        width: 100%;
-        border-collapse: collapse;
-        width: 300px;
-    } */
+    display: flex;
+    flex-direction: column;
+    border: solid black 5px;
+    height: 480px;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-page .scoreboards{
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    min-width: 800px;
+    height: 400px;
+    border: solid black 5px;
+    padding: 20px;
+    margin: 0px;
+}

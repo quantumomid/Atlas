@@ -25,9 +25,14 @@ body {
     color: white;
     justify-content: center;
     align-items: center;
+    min-height: 50px;
 }
 
 .app-nav-banners li {
     padding: 15px;
     list-style-type: none;
+}
+
+button{
+    cursor: pointer;
 }

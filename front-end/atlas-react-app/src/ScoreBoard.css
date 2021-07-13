@@ -1,0 +1,69 @@
+.scoreboard{
+    display: flex;
+    border: solid black 5px;
+    padding: 20px;
+    margin: 0px 30px;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.scoreboard h2 {
+    color: #009879;
+}
+
+.scoreboard div {
+    height: 350px;
+    overflow: scroll;
+}
+
+.scoreboard table, .scoreboard td, .scoreboard th {
+    /* border: 1px solid black; */
+    text-align: left;
+}
+
+.scoreboard table{
+    width: 100%;
+    white-space: nowrap;
+    border-spacing: 0;
+    border-collapse: separate;
+    width: 300px;
+    position: relative;
+
+    /* border-collapse: collapse; */
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.scoreboard table td, .scoreboard table th {
+    padding: 10px 40px;
+    text-align: center;
+}
+
+.scoreboard th {
+    position: sticky;
+    top: 0px;
+    background-color:#009879;
+    /* border: 1px solid black; */
+}
+
+.scoreboard thead {
+    border: 1px solid black;
+}
+
+.scoreboard thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.scoreboard tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.scoreboard tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
