@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 
-
 const timeGiven = 15
+const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 class Game extends Component {  
   
@@ -300,7 +300,7 @@ class Game extends Component {
                 <button className="game-submit"
                   type = "submit"
                   onClick = {(e) => this.handleSubmitUserCountry(e)}
-                  disabled = {userInput === "" || userInput.length > 60}
+                  disabled = {userInput === "" || !userInput.toLowerCase().split('').some(character => alphabet.includes(character)) || userInput.length > 60}
                 >
                   Submit
                 </button>
@@ -318,7 +318,7 @@ class Game extends Component {
               <button className="game-submit"
                 type = "submit"
                 onClick = {(e) => this.checkCapitalCity(e)}
-                disabled = {userInputCity === "" || userInputCity.length > 60}
+                disabled = {userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
               >
                 Submit
               </button>
