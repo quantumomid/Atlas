@@ -284,7 +284,7 @@ class Game extends Component {
           {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
             {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
-            {letter && !showCapitalCityQuestion ? <div>Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {userInput}</div>}
+            {letter && !showCapitalCityQuestion ? <div>Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
             <div className="letter">{letter}</div>
           </div> }
           <section>
@@ -309,7 +309,7 @@ class Game extends Component {
             {showCapitalCityQuestion && <div><form className="game-input-container">
               <input className="game-input-bar"
                 type = "text" 
-                placeholder = {`For a bonus point, name the capital city of ${userInput}`}
+                placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
                 name="userInputCity" 
                 value={userInputCity} 
                 onChange ={(e) => this.handleUserInputChange(e)}
@@ -337,3 +337,17 @@ class Game extends Component {
 }
 
 export default Game
+
+function formatUserGameInput(userInput) {
+  if (!userInput) return
+  // hard codes capitalisation for all inputs, accounting for those with 'of', 'the' and 'and' (all edge cases)
+  userInput = userInput.toLowerCase()
+  userInput = userInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+  userInput = userInput.split('').filter(elem => alphabet.includes(elem) || elem === '-' || elem === ' ').join('')
+  userInput = userInput.trim()
+  const nonCapitalizedWords = ['and', 'of', 'the', 'au', 'la']
+  userInput = userInput.split(' ').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ')
+  userInput = userInput.split('-').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join('-')
+  return userInput
+}
