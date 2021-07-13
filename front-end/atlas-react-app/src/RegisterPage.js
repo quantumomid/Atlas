@@ -1,13 +1,36 @@
+import { Component } from 'react';
 import Registration from "./Registration";
 
-export default function RegisterPage() {
-    return (
+
+class RegisterPage extends Component {
+
+    componentDidMount() {
+        this.props.setOnRegisterStatus()
+    }
+
+    componentWillUnmount() {
+        this.props.clearOnRegisterStatus()
+    }
+
+    render () {
+        return (
         <div className='register-page'>
             <div className = 'register'> 
                 <div className = 'register-title' >Register</div>
                 <Registration/>
             </div>
         </div>
-    )
+      )
+    }
 }
 
+export default RegisterPage
+
+// export default function RegisterPage() {
+//     return (
+//         <div className='register-page'>
+//             <div className = 'titleform' >Register!!!</div>
+//             <Registration/>
+//         </div>
+//     )
+// }
