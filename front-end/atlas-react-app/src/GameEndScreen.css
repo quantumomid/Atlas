@@ -45,7 +45,7 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    margin: 25px;
+    margin: 15px;
 }
 
 .countries-played-and-could-container {
@@ -83,8 +83,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .final-input-container h2 {
-    margin: 15px;
+    margin: 5px;
 }
