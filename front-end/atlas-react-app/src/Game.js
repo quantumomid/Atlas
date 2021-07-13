@@ -205,13 +205,14 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped } = this.state
+    const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, time, aiLooped, nextPlayerLooped } = this.state
   
     if (gameOver) return <GameEndScreen
                           currentGameID={0}
                           isLoggedIn={this.props.isLoggedIn}
                           handleGameReset = {() => this.handleGameReset()}
                           allMatches = {allMatches}
+                          time={time}
                          />
     
     return (
