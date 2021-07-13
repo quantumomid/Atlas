@@ -21,7 +21,8 @@ class Game extends Component {
     time: timeGiven,
     allMatches: [],
     aiLooped: false,
-    nextPlayerLooped: false
+    nextPlayerLooped: false,
+    correctCity: ''
   }
   
   state = this.initialState
@@ -127,7 +128,7 @@ class Game extends Component {
       // only want to trigger AI turn if player was correct (otherwise ends game)
       this.setState({letter: '✓'})
       this.correctTimeout = setTimeout(() => {
-          this.setState({showCapitalCityQuestion: true})
+          this.setState({showCapitalCityQuestion: true, letter:'?'})
           this.handleRestart()
           this.correctTimeout = 0
         }, 1000)      
@@ -164,7 +165,7 @@ class Game extends Component {
       body: JSON.stringify({userInputCity})
     })
 
-    const { isCorrectCity, correctCity, country } = await response.json()
+    const { isCorrectCity, correctCity } = await response.json()
     console.log('isCorrectCity: ', isCorrectCity)
 
     if (isCorrectCity) {
@@ -177,7 +178,7 @@ class Game extends Component {
 
     } else {
       this.getAllMatches()
-      this.setState({letter: '✗'})
+      this.setState({letter: '✗', correctCity})
       this.incorrectTimeout = setTimeout(() => {
           this.handleLoss()
           this.incorrectTimeout = 0
@@ -247,13 +248,15 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, country } = this.state
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity } = this.state
   
     if (gameOver) return <GameEndScreen
                             currentGameID={0}
                             isLoggedIn={this.props.isLoggedIn}
                             handleGameReset = {() => this.handleGameReset()}
                             allMatches = {allMatches}
+                            time={time}
+                            correctCity={correctCity}
                          />
     
     return (
@@ -275,11 +278,11 @@ class Game extends Component {
           {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
             {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
-            {letter && <div>Name a country beginning with:</div>}
+            {letter && !showCapitalCityQuestion && <div>Name a country beginning with:</div>}
             <div className="letter">{letter}</div>
           </div> }
           <section>
-            {!needStart && <form className="game-input-container">
+            {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
                 <input className="game-input-bar"
                   type = "text" 
                   placeholder = "Enter country beginning with this letter" 
@@ -300,7 +303,7 @@ class Game extends Component {
             {showCapitalCityQuestion && <form className="game-input-container">
               <input className="game-input-bar"
                 type = "text" 
-                placeholder = {`For a bonus point, name the capital city of ${country}`}
+                placeholder = {`For a bonus point, name the capital city of ${userInput}`}
                 name="userInputCity" 
                 value={userInputCity} 
                 onChange ={(e) => this.handleUserInputChange(e)}
