@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GameEndScreen from './GameEndScreen';
+import GameEndScreen2 from './GameEndScreen2';
 import './Game.css'
 
 
@@ -207,7 +207,7 @@ class Game extends Component {
   render() {
     const { needStart, letter, userInput, aiCountryChoice, isPlayerTurn, gameOver, score, allMatches, time, aiLooped, nextPlayerLooped } = this.state
   
-    if (gameOver) return <GameEndScreen
+    if (gameOver) return <GameEndScreen2
                           currentGameID={0}
                           isLoggedIn={this.props.isLoggedIn}
                           handleGameReset = {() => this.handleGameReset()}

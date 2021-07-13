@@ -1,7 +1,7 @@
 import { Component } from "react";
 import PersonalScoreBoard from "./PersonalScoreboard";
 import Registration from "./Registration";
-import './GameEndScreen.css'
+import './GameEndScreen2.css'
 
 class GameEndScreen extends Component {
 
