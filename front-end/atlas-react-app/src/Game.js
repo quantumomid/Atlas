@@ -254,7 +254,7 @@ class Game extends Component {
 
   render() {
     const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity } = this.state
-  
+    const numbers = [0,1,2,3,4,5,6,7,8,9]
     if (gameOver) return <GameEndScreen
                             currentGameID={0}
                             isLoggedIn={this.props.isLoggedIn}
@@ -300,7 +300,7 @@ class Game extends Component {
                 <button className="game-submit"
                   type = "submit"
                   onClick = {(e) => this.handleSubmitUserCountry(e)}
-                  disabled = {userInput === "" || !userInput.toLowerCase().split('').some(character => alphabet.includes(character)) || userInput.length > 60}
+                  disabled = {numbers.some(number => userInput.includes(number)) || userInput === "" || !userInput.toLowerCase().split('').some(character => alphabet.includes(character)) || userInput.length > 60}
                 >
                   Submit
                 </button>
@@ -318,7 +318,7 @@ class Game extends Component {
               <button className="game-submit"
                 type = "submit"
                 onClick = {(e) => this.checkCapitalCity(e)}
-                disabled = {userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
+                disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
               >
                 Submit
               </button>
