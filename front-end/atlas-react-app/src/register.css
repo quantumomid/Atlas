@@ -13,7 +13,7 @@
     font-size: 45px;
 }
 
-.register-page .register-container {
+.register-page  {
     display: flex;
     align-items: flex-end;
     justify-content: center;

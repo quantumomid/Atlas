@@ -16,8 +16,7 @@ function RegisterForm(props){
     const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
    
     return (
-            <div className = 'register'>
-            <div className = 'register-title' >Register</div>
+            <div>
             <form className = 'register-form' onSubmit={handleSubmit}>
             <div className='register-inputs'>
                 <label className = 'registerationlabel'>Email:
