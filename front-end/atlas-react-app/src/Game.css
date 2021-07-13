@@ -76,11 +76,15 @@
     outline: none;
 }
 
-.game-input-container .game-submit {
+.game-input-container .game-submit, .game-input-container .game-skip {
     padding: 5px 15px;
     border: solid 3px;
     border-radius: 30px;
     font-size: 16px;
+}
+
+.game-input-container .game-skip {
+    background-color: rgb(240, 104, 104);
 }
 
 .player-score, .timer {

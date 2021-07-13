@@ -284,7 +284,7 @@ class Game extends Component {
           {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
             {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
-            {letter && !showCapitalCityQuestion && <div>Name a country beginning with:</div>}
+            {letter && !showCapitalCityQuestion ? <div>Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {userInput}</div>}
             <div className="letter">{letter}</div>
           </div> }
           <section>
@@ -322,12 +322,13 @@ class Game extends Component {
               >
                 Submit
               </button>
+              <button className="game-skip"
+                  onClick={() => this.handleSkip()}
+                >
+                  Skip
+              </button>
             </form> 
-            <button
-              onClick={() => this.handleSkip()}
-            >
-              Skip
-            </button></div> }
+            </div> }
           </section>
       </div>
      </main>
