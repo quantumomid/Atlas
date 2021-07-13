@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Homepage from './Homepage';
 import Game from './Game';
-import Registration from './Registration';
+import RegisterPage from './RegisterPage';
 import Login from './Login';
 import Logout from './Logout';
 import {
@@ -92,7 +92,7 @@ class App extends Component {
             </Route>
             { !isLoggedIn &&
             <Route path="/register">
-              <Registration />
+              <RegisterPage/>
             </Route>
             }
             { !isLoggedIn &&
