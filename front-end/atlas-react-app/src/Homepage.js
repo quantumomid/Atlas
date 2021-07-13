@@ -6,7 +6,7 @@ import './Homepage.css'
 class Homepage extends Component {
     render() {
       return (
-        <div className = 'home-page'>
+        <div className = 'homepage-container'>
           <div className = 'scoreboards'>
           <GlobalScoresBoard />
           { this.props.isLoggedIn && <PersonalScoreboard /> }
