@@ -8,10 +8,10 @@
 .login{
     display: flex;
     flex-direction: column;
-    height: 60vh;
-    justify-content: space-around;
+    height: 46vh;
+    justify-content: center;
     align-items: center;
-    border: solid black 5px;
+    /* border: solid black 5px; */
     font-family: 'Montserrat', sans-serif;
 
     background-color: #fff;
@@ -21,7 +21,7 @@
 	position: relative;
 	overflow: hidden;
     margin: 0vh 20vw;
-    padding: 0px 50px;
+    padding: 0px 60px;
 }
 .login-form{
     display: flex;
@@ -33,12 +33,13 @@
 
 .title{
     display: flex;
-    border: solid black 5px;
+    /* border: solid black 5px; */
     padding: 20px;
     font-weight: bold;
     color:hsl(133, 100%, 40%);
     align-content: center;
     justify-content:center;
+    font-size: 45px;
 }
 
 
@@ -47,9 +48,10 @@
     width: 40vw;
     background-color: #eee;
     border: none;
-    border: solid black 5px;
+    /* border: solid black 5px; */
 	padding: 12px 15px;
 	margin: 8px 0;
+    border-radius: 20px;
 }
 
 .login-form button{
@@ -59,7 +61,7 @@
     align-self: center;
     width: fit-content;
     border-radius: 20px;
-	border: 1px solid hsl(133, 97%, 15%);
+	border: 1px solid hsl(133, 100%, 40%);
 	background-color: hsl(133, 100%, 40%);
 	color: #FFFFFF;
 	font-size: 16px;
@@ -67,7 +69,9 @@
 	padding: 10px 35px;
 	letter-spacing: 1px;
 }
-
+.login-form button:disabled {
+opacity: 40%;
+}
 .login-form button:active {
 	transform: scale(0.95);
 }
