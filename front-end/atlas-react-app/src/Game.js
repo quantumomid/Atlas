@@ -280,10 +280,10 @@ class Game extends Component {
               <div>{score}</div>
             </div>
           </section>}
-          {isPlayerTurn && aiCountryChoice && aiLooped ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
+          {isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
           {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
-            {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
+            {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
             {letter && !showCapitalCityQuestion ? <div>Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
             <div className="letter">{letter}</div>
           </div> }
