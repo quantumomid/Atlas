@@ -273,7 +273,7 @@ class Game extends Component {
             </div>
           </section>}
           {isPlayerTurn && aiCountryChoice && aiLooped ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
-          {isPlayerTurn && aiCountryChoice ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
+          {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
             {letter && nextPlayerLooped ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
             {letter && !showCapitalCityQuestion && <div>Name a country beginning with:</div>}
