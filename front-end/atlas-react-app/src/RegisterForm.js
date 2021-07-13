@@ -62,7 +62,7 @@ function RegisterForm(props){
                 <p>{passwordError}</p>
                 </div>
 
-                <label className = 'registerationlabel'>Password Confirmation:
+                <label className = 'registerationlabel'>Confirm your password:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
