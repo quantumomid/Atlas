@@ -162,7 +162,7 @@ class Game extends Component {
       body: JSON.stringify({userInputCity})
     })
 
-    const { isCorrectCity } = await response.json()
+    const { isCorrectCity, correctCity } = await response.json()
     console.log('isCorrectCity: ', isCorrectCity)
 
     if (isCorrectCity) {
@@ -180,6 +180,7 @@ class Game extends Component {
           this.handleLoss()
           this.incorrectTimeout = 0
         }, 1000)
+      // something to do with correctCity
     }
   }
 

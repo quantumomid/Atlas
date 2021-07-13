@@ -2,6 +2,7 @@ import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
+import formatUserGameInput from "./helperFunctions/formatUserGameInput.js"
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 config({ path: `./.env.${DENO_ENV}`, export: true })
@@ -15,7 +16,8 @@ async function capitalCityCheck(server) {
     // if the answer is right, adds another point to the score of the current_game, and returns a boolean marking it as true
     // if the answer is wrong, returns a boolean marking it as false, which ends the game
 
-    const { city } = await server.body
+    let { city } = await server.body
+    city = formatUserGameInput(city)
 
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server)
@@ -29,10 +31,12 @@ async function capitalCityCheck(server) {
                                                    FROM countries
                                                    WHERE country_name = $1;`, lastCountry)).rows
     
+    const correctCityForm = formatUserGameInput(correctCity)
+
     console.log('correct city: ', correctCity)
 
     let isCorrectCity = false
-    if (correctCity === city) {
+    if (correctCityForm === city) {
         isCorrectCity = true
 
         // increase score for correct answer
@@ -42,7 +46,7 @@ async function capitalCityCheck(server) {
                                   WHERE username = $2;`, score + 1, user)
     }
 
-    await server.json({isCorrectCity})
+    await server.json({isCorrectCity, correctCity})
 }
 
 export default capitalCityCheck

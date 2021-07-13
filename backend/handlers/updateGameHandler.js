@@ -2,6 +2,7 @@ import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
+import formatUserGameInput from './helperFunctions/formatUserGameInput.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 config({ path: `./.env.${DENO_ENV}`, export: true })
@@ -18,17 +19,6 @@ async function insertToTable(countryArray, userInput, user) {
                               SET played_countries = $1, updated_at = NOW()
                               WHERE username = $2;`, JSON.stringify(countryArray), user)
 
-}
-
-function formatCountryInput(userInput) {
-    // hard codes capitalisation for all inputs, accounting for those with 'of', 'the' and 'and' (all edge cases)
-    userInput = userInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    userInput = userInput.trim()
-    const nonCapitalizedWords = ['and', 'of', 'the']
-    userInput = userInput.toLowerCase()
-    userInput = userInput.split(' ').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ')
-    userInput = userInput.split('-').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join('-')
-    return userInput
 }
 
 const updateGameHandler = async (server) => {
@@ -54,7 +44,7 @@ const updateGameHandler = async (server) => {
     // take user input and letter assigned to check it's a correct answer
     let { userInput, letter } = await server.body
 
-    userInput = formatCountryInput(userInput)
+    userInput = formatUserGameInput(userInput)
     console.log('fixed userInput: ', userInput)
     //console.log('userInput: ', userInput, 'for letter: ', letter)
 
