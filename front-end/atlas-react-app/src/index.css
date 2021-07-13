@@ -15,26 +15,47 @@ body {
     display:flex;
     padding:20px;
     justify-content: center;
-    background-color: lightcyan;
+    background-color: white;
     color:black;
     font-size: 30px;
     align-items: center;
     flex-direction: column;
+    padding: 25px;
+}
+
+.app-title-banner * {
+    text-decoration: none;
+}
+
+.app-title-banner .homepage-title {
+    color: 	#00cc2c;
+    font-size: 65px;
+}
+
+.app-title-banner .slogan {
+    color: 	#00cc2c;
+    font-size: 25px;
+    margin-top: -10px;
 }
 
 .app-nav-banners {
     display: flex;
-    padding: 20px;
-    background-color: aquamarine;
-    color: white;
-    justify-content: center;
+    padding: 8px;
+    background-color: 	#00cc2c;
+    justify-content: space-between;
     align-items: center;
-    min-height: 50px;
 }
 
 .app-nav-banners li {
-    padding: 15px;
+    padding: 5px;
     list-style-type: none;
+    margin: 0px 50px;
+}
+
+.app-nav-banners li * {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
 }
 
 button{
@@ -49,4 +70,8 @@ button{
     border-radius: 4px;
     background-color: rgba(0, 0, 0, .5);
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.selected-page {
+    font-weight: 600;
 }

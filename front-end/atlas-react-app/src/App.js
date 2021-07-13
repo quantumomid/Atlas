@@ -56,15 +56,16 @@ class App extends Component {
         <main>
           <nav>
             <ul className="app-banners">
-              <li className="app-title-banner">
-              <Link to="/">Homepage</Link>
-              <div>Trendy Slogan</div>
-              </li>
+              <div className="app-title-banner">
+              <Link to="/"><div className="homepage-title">Around the World in 100 points</div></Link>
+              <div className="slogan">Can you name every country?</div>
+              </div>
               <div className="app-nav-banners">
-                {!inGame &&
                 <li>
-                <Link to="/game">Game</Link>
-                </li>}
+                {!inGame &&
+                <Link to="/game">Game</Link>}
+                {inGame && <div className="selected-page">Game</div>}
+                </li>
                 {!isLoggedIn &&
                 <li>
                 <Link to="/register">Register</Link>
