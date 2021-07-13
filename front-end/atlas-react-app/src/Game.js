@@ -15,6 +15,7 @@ class Game extends Component {
     isPlayerTurn: true,
     lastLetter: '',
     aiCountryChoice: '',
+    showCapitalCityQuestion: false,
     gameOver: false,
     score: 0,
     time: timeGiven,
@@ -126,7 +127,7 @@ class Game extends Component {
       // only want to trigger AI turn if player was correct (otherwise ends game)
       this.setState({letter: '✓'})
       this.correctTimeout = setTimeout(() => {
-          this.setState({isPlayerTurn: false})
+          this.setState({showCapitalCityQuestion: true})
           this.handleRestart()
           this.correctTimeout = 0
         }, 1000)      
@@ -153,6 +154,7 @@ class Game extends Component {
   async checkCapitalCity(e) {
     e.preventDefault()
     const { userInputCity } = this.state
+    console.log(userInputCity)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
       method: "POST",
       credentials: "include",
@@ -294,24 +296,24 @@ class Game extends Component {
                 Submit
               </button>
             </form> }
-            {/* optional capital city question: */}
-            {!needStart && <form className="game-input-container">
-              <input className="game-input-bar"
-                type = "text" 
-                placeholder = "For a bonus point, name the capital city of that country" 
-                name="userInputCity" 
-                value={userInputCity} 
-                onChange ={(e) => this.handleUserInputChange(e)}
-                autoComplete = 'off' 
-              />
-              <button className="game-submit"
-                type = "submit"
-                onClick = {(e) => this.handleSubmitUserCountry(e)}
-                disabled = {userInput === "" || userInput.length > 60}
-              >
-                Submit
-              </button>
-            </form> }
+          {/* optional capital city question: */}
+          {!needStart && <form className="game-input-container">
+            <input className="game-input-bar"
+              type = "text" 
+              placeholder = "For a bonus point, name the capital city of that country" 
+              name="userInputCity" 
+              value={userInputCity} 
+              onChange ={(e) => this.handleUserInputChange(e)}
+              autoComplete = 'off' 
+            />
+            <button className="game-submit"
+              type = "submit"
+              onClick = {(e) => this.checkCapitalCity(e)}
+              disabled = {userInputCity === "" || userInputCity.length > 60}
+            >
+              Submit
+            </button>
+          </form> }
           </section>
       </div>
      </main>

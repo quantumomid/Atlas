@@ -16,16 +16,18 @@ async function capitalCityCheck(server) {
     // if the answer is right, adds another point to the score of the current_game, and returns a boolean marking it as true
     // if the answer is wrong, returns a boolean marking it as false, which ends the game
 
-    let { city } = await server.body
-    city = formatUserGameInput(city)
+    const { userInputCity } = await server.body
+    console.log('input city: ', userInputCity)
+    const city = formatUserGameInput(userInputCity)
+    console.log('city after format: ', city)
 
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server)
     if (!user) throw new Error ('No user detected')
 
     // finds country (most recent in current_games)
-    const countryArray = getCountryArray(user)
-    const lastCountry = countryArray.slice(-1)
+    const countryArray = await getCountryArray(user)
+    const [lastCountry] = countryArray.slice(-1)
 
     const [[correctCity]] = (await client.queryArray(`SELECT capital 
                                                    FROM countries
