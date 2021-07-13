@@ -6,7 +6,7 @@ import Filter from 'bad-words'
 
 
 function RegisterForm(props){
-    const { handleSubmit, handleChange, email, username, password, passwordConfirmation, handleBlur, touched } = props
+    const { handleSubmit, handleChange, email, username, password, passwordConfirmation, handleBlur, touched, message } = props
     let validSignup 
    try {
         signUpValidator(email, username, password, passwordConfirmation, touched)
@@ -16,9 +16,9 @@ function RegisterForm(props){
     const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
    
     return (
-        <div>
-            <div className = 'registerform'>
-            <form className = 'innerform' onSubmit={handleSubmit}>
+            <div>
+            <form className = 'register-form' onSubmit={handleSubmit}>
+            <div className='register-inputs'>
                 <label className = 'registerationlabel'>Email:
                         <input 
                             onChange={handleChange}
@@ -62,7 +62,7 @@ function RegisterForm(props){
                 <p>{passwordError}</p>
                 </div>
 
-                <label className = 'registerationlabel'>Password Confirmation:
+                <label className = 'registerationlabel'>Confirm your password:
                     <input 
                         onChange={handleChange}
                         onBlur={(event) => handleBlur(event)}
@@ -75,17 +75,17 @@ function RegisterForm(props){
                 <div className = 'registerformerrormessage'>
                 <p>{passwordConfirmationError}</p>
                 </div>
-
+                </div>  
 
                 <button className = 'buttonform' 
                 type="submit"
-                disabled= {!validSignup}
+                disabled= {!validSignup || !touched.email || !touched.username || !touched.password || !touched.passwordConfirmation}
                 >
                 Sign-up
                 </button>
 
             </form>
-            </div>
+            <div className='register-response'>{message}</div>
             </div>
     )
 }

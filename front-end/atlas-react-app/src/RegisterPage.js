@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Registration from "./Registration";
 
+
 class RegisterPage extends Component {
 
     componentDidMount() {
@@ -13,11 +14,13 @@ class RegisterPage extends Component {
 
     render () {
         return (
-            <div className='register-page'>
-                <div className = 'titleform' >Register!!!</div>
+        <div className='register-page'>
+            <div className = 'register'> 
+                <div className = 'register-title' >Register</div>
                 <Registration/>
             </div>
-        )
+        </div>
+      )
     }
 }
 
