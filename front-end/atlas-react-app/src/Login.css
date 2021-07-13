@@ -3,7 +3,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 69vh;
+    height: 75vh;
+    background-image: url(earth.png);
+    background-repeat: no-repeat;
+    /* background-position: center;
+    background-size: 45%; */
+    background-position: top;
+    background-size: 90%;
+    background-color: whitesmoke;
 }
 .login{
     display: flex;
