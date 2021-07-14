@@ -297,8 +297,8 @@ class Game extends Component {
                 <div>{this.state.time}</div>
               </div>
               {/* conditionally show flow of game as is appropriate */}
-              <div className="player-score">Your score: 
-                <div>{score}</div>
+              <div className="player-score"> Score:
+                <span>{score}</span>
               </div>
           </section>}
           { !needStart && <div className="letter-question-container">

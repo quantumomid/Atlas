@@ -41,7 +41,8 @@ body {
     display: flex;
     padding: 3px;
     background-color: white;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     align-items: center;
     border-bottom: solid 3px #00cc2c;
     min-height: 38px;
@@ -50,7 +51,7 @@ body {
 .app-nav-banners li {
     padding: 0px;
     list-style-type: none;
-    margin: 0px 50px;
+    margin: 0px 30px;
 }
 
 .app-nav-banners li * {

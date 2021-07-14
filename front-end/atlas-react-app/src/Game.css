@@ -46,7 +46,7 @@
 .question-container {
     border: solid white 5px;
     padding: 8px 30px;
-    margin: 10px;
+    margin-top: -30px;
     text-align: center;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     background-color: white;
@@ -122,6 +122,22 @@
     align-items: center;
 }
 
+.player-score span {
+    display: flex;
+    border-radius: 50%;
+    padding: 30px;
+    background-color: orange;
+    font-weight: bolder;
+    color: white;
+    font-family: 'Handlee', cursive;
+    font-size: 40px;
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;   
+}
+
 /* .game-container { 
     display: flex;
     flex-direction: column;
@@ -136,7 +152,7 @@
     display: flex;
     justify-content: space-between;
     margin: 10px 80px;
-    align-items: center;
+    align-items: flex-start;
     font-size: 20px;
 }
 
