@@ -4,9 +4,8 @@ import UniqueEmailError from './UniqueEmailError'
 import './register.css'
 import Filter from 'bad-words'
 
-
 function RegisterForm(props){
-    const { handleSubmit, handleChange, email, username, password, passwordConfirmation, handleBlur, touched, message } = props
+    const { handleSubmit, handleChange, email, username, password, passwordConfirmation, country, handleBlur, touched, message, allCountries } = props
     let validSignup 
    try {
         signUpValidator(email, username, password, passwordConfirmation, touched)
@@ -14,7 +13,9 @@ function RegisterForm(props){
     } catch (err) {}
     
     const [emailError, usernameError, passwordError, passwordConfirmationError] = createErrorMessages(email, username, password, passwordConfirmation, touched)
-   
+    
+    const countryOptions = allCountries.map((country, i) => {return <option key={i} value={country}>{country}</option>})
+
     return (
             <div>
             <form className = 'register-form' onSubmit={handleSubmit}>
@@ -48,6 +49,13 @@ function RegisterForm(props){
                 <UniqueUsernameError username={username} touched={touched.username}/>
                 </div>
 
+                <label className = 'registerationlabel'>Country:
+                    <select name='country' value={country} onChange={handleChange}>
+                        <option value="">Select a country or leave blank</option>
+                            {countryOptions}
+                    </select>
+                </label>
+
                 <label className = 'registerationlabel'>Password:
                     <input 
                         onChange={handleChange}
@@ -79,7 +87,7 @@ function RegisterForm(props){
 
                 <button className = 'buttonform' 
                 type="submit"
-                disabled= {!validSignup || !touched.email || !touched.username || !touched.password || !touched.passwordConfirmation}
+                disabled= {!validSignup || !touched.email || !touched.username || !touched.password}
                 >
                 Sign-up
                 </button>

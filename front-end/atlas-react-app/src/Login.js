@@ -4,7 +4,7 @@ import './Login.css'
 class Login extends Component {
   
   state = {
-    username: '',
+    usernameOrEmail: '',
     password: '',
     message: '',
   }
@@ -19,7 +19,7 @@ class Login extends Component {
   
   async handleSubmit(event) {
     event.preventDefault()
-    const { username, password } = this.state
+    const { usernameOrEmail, password } = this.state
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/sessions`,
       {
@@ -27,7 +27,7 @@ class Login extends Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username, password}),
+        body: JSON.stringify({usernameOrEmail, password}),
         credentials: 'include'
       }
       )
@@ -36,20 +36,20 @@ class Login extends Component {
       if (message === 'Success') {
         this.props.handleLogin()
       } else { 
-        this.setState({username: '', password: ''})
+        this.setState({usernameOrEmail: '', password: ''})
       }
   }
     
   render() {
-    const { username, password, message } = this.state
+    const { usernameOrEmail, password, message } = this.state
     return (
       <div className='login-container'>
         <div className='login'>
           <h1 className='title'>Sign in</h1>
           <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
-            <div>Username: <input className='login-input' name='username' type="text" value={username} onChange={(event) => this.setState({username: event.target.value})} /></div>
+            <div>Username or Email: <input className='login-input' name='usernameOrEmail' type="text" value={usernameOrEmail} onChange={(event) => this.setState({usernameOrEmail: event.target.value})} /></div>
             <div>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
-            <button type='submit' disabled={ username.length === 0 || password.length < 8 }>Login</button>
+            <button type='submit' disabled={ usernameOrEmail.length === 0 || password.length < 8 }>Login</button>
           </form>
           <div className='login-response'>{message}</div>
         </div>

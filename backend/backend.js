@@ -17,6 +17,7 @@ import usernameExistanceCheckerHandler from './handlers/usernameExistenceChecker
 import emailExistanceCheckerHandler from './handlers/emailExistenceCheckerHandler.js'
 import getMatchesForLetter from './handlers/getMatchesForLetter.js'
 import capitalCityCheck from './handlers/capitalCityHandler.js'
+import allCountries from './handlers/allCountries.js'
 
 const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
 
@@ -52,7 +53,7 @@ app
     .post('/emailexists', emailExistanceCheckerHandler)
     .post('/getmatches', getMatchesForLetter)
     .post('/game/city', capitalCityCheck)
-
+    .get('/allcountries', allCountries)
     .start({ port: PORT })
 
 console.log(`Server running on http://localhost:${PORT}`)

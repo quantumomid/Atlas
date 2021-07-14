@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import RegisterForm from './RegisterForm'
 import './register.css'
+import { Redirect } from 'react-router';
 
 class Registration extends Component {
   initialState ={
@@ -8,6 +9,7 @@ class Registration extends Component {
     password: '',
     passwordConfirmation: '',
     email: '',
+    country: '',
     touched: {
       username: false,
       password: false,
@@ -17,7 +19,14 @@ class Registration extends Component {
     message: '',
   }
 
-  state = this.initialState
+  state = {...this.initialState, allCountries:[]}
+
+  async componentDidMount() {
+    const response  = await fetch(`${process.env.REACT_APP_API_URL}/allcountries`)
+    const allCountries = await response.json()
+    allCountries.sort()
+    this.setState({allCountries})
+  }
 
   markAsTouched(field){
     const newTouched = { ...this.state.touched }
@@ -27,7 +36,7 @@ class Registration extends Component {
 
   async handleSubmit(event){
     event.preventDefault()
-    const { email, username, password, passwordConfirmation } = this.state
+    const { email, username, password, passwordConfirmation, country } = this.state
     const { saveScore } = this.props
     
     //data sent back from POST fetch request in backend (includes any errors and whether registration was a success)
@@ -39,14 +48,13 @@ class Registration extends Component {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
-      body: JSON.stringify({ username, email, password, passwordConfirmation, saveScore})
+      body: JSON.stringify({ username, email, password, passwordConfirmation, saveScore, country})
     })
     const { message } = await postFetch.json()
 
     if (message === 'Success') {
       this.setState(this.initialState)
     }
-
     this.setState({message})
   }
   handleChange(event){
@@ -55,7 +63,9 @@ class Registration extends Component {
   }
   
   render() {
-    const { username, email, password, passwordConfirmation, message } = this.state
+    const { username, email, password, passwordConfirmation, message, country, allCountries } = this.state
+    if (message === 'Success' && !this.props.saveScore)  return <Redirect to='/login'/>
+
     return (
       <div className='register-container'>
       <RegisterForm
@@ -67,7 +77,9 @@ class Registration extends Component {
       username={username}
       password={password}
       passwordConfirmation={passwordConfirmation}
+      country={country}
       message = {message}
+      allCountries={allCountries}
       />
       {/* <div>{message}</div> */}
       </div>
