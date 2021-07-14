@@ -20,7 +20,6 @@ class App extends Component {
     inGame: false,
     onRegister: false,
     onLogin: false,
-    memberClicked: false
   }
 
   async componentDidMount() {
@@ -118,8 +117,6 @@ class App extends Component {
             </Route>
             <Route path='/aboutus'>
               <Aboutus 
-                onClick={() => this.setState({memberClicked: false})}
-                memberClicked={this.state.memberClicked}
               />
             </Route>
             { !isLoggedIn &&

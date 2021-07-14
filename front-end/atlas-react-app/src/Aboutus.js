@@ -52,10 +52,6 @@ export default class Aboutus extends Component{
         memberData: []
     }
 
-    componentDidMount(){
-        this.setState({memberClicked: false})
-    }
-
     handleClick(event){
         const { name } = event.target
         this.setState({
@@ -66,7 +62,7 @@ export default class Aboutus extends Component{
 
     render(){
   
-        if(!this.props.memberClicked) {
+        if(!this.state.memberClicked) {
             return (
                 <div className='overall-container'>
                 <h1>Meet our team</h1>
