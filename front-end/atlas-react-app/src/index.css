@@ -76,6 +76,7 @@ body {
 
 button{
     cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 ::-webkit-scrollbar {

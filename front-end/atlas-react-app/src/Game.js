@@ -272,17 +272,17 @@ class Game extends Component {
           <h3>Welcome to Atlas game!</h3>
           <p>
             On clicking start game, the AI will provide you with a random letter. <br />
-            For ten points, you will need to enter the name of a country beginning with that letter. <br />
-            If you are correct, you can then enter the name of that country's capital city for a bonus five points, or skip if you aren't sure.<br />
+            For ten points, you will need to <span className="instruction-correct">enter the name of a country beginning with that letter</span>. <br />
+            If you are correct, you can then <span className="instruction-correct">enter the name of that country's capital city</span> for a bonus five points, or skip if you aren't sure.<br />
             The AI will then pick a country that starts with the last letter of your chosen country.<br />
             You then guess again, for the last letter of the AI's pick.
           </p>
           <p>
-            Any incorrect answers, or picking a country that has already been played by you or the AI, will end the game!<br />
+            Any <span className="instruction-error">incorrect answers</span>, or <span className="instruction-error">picking a country that has already been played by you or the AI</span>, will <span className="instruction-error">lead to game over!</span><br />
             If there are no remaining countries starting with a letter, we move on to the next letter in the alphabet instead, repeating until all 201 countries have been played.<br />
           </p>
           <p>
-            Don't let the timer run out or it's game over!
+            <span className="instruction-error">Don't let the timer run out</span> or it's game over!
           </p>
           <h3>
             Have fun!
@@ -303,10 +303,9 @@ class Game extends Component {
           </section>}
           { !needStart && <div className="letter-question-container">
             <div className="question-container">
-              {isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
-              {/* {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />} */}
+              {(isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion) || (letter && nextPlayerLooped && !showCapitalCityQuestion) ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
               {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
-              {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />}
+              {/* {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />} */}
               {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
               </div>
               {showCapitalCityQuestion ? 
