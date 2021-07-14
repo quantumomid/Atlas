@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import RegisterForm from './RegisterForm'
 import './register.css'
+import { Redirect } from 'react-router';
 
 class Registration extends Component {
   initialState ={
@@ -46,7 +47,6 @@ class Registration extends Component {
     if (message === 'Success') {
       this.setState(this.initialState)
     }
-
     this.setState({message})
   }
   handleChange(event){
@@ -56,6 +56,7 @@ class Registration extends Component {
   
   render() {
     const { username, email, password, passwordConfirmation, message } = this.state
+    if (message === 'Success' && !this.props.saveScore)  return <Redirect to='/login'/>
     return (
       <div className='register-container'>
       <RegisterForm
