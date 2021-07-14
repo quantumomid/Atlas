@@ -52,7 +52,7 @@ async function signUpValidator(email, username, password, passwordConfirmation) 
 const registerUser = async (server) => {
   
   //retrieve typed details from form elements from front-end
-  let { email, username, password, passwordConfirmation, saveScore } = await server.body;
+  let { email, username, country, password, passwordConfirmation, saveScore } = await server.body;
   //make email and username non case sensitive
   email = email.toLowerCase()
   username = username.toLowerCase()
@@ -60,7 +60,13 @@ const registerUser = async (server) => {
   // console.log(username, password, passwordConfirmation)
   
   //retrieve any EXISTING user details from database for provided/typed username/email and throw error if a user already exists and send back to front-end
-  
+  console.log(country)
+  const [countryExists] = (await client.queryArray(`
+    SELECT 1 FROM countries
+    WHERE country_name = $1`,
+    country)).rows
+  country = countryExists ? country : null
+  console.log(country)
   
   try {
     await signUpValidator(email, username, password, passwordConfirmation)
@@ -77,9 +83,9 @@ const registerUser = async (server) => {
   
   //save encrypted password with username into users table
   await client.queryObject(`
-    INSERT INTO users(username, email, password_encrypted, created_at, updated_at) 
-    VALUES ($1, $2, $3, NOW(), NOW());`,
-    username, email, passwordEncrypted);
+    INSERT INTO users(username, email, password_encrypted, country, created_at, updated_at) 
+    VALUES ($1, $2, $3, $4, NOW(), NOW());`,
+    username, email, passwordEncrypted, country);
   
 
   // saving game to finished games if user signing up from game end screen and deleting from current games

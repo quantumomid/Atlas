@@ -23,6 +23,7 @@ await client.queryObject(
 await client.queryObject(`CREATE TABLE countries (
                 country_id SERIAL PRIMARY KEY,
                 country_name TEXT UNIQUE NOT NULL,
+                flag TEXT,
                 capital TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL
                 )`)
@@ -31,6 +32,7 @@ await client.queryObject(`CREATE TABLE users (
                 id SERIAL PRIMARY KEY,
                 username TEXT UNIQUE NOT NULL,
                 email TEXT UNIQUE NOT NULL,
+                country TEXT, 
                 password_encrypted TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL
