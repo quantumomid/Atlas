@@ -45,8 +45,8 @@ article{
 }
 
 article img{
-    width: 350px;
-    height: 400px;
+    width: 20vw;
+    height: 40vh;
     cursor: pointer;
     border-radius: 100px;
 }
@@ -55,14 +55,15 @@ article img{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
-    height: 75vh;
+    align-items: center;
+    /* height: 90vh; */
     /* border: solid gold 5px; */
     background-image: url(earth.png);
     background-color: whitesmoke;
     background-position: top;
     background-size: 100%;
     background-repeat: no-repeat;
+    margin-top: 40px;
 }
 .member-container{
     display: flex;

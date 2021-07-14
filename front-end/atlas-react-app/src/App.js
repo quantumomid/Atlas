@@ -12,7 +12,6 @@ import {
   withRouter
 } from "react-router-dom";
 
-
 class App extends Component {
 
   state = {
