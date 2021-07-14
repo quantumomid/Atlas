@@ -86,7 +86,7 @@
 	font-weight: bold;
 	padding: 10px 35px;
 	letter-spacing: 1px;
-    margin-top: 20px;
+    margin: 10px;
 }
  .register-form button:disabled {
     opacity: 40%;
