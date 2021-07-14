@@ -4,7 +4,8 @@ import ScoreBoard from './ScoreBoard.js'
 export default class PersonalScoreBoard extends Component{
 
     state = {
-        gameData: []
+        gameData: [],
+        dateFilter: 'all'
     }
     
     async componentDidMount(){
@@ -12,8 +13,9 @@ export default class PersonalScoreBoard extends Component{
     }
 
     async fetchScores() {
+        const { dateFilter } = this.state
         const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/personaltopscores`,
+            `${process.env.REACT_APP_API_URL}/personaltopscores/${dateFilter}`,
             {
                 credentials: 'include'
             })
