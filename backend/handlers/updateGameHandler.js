@@ -57,6 +57,8 @@ const updateGameHandler = async (server) => {
     //MAYBE MAKE A HELPER FUNCTION?? CALLED AGAIN IN GETMATCHESFORLETTER
     // find already played countries in this game
     const countryArray = await getCountryArray(user)
+
+    let flag // initialise flag as undefined for later
     
     if (countryArray.includes(userInput)) {
         // if country has already been used this game, end the game
@@ -94,7 +96,11 @@ const updateGameHandler = async (server) => {
             const correct = true
             const lastLetter = userInput.slice(-1)
             //console.log('lastLetter: ', lastLetter)
-            await server.json({correct, lastLetter, score: score + 1})
+
+            [[flag]] = (await client.queryArray(`SELECT flag FROM countries WHERE country_name = $1;`, userInput)).rows
+            // console.log('flag link: ', flag)
+
+            await server.json({correct, lastLetter, score: score + 1, flag})
         }
     }
 }

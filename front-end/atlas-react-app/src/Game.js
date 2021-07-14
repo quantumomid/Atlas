@@ -22,7 +22,8 @@ class Game extends Component {
     allMatches: [],
     aiLooped: false,
     nextPlayerLooped: false,
-    correctCity: ''
+    correctCity: '',
+    flag: ''
   }
   
   state = this.initialState
@@ -116,7 +117,7 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct, lastLetter, score} = await response.json()
+    const {correct, lastLetter, score, flag} = await response.json()
     // if user input correct, returns true else returns false
     console.log('correct: ', correct)
     // console.log('lastLetter response:', lastLetter)
@@ -126,7 +127,7 @@ class Game extends Component {
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
-      this.setState({letter: '✓'})
+      this.setState({letter: '✓', flag})
       this.correctTimeout = setTimeout(() => {
           this.setState({showCapitalCityQuestion: true, letter:'?'})
           this.handleRestart()
@@ -288,7 +289,7 @@ class Game extends Component {
             {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
             {showCapitalCityQuestion ? 
             <div style={{ 
-              backgroundImage: `url("https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_the_Vatican_City.svg")` }} className="letter"
+              backgroundImage: `url(${this.state.flag})`, color:'white' }} className="letter"
             >
               {letter}
             </div>

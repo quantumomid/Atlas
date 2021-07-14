@@ -48,7 +48,7 @@
 
 .letter-question-container .letter {
     font-size: 100px;
-    border: solid 5px;
+    border: solid 5px black;
     /* padding: 15px 45px; */
     height: 150px;
     width: 150px;
@@ -57,7 +57,13 @@
     justify-content: center;
     align-items: center;
     margin: 30px 0px;
-    background-size: 160px 160px;
+    /* background-size: 100%; */
+    background-position: center;
+    background-size: cover;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+    /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+
 }
 
 .game-input-container {
