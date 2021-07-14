@@ -1,4 +1,33 @@
+.overall-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid gold 5px;
+
+}
+
+.whole-team-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 80vw;
+    border: solid gold 5px;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid gold 5px;
+
+}
+
 article img{
     width: 350px;
     height: 400px;
+    cursor: pointer;
 }
+  
+ 
