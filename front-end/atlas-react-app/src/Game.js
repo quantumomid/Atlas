@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 
-const timeGiven = 300
+const timeGiven = 15
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 class Game extends Component {  
