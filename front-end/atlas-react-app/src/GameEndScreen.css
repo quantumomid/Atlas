@@ -3,46 +3,154 @@
     margin: 0px;
     display: flex;
     flex-direction: row;
-    border: solid black 5px;
-    justify-content: space-between;
+    border: solid white 5px;
+    justify-content: space-around;
     align-items: center;
-    height: 480px;
+    height: 75vh;
+    background-image: url(earth.png);
+    background-color: whitesmoke;
+    background-position: top;
+    background-size: 90%;
+    background-repeat: no-repeat;
 }
 
-.register-or-scoreboard {
-    padding: 10px;
+.register-or-scoreboard .end-game-register {
     margin-left: 15px;
-}
-
-.end-game-register h2 {
-    margin: 10px;
-}
-
-.end-game-register{
-    padding: 0px;
-    margin: 0px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    height: 62vh;
+    padding: 20px 60px;
 }
+
+.register-or-scoreboard .scoreboard {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    height: 62vh;
+}
+
+.end-game-register h2 {
+    margin: 10px;
+    display: flex;
+    /* border: solid black 5px; */
+    /* padding: 20px; */
+    font-weight: bold;
+    color:hsl(133, 100%, 40%);
+    align-content: center;
+    justify-content:center;
+    margin-top: 50px;
+}
+
+
+
+/* .end-game-register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	overflow: hidden;
+    height: 62vh;
+    padding: 20px 60px;
+} */
+
+.end-game-register .register-form{
+    display: flex;
+    flex-direction: column;
+    height: 55vh;
+    justify-content: space-around;
+    align-items: center;
+    color:hsl(133, 97%, 15%);
+    padding: 25px 25px 0px 25px;
+
+}
+
 
 .end-game-register input{
     display: flex;
-    width: 500px;
+    width: 30vw;
     height: 30px;
+    background-color: #eee;
+    border: none;
+    border-radius: 20px;
+    margin: 8px 25px;
+    padding-left: 15px;
 }
 
 .end-game-register select{
     display: flex;
-    width: 200px;
+    width: 20vw;
     height: 30px;
+    background-color: #eee;
+    border: none;
+    border-radius: 20px;
+    margin: 8px 25px;
+    padding-left: 15px;
+}
+
+.end-game-register .register-inputs{
+    overflow-y: scroll;
+}
+
+.endgame-success {
+    margin-bottom: 20px;
+}
+
+
+.score-and-replay button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: fit-content;
+    border-radius: 20px;
+	border: 1px solid hsl(133, 100%, 40%);
+	background-color: hsl(133, 100%, 40%);
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 35px;
+	letter-spacing: 1px;
+    margin:0px;
+}
+ .score-and-replay button:disabled {
+    opacity: 40%;
+}
+ .score-and-replay button:active {
+	transform: scale(0.95);
+}
+
+ .score-and-replay button:focus {
+	outline: none;
 }
 
 .score-and-replay {
+    margin-left: 15px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    height: 62vh;
+    padding: 20px 60px;
 }
 
 .score-and-replay .final-score {
@@ -59,12 +167,35 @@
     margin: 15px;
 }
 
+/* .score-and-replay button {
+    align-self: center;
+    width: 150px;
+    height: 50px;
+    width: 50 px;
+    height: 20 px;
+    border-radius: 5px;
+    border-color: green;
+    color:black;
+    background-color: chartreuse;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border: black solid 1px;
+} */
+
 .countries-played-and-could-container {
+    margin-left: 15px;
+    margin-right: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    margin-right: 25px;
+    background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    height: 62vh;
+    padding: 20px 60px;
 }
 
 .countries-played-and-could-container div{
