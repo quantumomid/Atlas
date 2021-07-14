@@ -3,8 +3,11 @@ export default function AboutMember(props){
         <article>
         <img src={props.memberData.image} alt="Headshot of David" />
         <div>
-        <h3>David Ingram</h3>
-        <p>Helloing.......Helloing.......Helloing.......Helloing.......</p>
+        <h3>{props.memberData.fullName}</h3>
+        <p>{props.memberData.description}</p>
+        <a href={props.memberData.linkedIn}>LinkedIn</a>
+        <a href={props.memberData.github}>GitHub</a>
+
         </div>
         </article>
     )
