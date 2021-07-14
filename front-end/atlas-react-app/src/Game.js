@@ -286,41 +286,42 @@ class Game extends Component {
           </p>
           <h3>
             Have fun!
-          </h3  >
+          </h3>
         </div>}
         <div className="start-button-container">
           {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         </div>
         <div className = 'game-container'>
-        {!needStart && <section className="top-game-bar">
-            <div className = 'timer'>Time remaining:
-              <div>{this.state.time}</div>
-            </div>
-            {/* conditionally show flow of game as is appropriate */}
-            <div className="player-score">Your score: 
-              <div>{score}</div>
-            </div>
+          {!needStart && <section className="top-game-bar">
+              <div className = 'timer'>Time remaining:
+                <div>{this.state.time}</div>
+              </div>
+              {/* conditionally show flow of game as is appropriate */}
+              <div className="player-score">Your score: 
+                <div>{score}</div>
+              </div>
           </section>}
           { !needStart && <div className="letter-question-container">
-          <div className="question-container">
-            {isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
-            {/* {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />} */}
-            {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
-            {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />}
-            {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
-          </div>
-            {showCapitalCityQuestion ? 
-            <div style={{ 
-              backgroundImage: `url(${this.state.flag})`, color:'white' }} 
-              className="letter"
-            >
-              {letter}
-            </div>
-            : <div className="letter">{letter}</div>
-            }
-          </div> }
-          <section>
-            {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
+            <div className="question-container">
+              {isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
+              {/* {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />} */}
+              {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
+              {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />}
+              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
+              </div>
+              {showCapitalCityQuestion ? 
+              <div style={{ 
+                    backgroundImage: `url(${this.state.flag})`, color:'white' }} 
+                    className="letter"
+                  >
+                    {letter}
+              </div>
+              :
+              <div className="letter">{letter}</div>
+              }
+            </div> }
+            <section>
+              {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
                 <input className="game-input-bar"
                   type = "text" 
                   placeholder = "Enter country beginning with this letter" 
@@ -337,32 +338,31 @@ class Game extends Component {
                   Submit
                 </button>
               </form> }
-            {/* optional capital city question: */}
-            {showCapitalCityQuestion && <div><form className="game-input-container">
-              <input className="game-input-bar"
-                type = "text" 
-                placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
-                name="userInputCity" 
-                value={userInputCity} 
-                onChange ={(e) => this.handleUserInputChange(e)}
-                autoComplete = 'off' 
-              />
-              <button className="game-submit"
-                type = "submit"
-                onClick = {(e) => this.checkCapitalCity(e)}
-                disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
-              >
-                Submit
-              </button>
-              <button className="game-skip"
-                  onClick={() => this.handleSkip()}
+              {/* optional capital city question: */}
+              {showCapitalCityQuestion && <form className="game-input-container">
+                <input className="game-input-bar"
+                  type = "text" 
+                  placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
+                  name="userInputCity" 
+                  value={userInputCity} 
+                  onChange ={(e) => this.handleUserInputChange(e)}
+                  autoComplete = 'off' 
+                />
+                <button className="game-submit"
+                  type = "submit"
+                  onClick = {(e) => this.checkCapitalCity(e)}
+                  disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
                 >
-                  Skip
-              </button>
-            </form> 
-            </div> }
-          </section>
-      </div>
+                  Submit
+                </button>
+                <button className="game-skip"
+                    onClick={() => this.handleSkip()}
+                  >
+                    Skip
+                </button>
+              </form>  }
+            </section>
+        </div>
      </main>
     )
   }
