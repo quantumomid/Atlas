@@ -4,6 +4,7 @@ import Game from './Game';
 import RegisterPage from './RegisterPage';
 import Login from './Login';
 import Logout from './Logout';
+import Aboutus from './Aboutus'
 import {
   Switch,
   Route,
@@ -85,6 +86,9 @@ class App extends Component {
                 {inGame && <div className="selected-page">Game</div>}
                 </li>
                 <li>
+                  <Link to='/aboutus'>About us</Link>
+                </li>
+                <li>
                 {!isLoggedIn && !onRegister &&
                 <Link to="/register">Register</Link>}
                 {!isLoggedIn && onRegister && <div className="selected-page">Register</div>}
@@ -110,6 +114,9 @@ class App extends Component {
               setInGameStatus={() => this.setInGameStatus()}
               clearInGameStatus={() => this.clearInGameStatus()}
               />
+            </Route>
+            <Route path='/aboutus'>
+              <Aboutus />
             </Route>
             { !isLoggedIn &&
             <Route path="/register">
