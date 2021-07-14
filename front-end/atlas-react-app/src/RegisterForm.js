@@ -3,6 +3,7 @@ import UniqueUsernameError from './UniqueUsernameError'
 import UniqueEmailError from './UniqueEmailError'
 import './register.css'
 import Filter from 'bad-words'
+import { Link } from 'react-router-dom'
 
 function RegisterForm(props){
     const { handleSubmit, handleChange, email, username, password, passwordConfirmation, country, handleBlur, touched, message, allCountries } = props
@@ -90,8 +91,10 @@ function RegisterForm(props){
                 disabled= {!validSignup || !touched.email || !touched.username || !touched.password}
                 >
                 Sign-up
-                </button>
-                }
+                </button>}
+                <Link to='/login'>Already got an account? Click here to sign in</Link>
+                
+
             </form>
             </div>
     )
