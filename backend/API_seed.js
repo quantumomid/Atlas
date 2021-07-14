@@ -51,6 +51,11 @@ await client.queryObject(`
     SET country_name = 'Eswatini'
     WHERE country_name = 'Swaziland'`)
 
+await client.queryObject(`
+    UPDATE countries
+    SET country_name = 'Vatican City'
+    WHERE country_name = 'Vatican'`)
+
 // deleting all countries that aren't on the UNs website of official countries
 nonUNCountries.forEach(async (country) => await client.queryObject(`
     DELETE FROM countries
@@ -62,3 +67,31 @@ nonUNCountries.forEach(async (country) => await client.queryObject(`
 // DELETE FROM countries
 // WHERE country_name = $1`,
 // country))
+
+// hard-coding missing flags
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Flag_of_Russia.svg', 'Russia')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Bandera_de_Bolivia_%28Estado%29.svg', 'Bolivia')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Flag_of_Venezuela_%28state%29.svg', 'Venezuela')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/7/76/Flag_of_Western_Sahara.png', 'Western Sahara')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/2/27/Flag_of_Moldova.svg', 'Moldova')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/3/38/Flag_of_Tanzania.svg', 'Tanzania')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_North_Macedonia.svg', 'North Macedonia')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Palestine.svg', 'Palestine')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Flag_of_the_Federated_States_of_Micronesia.svg', 'Micronesia')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/1/1f/Flag_of_Kosovo.svg', 'Kosovo')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_C%C3%B4te_d%27Ivoire.svg', 'Ivory Coast')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_the_Republic_of_the_Congo.svg', 'Republic of the Congo')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Flag_of_the_Democratic_Republic_of_the_Congo.svg', 'Democratic Republic of the Congo')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Flag_of_South_Sudan.svg', 'South Sudan')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg', 'South Korea')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/5/51/Flag_of_North_Korea.svg', 'North Korea')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Libya.svg', 'Libya')
+await client.queryObject(`UPDATE countries SET flag = $1 WHERE country_name = $2;`, 'https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_the_Vatican_City.svg', 'Vatican City')
+
+
+
+
+
+
+
+
