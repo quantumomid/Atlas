@@ -9,7 +9,7 @@
     background-position: top;
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 76vh;
+    /* height: 75vh; */
 }
 
 .overall-container h1{
@@ -27,8 +27,8 @@
 .whole-team-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    width: 80vw;
+    justify-content:space-between;
+    width: 90vw;
     /* border: solid gold 5px; */
 }
 
@@ -43,7 +43,7 @@
     margin-bottom: 50px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-    /* width: 230px; */
+    /* width: 20vw; */
 }
 
 .whole-team-container article img{
@@ -51,7 +51,7 @@
     width: 200px;
     cursor: pointer;
     border-radius: 80px;
-    height: 30vh;
+    height: 35vh;
     background-position: center;
     object-fit: cover;
 }
@@ -61,7 +61,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
     /* height: 96vh; */
     /* border: solid gold 5px; */
     background-image: url(earth.png);
