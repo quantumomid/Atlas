@@ -93,6 +93,15 @@
     align-items: center;
 }
 
+
+.game-clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: solid black;
+}
+
 .game-container {
     display: flex;
     flex-direction: column;
