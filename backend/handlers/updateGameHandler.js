@@ -97,8 +97,8 @@ const updateGameHandler = async (server) => {
             const lastLetter = userInput.slice(-1)
             //console.log('lastLetter: ', lastLetter)
 
-            [[flag]] = (await client.queryArray(`SELECT flag FROM countries WHERE country_name = $1;`, userInput)).rows
-            // console.log('flag link: ', flag)
+            flag = (await client.queryArray(`SELECT flag FROM countries WHERE country_name = $1;`, userInput)).rows
+            console.log('flag link: ', flag)
 
             await server.json({correct, lastLetter, score: score + 1, flag})
         }
