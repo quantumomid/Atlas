@@ -33,6 +33,12 @@
     height: 30px;
 }
 
+.end-game-register select{
+    display: flex;
+    width: 200px;
+    height: 30px;
+}
+
 .score-and-replay {
     display: flex;
     flex-direction: column;
