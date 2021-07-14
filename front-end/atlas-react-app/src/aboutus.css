@@ -56,7 +56,7 @@ article img{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 96vh;
     /* border: solid gold 5px; */
     background-image: url(earth.png);
     background-color: whitesmoke;
