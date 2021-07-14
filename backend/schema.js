@@ -32,6 +32,7 @@ await client.queryObject(`CREATE TABLE users (
                 id SERIAL PRIMARY KEY,
                 username TEXT UNIQUE NOT NULL,
                 email TEXT UNIQUE NOT NULL,
+                country TEXT, 
                 password_encrypted TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP NOT NULL
@@ -60,6 +61,7 @@ await client.queryObject(`CREATE TABLE finished_games (
                 fin_game_id SERIAL PRIMARY KEY,
                 username TEXT NOT NULL,
                 score INTEGER DEFAULT 0,
+                country TEXT,
                 created_at TIMESTAMP NOT NULL,
                 FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
                 )`)                
