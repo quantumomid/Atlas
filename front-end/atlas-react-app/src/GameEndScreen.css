@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: row;
     border: solid white 5px;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 75vh;
     background-image: url(earth.png);
@@ -185,6 +185,7 @@
 
 .countries-played-and-could-container {
     margin-left: 15px;
+    margin-right: 15px;
     display: flex;
     flex-direction: column;
     justify-content: start;
