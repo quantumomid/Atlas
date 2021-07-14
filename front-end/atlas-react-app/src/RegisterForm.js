@@ -29,7 +29,7 @@ function RegisterForm(props){
                             type='email'
                             value={email}
                         />
-                    </label >
+                </label>
                 <div className = 'registerformerrormessage'>
                 <p>{emailError}</p>
                 <UniqueEmailError email={email} touched={touched.email}/>
@@ -85,14 +85,16 @@ function RegisterForm(props){
                 <p>{passwordConfirmationError}</p>
                 </div>
                 </div>  
-
+                { message === 'Success and score saved' ? <div className='endgame-success'>{message}</div> :
                 <button className = 'buttonform' 
                 type="submit"
                 disabled= {!validSignup || !touched.email || !touched.username || !touched.password}
                 >
                 Sign-up
-                </button>
+                </button>}
                 <Link to='/login'>Already got an account? Click here to sign in</Link>
+                
+
             </form>
             </div>
     )
