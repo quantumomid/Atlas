@@ -42,13 +42,17 @@ article{
     margin-bottom: 50px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
+    width: 150px;
 }
 
 article img{
-    width: 20vw;
-    height: 40vh;
+    /* width: 20vw; */
+    width: 150px;
     cursor: pointer;
     border-radius: 100px;
+    height: 30vh;
+    background-position: center;
+    object-fit: cover;
 }
 
 .overall-member-container {
@@ -106,4 +110,3 @@ article img{
 	padding: 10px 35px;
 	letter-spacing: 1px;
 }
- 
