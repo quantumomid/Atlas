@@ -100,3 +100,7 @@ button{
     padding: 10px 20px;
     border-radius: 20px;
 }
+
+.app-nav-banners li .selected-page:active {
+    opacity: 1;
+}
