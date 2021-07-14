@@ -1,14 +1,18 @@
 export default function AboutMember(props){
     return(
-        <article>
-        <img src={props.memberData.image} alt="Headshot of David" />
-        <div>
-        <h3>{props.memberData.fullName}</h3>
+        <div className='overall-member-container'>
+        <article className='member-container'>
+        <h3 className='full-name'>{props.memberData.fullName}</h3>
+        <div className="member-profile">
+        <img src={props.memberData.image} alt={`Headshot of ${props.memberData.fullName}`} />
+        <div className='member-info'>
         <p>{props.memberData.description}</p>
-        <a href={props.memberData.linkedIn}>LinkedIn</a>
-        <a href={props.memberData.github}>GitHub</a>
-
+        <p>View <a href={props.memberData.linkedIn}>linkedIn</a> profile</p>
+        <p>View <a href={props.memberData.github}>gitHub</a> profile</p>
+        </div>
         </div>
         </article>
+        </div>
+
     )
 }

@@ -7,7 +7,7 @@
     background-image: url(earth.png);
     background-color: whitesmoke;
     background-position: top;
-    background-size: 90%;
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 
@@ -15,7 +15,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 80vw;
+    width: 70vw;
     /* border: solid gold 5px; */
 }
 
@@ -36,6 +36,39 @@ article img{
     width: 350px;
     height: 400px;
     cursor: pointer;
+    border-radius: 100px;
+}
+
+.overall-member-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 75vh;
+    /* border: solid gold 5px; */
+    background-image: url(earth.png);
+    background-color: whitesmoke;
+    background-position: top;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.member-container{
+    display: flex;
+    align-self: center;
+    height: fit-content;
+    /* border: solid gold 5px; */
+
+}
+.overall-member-container .full-name{
+    font-size: 40px;
+}
+.member-profile{
+    display: flex;
+    padding: 10px;
+}
+.member-info{
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
 }
   
  
