@@ -31,7 +31,7 @@ export default class PersonalScoreBoard extends Component{
         <div className = 'scoreboard' >
             <h2>Personal Scoreboard</h2>
             <div>
-            {gameData.length === 0 ? <p>No personal scores</p> : <ScoreBoard gameData={gameData} />}
+            {gameData.length === 0 ? <p>No personal scores</p> : <ScoreBoard gameData={gameData} personal={true} />}
             </div>
         </div>
         )

@@ -1,23 +1,24 @@
 import './ScoreBoard.css'
 
 function Table (props) {
-    const { gameData } = props
+    const { gameData, personal } = props
     return (
         <table>
-            <TableHeader />
-            <TableBody gameData={gameData} />
+            <TableHeader personal={personal} />
+            <TableBody gameData={gameData} personal={personal} />
         </table>
     )
     
 }
 
 //functional component for table headings
-function TableHeader() {
+function TableHeader(props) {
     return (
       <thead>
         <tr>
           <th>Ranking</th>
-          <th>Username</th>
+          {!props.personal && <th>Username</th>}
+          {!props.personal && <th>Country</th>}
           <th>Score</th>
           <th>Date</th>
         </tr>
@@ -31,7 +32,8 @@ function TableBody(props) {
         return (
             <tr key={index}>
                 <td>{ row.ranking }</td>
-                <td>{ row.username }</td>
+                {!props.personal && <td>{ row.username }</td>}
+                {!props.personal && <td>{ row.country }</td>}
                 <td>{ row.score }</td>
                 <td>{ (new Date(row.created_at)).toLocaleDateString() }</td>
             </tr>

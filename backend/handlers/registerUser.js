@@ -98,9 +98,9 @@ const registerUser = async (server) => {
         WHERE username = $1`,
         tempUser)).rows
       await client.queryObject(`
-        INSERT INTO finished_games(username, score, created_at)
-        VALUES($1, $2, NOW())`,
-        username, score)
+        INSERT INTO finished_games(username, country, score, created_at)
+        VALUES($1, $2, $3, NOW())`,
+        username, country, score)
       await client.queryObject(`
         DELETE FROM current_games
         WHERE username = $1`,
