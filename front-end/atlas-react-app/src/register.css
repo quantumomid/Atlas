@@ -11,12 +11,12 @@
     align-content: center;
     justify-content:center;
     font-size: 45px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .register-page  {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     height: 75vh;
     background-image: url(earth.png);
@@ -29,7 +29,7 @@
 .register-page .register{
     display: flex;
     flex-direction: column;
-    height: 62vh;
+    height: 73vh;
     width: 50vw;
     justify-content: center;
     align-items: center;
@@ -42,15 +42,13 @@
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-    margin: 4vh 20vw;
-    padding: 20px 60px;
 
 }
 
 .register-page .register-form{
     display: flex;
     flex-direction: column;
-    height: 55vh;
+    height: 57vh;
     justify-content: space-around;
     align-items: center;
     color:hsl(133, 97%, 15%);
@@ -60,7 +58,6 @@
 
 .register-page .register-inputs{
     overflow-y: scroll;
-
 }
 
 .register-page .register-form input{
@@ -69,13 +66,13 @@
     background-color: #eee;
     border: none;
     /* border: solid black 5px; */
-	padding: 15px 15px;
+    padding: 12px 15px;
 	margin: 8px 25px;
     border-radius: 20px;
 }
 
 
-.register-page .register-form button{
+ .register-form button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,24 +86,24 @@
 	font-weight: bold;
 	padding: 10px 35px;
 	letter-spacing: 1px;
-    margin:25px;
+    margin-top: 20px;
 }
-.register-page .register-form button:disabled {
+ .register-form button:disabled {
     opacity: 40%;
 }
-.register-page .register-form button:active {
+ .register-form button:active {
 	transform: scale(0.95);
 }
 
-.register-page .register-form button:focus {
+ .register-form button:focus {
 	outline: none;
 }
 
-.register-page .registerformerrormessage{
+ .registerformerrormessage{
     color: red;
 }
 
-.register-page .register-response{
+ .register-response{
     text-align: center;
     color: red
 }
@@ -117,7 +114,9 @@
     background-color: #eee;
     border: none;
     /* border: solid black 5px; */
-	padding: 15px 15px;
+	padding-left: 15px;
 	margin: 8px 25px;
     border-radius: 20px;
+    height: 30px;
+
 }
