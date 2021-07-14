@@ -12,35 +12,35 @@ const memberDataObject = {
     david: {
         fullName: 'David Ingram',
         image: davidimg,
-        description: 'Helloing.......Helloing.......Helloing.......Helloing.......',
+        description: 'Helloing...'.repeat(30),
         linkedIn: 'https://uk.linkedin.com/in/david-ingram-2984139b',
         github: 'https://github.com/Dingram23'
     },
     guy: {
         fullName: 'Guy Hotchin',
         image: guyimg,
-        description: 'Helloing.......Helloing.......Helloing.......Helloing.......',
+        description: 'Helloing...'.repeat(30),
         linkedIn: 'htteps.s.s.s',
         github: 'https://github.com/Dingram23'
     },
     joanna: {
         fullName: 'Joanna Hawthorne',
         image: joannaimg,
-        description: 'Helloing.......Helloing.......Helloing.......Helloing.......',
+        description: 'Helloing...'.repeat(30),
         linkedIn: 'https://www.linkedin.com/in/joanna-hawthorne-9685921b1/',
         github: 'https://github.com/joannah62'
     },
     michael: {
         fullName: 'Michael Baugh',
         image: michaelimg,
-        description: 'Helloing.......Helloing.......Helloing.......Helloing.......',
+        description: 'Helloing...'.repeat(30),
         linkedIn: 'https://www.linkedin.com/in/michael-baugh-90126a4b/',
         github: 'https://github.com/mbaugh99'
     },
     omid: {
         fullName: 'Omid Wakili',
         image: omidimg,
-        description: 'Helloing.......Helloing.......Helloing.......Helloing.......',
+        description: 'Helloing...'.repeat(30),
         linkedIn: 'https://uk.linkedin.com/in/omid-wakili-34781b12a',
         github: 'https://github.com/quantumomid'
     },
@@ -62,7 +62,12 @@ export default class Aboutus extends Component{
             memberData: memberDataObject[name]
         })
     }
-    async componentWillUnmount() {
+
+    handleReset(){
+        this.setState({memberClicked: false})
+    }
+    
+    componentWillUnmount() {
         this.props.clearInAboutusStatus()
       }
 
@@ -112,8 +117,12 @@ export default class Aboutus extends Component{
             </div>
             )
         } else{
-            return <AboutMember memberData={this.state.memberData}/>
-
+            return (
+                <AboutMember 
+                    memberData={this.state.memberData}
+                    handleReset={() => this.handleReset()}
+                />
+            )
         }
     }
 }

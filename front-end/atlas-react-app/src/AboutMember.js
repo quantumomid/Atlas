@@ -1,4 +1,6 @@
+
 export default function AboutMember(props){
+    
     return(
         <div className='overall-member-container'>
         <article className='member-container'>
@@ -12,6 +14,7 @@ export default function AboutMember(props){
         </div>
         </div>
         </article>
+        <button onClick={() => props.handleReset()}>Return back</button>
         </div>
 
     )

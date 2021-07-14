@@ -47,6 +47,7 @@ article img{
 
 .overall-member-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
     height: 75vh;
@@ -75,6 +76,26 @@ article img{
     display: flex;
     flex-direction: column;
     padding: 40px;
+    word-wrap:break-word;
+    width: 40vw;
 }
-  
+.member-info p{
+    line-height: 32px;
+}
+
+.overall-member-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: fit-content;
+    border-radius: 20px;
+	border: 1px solid hsl(133, 100%, 40%);
+	background-color: hsl(133, 100%, 40%);
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 35px;
+	letter-spacing: 1px;
+}
  
