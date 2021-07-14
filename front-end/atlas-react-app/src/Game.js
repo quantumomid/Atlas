@@ -286,7 +286,14 @@ class Game extends Component {
           {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />}
             {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />}
             {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
-            <div className="letter">{letter}</div>
+            {showCapitalCityQuestion ? 
+            <div style={{ 
+              backgroundImage: `url("https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_the_Vatican_City.svg")` }} className="letter"
+            >
+              {letter}
+            </div>
+            : <div className="letter">{letter}</div>
+            }
           </div> }
           <section>
             {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
