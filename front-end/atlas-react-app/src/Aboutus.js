@@ -72,49 +72,24 @@ export default class Aboutus extends Component{
       }
 
     render(){
-  
+        const allMemberArticles = Object.keys(memberDataObject).map(member => {
+            return (
+                <article key={memberDataObject[member].fullName} className='container'>
+                    <img name={member} src={memberDataObject[member].image} alt="Headshot of David" onClick={(event) => this.handleClick(event)}/>
+                    <div>
+                        <h3 className='name-tag'>{memberDataObject[member].fullName}</h3>
+                    </div>
+                </article>
+            )})
+            
         if(!this.state.memberClicked) {
             return (
                 <div className='overall-container'>
-                <h1>Meet our team</h1>
-                <div className='whole-team-container'>
-               
-                <article className='container'>
-                <img name='david' src={davidimg} alt="Headshot of David" onClick={(event) => this.handleClick(event)}/>
-                <div>
-                <h3 className='name-tag'>David Ingram</h3>
+                    <h1>Meet our team</h1>
+                    <div className='whole-team-container'>
+                        {allMemberArticles}
+                    </div>
                 </div>
-                </article>
-    
-                <article className='container'>
-                <img name='joanna' src={joannaimg} alt="Headshot of Joanna" onClick={(event) => this.handleClick(event)}/>
-                <div>
-                <h3 className='name-tag'>Joanna Hawthorne</h3>
-                </div>
-                </article>
-    
-                <article>
-                <img name='guy' src={guyimg} alt="Headshot of Guy" onClick={(event) => this.handleClick(event)}/>
-                <div>
-                <h3 className='name-tag'>Guy Hotchin</h3>
-                </div>
-                </article>
-    
-                <article>
-                <img name='michael' src={michaelimg} alt="Headshot of Michael" onClick={(event) => this.handleClick(event)}/>
-                <div>
-                <h3 className='name-tag'>Michael Baugh</h3>
-                </div>
-                </article>
-    
-                <article>
-                <img name='omid' src={omidimg} alt="Headshot of Omid" onClick={(event) => this.handleClick(event)}/>
-                <div>
-                <h3 className='name-tag'>Omid Wakili</h3>
-                </div>
-                </article>
-                </div>
-            </div>
             )
         } else{
             return (
