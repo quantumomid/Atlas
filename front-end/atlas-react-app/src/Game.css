@@ -115,6 +115,8 @@
 
 .game-input-container .game-skip {
     background-color: rgb(240, 104, 104);
+    color: white;
+    border: solid 3px rgb(167, 53, 53);
 }
 
 .game-input-container .game-submit {
