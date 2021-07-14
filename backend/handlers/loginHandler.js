@@ -9,10 +9,13 @@ const client = new Client(Deno.env.get("PG_URL"))
 await client.connect()
 
 export default async function loginHandler(server) {
-    let { username, password } = await server.body
+    let { usernameOrEmail, password } = await server.body
     // make username non case sensitive
-    username = username.toLowerCase()
-    const [userInfo] = (await client.queryObject('SELECT id, password_encrypted FROM users WHERE username = $1', username)).rows
+    usernameOrEmail = usernameOrEmail.toLowerCase()
+    const [userInfo] = (await client.queryObject(`
+        SELECT id, password_encrypted FROM users 
+        WHERE username = $1 OR email = $1`,
+        usernameOrEmail)).rows
 
     try{
         if (!userInfo) throw new Error('User doesnt exist - please try again')

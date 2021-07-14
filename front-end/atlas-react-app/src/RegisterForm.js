@@ -51,7 +51,7 @@ function RegisterForm(props){
 
                 <label className = 'registerationlabel'>Country:
                     <select name='country' value={country} onChange={handleChange}>
-                        <option value="">Select a country</option>
+                        <option value="">Select a country or leave blank</option>
                             {countryOptions}
                     </select>
                 </label>
