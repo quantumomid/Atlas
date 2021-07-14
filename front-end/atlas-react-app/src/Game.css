@@ -3,7 +3,6 @@
     margin: 0px;
     display: flex;
     flex-direction: column;
-    border: solid black 5px;
     justify-content: center;
     align-items: center;
     height: 69vh;
@@ -127,8 +126,24 @@
     font-size: 30px;
     border: 5px solid;
     border-radius: 30px;
+    margin: 15px;
 }
 
 .ai-response, .main-question {
     margin: 5px 0px;
+}
+
+.start-instructions {
+    border: solid white 5px;
+    padding: 8px 30px;
+    margin: 10px;
+    text-align: center;
+    width: 65%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    border-radius: 10px;
+}
+
+.start-instructions {
+    text-align: center;
 }
