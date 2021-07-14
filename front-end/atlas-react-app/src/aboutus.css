@@ -56,21 +56,20 @@ article img{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 90vh; */
+    height: 80vh;
     /* border: solid gold 5px; */
     background-image: url(earth.png);
     background-color: whitesmoke;
     background-position: top;
     background-size: 100%;
     background-repeat: no-repeat;
-    margin-top: 40px;
 }
 .member-container{
     display: flex;
     align-self: center;
     height: fit-content;
     /* border: solid gold 5px; */
-
+    margin-top: 40px;
 }
 .overall-member-container .full-name{
     font-size: 40px;
