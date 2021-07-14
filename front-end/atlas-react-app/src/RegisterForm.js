@@ -84,16 +84,15 @@ function RegisterForm(props){
                 <p>{passwordConfirmationError}</p>
                 </div>
                 </div>  
-
+                { message === 'Success and score saved' ? <div className='endgame-success'>{message}</div> :
                 <button className = 'buttonform' 
                 type="submit"
                 disabled= {!validSignup || !touched.email || !touched.username || !touched.password}
                 >
                 Sign-up
                 </button>
-
+                }
             </form>
-            <div className='register-response'>{message}</div>
             </div>
     )
 }

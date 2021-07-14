@@ -113,6 +113,7 @@ const registerUser = async (server) => {
         sameSite: Deno.env.get('DENO_ENV') === 'production' ? 'none' : 'lax',
         expires: new Date(0),
       });
+      return await server.json({message: 'Success and score saved'})
     }
     catch { return await server.json({message: 'Successful signup but score not saved'})}
   }

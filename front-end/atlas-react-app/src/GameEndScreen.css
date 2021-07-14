@@ -6,7 +6,7 @@
     border: solid white 5px;
     justify-content: space-between;
     align-items: center;
-    height: 600px;
+    height: 75vh;
     background-image: url(earth.png);
     background-color: whitesmoke;
     background-position: top;
@@ -38,7 +38,7 @@
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-    height: 50vh;
+    height: 62vh;
 }
 
 .end-game-register h2 {
@@ -107,6 +107,38 @@
     overflow-y: scroll;
 }
 
+.endgame-success {
+    margin-bottom: 20px;
+}
+
+
+.score-and-replay button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: fit-content;
+    border-radius: 20px;
+	border: 1px solid hsl(133, 100%, 40%);
+	background-color: hsl(133, 100%, 40%);
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 10px 35px;
+	letter-spacing: 1px;
+    margin:0px;
+}
+ .score-and-replay button:disabled {
+    opacity: 40%;
+}
+ .score-and-replay button:active {
+	transform: scale(0.95);
+}
+
+ .score-and-replay button:focus {
+	outline: none;
+}
+
 .score-and-replay {
     margin-left: 15px;
     display: flex;
@@ -135,7 +167,7 @@
     margin: 15px;
 }
 
-.score-and-replay button {
+/* .score-and-replay button {
     align-self: center;
     width: 150px;
     height: 50px;
@@ -149,13 +181,13 @@
     font-size: 20px;
     font-weight: bold;
     border: black solid 1px;
-}
+} */
 
 .countries-played-and-could-container {
     margin-left: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     background-color: #fff;
 	border-radius: 10px;
