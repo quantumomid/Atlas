@@ -1,13 +1,15 @@
 // import {Component} from 'react'
-import davidimg from '../public/davidimg.jpg'
+import davidimg from './davidimg.jpg'
+import './aboutus.css'
+
 export default function Aboutus(){
     return (
-        <div>
+        <div className='whole-team-container'>
             <h1>Meet our team</h1>
             <article>
             <h3 className='name-tag'>David Ingram</h3>
-            <img src="./images/Indian.jpg" alt="Image of some of the food the restaurant offers" />
-            <div class='tag tag-white'>Free delivery</div>
+            <img src={davidimg} alt="Image of some of the food the restaurant offers" />
+            <p className='descriptions'>Helloing.......Helloing.......Helloing.......Helloing.......</p>
             </article>
 
         </div>
