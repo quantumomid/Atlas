@@ -79,7 +79,7 @@ function RegisterForm(props){
 
                 <button className = 'buttonform' 
                 type="submit"
-                disabled= {!validSignup || !touched.email || !touched.username || !touched.password || !touched.passwordConfirmation}
+                disabled= {!validSignup || !touched.email || !touched.username || !touched.password}
                 >
                 Sign-up
                 </button>
