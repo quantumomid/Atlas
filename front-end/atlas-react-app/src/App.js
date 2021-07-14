@@ -20,6 +20,7 @@ class App extends Component {
     inGame: false,
     onRegister: false,
     onLogin: false,
+    inAboutus: false
   }
 
   async componentDidMount() {
@@ -52,6 +53,14 @@ class App extends Component {
     this.setState({inGame: false})
   }
 
+  setInAboutusStatus() {
+    this.setState({inAboutus: true})
+  }
+
+  clearInAboutusStatus() {
+    this.setState({inAboutus: false})
+  }
+
   setOnRegisterStatus() {
     this.setState({onRegister: true})
   }
@@ -69,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, inGame, onLogin, onRegister } = this.state
+    const { isLoggedIn, inGame, onLogin, onRegister, inAboutus } = this.state
     return (
         <div>
         <main>
@@ -86,7 +95,8 @@ class App extends Component {
                 {inGame && <div className="selected-page">Game</div>}
                 </li>
                 <li>
-                  <Link to='/aboutus'>About us</Link>
+                {!inAboutus && <Link to='/aboutus'>About us</Link>}
+                {inAboutus && <div className="selected-page">About us</div>}
                 </li>
                 <li>
                 {!isLoggedIn && !onRegister &&
@@ -116,7 +126,9 @@ class App extends Component {
               />
             </Route>
             <Route path='/aboutus'>
-              <Aboutus 
+              <Aboutus
+              setInAboutusStatus={() => this.setInAboutusStatus()}
+              clearInAboutusStatus={() => this.clearInAboutusStatus()} 
               />
             </Route>
             { !isLoggedIn &&

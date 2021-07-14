@@ -8,7 +8,7 @@ export default function AboutMember(props){
         <div className='member-info'>
         <p>{props.memberData.description}</p>
         <p>View <a href={props.memberData.linkedIn}>linkedIn</a> profile</p>
-        <p>View <a href={props.memberData.github}>gitHub</a> profile</p>
+        <p>View <a href={props.memberData.github}>github</a> profile</p>
         </div>
         </div>
         </article>

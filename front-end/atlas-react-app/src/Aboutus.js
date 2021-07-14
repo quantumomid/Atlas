@@ -51,6 +51,9 @@ export default class Aboutus extends Component{
         memberClicked: false,
         memberData: []
     }
+    componentDidMount() {
+        this.props.setInAboutusStatus()
+      }
 
     handleClick(event){
         const { name } = event.target
@@ -59,6 +62,9 @@ export default class Aboutus extends Component{
             memberData: memberDataObject[name]
         })
     }
+    async componentWillUnmount() {
+        this.props.clearInAboutusStatus()
+      }
 
     render(){
   

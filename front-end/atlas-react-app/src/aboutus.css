@@ -11,11 +11,17 @@
     background-repeat: no-repeat;
 }
 
+.overall-container h1{
+    font-size: 50px;
+    color:hsl(133, 100%, 40%);
+
+}
+
 .whole-team-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    width: 70vw;
+    width: 80vw;
     /* border: solid gold 5px; */
 }
 
@@ -24,10 +30,10 @@ article{
     flex-direction: column;
     align-items: center;
     /* border: solid gold 5px; */
-    padding: 10px;
+    padding: 15px;
     background-color: #fff;
 	border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
 }
