@@ -28,7 +28,7 @@ function RegisterForm(props){
                             type='email'
                             value={email}
                         />
-                    </label >
+                </label>
                 <div className = 'registerformerrormessage'>
                 <p>{emailError}</p>
                 <UniqueEmailError email={email} touched={touched.email}/>
