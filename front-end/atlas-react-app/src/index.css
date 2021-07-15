@@ -50,7 +50,8 @@ body {
     margin: 0vh 1vh;
 }
 
-.app-nav-banners li * {
+.app-nav-banners * {
+    margin: 0px 2vw;
     text-decoration: none;
     font-size: 2vh;
     color: #00cc2c;
@@ -59,24 +60,14 @@ body {
     border-radius: 3vh;
 }
 
-.app-nav-banners li *:hover {
+.app-nav-banners *:hover {
     background-color: #019120;
     color: white;
     border-radius: 3vh;
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
 
-.app-nav-banners li *:active {
-    opacity: 0.5;
-}
-
-.app-nav-banners button {
-    background-color: transparent;
-    border: none;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.app-nav-banners li .selected-page {
+.app-nav-banners .selected-page {
     font-weight: 600;
     background-color: #019120;
     color: white;
@@ -84,11 +75,12 @@ body {
     border-radius: 3vh;
 }
 
-.app-nav-banners li .selected-page:active {
-    opacity: 1;
+.app-nav-banners button {
+    border: none;
+    background-color: inherit;
 }
 
-button{
+button {
     cursor: pointer;
     font-family: 'Ubuntu', sans-serif;
 }

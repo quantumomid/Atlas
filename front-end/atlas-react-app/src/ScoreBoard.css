@@ -67,3 +67,16 @@
 .scoreboard tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
+
+.scoreboard label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 18vw
+}
+
+.scoreboard label select{
+ width: 10vw;
+ margin-left: 10px;
+}

@@ -8,8 +8,8 @@ export default function AboutMember(props){
                     <img src={props.memberData.image} alt={`Headshot of ${props.memberData.fullName}`} />
                     <div className='member-info'>
                         <p>{props.memberData.description}</p>
-                        <p>View <a href={props.memberData.linkedIn}>linkedIn</a> profile</p>
-                        <p>View <a href={props.memberData.github}>github</a> profile</p>
+                        <p>View <a href={props.memberData.linkedIn}>LinkedIn</a> profile</p>
+                        <p>View <a href={props.memberData.github}>Github</a> profile</p>
                     </div>
                 </div>
                 <button onClick={() => props.handleReset()}>Back</button>

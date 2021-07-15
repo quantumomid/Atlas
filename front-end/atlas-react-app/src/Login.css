@@ -91,3 +91,21 @@
     color: red
 }
 /*  */
+
+.register-link-message {
+    color: rgb(94, 93, 93);
+}
+
+.register-link {
+    color: hsl(133, 100%, 40%);
+    text-decoration: none;
+}
+
+.register-link:hover {
+    color: hsl(133, 100%, 26%);
+    text-decoration: underline;
+}
+
+.register-link:active {
+    opacity: 0.5;
+}

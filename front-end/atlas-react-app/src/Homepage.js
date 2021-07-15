@@ -9,7 +9,7 @@ class Homepage extends Component {
       return (
         <div className = 'homepage-container'>
           <div className = 'scoreboards'>
-          <GlobalScoresBoard />
+          <div className='global-scoreboard-homepage'><GlobalScoresBoard /></div>
           { this.props.isLoggedIn ? <PersonalScoreboard /> :
           <div className='game-description'> 
             <ul >
