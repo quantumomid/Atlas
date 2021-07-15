@@ -75,7 +75,7 @@ export default class Aboutus extends Component{
         const allMemberArticles = Object.keys(memberDataObject).map(member => {
             return (
                 <article key={memberDataObject[member].fullName} className='container'>
-                    <img name={member} src={memberDataObject[member].image} alt="Headshot of David" onClick={(event) => this.handleClick(event)}/>
+                    <img name={member} src={memberDataObject[member].image} alt={"Headshot of " + memberDataObject[member].fullName} onClick={(event) => this.handleClick(event)}/>
                     <div>
                         <h3 className='name-tag'>{memberDataObject[member].fullName}</h3>
                     </div>

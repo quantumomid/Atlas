@@ -112,10 +112,11 @@
     /* width: 10vw; */
     width: 350px;
     cursor: pointer;
-    border-radius: 100px;
+    /* border-radius: 100px; */
     height: 50vh;
     background-position: center;
-    object-fit: cover;
+    object-fit: scale-down; /* was cover */
+    size: 80%;
 }
 .overall-member-container article{
     display: flex;
