@@ -70,15 +70,12 @@
     background-color: #f3f3f3;
 }
 
-.scoreboard label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.2vh;
-    width: 18vw
+.scoreboard label, .scoreboard select {
+    margin: 1vh 1vw;
 }
 
-.scoreboard label select{
- width: 10vw;
- margin-left: 0.7vw;
+.scoreboard .global-scoreboard-filters-box {
+    display: flex;
+    max-height: 7.5vh;
 }
+
