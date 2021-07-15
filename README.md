@@ -31,7 +31,7 @@ In our database schema, we decided on using five tables:
 - countries: to include the country names, their capital cities and flag url links
 - users: to store user email, username and encrypted passwords
 - sessions: to store cookies as uuids
-- current_games: to keep track of any current games including user details, the contries played, current score, etc.
+- current_games: to keep track of any current games including user details, the countries played, current score, etc.
 - finished_games: to store details of any finished games including user details, final score, etc.
 
 ### Countries data
@@ -63,19 +63,18 @@ For our backend, we used [heroku](https://heroku.com/home) ...........
 
 For our frontend, we used the [React](https://reactjs.org) library and split our main App JS file into separate components to handle different pages, i.e. login, register, homepage, etc.
 
-Some of the packages we used:
+Some of the packages we used (for installation):
 - React [Router](https://reactrouter.com/web/guides/quick-start): for handling the routing to the different pages
 - Countdown [clock](https://www.npmjs.com/package/react-countdown-clock): for providing a visual animation to the time countdown during game play
 - [Confetti](https://www.npmjs.com/package/react-dom-confetti) animations: for displaying a visual animation whenever the user correctly names a country or its capital city
-
 
 ### Deployment
 
 For our frontend, we used [netlify](https://www.netlify.com) ...........
 
-## Extra: What else if had more time?
+## Extra: What if we had more time?
 
-- Implementing user to user gaming experience (i.e. on one device)
-- Implementing online multiplayer gaming experience
+- Implement user to user gaming experience (i.e. on one device)
+- Implement online multiplayer gaming experience
 - More bonus questions, i.e. naming neighbouring countries, official/main languages, population sizes, etc.
 - Anything else you can think of? Do let us know! :smiley:
