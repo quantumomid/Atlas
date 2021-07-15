@@ -24,7 +24,7 @@
 }
 
 .instruction-correct {
-    color: #00cc2c;
+    color: hsl(133, 100%, 40%);
     font-weight: bolder;
 }
 
@@ -37,8 +37,8 @@
 .start-button-container button {
     padding: 1.8vh 2.1vw;
     font-size: 3.6vh;
-    border: 0.6vh solid #00cc2c;
-    background-color: #00cc2c;
+    border: 0.6vh solid hsl(133, 100%, 40%) ;
+    background-color: hsl(133, 100%, 40%);
     color: white;
     border-radius: 30px;
     margin: 1.8vh;
@@ -176,7 +176,7 @@
 }
 
 .game-input-container .game-submit {
-    background-color: #00cc2c;
+    background-color: hsl(133, 100%, 40%);
     border: none;
     color: white;
 }
