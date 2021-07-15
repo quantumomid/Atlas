@@ -41,6 +41,10 @@ One of the issues that the team had to address was whether to include all countr
 
 We also decided to change the name of a few countries to their more commonly-known or most-latest accepted names, i.e. North Macedonia (insead of Macedonia), or Palestine (instead of Palestinian Territory).
 
+### Deployment
+
+For our database, we used [ElephantSQL](https://www.elephantsql.com/) ...........
+
 ## Backend: How we set up our backend
 
 We set up our backend in JavaScript using [Deno](https://deno.land), and specifically using Deno's [Abc](https://deno.land/x/abc@v1.3.1) framework.
