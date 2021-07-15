@@ -28,6 +28,9 @@ const updateGameHandler = async (server) => {
     // if invalid, adds game to finished_games and removes it from current_games, and returns a message/boolean etc. that we can check on frontend to trigger end game screen
     // if valid somehow triggers AI turn
 
+    //define points for correct country
+    const countryPoints = 10
+
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server)
     if (!user) throw new Error ('No user detected')
@@ -88,7 +91,7 @@ const updateGameHandler = async (server) => {
             // 1 is placeholder for whatever we decide a correct answer is worth!
             await client.queryObject(`UPDATE current_games
                                     SET score = $1
-                                    WHERE username = $2;`, score + 1, user)
+                                    WHERE username = $2;`, score + countryPoints, user)
             // test:                                  
             // let [[update]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
             // console.log('correct! updated score: ', scoreYes)
@@ -100,7 +103,7 @@ const updateGameHandler = async (server) => {
             flag = (await client.queryArray(`SELECT flag FROM countries WHERE country_name = $1;`, userInput)).rows
             console.log('flag link: ', flag)
 
-            await server.json({correct, lastLetter, score: score + 1, flag})
+            await server.json({correct, lastLetter, score: score + countryPoints, flag})
         }
     }
 }

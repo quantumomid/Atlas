@@ -16,6 +16,9 @@ async function capitalCityCheck(server) {
     // if the answer is right, adds another point to the score of the current_game, and returns a boolean marking it as true
     // if the answer is wrong, returns a boolean marking it as false, which ends the game
 
+    //define points for correct capital city
+    const capitalCityPoints = 5
+
     const { userInputCity } = await server.body
     console.log('input city: ', userInputCity)
     const city = formatUserGameInput(userInputCity)
@@ -55,8 +58,8 @@ async function capitalCityCheck(server) {
         // increase score for correct answer
         await client.queryObject(`UPDATE current_games
                                   SET score = $1, updated_at = NOW()
-                                  WHERE username = $2;`, score + 1, user)
-        score += 1
+                                  WHERE username = $2;`, score + capitalCityPoints, user)
+        score += capitalCityPoints
     }
 
     await server.json({isCorrectCity, correctCity, score})
