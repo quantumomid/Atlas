@@ -99,3 +99,11 @@ button {
 button:disabled {
     cursor: default;
 }
+
+input:focus {
+    outline: none;
+}
+
+input, select, button, th, td {
+    font-family: 'Ubuntu', sans-serif;
+}
