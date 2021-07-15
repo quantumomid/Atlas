@@ -16,9 +16,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #00cc2c;
-    font-size: 30px;
-    min-height: 18vh;
+    background-color: #019120;
+    min-height: 10vh;
 }
 
 .app-title-banner * {
@@ -27,39 +26,44 @@ body {
 }
 
 .app-title-banner .homepage-title {
-    font-size: 65px;
+    font-size: 7.5vh;
 }
 
 .app-title-banner .slogan {
-    font-size: 25px;
-    margin-top: -10px;
+    font-size: 2.5vh;
+    margin-top: -1vh;
 }
 
 .app-nav-banners {
     display: flex;
-    padding: 3px;
+    padding: 0.5vh;
     background-color: white;
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-bottom: solid 3px #00cc2c;
-    min-height: 6.5vh;
+    border-bottom: solid 0.5vh #00cc2c;
+    min-height: 4vh;
+}
+
+.app-nav-banners li {
+    list-style-type: none;
+    margin: 0vh 1vh;
 }
 
 .app-nav-banners * {
-    margin: 0px 30px;
+    margin: 0px 2vw;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 2vh;
     color: #00cc2c;
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 0.5vh 1vh;
+    border-radius: 3vh;
 }
 
 .app-nav-banners *:hover {
     background-color: #019120;
     color: white;
-    border-radius: 20px;
+    border-radius: 3vh;
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
 
@@ -67,8 +71,8 @@ body {
     font-weight: 600;
     background-color: #019120;
     color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 0.5vh 0.5vh;
+    border-radius: 3vh;
 }
 
 .app-nav-banners button {
@@ -83,11 +87,11 @@ button {
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
-    width: 7px;
+    width: 0.1vw;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
+    border-radius: 0.1vw;
     background-color: rgba(0, 0, 0, .5);
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }

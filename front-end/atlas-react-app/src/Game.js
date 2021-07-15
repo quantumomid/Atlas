@@ -308,7 +308,7 @@ class Game extends Component {
         </div>
         <div className = 'game-container'>
         {!needStart && <section className="top-game-bar">
-            <div className = 'timer'>Time remaining
+            <div className = 'timer'>
               {/* <div>{this.state.time}</div> */}
               {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
                 <ReactCountdownClock
@@ -328,7 +328,7 @@ class Game extends Component {
               </div>}
             </div>
             {/* conditionally show flow of game as is appropriate */}
-            <div className="player-score"> Score:
+            <div className="player-score">
               <span>{score}</span>
             </div>
           </section>}
