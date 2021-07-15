@@ -18,6 +18,10 @@
     overflow: scroll;
 }
 
+.scoreboard .global-scoreboard {
+    width: 55vw;
+}
+
 .scoreboard table, .scoreboard td, .scoreboard th {
     /* border: 1px solid black; */
     text-align: left;
