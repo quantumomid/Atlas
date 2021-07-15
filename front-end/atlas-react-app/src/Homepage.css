@@ -14,11 +14,15 @@
     display: flex;
     align-content: center;
     justify-content: space-around;
-    min-width: 40vw;
     height: 60vh;
+    min-width: 40vw;
     padding: 20px;
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
+}
+
+.global-scoreboard-homepage {
+    min-width: 63vw
 }
 
 

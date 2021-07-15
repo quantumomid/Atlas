@@ -34,7 +34,7 @@ export default class globalScoresBoard extends Component{
         return (
         <div className = 'scoreboard'>
             <h2>Global Scoreboard</h2>
-            <label className = 'scoreboard-filter'>Scores since:
+            <label className='scoreboard-filter'>Scores since:
                 <select name='dateFilter' value={this.state.dateFilter} onChange={(e) => this.setState({dateFilter: e.target.value})}>
                     <option value="all">All time</option>
                     <option value="day">Last day</option>
@@ -43,7 +43,7 @@ export default class globalScoresBoard extends Component{
                     <option value="year">Last year</option>
 ]                </select>
             </label>
-            <label className = 'scoreboard-filter'>Country:
+            <label className='scoreboard-filter'>Country:
                     <select name='country' value={country} onChange={(e) => this.setState({country: e.target.value})}>
                         <option value="world">World</option>
                             {allCountries.map((country, i) => {return <option key={i} value={country}>{country}</option>})}
