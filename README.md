@@ -43,15 +43,17 @@ We also decided to change the name of a few countries to their more commonly-kno
 
 ## Backend: How we set up our backend
 
+We set up our backend in JavaScript using [Deno](https://deno.land), and specifically using Deno's [Abc](https://deno.land/x/abc@v1.3.1) framework.
+
 ### Deployment
 
-For our backend, we used heroku...........
+For our backend, we used [heroku](https://heroku.com/home) ...........
 
 ## Frontend: How we set up our frontend
 
 ### Deployment
 
-For our frontend, we used netlify...........
+For our frontend, we used [netlify](https://www.netlify.com) ...........
 
 ## Extra: What else if had more time?
 
