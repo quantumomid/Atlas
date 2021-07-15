@@ -46,6 +46,7 @@
     justify-content: space-around;
     font-family: 'Ubuntu', sans-serif;
     height: 55vh;
+    overflow-y: scroll;
 }
 
 .homepage-container .game-description ul {
@@ -81,4 +82,5 @@
     box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
                 0 1.5vh 0.5vw rgba(0,0,0,0.22);
     font-size: 1.5vmax;
+    text-align: center;
 }
