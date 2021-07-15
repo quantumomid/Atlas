@@ -39,6 +39,15 @@
     box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
                 0 1.5vh 0.5vw rgba(0,0,0,0.22);
     height: 62vh;
+    font-size: 2.1vh;
+}
+
+.register-or-scoreboard .scoreboard h2 {
+    font-size: 2.8vh;
+}
+
+.register-or-scoreboard .scoreboard select {
+    font-size: 2vh;
 }
 
 .end-game-register h2 {
@@ -163,7 +172,8 @@
     border: solid 0.4vw;
     /* padding: 15px 45px; */
     height: 21.6vh;
-    width: 10.4vw;
+    /* width: 10.4vw; */
+    width: 21.6vh;
     border-radius: 50%;
     display: flex;
     justify-content: center;
