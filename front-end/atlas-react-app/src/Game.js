@@ -23,7 +23,8 @@ class Game extends Component {
     allMatches: [],
     aiLooped: false,
     nextPlayerLooped: false,
-    correctCity: ''
+    correctCity: '',
+    flag: ''
   }
   
   state = this.initialState
@@ -117,7 +118,7 @@ class Game extends Component {
       body: JSON.stringify({userInput, letter})
     })
 
-    const {correct, lastLetter, score} = await response.json()
+    const {correct, lastLetter, score, flag} = await response.json()
     // if user input correct, returns true else returns false
     console.log('correct: ', correct)
     // console.log('lastLetter response:', lastLetter)
@@ -127,7 +128,7 @@ class Game extends Component {
 
     if (correct) {
       // only want to trigger AI turn if player was correct (otherwise ends game)
-      this.setState({letter: '✓'})
+      this.setState({letter: '✓', flag})
       this.correctTimeout = setTimeout(() => {
           this.setState({showCapitalCityQuestion: true, letter:'?'})
           this.handleRestart()
@@ -268,6 +269,26 @@ class Game extends Component {
     
     return (
       <main className = 'game-page'>
+        {needStart && <div className="start-instructions">
+          <h3>Welcome to Atlas game!</h3>
+          <p>
+            On clicking start game, the AI will provide you with a random letter. <br />
+            For ten points, you will need to <span className="instruction-correct">enter the name of a country beginning with that letter</span>. <br />
+            If you are correct, you can then <span className="instruction-correct">enter the name of that country's capital city</span> for a bonus five points, <span className="instruction-correct">or skip</span> if you aren't sure.<br />
+            The AI will then pick a country that starts with the last letter of your chosen country.<br />
+            You then guess again, for the last letter of the AI's pick.
+          </p>
+          <p>
+            Any <span className="instruction-error">incorrect answers</span>, or <span className="instruction-error">picking a country that has already been played by you or the AI</span>, will <span className="instruction-error">lead to game over!</span><br />
+            If there are no remaining countries starting with a letter, we move on to the next letter in the alphabet instead, repeating until all 201 countries have been played.<br />
+          </p>
+          <p>
+            <span className="instruction-error">Don't let the timer run out</span> or it's game over!
+          </p>
+          <h3>
+            Have fun!
+          </h3>
+        </div>}
         <div className="start-button-container">
           {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         </div>
@@ -293,19 +314,30 @@ class Game extends Component {
               </div>}
             </div>
             {/* conditionally show flow of game as is appropriate */}
-            <div className="player-score">Your score: 
-              <div>{score}</div>
+            <div className="player-score"> Score:
+              <span>{score}</span>
             </div>
           </section>}
-          {isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div className="ai-response-placeholder" />}
-          {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div className="ai-response-placeholder" />}
           { !needStart && <div className="letter-question-container">
-            {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div className="ai-response-placeholder" />}
-            {letter && !showCapitalCityQuestion ? <div>Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
-            <div className="letter">{letter}</div>
-          </div> }
-          <section>
-            {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
+            <div className="question-container">
+              {(isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion) || (letter && nextPlayerLooped && !showCapitalCityQuestion) ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
+              {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
+              {/* {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />} */}
+              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
+              </div>
+              {showCapitalCityQuestion ? 
+              <div style={{ 
+                    backgroundImage: `url(${this.state.flag})`, color:'white' }} 
+                    className="letter"
+                  >
+                    {letter}
+              </div>
+              :
+              <div className="letter">{letter}</div>
+              }
+            </div> }
+            <section>
+              {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
                 <input className="game-input-bar"
                   type = "text" 
                   placeholder = "Enter country beginning with this letter" 
@@ -313,6 +345,7 @@ class Game extends Component {
                   value={userInput} 
                   onChange ={(e) => this.handleUserInputChange(e)}
                   autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
+                  autoFocus={true}
                 />
                 <button className="game-submit"
                   type = "submit"
@@ -322,32 +355,32 @@ class Game extends Component {
                   Submit
                 </button>
               </form> }
-            {/* optional capital city question: */}
-            {showCapitalCityQuestion && <div><form className="game-input-container">
-              <input className="game-input-bar"
-                type = "text" 
-                placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
-                name="userInputCity" 
-                value={userInputCity} 
-                onChange ={(e) => this.handleUserInputChange(e)}
-                autoComplete = 'off' 
-              />
-              <button className="game-submit"
-                type = "submit"
-                onClick = {(e) => this.checkCapitalCity(e)}
-                disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
-              >
-                Submit
-              </button>
-              <button className="game-skip"
-                  onClick={() => this.handleSkip()}
+              {/* optional capital city question: */}
+              {showCapitalCityQuestion && <form className="game-input-container">
+                <input className="game-input-bar"
+                  type = "text" 
+                  placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
+                  name="userInputCity" 
+                  value={userInputCity} 
+                  onChange ={(e) => this.handleUserInputChange(e)}
+                  autoComplete = 'off'
+                  autoFocus={true}
+                />
+                <button className="game-submit"
+                  type = "submit"
+                  onClick = {(e) => this.checkCapitalCity(e)}
+                  disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
                 >
-                  Skip
-              </button>
-            </form> 
-            </div> }
-          </section>
-      </div>
+                  Submit
+                </button>
+                <button className="game-skip"
+                    onClick={() => this.handleSkip()}
+                  >
+                    Skip
+                </button>
+              </form>  }
+            </section>
+        </div>
      </main>
     )
   }

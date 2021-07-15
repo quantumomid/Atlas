@@ -13,26 +13,24 @@ body {
 .app-title-banner{
     font-family: 'Handlee', cursive;
     display:flex;
-    padding:20px;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: #00cc2c;
     font-size: 30px;
-    align-items: center;
-    flex-direction: column;
-    padding: 23px;
+    min-height: 18vh;
 }
 
 .app-title-banner * {
     text-decoration: none;
+    color: white;
 }
 
 .app-title-banner .homepage-title {
-    color: 	white;
     font-size: 65px;
 }
 
 .app-title-banner .slogan {
-    color: 	white;
     font-size: 25px;
     margin-top: -10px;
 }
@@ -43,14 +41,14 @@ body {
     background-color: white;
     justify-content: center;
     align-items: center;
+    background-color: white;
     border-bottom: solid 3px #00cc2c;
-    min-height: 38px;
+    min-height: 6.5vh;
 }
 
 .app-nav-banners li {
-    padding: 0px;
     list-style-type: none;
-    margin: 0px 50px;
+    margin: 0px 30px;
 }
 
 .app-nav-banners li * {
@@ -73,20 +71,6 @@ body {
     opacity: 0.5;
 }
 
-button{
-    cursor: pointer;
-}
-
-::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 7px;
-}
-::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, .5);
-    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-}
-
 .app-nav-banners button {
     background-color: transparent;
     border: none;
@@ -99,6 +83,26 @@ button{
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
+}
+
+.app-nav-banners li .selected-page:active {
+    opacity: 1;
+}
+
+button{
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 button:disabled {
