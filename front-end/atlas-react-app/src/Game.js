@@ -313,17 +313,17 @@ class Game extends Component {
               {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
                 <ReactCountdownClock
                 seconds={15}
-                color="#34778D"
+                color="#019120"
                 alpha={0.9}
                 size={100}
                 />
               </div>}
               {showCapitalCityQuestion && <div className = 'game-clock-container'>
                 <ReactCountdownClock
-                seconds={15}
-                color="#34778D"
-                alpha={0.9}
-                size={100}
+                  seconds={15}
+                  color="#019120"
+                  alpha={0.9}
+                  size={100}
                 />
               </div>}
             </div>

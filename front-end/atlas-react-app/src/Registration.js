@@ -68,19 +68,19 @@ class Registration extends Component {
 
     return (
       <div className='register-container'>
-      <RegisterForm
-      handleChange={(event) => this.handleChange(event)}
-      handleSubmit={(event) => this.handleSubmit(event)}
-      handleBlur={(event) => this.markAsTouched(event.target.name)}
-      touched={this.state.touched} 
-      email={email}
-      username={username}
-      password={password}
-      passwordConfirmation={passwordConfirmation}
-      country={country}
-      message = {message}
-      allCountries={allCountries}
-      />
+        <RegisterForm
+          handleChange={(event) => this.handleChange(event)}
+          handleSubmit={(event) => this.handleSubmit(event)}
+          handleBlur={(event) => this.markAsTouched(event.target.name)}
+          touched={this.state.touched} 
+          email={email}
+          username={username}
+          password={password}
+          passwordConfirmation={passwordConfirmation}
+          country={country}
+          message = {message}
+          allCountries={allCountries}
+        />
       {/* <div>{message}</div> */}
       </div>
        )

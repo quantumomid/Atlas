@@ -46,7 +46,7 @@ class Login extends Component {
     return (
       <div className='login-container'>
         <div className='login'>
-          <h1 className='title'>Sign in</h1>
+          <h1 className='title'>Log in</h1>
           <form className='login-form' onSubmit={(event) => this.handleSubmit(event)} >
             <div>Username or Email: <input className='login-input' name='usernameOrEmail' type="text" value={usernameOrEmail} onChange={(event) => this.setState({usernameOrEmail: event.target.value})} /></div>
             <div>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
