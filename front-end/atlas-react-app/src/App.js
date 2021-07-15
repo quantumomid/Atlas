@@ -9,8 +9,10 @@ import {
   Switch,
   Route,
   Link,
-  withRouter
+  withRouter,
+  NavLink
 } from "react-router-dom";
+// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 class App extends Component {
 
@@ -77,44 +79,60 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, inGame, onLogin, onRegister, inAboutus } = this.state
+    const { isLoggedIn } = this.state
     return (
         <div>
         <main>
-          <nav>
-            <ul className="app-banners">
-              <div className="app-title-banner">
-              <Link to="/"><div className="homepage-title">Atlas</div></Link>
-              <div className="slogan">Around the World in 101 Questions</div>
-              </div>
-              <ul className="app-nav-banners">
-                <li>
-                {!inGame &&
-                <Link to="/game">Game</Link>}
-                {inGame && <div className="selected-page">Game</div>}
-                </li>                
-                <li>
-                {!isLoggedIn && !onRegister &&
-                <Link to="/register">Register</Link>}
-                {!isLoggedIn && onRegister && <div className="selected-page">Register</div>}
-                </li>
-                <li>
-                {!isLoggedIn && !onLogin &&
-                <Link to="/login">Login</Link>}
-                {!isLoggedIn && onLogin && <div className="selected-page">Login</div>}
-                </li>
-                {isLoggedIn &&
-                <li>
-                  <Logout
-                  handleLogout={() => this.handleLoginAndLogout()} />
-                </li>
-                }
-                <li>
-                {!inAboutus && <Link to='/aboutus'>About us</Link>}
-                {inAboutus && <div className="selected-page">About us</div>}
-                </li>
-              </ul>
-            </ul>
+          <div className="app-title-banner">
+            <Link to="/"><div className="homepage-title">Atlas</div></Link>
+            <div className="slogan">Around the World in 101 Questions</div>
+          </div>
+          <nav className="app-nav-banners">
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/game"
+            >
+              Play
+            </NavLink>
+            {!isLoggedIn ? 
+            <>
+              <NavLink
+                className="navLink"
+                activeClassName="selected-page"
+                exact to="/register"
+              >
+                Register
+              </NavLink>
+              <NavLink
+                className="navLink"
+                activeClassName="selected-page"
+                exact to="/login"
+              >
+                Log in
+              </NavLink>
+            </> : 
+              <Logout
+                handleLogout={() => this.handleLoginAndLogout()}
+                className="navLink logoutLink"
+              >
+                Logout
+              </Logout>
+            }
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/aboutus"
+            >
+              About us
+            </NavLink>
           </nav>
           <Switch>
             <Route path="/game">
