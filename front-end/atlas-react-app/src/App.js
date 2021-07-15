@@ -9,8 +9,10 @@ import {
   Switch,
   Route,
   Link,
-  withRouter
+  withRouter,
+  NavLink
 } from "react-router-dom";
+// import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 class App extends Component {
 
@@ -81,7 +83,7 @@ class App extends Component {
     return (
         <div>
         <main>
-          <nav>
+          {/* <nav>
             <ul className="app-banners">
               <div className="app-title-banner">
               <Link to="/"><div className="homepage-title">Atlas</div></Link>
@@ -115,6 +117,47 @@ class App extends Component {
                 </li>
               </ul>
             </ul>
+          </nav> */}
+          <div className="app-title-banner">
+            <Link to="/"><div className="homepage-title">Atlas</div></Link>
+            <div className="slogan">Around the World in 101 Questions</div>
+          </div>
+          <nav>
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/game"
+            >
+              Play
+            </NavLink>
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/register"
+            >
+              Register
+            </NavLink>
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/login"
+            >
+              Login
+            </NavLink>
+            <NavLink
+              className="navLink"
+              activeClassName="selected-page"
+              exact to="/aboutus"
+            >
+              About us
+            </NavLink>
           </nav>
           <Switch>
             <Route path="/game">
