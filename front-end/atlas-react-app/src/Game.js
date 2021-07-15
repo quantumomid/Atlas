@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
+import ReactCountdownClock from 'react-countdown-clock';
 
 const timeGiven = 15
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -292,14 +293,30 @@ class Game extends Component {
           {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
         </div>
         <div className = 'game-container'>
-          {!needStart && <section className="top-game-bar">
-              <div className = 'timer'>Time remaining:
-                <div>{this.state.time}</div>
-              </div>
-              {/* conditionally show flow of game as is appropriate */}
-              <div className="player-score"> Score:
-                <span>{score}</span>
-              </div>
+        {!needStart && <section className="top-game-bar">
+            <div className = 'timer'>Time remaining
+              {/* <div>{this.state.time}</div> */}
+              {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
+                <ReactCountdownClock
+                seconds={15}
+                color="#34778D"
+                alpha={0.9}
+                size={100}
+                />
+              </div>}
+              {showCapitalCityQuestion && <div className = 'game-clock-container'>
+                <ReactCountdownClock
+                seconds={15}
+                color="#34778D"
+                alpha={0.9}
+                size={100}
+                />
+              </div>}
+            </div>
+            {/* conditionally show flow of game as is appropriate */}
+            <div className="player-score"> Score:
+              <span>{score}</span>
+            </div>
           </section>}
           { !needStart && <div className="letter-question-container">
             <div className="question-container">

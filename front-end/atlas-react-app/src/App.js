@@ -4,6 +4,7 @@ import Game from './Game';
 import RegisterPage from './RegisterPage';
 import Login from './Login';
 import Logout from './Logout';
+import Aboutus from './Aboutus'
 import {
   Switch,
   Route,
@@ -11,14 +12,14 @@ import {
   withRouter
 } from "react-router-dom";
 
-
 class App extends Component {
 
   state = {
     isLoggedIn: false,
     inGame: false,
     onRegister: false,
-    onLogin: false
+    onLogin: false,
+    inAboutus: false
   }
 
   async componentDidMount() {
@@ -51,6 +52,14 @@ class App extends Component {
     this.setState({inGame: false})
   }
 
+  setInAboutusStatus() {
+    this.setState({inAboutus: true})
+  }
+
+  clearInAboutusStatus() {
+    this.setState({inAboutus: false})
+  }
+
   setOnRegisterStatus() {
     this.setState({onRegister: true})
   }
@@ -68,7 +77,7 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, inGame, onLogin, onRegister } = this.state
+    const { isLoggedIn, inGame, onLogin, onRegister, inAboutus } = this.state
     return (
         <div>
         <main>
@@ -83,6 +92,10 @@ class App extends Component {
                 {!inGame &&
                 <Link to="/game">Game</Link>}
                 {inGame && <div className="selected-page">Game</div>}
+                </li>
+                <li>
+                {!inAboutus && <Link to='/aboutus'>About us</Link>}
+                {inAboutus && <div className="selected-page">About us</div>}
                 </li>
                 <li>
                 {!isLoggedIn && !onRegister &&
@@ -109,6 +122,12 @@ class App extends Component {
               isLoggedIn={isLoggedIn}
               setInGameStatus={() => this.setInGameStatus()}
               clearInGameStatus={() => this.clearInGameStatus()}
+              />
+            </Route>
+            <Route path='/aboutus'>
+              <Aboutus
+              setInAboutusStatus={() => this.setInAboutusStatus()}
+              clearInAboutusStatus={() => this.clearInAboutusStatus()} 
               />
             </Route>
             { !isLoggedIn &&
