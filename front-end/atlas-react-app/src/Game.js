@@ -274,7 +274,7 @@ class Game extends Component {
           <p>
             On clicking start game, the AI will provide you with a random letter. <br />
             For ten points, you will need to <span className="instruction-correct">enter the name of a country beginning with that letter</span>. <br />
-            If you are correct, you can then <span className="instruction-correct">enter the name of that country's capital city</span> for a bonus five points, or skip if you aren't sure.<br />
+            If you are correct, you can then <span className="instruction-correct">enter the name of that country's capital city</span> for a bonus five points, <span className="instruction-correct">or skip</span> if you aren't sure.<br />
             The AI will then pick a country that starts with the last letter of your chosen country.<br />
             You then guess again, for the last letter of the AI's pick.
           </p>
