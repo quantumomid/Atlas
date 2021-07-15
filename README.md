@@ -1,4 +1,4 @@
-# Atlas: Group Project
+# Atlas :earth_africa:: Group Project
 
 In the final two weeks of the Sigma Labs traning, students were assigned to various group projects, one of which was the Atlas project. The Atlas team consisted of five members: David Ingram, Guy Hotchin, Joanna Hawthorne, Michael Baugh and Omid Wakili. 
 
