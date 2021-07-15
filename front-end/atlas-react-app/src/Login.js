@@ -52,7 +52,7 @@ class Login extends Component {
             <div>Password: <input className='login-input' name='password' type="password" value={password} onChange={(event) => this.setState({password: event.target.value})} /></div>
             <button type='submit' disabled={ usernameOrEmail.length === 0 || password.length < 8 }>Login</button>
           </form>
-          <p>Haven't got an account? Sign up <Link to='/register'>here</Link>.</p>
+          <p className="register-link-message">Haven't got an account? Sign up <Link to='/register' className="register-link">here</Link>.</p>
           <div className='login-response'>{message}</div>
         </div>
       </div>
