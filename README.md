@@ -53,6 +53,8 @@ We decided to simplify our main JS file for the backend by splitting up the func
 
 For user authentication, we used a third party module, [BCrypt](https://deno.land/x/bcrypt/mod.ts), to handle the user password hashing and check it. 
 
+We used cookies in the backend for dealing with user authorisation, to keep track of currently logged in user, current games being played now, etc.
+
 ### Deployment
 
 For our backend, we used [heroku](https://heroku.com/home) ...........
