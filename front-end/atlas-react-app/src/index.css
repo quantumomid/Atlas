@@ -3,6 +3,7 @@
 body {
     margin: 0px;
 	font-family: 'Ubuntu', sans-serif;
+    background-color: whitesmoke;
 }
 
 .app-banners{
@@ -45,18 +46,13 @@ body {
     min-height: 4vh;
 }
 
-.app-nav-banners li {
-    list-style-type: none;
-    margin: 0vh 1vh;
-}
-
 .app-nav-banners * {
-    margin: 0px 2vw;
+    margin: 0px 4vw;
     text-decoration: none;
     font-size: 2vh;
     color: #00cc2c;
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
-    padding: 0.5vh 1vh;
+    padding: 1vh 2vh;
     border-radius: 3vh;
 }
 
@@ -71,7 +67,7 @@ body {
     font-weight: 600;
     background-color: #019120;
     color: white;
-    padding: 0.5vh 0.5vh;
+    padding: 1vh 2vh;
     border-radius: 3vh;
 }
 

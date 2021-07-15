@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 75vh;
+    height: 82vh;
     background-image: url(earth.png);
     background-repeat: no-repeat;
     background-position: top;
@@ -14,7 +14,7 @@
 /* styling of instructions on start page */
 .start-instructions {
     border: solid white 5px;
-    padding: 8px 30px;
+    padding: 1.1vh 2.1vw;
     margin-top: 8vh;
     text-align: center;
     width: 65%;
@@ -35,24 +35,24 @@
 
 /* styling of start button on start game page */
 .start-button-container button {
-    padding: 15px 30px;
-    font-size: 30px;
-    border: 5px solid #00cc2c;
+    padding: 1.8vh 2.1vw;
+    font-size: 3.6vh;
+    border: 0.6vh solid #00cc2c;
     background-color: #00cc2c;
     color: white;
     border-radius: 30px;
-    margin: 15px;
+    margin: 1.8vh;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 /* placement of score and timer relative */
 .top-game-bar {
-    width: 1100px;
+    width: 76vw;
     display: flex;
     justify-content: space-between;
-    margin: 20px 80px;
+    margin: 2.4vh 5.5vw;
     align-items: flex-start;
-    font-size: 20px;
+    font-size: 2.4vh;
 }
 
 /* centering time remaining element (title and seconds) ***REPLACE BY CLOCK*** */
@@ -66,14 +66,14 @@
 .player-score span {
     display: flex;
     border-radius: 50%;
-    padding: 30px;
+    padding: 3.6vh;
     background-color: orange;
     font-weight: bolder;
     color: white;
     font-family: 'Handlee', cursive;
-    font-size: 40px;
-    height: 30px;
-    width: 30px;
+    font-size: 4.9vh;
+    height: 3.65vh;
+    width: 2.1vw;
     justify-content: center;
     align-items: center;
     margin-top: 10px;   
@@ -85,18 +85,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 2.5vh;
     position: fixed;
     right: 9%;
     top: 50%;
-    width: 1200px;
+    width: 83vw;
 }
 
 /* white box around question/response */
 .question-container {
     border: solid white 5px;
-    padding: 8px 30px;
-    margin-top: -50px;
+    padding: 1vh 2.1vw;
+    margin-top: -6.1vh;
     text-align: center;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     background-color: white;
@@ -105,20 +105,20 @@
 
 /* line spacing between question and ai country */
 .ai-response, .main-question {
-    margin: 5px 0px;
+    margin: 0.7vh 0px;
 }
 
 /* actual letter displayed and circle around it, flag is circle background on capital question */
 .letter-question-container .letter {
-    font-size: 100px;
+    font-size: 13.6vh;
     border: solid 5px black;
-    height: 150px;
-    width: 150px;
+    height: 18vh;
+    width: 18vh;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 30px 0px;
+    margin:3.65vh 0px;
     background-color: white;
     background-position: center;
     background-size: cover;
@@ -137,22 +137,22 @@
     position: fixed;
     bottom: 0;
     right: 22.5%;
-    margin-bottom: 10px;
-    width: 800px;
+    margin-bottom: 1.2vh;
+    width: 55.5vw;
 }
 
 /* spacing between bar and buttons */
 .game-input-container * {
-    margin: 0px 2px;
+    margin: 0px 0.1vw;
 }
 
 /* styling of input bar */
 .game-input-container .game-input-bar {
-    padding: 10px 15px;
+    padding: 1.2vh 1vw;
     width: inherit;
-    border: solid 3px;
+    border: solid 0.3vh;
     border-radius: 25px;
-    font-size: 20px;
+    font-size: 2.4vh;
 }
 
 .game-input-container .game-input-bar:focus {
@@ -161,11 +161,11 @@
 
 /* styling of buttons */
 .game-input-container .game-submit, .game-input-container .game-skip {
-    padding: 5px 15px;
-    border: solid 3px;
+    padding: 0.6vh 1vw;
+    border: solid 0.3vh;
     border-radius: 30px;
-    font-size: 16px;
-    height: 49px;
+    font-size: 2vh;
+    height: 6vh;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
 }
 

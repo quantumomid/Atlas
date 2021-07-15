@@ -49,7 +49,7 @@ export default class globalScoresBoard extends Component{
                             {allCountries.map((country, i) => {return <option key={i} value={country}>{country}</option>})}
                     </select>
             </label>
-            <div>
+            <div className='global-scoreboard'>
             {gameData.length === 0 ? <p>No global scores</p> : <ScoreBoard gameData={gameData} />}
             </div>
         </div>
