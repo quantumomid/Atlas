@@ -66,7 +66,6 @@ const registerUser = async (server) => {
     WHERE country_name = $1`,
     country)).rows
   country = countryExists ? country : null
-  console.log(country)
   
   try {
     await signUpValidator(email, username, password, passwordConfirmation)

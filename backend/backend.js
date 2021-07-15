@@ -45,7 +45,7 @@ app
     .post('/game/new', startGameHandler)
     .post('/game', updateGameHandler)
     .delete('/sessions', logoutHandler)
-    .get('/globalscores/:dateFilter', globalScoresHandler)
+    .get('/globalscores/:dateFilter/:country', globalScoresHandler)
     .get('/personaltopscores/:dateFilter', personalTopScoresHandler)
     .post('/game/ai', aiTurnHandler)
     .post('/endgamedata', endgameDataHandler)
