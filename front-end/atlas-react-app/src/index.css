@@ -103,3 +103,7 @@ input:focus, select:focus {
 input, select, button, th, td {
     font-family: 'Ubuntu', sans-serif;
 }
+
+button:active {
+	transform: scale(0.95);
+}
