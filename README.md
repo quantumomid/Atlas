@@ -6,7 +6,7 @@ Our motivation behind the project was to build an enjoyable game, which would ch
 
 ### How does the game work?
 
-In its simplest form, between two players, player 1 is presented with a random letter of the alphabet. PLayer 1 has to name a country beginning with that letter. Player 2, in turn, has to name a country, which begins with the final letter of player 1's response. The two players then continue, in turn, each one naming another country beginning with the other's last letter. Failure to name a country results in loss of a player. 
+In its simplest form, between two players, player 1 is presented with a random letter of the alphabet. Player 1 has to name a country beginning with that letter. Player 2, in turn, has to name a country, which begins with the final letter of player 1's response. The two players then continue, in turn, each one naming another country beginning with the other's last letter. Failure to name a country results in loss of a player. 
 
 In our first implementation, the user would be playing against the computer. The user would gain points for every correct country they can name, and they would lose if they fail to do so. The user could play as a guest, or sign up and login. As a logged in user, the player can keep track of their previous scores in a personal scoreboard. There is also a global scoreboard keeping track of the scores of all players on the site. 
 
@@ -16,11 +16,11 @@ Some design decisions with regards to the game play:
 - Timed turns: the user has to return a response within a specified (i.e. 15 seconds) time period
 - Scoring: 10 points for naming a country correctly and 5 points for naming the capital city correctly
 - All countries named: if all countries have been named then the game finished and the user scores are tallied up
-- No choices left for letter: if all countries beginning with a specific letter have been named, then the user presented with such a letter has to instead name a country beginning with the next letter of the alphabet following said letter
+- No choices left for letter: if all countries beginning with a specific letter have been named, the next letter alphabetically is presented instead as the next question
 - Incorrect naming of country or capital city (including misspellings) results in loss of game
 - Played countries: at the end of the game, the user can view the list of countries that were played during the game
-- Possible countries: at the end of the game, the user can view a list of possible countries which they could have played
-- Correct capital city: at the end of the game, a user who incorrectly named a capital city and view the correct response
+- Possible countries: at the end of the game, the user can view a list of possible countries which they could have played for a letter if they got it wrong
+- Correct capital city: at the end of the game, a user who incorrectly named a capital city can view the correct response
 
 
 ## Data Architecture: How we set up our database
