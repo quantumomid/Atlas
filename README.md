@@ -47,13 +47,25 @@ For our database, we used [ElephantSQL](https://www.elephantsql.com/) ..........
 
 ## Backend: How we set up our backend
 
-We set up our backend in JavaScript using [Deno](https://deno.land), and specifically using Deno's [Abc](https://deno.land/x/abc@v1.3.1) framework.
+We set up our backend in JavaScript (JS) using [Deno](https://deno.land), and specifically using Deno's [Abc](https://deno.land/x/abc@v1.3.1) framework.
+
+We decided to simplify our main JS file for the backend by splitting up the functions for each endpoint into its own handler. We also took out certain helper functions into their own JS files.
+
+For user authentication, we used a third party module, [BCrypt](https://deno.land/x/bcrypt/mod.ts), to handle the user password hashing and check it. 
 
 ### Deployment
 
 For our backend, we used [heroku](https://heroku.com/home) ...........
 
 ## Frontend: How we set up our frontend
+
+For our frontend, we used the [React](https://reactjs.org) library and split our main App JS file into separate components to handle different pages, i.e. login, register, homepage, etc.
+
+Some of the packages we used:
+- React [Router](https://reactrouter.com/web/guides/quick-start): for handling the routing to the different pages
+- Countdown [clock](https://www.npmjs.com/package/react-countdown-clock): for providing a visual animation to the time countdown during game play
+- [Confetti](https://www.npmjs.com/package/react-dom-confetti) animations: for displaying a visual animation whenever the user correctly names a country or its capital city
+
 
 ### Deployment
 
