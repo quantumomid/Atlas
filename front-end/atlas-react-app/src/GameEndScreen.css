@@ -105,10 +105,8 @@
 
 .end-game-register select{
     display: flex;
-    /* width: 20vw;
-    height: 4.3vh; */
-    width: 31vw;
-    height: 4vh;
+    width: 32vw;
+    height: 5.5vh;
     background-color: #eee;
     border: none;
     border-radius: 2vw;
@@ -166,7 +164,7 @@
     box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
                 0 1.5vh 0.5vw rgba(0,0,0,0.22);
     height: 62vh;
-    padding: 3vh 2vw;
+    padding: 3vh 0.75vw;
 }
 
 .score-and-replay .final-score {
@@ -181,7 +179,7 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    margin: 2.1vh 1vw;
+    margin: 2.2vh 1vw;
 }
 
 /* .score-and-replay button {
@@ -212,7 +210,7 @@
     box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
                 0 1.5vh 0.5vw rgba(0,0,0,0.22);
     height: 62vh;
-    padding: 3vh 2vw;
+    padding: 3vh 1vw;
 }
 
 .countries-played-and-could-container h2 {
@@ -228,16 +226,17 @@
 
 .countries-played-and-could-container .country-list {
     height: 17.5vh;
-    width: 18vw;
+    width: 22vw;
     /* border: 1px solid black; */
     list-style-type: none;
-    padding: 0;
+    padding-left: 1vw;
+    padding-right: 1vw;
     overflow: scroll;
 }
 
 .countries-played-and-could-container .country-list li {
     line-height: 4vh;
-    padding-left: 0.4vw;
+    padding-left: 1vw;
     font-size: 2.3vh;
 }
 
@@ -258,6 +257,8 @@
 }
 
 .score-and-replay h2 {
+    margin-bottom: 1vh;
+    font-size: 3.5vh;
     color:hsl(133, 100%, 40%);
 }
 
@@ -265,11 +266,6 @@
     margin: 0.4vw;
     font-weight: 500;
     color: black;
-}
-
-.score-and-replay h2 {
-    margin-bottom: 0;
-    font-size: 3.5vh;
 }
 
 .end-game-register .registerationlabel, .end-game-register .buttonform, .end-game-register .signin-link-message {
