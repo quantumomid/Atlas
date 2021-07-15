@@ -4,10 +4,6 @@ import { isEmail } from "https://deno.land/x/isemail/mod.ts";
 import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
 import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
 
 // const db = new DB('./atlas.db')
 
@@ -49,7 +45,7 @@ async function signUpValidator(email, username, password, passwordConfirmation) 
   passwordValidator(password, passwordConfirmation)
 }
 
-const registerUser = async (server) => {
+const registerUser = async (server, client) => {
   
   //retrieve typed details from form elements from front-end
   let { email, username, country, password, passwordConfirmation, saveScore } = await server.body;

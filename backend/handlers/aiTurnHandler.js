@@ -1,14 +1,8 @@
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-import { config } from 'https://deno.land/x/dotenv/mod.ts'
+
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
 
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
-
-async function letterSolutionChecker(lastLetter, countryArray) {
+async function letterSolutionChecker(lastLetter, countryArray, client) {
     let timesTried = 0
     let foundSolution = false
     const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
@@ -52,13 +46,13 @@ async function letterSolutionChecker(lastLetter, countryArray) {
     }
 }
 
-async function aiTurnHandler(server) {
+async function aiTurnHandler(server, client) {
     let { lastLetter } = await server.body
     const savedLastLetter = lastLetter
     // console.log('AI turn triggered with ', lastLetter)
 
     // finds user, prioritising registered log in over temporary users
-    const user = await getUserFromCookies(server)
+    const user = await getUserFromCookies(server, client)
     if (!user) throw new Error("Game started without user")
 
     // get current countries that have been played
@@ -68,7 +62,7 @@ async function aiTurnHandler(server) {
 
     let filteredAiCountries
     // checks if there are any solutions to this letter
-    [lastLetter, filteredAiCountries] = await letterSolutionChecker(lastLetter, countryArray)
+    [lastLetter, filteredAiCountries] = await letterSolutionChecker(lastLetter, countryArray, client)
 
     // if (!foundSolution) still, game ends
     if (!lastLetter) {
@@ -95,7 +89,7 @@ async function aiTurnHandler(server) {
         lastLetter = aiCountryChoice.slice(-1)
 
          // checks if there are any solutions to this letter before we send it to player
-        let [userLetter] = await letterSolutionChecker(lastLetter, countryArray)
+        let [userLetter] = await letterSolutionChecker(lastLetter, countryArray, client)
         console.log('userLetter', userLetter)
         // if (!foundSolution) still, game ends
         if (!userLetter) {    

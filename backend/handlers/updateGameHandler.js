@@ -4,14 +4,9 @@ import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
 import formatUserGameInput from './helperFunctions/formatUserGameInput.js'
 
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
-
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
 
 //helper function to input country played into countries_played
-async function insertToTable(countryArray, userInput, user) {
+async function insertToTable(countryArray, userInput, user, client) {
     countryArray.push(userInput)
 
     // re-stringify and update current_game table
@@ -21,7 +16,7 @@ async function insertToTable(countryArray, userInput, user) {
 
 }
 
-const updateGameHandler = async (server) => {
+const updateGameHandler = async (server, client) => {
     // takes user country input
     // updates entry in current_games table
     // checks validity of answer
@@ -32,7 +27,7 @@ const updateGameHandler = async (server) => {
     const countryPoints = 10
 
     // finds user, prioritising registered log in over temporary users
-    let user = await getUserFromCookies(server)
+    let user = await getUserFromCookies(server, client)
     if (!user) throw new Error ('No user detected')
 
     // backend timer to prevent them hacking the frontend clock to gain more time
@@ -59,20 +54,20 @@ const updateGameHandler = async (server) => {
 
     //MAYBE MAKE A HELPER FUNCTION?? CALLED AGAIN IN GETMATCHESFORLETTER
     // find already played countries in this game
-    const countryArray = await getCountryArray(user)
+    const countryArray = await getCountryArray(user, client)
 
     let flag // initialise flag as undefined for later
     
     if (countryArray.includes(userInput)) {
         // if country has already been used this game, end the game
 
-        await insertToTable(countryArray, userInput, user)
+        await insertToTable(countryArray, userInput, user, client)
         console.log('this country has been used, ending game')
         const correct = false
         await server.json({correct, score})
 
     } else {
-        await insertToTable(countryArray, userInput, user)
+        await insertToTable(countryArray, userInput, user, client)
         // check correctness of suggested country answer (disregarding case)
         console.log('userInput: ', userInput.toLowerCase(), 'for letter: ', letter)
         const [matches] = (await client.queryArray(`SELECT country_name 
