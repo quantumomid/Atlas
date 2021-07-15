@@ -120,3 +120,25 @@
     height: 30px;
 
 }
+
+.signin-link-message {
+    color: rgb(94, 93, 93);
+}
+
+.signin-link {
+    color: hsl(133, 100%, 40%);
+    text-decoration: none;
+}
+
+.signin-link:hover {
+    color: hsl(133, 100%, 26%);
+    text-decoration: underline;
+}
+
+.signin-link:active {
+    opacity: 0.5;
+}
+
+.end-game-register .signin-link-message {
+    padding-bottom: 15px;
+}
