@@ -27,7 +27,19 @@ Some design decisions with regards to the game play:
 
 In the first few days of the project, we began by setting up our database using SQLite due to our better understanding of the library. However, following some well-recieved feedback from our coach, the team then swiftly moved on to using PostgreSQL instead. This was, in part, to avoid any later complications that could have resulted by switching from SQLite to PostgreSQL.
 
-When it came to the data for the countries and their capital cities, we decided to use the [countries-now-space](https://countriesnow.space) API.
+In our database schema, we decided on using five tables:
+-countries
+-users
+-sessions
+-current_games
+-finished_games
+
+### Countries data
+When it came to the data for all of the countries and their capital cities, we decided to use the [countries-now-space](https://countriesnow.space) API. This API was chosen because it provided more commonly known colloquial names of the countries, instead of their strictly official names, which many English speaking users may not be aware of. 
+
+One of the issues that the team had to address was whether to include all countries included in the API, such as Greenland, the Réunion island, etc. We decided to use the United Nations [member states](https://www.un.org/en/about-us/member-states) as a guide to deciding which countries to include. 
+
+We also decided to change the name of a few countries to their more commonly-known or most-latest accepted names, i.e. North Macedonia (insead of Macedonia), or Palestine (instead of Palestinian Territory).
 
 ## Backend: How we set up our backend
 
