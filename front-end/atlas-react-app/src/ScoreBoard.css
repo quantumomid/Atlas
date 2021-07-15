@@ -70,7 +70,7 @@
     background-color: #f3f3f3;
 }
 
-.scoreboard label {
+/* .scoreboard label {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,5 +80,16 @@
 
 .scoreboard label select{
  width: 10vw;
- margin-left: 0.7vw;
+ /* margin-left: 0.7vw; */
+ /* margin-left: 0; 
+ margin: 10vw 0;
+} */
+
+.scoreboard label, .scoreboard select {
+    margin: 1vh 1vw;
 }
+
+.scoreboard .global-scoreboard-filters-box {
+    display: flex;
+}
+
