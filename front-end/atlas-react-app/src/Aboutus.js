@@ -19,9 +19,9 @@ const memberDataObject = {
     guy: {
         fullName: 'Guy Hotchin',
         image: guyimg,
-        description: 'Helloing...'.repeat(30),
-        linkedIn: 'htteps.s.s.s',
-        github: 'https://github.com/Dingram23'
+        description: "After studying a masters degree in aeronautical engineering from Imperial College London I decided on a change of career into web based software development. This removed the physical bounds imposed by mechanical based engineering. Sigma labs has given me the opportunity to develop skills in Javascript, Html and Css which I look foreward to applying on many future projects.",
+        linkedIn: 'https://uk.linkedin.com/in/guy-hotchin-509742130',
+        github: 'https://github.com/gah19'
     },
     joanna: {
         fullName: 'Joanna Hawthorne',
