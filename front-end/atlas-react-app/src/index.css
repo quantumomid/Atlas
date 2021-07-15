@@ -46,12 +46,8 @@ body {
     min-height: 6.5vh;
 }
 
-.app-nav-banners li {
-    list-style-type: none;
+.app-nav-banners * {
     margin: 0px 30px;
-}
-
-.app-nav-banners li * {
     text-decoration: none;
     font-size: 16px;
     color: #00cc2c;
@@ -60,24 +56,14 @@ body {
     border-radius: 20px;
 }
 
-.app-nav-banners li *:hover {
+.app-nav-banners *:hover {
     background-color: #019120;
     color: white;
     border-radius: 20px;
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
 
-.app-nav-banners li *:active {
-    opacity: 0.5;
-}
-
-.app-nav-banners button {
-    background-color: transparent;
-    border: none;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-.app-nav-banners li .selected-page {
+.app-nav-banners .selected-page {
     font-weight: 600;
     background-color: #019120;
     color: white;
@@ -85,11 +71,12 @@ body {
     border-radius: 20px;
 }
 
-.app-nav-banners li .selected-page:active {
-    opacity: 1;
+.app-nav-banners button {
+    border: none;
+    background-color: inherit;
 }
 
-button{
+button {
     cursor: pointer;
     font-family: 'Ubuntu', sans-serif;
 }

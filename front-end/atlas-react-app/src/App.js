@@ -79,50 +79,15 @@ class App extends Component {
   }
 
   render() {
-    const { isLoggedIn, inGame, onLogin, onRegister, inAboutus } = this.state
+    const { isLoggedIn } = this.state
     return (
         <div>
         <main>
-          {/* <nav>
-            <ul className="app-banners">
-              <div className="app-title-banner">
-              <Link to="/"><div className="homepage-title">Atlas</div></Link>
-              <div className="slogan">Around the World in 101 Questions</div>
-              </div>
-              <ul className="app-nav-banners">
-                <li>
-                {!inGame &&
-                <Link to="/game">Game</Link>}
-                {inGame && <div className="selected-page">Game</div>}
-                </li>                
-                <li>
-                {!isLoggedIn && !onRegister &&
-                <Link to="/register">Register</Link>}
-                {!isLoggedIn && onRegister && <div className="selected-page">Register</div>}
-                </li>
-                <li>
-                {!isLoggedIn && !onLogin &&
-                <Link to="/login">Login</Link>}
-                {!isLoggedIn && onLogin && <div className="selected-page">Login</div>}
-                </li>
-                {isLoggedIn &&
-                <li>
-                  <Logout
-                  handleLogout={() => this.handleLoginAndLogout()} />
-                </li>
-                }
-                <li>
-                {!inAboutus && <Link to='/aboutus'>About us</Link>}
-                {inAboutus && <div className="selected-page">About us</div>}
-                </li>
-              </ul>
-            </ul>
-          </nav> */}
           <div className="app-title-banner">
             <Link to="/"><div className="homepage-title">Atlas</div></Link>
             <div className="slogan">Around the World in 101 Questions</div>
           </div>
-          <nav>
+          <nav className="app-nav-banners">
             <NavLink
               className="navLink"
               activeClassName="selected-page"
@@ -137,7 +102,8 @@ class App extends Component {
             >
               Play
             </NavLink>
-            {!isLoggedIn ? <>
+            {!isLoggedIn ? 
+            <>
               <NavLink
                 className="navLink"
                 activeClassName="selected-page"
@@ -155,7 +121,7 @@ class App extends Component {
             </> : 
               <Logout
                 handleLogout={() => this.handleLoginAndLogout()}
-                className="navLink"
+                className="navLink logoutLink"
               >
                 Logout
               </Logout>
