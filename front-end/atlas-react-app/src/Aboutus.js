@@ -33,7 +33,7 @@ const memberDataObject = {
     michael: {
         fullName: 'Michael Baugh',
         image: michaelimg,
-        description: 'Helloing...'.repeat(30),
+        description: 'I am a recent BS Mathematics Graduate from the University of Bristol, who is always looking for opportunities to aid my personal development and up-skill. I love getting to the heart of complex problems and finding solutions. Since joining Sigma Labs I have loved coding everyday and learning new technologies and am looking forward to using these new skills in industry. In my spare time I enjoy playing chess and doing quizzes.' ,
         linkedIn: 'https://www.linkedin.com/in/michael-baugh-90126a4b/',
         github: 'https://github.com/mbaugh99'
     },
