@@ -26,7 +26,7 @@ const memberDataObject = {
     joanna: {
         fullName: 'Joanna Hawthorne',
         image: joannaimg,
-        description: 'Helloing...'.repeat(30),
+        description: "Hello! My name is Jo. I studied BA Japanese and Linguistics at SOAS, University of London. After graduating, I decided to take on coding as a hobby and immediately fell in love with it! I've studied JavaScript, HTML, CSS, SQL, and Data Science as part of the Sigma Labs Graduate Program, and am very much looking forward to a career in tech!",
         linkedIn: 'https://www.linkedin.com/in/joanna-hawthorne-9685921b1/',
         github: 'https://github.com/joannah62'
     },
