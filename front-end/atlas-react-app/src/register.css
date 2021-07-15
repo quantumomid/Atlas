@@ -138,3 +138,7 @@
 .signin-link:active {
     opacity: 0.5;
 }
+
+.end-game-register .signin-link-message {
+    padding-bottom: 15px;
+}
