@@ -51,7 +51,7 @@ We set up our backend in JavaScript (JS) using [Deno](https://deno.land), and sp
 
 We decided to simplify our main JS file for the backend by splitting up the functions for each endpoint into its own handler. We also took out certain helper functions into their own JS files.
 
-For user authentication, we used a third party module, [BCrypt](https://deno.land/x/bcrypt/mod.ts), to handle the user password hashing and check it. 
+For user authentication, we used a third party module, [BCrypt](https://deno.land/x/bcrypt/mod.ts), to handle the user password hashing and for checking the password. 
 
 We used cookies in the backend for dealing with user authorisation, to keep track of currently logged in user, current games being played now, etc.
 
