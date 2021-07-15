@@ -12,7 +12,7 @@ const memberDataObject = {
     david: {
         fullName: 'David Ingram',
         image: davidimg,
-        description: 'Doctoral (PhD) graduate in Physics from UCL. Fan of Python (Pandas, NumPy, Matplotlib, Seaborn), full stack Javascript, data science/visualisation (SQL), and machine learning. Looking for an opportunity where I can use my technical and analytical expertise to help solve a variety of complex problems, as well as challenge myself to learn and develop new skills. ',
+        description: "Doctoral (PhD) graduate in Physics from UCL. Big fan of Python (Pandas, NumPy, Matplotlib, Seaborn), full stack Javascript, data science/visualisation (SQL), and machine learning. I'm looking for an opportunity where I can use my technical and analytical expertise to help solve a variety of complex problems, as well as challenge myself to keep learning and developing new skills.",
         linkedIn: 'https://uk.linkedin.com/in/david-ingram-2984139b',
         github: 'https://github.com/Dingram23'
     },
