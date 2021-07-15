@@ -42,7 +42,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-bottom: solid 0.5vh #00cc2c;
+    border-bottom: solid 0.5vh #019120;
     min-height: 4vh;
 }
 
@@ -50,7 +50,7 @@ body {
     margin: 0px 4vw;
     text-decoration: none;
     font-size: 2vh;
-    color: #00cc2c;
+    color: hsl(133, 100%, 40%);
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
     padding: 1vh 2vh;
     border-radius: 3vh;
