@@ -16,7 +16,6 @@
 .scoreboard div {
     height: 43vh;
     overflow: scroll;
-    width: 55vw;
 }
 
 .scoreboard table, .scoreboard td, .scoreboard th {
@@ -29,9 +28,7 @@
     white-space: nowrap;
     border-spacing: 0;
     border-collapse: separate;
-    width: 21vw;
     position: relative;
-
     /* border-collapse: collapse; */
     margin: 3vh 0;
     font-size: 0.9em;
