@@ -62,7 +62,7 @@
 }
 
 .scoreboard tbody tr {
-    border-bottom: 0.1vh solid #dddddd;
+    border-bottom: 0.1vh solid hsl(130, 30%, 96%);
 }
 
 .scoreboard tbody tr:nth-of-type(even) {
@@ -71,7 +71,7 @@
 
 .scoreboard label, .scoreboard select {
     margin: 1vh 1vw;
-    font-size: 1vmax;
+    font-size: 1.1vmax;
 }
 
 .scoreboard h2 {
@@ -85,5 +85,16 @@
 .scoreboard .global-scoreboard-filters-box {
     display: flex;
     max-height: 7.5vh;
+    margin-bottom: 2vh;
 }
 
+.scoreboard .scoreboard-filter {
+    margin-bottom: 2vh;
+}
+
+.scoreboard .global-scoreboard-filters-box select, .scoreboard .scoreboard-filter select {
+    border-radius: 1vw;
+    padding: 0.5vw 0.5vh;
+    font-size: 1vmax;
+    border: solid 0.1vmax rgb(70, 69, 69);
+}

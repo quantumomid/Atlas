@@ -84,6 +84,7 @@ button {
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 0.1vw;
+    height: 0.1vw;
 }
 
 ::-webkit-scrollbar-thumb {
