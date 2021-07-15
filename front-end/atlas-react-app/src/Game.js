@@ -345,7 +345,7 @@ class Game extends Component {
                   value={userInput} 
                   onChange ={(e) => this.handleUserInputChange(e)}
                   autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
-                  autoFocus="true"
+                  autoFocus={true}
                 />
                 <button className="game-submit"
                   type = "submit"
@@ -364,7 +364,7 @@ class Game extends Component {
                   value={userInputCity} 
                   onChange ={(e) => this.handleUserInputChange(e)}
                   autoComplete = 'off'
-                  autoFocus="true"
+                  autoFocus={true}
                 />
                 <button className="game-submit"
                   type = "submit"
