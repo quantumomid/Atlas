@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 75vh;
+    height: 82vh;
     background-image: url(earth.png);
     background-color: whitesmoke;
     background-position: top;
@@ -16,7 +16,7 @@
     justify-content: space-around;
     min-width: 40vw;
     height: 60vh;
-    padding: 20px;
+    padding: 2.5vh;
     margin: 0px;
     font-family: 'Montserrat', sans-serif;
 }
@@ -24,7 +24,7 @@
 
 .homepage-container .scoreboard{
     background-color: #fff;
-	border-radius: 10px;
+	border-radius: 2vh;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
 }
