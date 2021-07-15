@@ -2,9 +2,23 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 import ReactCountdownClock from 'react-countdown-clock';
+import Confetti from 'react-dom-confetti';
 
 const timeGiven = 15
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+const confettiConfig = {
+  angle: 90,
+  spread: 360,
+  startVelocity: 40,
+  elementCount: 70,
+  dragFriction: 0.12,
+  duration: 3000,
+  stagger: 3,
+  width: "10px",
+  height: "10px",
+  perspective: "500px",
+  colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
 
 class Game extends Component {  
   
@@ -24,7 +38,7 @@ class Game extends Component {
     aiLooped: false,
     nextPlayerLooped: false,
     correctCity: '',
-    flag: ''
+    flag: '',
   }
   
   state = this.initialState
@@ -325,6 +339,7 @@ class Game extends Component {
               {/* {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />} */}
               {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
               </div>
+              <Confetti active={ letter === '✓' } config={ confettiConfig }/>
               {showCapitalCityQuestion ? 
               <div style={{ 
                     backgroundImage: `url(${this.state.flag})`, color:'white' }} 
