@@ -1,8 +1,8 @@
 .scoreboard{
     display: flex;
-    border: solid white 5px;
-    padding: 20px;
-    margin: 0px 30px;
+    border: solid white 0.7vh;
+    padding: 2.4vh;
+    margin: 0px 2.1vw;
     flex-direction: column;
     align-items: center;
     font-family: 'Montserrat', sans-serif;
@@ -14,7 +14,7 @@
 }
 
 .scoreboard div {
-    height: 350px;
+    height: 43vh;
     overflow: scroll;
 }
 
@@ -28,18 +28,18 @@
     white-space: nowrap;
     border-spacing: 0;
     border-collapse: separate;
-    width: 300px;
+    width: 21vw;
     position: relative;
 
     /* border-collapse: collapse; */
-    margin: 25px 0;
+    margin: 3vh 0;
     font-size: 0.9em;
     font-family: sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .scoreboard table td, .scoreboard table th {
-    padding: 10px 40px;
+    padding: 1.2vh 2.8vw;
     text-align: center;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .scoreboard thead {
-    border: 1px solid black;
+    border: 0.1vh solid black;
 }
 
 .scoreboard thead tr {
@@ -61,7 +61,7 @@
 }
 
 .scoreboard tbody tr {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 0.1vh solid #dddddd;
 }
 
 .scoreboard tbody tr:nth-of-type(even) {
@@ -72,11 +72,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 1.2vh;
     width: 18vw
 }
 
 .scoreboard label select{
  width: 10vw;
- margin-left: 10px;
+ margin-left: 0.7vw;
 }

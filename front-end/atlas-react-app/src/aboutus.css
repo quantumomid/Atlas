@@ -48,7 +48,7 @@
 
 .whole-team-container article img{
     /* width: 20vw; */
-    width: 200px;
+    width: 14vw;
     cursor: pointer;
     border-radius: 80px;
     height: 35vh;
@@ -61,7 +61,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0px 0px 0px;
+    padding: 1.4vh 0px 0px 0px;
     height: 82vh;
     /* border: solid gold 5px; */
     background-image: url(earth.png);
@@ -99,18 +99,18 @@
     align-self: center;
     width: fit-content;
     border-radius: 20px;
-	border: 1px solid hsl(133, 100%, 40%);
+	border: 0.1vh solid hsl(133, 100%, 40%);
 	background-color: hsl(133, 100%, 40%);
 	color: #FFFFFF;
-	font-size: 16px;
+	font-size: 2vh;
 	font-weight: bold;
-	padding: 10px 35px;
-	letter-spacing: 1px;
+	padding: 1.2vh 2.4vw;
+	letter-spacing: 0.07vw;
 }
 
 .overall-member-container article img{
     /* width: 10vw; */
-    width: 350px;
+    width: 24vw;
     cursor: pointer;
     /* border-radius: 100px; */
     height: 50vh;
@@ -123,10 +123,10 @@
     flex-direction: column;
     align-items: center;
     /* border: solid gold 5px; */
-    padding: 15px;
+    padding: 2vh 1vw;
     background-color: #fff;
 	border-radius: 100px;
-    margin-bottom: 50px;
+    margin-bottom: 6.8vh;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
     /* width: 150px; */
