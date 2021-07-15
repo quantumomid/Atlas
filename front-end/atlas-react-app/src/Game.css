@@ -166,16 +166,17 @@
     border-radius: 30px;
     font-size: 16px;
     height: 49px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
 }
 
 .game-input-container .game-skip {
-    background-color: rgb(240, 104, 104);
-    border: solid 3px rgb(167, 53, 53);
+    background-color: rgb(231, 50, 73);
+    border: none;
     color: white;
 }
 
 .game-input-container .game-submit {
     background-color: #00cc2c;
-    border: solid 3px #009420;
+    border: none;
     color: white;
 }

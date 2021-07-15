@@ -92,7 +92,7 @@ function RegisterForm(props){
                 >
                 Sign-up
                 </button>}
-                <p className="signin-link-message">Already got an account? Sign in <Link to='/login' className="signin-link">here</Link>.</p>
+                <p className="signin-link-message">Already got an account? Log in <Link to='/login' className="signin-link">here</Link>.</p>
             </form>
             </div>
     )
