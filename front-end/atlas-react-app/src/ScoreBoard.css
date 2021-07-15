@@ -10,7 +10,7 @@
 }
 
 .scoreboard h2 {
-    color: #009879;
+    color: hsl(133, 100%, 40%);
 }
 
 .scoreboard div {
@@ -48,7 +48,7 @@
 .scoreboard th {
     position: sticky;
     top: 0px;
-    background-color:#009879;
+    background-color:hsl(133, 100%, 40%);
     /* border: 1px solid black; */
 }
 
@@ -57,7 +57,7 @@
 }
 
 .scoreboard thead tr {
-    background-color: #009879;
+    background-color: hsl(133, 100%, 40%);
     color: #ffffff;
     text-align: left;
 }
