@@ -50,7 +50,7 @@ body {
     margin: 0px 4vw;
     text-decoration: none;
     font-size: 2vh;
-    color: hsl(133, 100%, 40%);
+    color: hsl(133, 100%, 26%);
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
     padding: 1vh 2vh;
     border-radius: 3vh;
