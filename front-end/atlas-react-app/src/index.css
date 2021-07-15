@@ -100,7 +100,7 @@ input:focus, select:focus {
     outline: none;
 }
 
-input, select, button, th, td {
+input, select, button, th, td, label, h2 {
     font-family: 'Ubuntu', sans-serif;
 }
 
