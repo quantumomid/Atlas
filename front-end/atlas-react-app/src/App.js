@@ -137,20 +137,29 @@ class App extends Component {
             >
               Play
             </NavLink>
-            <NavLink
-              className="navLink"
-              activeClassName="selected-page"
-              exact to="/register"
-            >
-              Register
-            </NavLink>
-            <NavLink
-              className="navLink"
-              activeClassName="selected-page"
-              exact to="/login"
-            >
-              Login
-            </NavLink>
+            {!isLoggedIn ? <>
+              <NavLink
+                className="navLink"
+                activeClassName="selected-page"
+                exact to="/register"
+              >
+                Register
+              </NavLink>
+              <NavLink
+                className="navLink"
+                activeClassName="selected-page"
+                exact to="/login"
+              >
+                Log in
+              </NavLink>
+            </> : 
+              <Logout
+                handleLogout={() => this.handleLoginAndLogout()}
+                className="navLink"
+              >
+                Logout
+              </Logout>
+            }
             <NavLink
               className="navLink"
               activeClassName="selected-page"
