@@ -9,6 +9,7 @@
     background-position: top;
     background-size: 100%;
     background-repeat: no-repeat;
+    /* height: 75vh; */
 }
 
 .overall-container h1{
@@ -26,41 +27,42 @@
 .whole-team-container{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    width: 70vw;
+    justify-content:space-between;
+    width: 90vw;
     /* border: solid gold 5px; */
 }
 
-article{
+.whole-team-container article{
     display: flex;
     flex-direction: column;
     align-items: center;
     /* border: solid gold 5px; */
     padding: 15px;
     background-color: #fff;
-	border-radius: 10px;
+	border-radius: 80px;
     margin-bottom: 50px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
-    width: 150px;
+    /* width: 20vw; */
 }
 
-article img{
+.whole-team-container article img{
     /* width: 20vw; */
-    width: 150px;
+    width: 200px;
     cursor: pointer;
-    border-radius: 100px;
-    height: 30vh;
+    border-radius: 80px;
+    height: 35vh;
     background-position: center;
     object-fit: cover;
 }
 
+/* Indiviual Member CSS */
 .overall-member-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 96vh;
+    padding: 20px 0px 0px 0px;
+    /* height: 96vh; */
     /* border: solid gold 5px; */
     background-image: url(earth.png);
     background-color: whitesmoke;
@@ -68,16 +70,11 @@ article img{
     background-size: 100%;
     background-repeat: no-repeat;
 }
-.member-container{
-    display: flex;
-    align-self: center;
-    height: fit-content;
-    /* border: solid gold 5px; */
-    margin-top: 40px;
-}
+
 .overall-member-container .full-name{
     font-size: 40px;
     color:hsl(133, 100%, 40%);
+    margin: 0px;
 
 }
 .member-profile{
@@ -110,3 +107,27 @@ article img{
 	padding: 10px 35px;
 	letter-spacing: 1px;
 }
+
+.overall-member-container article img{
+    /* width: 10vw; */
+    width: 350px;
+    cursor: pointer;
+    border-radius: 100px;
+    height: 50vh;
+    background-position: center;
+    object-fit: cover;
+}
+.overall-member-container article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: solid gold 5px; */
+    padding: 15px;
+    background-color: #fff;
+	border-radius: 100px;
+    margin-bottom: 50px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+    /* width: 150px; */
+}
+

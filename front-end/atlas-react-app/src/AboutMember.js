@@ -12,7 +12,7 @@ export default function AboutMember(props){
                         <p>View <a href={props.memberData.github}>github</a> profile</p>
                     </div>
                 </div>
-                <button onClick={() => props.handleReset()}>Return back</button>
+                <button onClick={() => props.handleReset()}>Back</button>
             </article>
         </div>
     )

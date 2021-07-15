@@ -87,16 +87,12 @@ class App extends Component {
               <Link to="/"><div className="homepage-title">Atlas</div></Link>
               <div className="slogan">Around the World in 101 Questions</div>
               </div>
-              <div className="app-nav-banners">
+              <ul className="app-nav-banners">
                 <li>
                 {!inGame &&
                 <Link to="/game">Game</Link>}
                 {inGame && <div className="selected-page">Game</div>}
-                </li>
-                <li>
-                {!inAboutus && <Link to='/aboutus'>About us</Link>}
-                {inAboutus && <div className="selected-page">About us</div>}
-                </li>
+                </li>                
                 <li>
                 {!isLoggedIn && !onRegister &&
                 <Link to="/register">Register</Link>}
@@ -113,7 +109,11 @@ class App extends Component {
                   handleLogout={() => this.handleLoginAndLogout()} />
                 </li>
                 }
-              </div>
+                <li>
+                {!inAboutus && <Link to='/aboutus'>About us</Link>}
+                {inAboutus && <div className="selected-page">About us</div>}
+                </li>
+              </ul>
             </ul>
           </nav>
           <Switch>
