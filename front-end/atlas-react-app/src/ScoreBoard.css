@@ -16,6 +16,7 @@
 .scoreboard div {
     height: 43vh;
     overflow: scroll;
+    width: 55vw;
 }
 
 .scoreboard table, .scoreboard td, .scoreboard th {
