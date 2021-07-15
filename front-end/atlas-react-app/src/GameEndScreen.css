@@ -210,7 +210,7 @@
     box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
                 0 1.5vh 0.5vw rgba(0,0,0,0.22);
     height: 62vh;
-    padding: 3vh 4vw;
+    padding: 3vh 3vw;
 }
 
 .countries-played-and-could-container h2 {
@@ -226,7 +226,7 @@
 
 .countries-played-and-could-container .country-list {
     height: 17.5vh;
-    width: 14vw;
+    width: 18vw;
     /* border: 1px solid black; */
     list-style-type: none;
     padding: 0;
