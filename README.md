@@ -28,11 +28,11 @@ Some design decisions with regards to the game play:
 In the first few days of the project, we began by setting up our database using SQLite due to our better understanding of the library. However, following some well-recieved feedback from our coach, the team then swiftly moved on to using PostgreSQL instead. This was, in part, to avoid any later complications that could have resulted by switching from SQLite to PostgreSQL.
 
 In our database schema, we decided on using five tables:
-- countries
-- users
-- sessions
-- current_games
-- finished_games
+- countries: to include the country names, their capital cities and flag url links
+- users: to store user email, username and encrypted passwords
+- sessions: to store cookies as uuids
+- current_games: to keep track of any current games including user details, the contries played, current score, etc.
+- finished_games: to store details of any finished games including user details, final score, etc.
 
 ### Countries data
 When it came to the data for all of the countries and their capital cities, we decided to use the [countries-now-space](https://countriesnow.space) API. This API was chosen because it provided more commonly known colloquial names of the countries, instead of their strictly official names, which many English speaking users may not be aware of. 
@@ -52,3 +52,10 @@ For our backend, we used heroku...........
 ### Deployment
 
 For our frontend, we used netlify...........
+
+## Extra: What else if had more time?
+
+- Implementing user to user gaming experience (i.e. on one device)
+- Implementing online multiplayer gaming experience
+- More bonus questions, i.e. naming neighbouring countries, official/main languages, population sizes, etc.
+- Anything else you can think of? Do let us know! :smiley:
