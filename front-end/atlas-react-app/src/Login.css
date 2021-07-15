@@ -12,6 +12,11 @@
     background-size: 90%;
     background-color: whitesmoke;
 }
+
+.login-container * {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .login{
     display: flex;
     flex-direction: column;
