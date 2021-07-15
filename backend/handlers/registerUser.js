@@ -1,11 +1,5 @@
-import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import { isEmail } from "https://deno.land/x/isemail/mod.ts";
-import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-
-
-// const db = new DB('./atlas.db')
 
 async function passwordEncryptor(password) {
   const salt = await bcrypt.genSalt(8)

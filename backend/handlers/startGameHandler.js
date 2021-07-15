@@ -1,8 +1,5 @@
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import { v4 } from "https://deno.land/std/uuid/mod.ts"
 import getCurrentUser from "./helperFunctions/getCurrentUser.js"
-import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 
 const startGameHandler = async (server, client) => {
     // handles checking the current user, making a temporary user if need be
