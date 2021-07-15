@@ -7,7 +7,7 @@ async function passwordEncryptor(password) {
   return passwordEncrypted
 }
 
-async function emailValidator(email) {
+async function emailValidator(email, client) {
   if (email.length === 0) throw new Error('Email cannot be blank')
   if(!isEmail(email)) throw new Error('Must be valid email')
   if (email.length > 50) throw new Error('Email must be less than 50 characters')
@@ -15,7 +15,7 @@ async function emailValidator(email) {
   if (emailCheck) throw new Error('Email already in use')
 }
 
-async function usernameValidator(username){
+async function usernameValidator(username, client){
   if (username.length === 0) throw new Error('Username cannot be blank')
   if (username.length > 20) throw new Error('Username must be less than 20 characters')
   const [usernameCheck] = (await client.queryArray(`SELECT 1 FROM users WHERE username = $1;`, username)).rows
@@ -33,9 +33,9 @@ function passwordValidator(password, passwordConfirmation) {
   if (password !== passwordConfirmation) throw new Error('Passwords must be equal')
 }
 
-async function signUpValidator(email, username, password, passwordConfirmation) {
-  await emailValidator(email)
-  await usernameValidator(username)
+async function signUpValidator(email, username, password, passwordConfirmation, client) {
+  await emailValidator(email, client)
+  await usernameValidator(username, client)
   passwordValidator(password, passwordConfirmation)
 }
 
@@ -46,8 +46,8 @@ const registerUser = async (server, client) => {
   //make email and username non case sensitive
   email = email.toLowerCase()
   username = username.toLowerCase()
-  // console.log('registerrrrrinnnnnggg......... :)')
-  // console.log(username, password, passwordConfirmation)
+  console.log('registerrrrrinnnnnggg......... :)')
+  console.log(username, password, passwordConfirmation)
   
   //retrieve any EXISTING user details from database for provided/typed username/email and throw error if a user already exists and send back to front-end
   console.log(country)
@@ -58,7 +58,7 @@ const registerUser = async (server, client) => {
   country = countryExists ? country : null
   
   try {
-    await signUpValidator(email, username, password, passwordConfirmation)
+    await signUpValidator(email, username, password, passwordConfirmation, client)
   } catch (err) {
     return await server.json({message: err.message})
   }
@@ -68,7 +68,7 @@ const registerUser = async (server, client) => {
   
   // TESTING
   // console.log(password)
-  // console.log(passwordEncrypted)
+  console.log(passwordEncrypted)
   
   //save encrypted password with username into users table
   await client.queryObject(`
