@@ -77,4 +77,5 @@ For our frontend, we used [netlify](https://www.netlify.com) ...........
 - Implement user to user gaming experience (i.e. on one device)
 - Implement online multiplayer gaming experience
 - More bonus questions, i.e. naming neighbouring countries, official/main languages, population sizes, etc.
+- Difficulty settings
 - Anything else you can think of? Do let us know! :smiley:
