@@ -12,7 +12,7 @@ const memberDataObject = {
     david: {
         fullName: 'David Ingram',
         image: davidimg,
-        description: 'Helloing...'.repeat(30),
+        description: "Doctoral (PhD) graduate in Physics from UCL. Big fan of Python (Pandas, NumPy, Matplotlib, Seaborn), full stack Javascript, data science/visualisation (SQL), and machine learning. I'm looking for an opportunity where I can use my technical and analytical expertise to help solve a variety of complex problems, as well as challenge myself to keep learning and developing new skills.",
         linkedIn: 'https://uk.linkedin.com/in/david-ingram-2984139b',
         github: 'https://github.com/Dingram23'
     },
@@ -26,7 +26,7 @@ const memberDataObject = {
     joanna: {
         fullName: 'Joanna Hawthorne',
         image: joannaimg,
-        description: 'Helloing...'.repeat(30),
+        description: "Hello! My name is Jo. I studied BA Japanese and Linguistics at SOAS, University of London. After graduating, I decided to take on coding as a hobby and immediately fell in love with it! I've studied JavaScript, HTML, CSS, SQL, and Data Science as part of the Sigma Labs Graduate Program, and am very much looking forward to a career in tech!",
         linkedIn: 'https://www.linkedin.com/in/joanna-hawthorne-9685921b1/',
         github: 'https://github.com/joannah62'
     },
