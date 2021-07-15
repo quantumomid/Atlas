@@ -27,7 +27,7 @@ Some design decisions with regards to the game play:
 
 In the first few days of the project, we began by setting up our database using SQLite due to our better understanding of the library. However, following some well-recieved feedback from our coach, the team then swiftly moved on to using PostgreSQL instead. This was, in part, to avoid any later complications that could have resulted by switching from SQLite to PostgreSQL.
 
-When it came to the data for the countries and their capital cities, we decided to use the [countries-now-space API] (https://countriesnow.space).
+When it came to the data for the countries and their capital cities, we decided to use the [countries-now-space API](https://countriesnow.space).
 
 ## Backend: How we set up our backend
 
