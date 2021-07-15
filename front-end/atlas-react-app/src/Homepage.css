@@ -42,16 +42,22 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-.homepage-container .game-description ul{
+.homepage-container .game-description ul {
     list-style: none;
     font-size: 3vh;
     line-height: 3vh;
     padding: 0px;
+    text-align: center;
 }
 
-.homepage-container .game-description li{
+.homepage-container .game-description button {
+    
+}
+
+.homepage-container .game-description li {
     list-style: none;
     margin-top: 2vh;
     margin-bottom: 2vh;
@@ -68,10 +74,10 @@
 	border: 1vh solid hsl(133, 100%, 40%);
 	background-color: hsl(133, 100%, 40%);
 	color: #FFFFFF;
-	font-size: 4vh;
-	font-weight: bold;
 	padding: 1vh 2vh;
 	letter-spacing: 0vh;
     text-decoration: none;
     margin: 1vh;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    font-size: 30px;
 }
