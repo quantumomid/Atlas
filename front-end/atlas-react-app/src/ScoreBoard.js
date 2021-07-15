@@ -8,7 +8,6 @@ function Table (props) {
             <TableBody gameData={gameData} personal={personal} />
         </table>
     )
-    
 }
 
 //functional component for table headings

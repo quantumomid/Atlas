@@ -2,9 +2,23 @@ import React, { Component } from 'react';
 import GameEndScreen from './GameEndScreen';
 import './Game.css'
 import ReactCountdownClock from 'react-countdown-clock';
+import Confetti from 'react-dom-confetti';
 
 const timeGiven = 15
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+const confettiConfig = {
+  angle: 90,
+  spread: 200,
+  startVelocity: 40,
+  elementCount: 100,
+  dragFriction: 0.2,
+  duration: 2500,
+  stagger: 1,
+  width: "10px",
+  height: "10px",
+  perspective: "500px",
+  colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
 
 class Game extends Component {  
   
@@ -24,7 +38,7 @@ class Game extends Component {
     aiLooped: false,
     nextPlayerLooped: false,
     correctCity: '',
-    flag: ''
+    flag: '',
   }
   
   state = this.initialState
@@ -294,27 +308,27 @@ class Game extends Component {
         </div>
         <div className = 'game-container'>
         {!needStart && <section className="top-game-bar">
-            <div className = 'timer'>Time remaining
+            <div className = 'timer'>
               {/* <div>{this.state.time}</div> */}
               {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
                 <ReactCountdownClock
                 seconds={15}
-                color="#34778D"
+                color="#019120"
                 alpha={0.9}
                 size={100}
                 />
               </div>}
               {showCapitalCityQuestion && <div className = 'game-clock-container'>
                 <ReactCountdownClock
-                seconds={15}
-                color="#34778D"
-                alpha={0.9}
-                size={100}
+                  seconds={15}
+                  color="#019120"
+                  alpha={0.9}
+                  size={100}
                 />
               </div>}
             </div>
             {/* conditionally show flow of game as is appropriate */}
-            <div className="player-score"> Score:
+            <div className="player-score">
               <span>{score}</span>
             </div>
           </section>}
@@ -323,8 +337,9 @@ class Game extends Component {
               {(isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion) || (letter && nextPlayerLooped && !showCapitalCityQuestion) ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
               {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
               {/* {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />} */}
-              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For a bonus point, name the capital city of {formatUserGameInput(userInput)}</div>}
+              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For bonus points, name the capital city of {formatUserGameInput(userInput)}</div>}
               </div>
+              <Confetti active={ letter === '✓' } config={ confettiConfig }/>
               {showCapitalCityQuestion ? 
               <div style={{ 
                     backgroundImage: `url(${this.state.flag})`, color:'white' }} 
