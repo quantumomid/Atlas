@@ -37,6 +37,8 @@ body {
 
 .app-nav-banners {
     display: flex;
+    padding: 3px;
+    background-color: white;
     justify-content: center;
     align-items: center;
     background-color: white;
