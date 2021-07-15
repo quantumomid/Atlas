@@ -14,12 +14,20 @@ In our second iteration, following correct naming of a country, the user then al
 
 Some design decisions with regards to the game play:
 -Timed turns: the user has to return a response within a specified (i.e. 15 seconds) time period
+-Scoring: 10 points for naming a country correctly and 5 points for naming the capital city correctly
 -All countries named: if all countries have been named then the game finished and the user scores are tallied up
 -No choices left for letter: if all countries beginning with a specific letter have been named, then the user presented with such a letter has to instead name a country beginning with the next letter of the alphabet following said letter
 -Incorrect naming of country or capital city (including misspellings) results in loss of game
+-Played countries: at the end of the game, the user can view the list of countries that were played during the game
+-Possible countries: at the end of the game, the user can view a list of possible countries which they could have played
+-Correct capital city: at the end of the game, a user who incorrectly named a capital city and view the correct response
 
 
 ## Data Architecture: How we set up our database
+
+In the first few days of the project, we began by setting up our database using SQLite due to our better understanding of the library. However, following some well-recieved feedback from our coach, the team then swiftly moved on to using PostgreSQL instead. This was, in part, to avoid any later complications that could have resulted by switching from SQLite to PostgreSQL.
+
+When it came to the data for the countries and their capital cities, we decided to use the [countries-now-space API] (https://countriesnow.space).
 
 ## Backend: How we set up our backend
 
