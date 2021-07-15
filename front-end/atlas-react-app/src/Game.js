@@ -8,12 +8,12 @@ const timeGiven = 15
 const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 const confettiConfig = {
   angle: 90,
-  spread: 360,
+  spread: 200,
   startVelocity: 40,
-  elementCount: 70,
-  dragFriction: 0.12,
-  duration: 3000,
-  stagger: 3,
+  elementCount: 100,
+  dragFriction: 0.2,
+  duration: 2500,
+  stagger: 1,
   width: "10px",
   height: "10px",
   perspective: "500px",
