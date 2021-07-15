@@ -168,7 +168,8 @@
 }
 
 .score-and-replay .final-score {
-    font-size: 7vw;
+    /* font-size: 7vw; */
+    font-size: 10vmin;
     border: solid 0.4vw;
     /* padding: 15px 45px; */
     height: 21.6vh;
