@@ -21,8 +21,6 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-
-
 .global-scoreboard-homepage {
     min-width: 63vw
 }
@@ -62,10 +60,10 @@
     list-style: none;
     margin-top: 2vh;
     margin-bottom: 2vh;
+    line-height: 4.5vh;
 }
 
 .homepage-container .game-description .play-link {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,5 +78,5 @@
     text-decoration: none;
     margin: 1vh;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    font-size: 30px;
+    font-size: 4.3vh;
 }
