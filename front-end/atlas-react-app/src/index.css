@@ -50,7 +50,7 @@ body {
     margin: 0px 4vw;
     text-decoration: none;
     font-size: 2vh;
-    color: hsl(133, 100%, 40%);
+    color: hsl(133, 100%, 26%);
     transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out;
     padding: 1vh 2vh;
     border-radius: 3vh;
@@ -84,22 +84,27 @@ button {
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 0.1vw;
+    height: 0.1vw;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 0.1vw;
-    background-color: rgba(0, 0, 0, .5);
-    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    background-color: hsl(133, 100%, 26%);
+    box-shadow: 0 0 0.1vh rgba(255, 255, 255, .5);
 }
 
 button:disabled {
     cursor: default;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none;
 }
 
 input, select, button, th, td, label, h2 {
     font-family: 'Ubuntu', sans-serif;
+}
+
+button:active {
+	transform: scale(0.95);
 }

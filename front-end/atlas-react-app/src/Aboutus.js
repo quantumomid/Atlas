@@ -19,7 +19,7 @@ const memberDataObject = {
     guy: {
         fullName: 'Guy Hotchin',
         image: guyimg,
-        description: "After studying a masters degree in aeronautical engineering from Imperial College London I decided on a change of career into web based software development. This removed the physical bounds imposed by mechanical based engineering. Sigma labs has given me the opportunity to develop skills in Javascript, Html and Css which I look foreward to applying on many future projects.",
+        description: "After studying a masters degree in aeronautical engineering from Imperial College London I decided on a change of career into web based software development. This removed the physical bounds imposed by mechanical based engineering. Sigma labs has given me the opportunity to develop skills in Javascript, Html and Css which I look forward to applying on many future projects.",
         linkedIn: 'https://uk.linkedin.com/in/guy-hotchin-509742130',
         github: 'https://github.com/gah19'
     },
@@ -40,7 +40,7 @@ const memberDataObject = {
     omid: {
         fullName: 'Omid Wakili',
         image: omidimg,
-        description: 'Hi, My name is Omid.I am a MSci Physics graduate from University College London with some working experience in the intellectual property sector, namely patents. I love learning about new science and technology, especially coding in my free time! Since joining the Sigma Labs training programme, I have enjoyed the challenge of learning new programming languages and skills, as well as completing various coding projects. I love to learn new programming languages, environments and frameworks. Now, I am looking forward to my next challenge to allow me to develop my skills.',
+        description: 'Hi, my name is Omid.I am a MSci Physics graduate from University College London with some work experience in the intellectual property sector, namely patents. I love learning about new science and technology! Since joining the Sigma Labs training programme, I have enjoyed the challenge of completing various coding projects. I love to learn new programming languages, environments and frameworks. Now, I am looking forward to my next challenge to allow me to develop my skills.',
         linkedIn: 'https://uk.linkedin.com/in/omid-wakili-34781b12a',
         github: 'https://github.com/quantumomid'
     },
