@@ -51,7 +51,7 @@
 }
 
 .register-or-scoreboard .scoreboard select {
-    font-size: 2vh;
+    font-size: 2vmin;
 }
 
 .end-game-register h2 {
@@ -63,7 +63,7 @@
     color:hsl(133, 100%, 40%);
     align-content: center;
     justify-content:center;
-    margin-top: 7vh;
+    margin-top: 6vh;
     font-size: 4vh;
 }
 
@@ -92,7 +92,7 @@
     justify-content: space-around;
     align-items: center;
     color:hsl(133, 97%, 15%);
-    padding: 3.5vh 1.7vw 0px 1.7vw;
+    padding: 1vh 1.7vw 0px 1.7vw;
 }
 
 
@@ -119,8 +119,15 @@
     padding: 0.5vh 1vw;
 }
 
+.end-game-register .registerformerrormessage p {
+    font-size: 2vmin;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
 .end-game-register .register-inputs{
     overflow-y: scroll;
+    min-height: 42vh;
 }
 
 .endgame-success {
@@ -140,7 +147,7 @@
 	border: 0.1vh solid hsl(133, 100%, 40%);
 	background-color: hsl(133, 100%, 40%);
 	color: #FFFFFF;
-	font-size: 1.2vw;
+	font-size: 3vmin;
 	font-weight: 600;
 	padding: 1.5vh 2.5vw;
 	letter-spacing: 0.1vh;
