@@ -19,9 +19,11 @@
     margin-bottom: 5vh;
     text-align: center;
     width: 65%;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
+                0 1.5vh 0.5vw rgba(0,0,0,0.22);
     background-color: white;
-    border-radius: 10px;
+    border-radius: 2vw;
+    font-size: 1.12vmax;
 }
 
 .instruction-correct {
@@ -37,13 +39,14 @@
 /* styling of start button on start game page */
 .start-button-container button {
     padding: 1.8vh 2.1vw;
-    font-size: 3.6vh;
+    font-size: 2vmax;
     border: 0.6vh solid hsl(133, 100%, 40%) ;
     background-color: hsl(133, 100%, 40%);
     color: white;
     border-radius: 2vw;
     margin: 1.8vh;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
+                0 1.5vh 0.5vw rgba(0,0,0,0.22);
 }
 
 /* placement of score and timer relative */
