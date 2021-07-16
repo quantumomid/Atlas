@@ -1,13 +1,6 @@
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-import { config } from 'https://deno.land/x/dotenv/mod.ts'
 
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
 
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
-
-const letterGenHandler = async (server) => {
+const letterGenHandler = async (server, client) => {
     // handles returning a random letter that a country in our countries table starts with
     // NOTE: doesn't take into account countries being unique yet
 

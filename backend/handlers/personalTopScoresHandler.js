@@ -1,11 +1,4 @@
 import getCurrentUser from './helperFunctions/getCurrentUser.js'
-import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
 
 const dateFilters = {
     all: true,
@@ -15,11 +8,11 @@ const dateFilters = {
     year: 365
 }
 
-export default async function personalTopScoresHandler(server) {
+export default async function personalTopScoresHandler(server, client) {
     let { dateFilter } = server.params
     dateFilter = dateFilters[dateFilter] ? dateFilters[dateFilter] : true
     const tableLength = 20
-    const currentUser = await getCurrentUser(server)
+    const currentUser = await getCurrentUser(server, client)
     let gameData = []
     if (currentUser) {
         if (dateFilter === true) {
