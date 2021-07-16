@@ -39,7 +39,8 @@ class Game extends Component {
     nextPlayerLooped: false,
     correctCity: '',
     flag: '',
-    allCountriesPlayed: false
+    allCountriesPlayed: false,
+    playedCity: '',
   }
   
   state = this.initialState
@@ -118,6 +119,7 @@ class Game extends Component {
     clearInterval(this.timerInterval)
 
     const {userInput, letter} = this.state
+    this.setState({userInput: ''})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
       method: "POST",
       credentials: "include",
@@ -146,7 +148,7 @@ class Game extends Component {
     // if response is no... don't change isPlayerTurn state (so componentDidUpdate doesn't trigger), and end the game
     if (!correct) {
 
-      this.getAllMatches()
+      await this.getAllMatches()
       //render endgame
       this.setState({letter: '✗'})
       // this.setState({allMatches})
@@ -161,6 +163,8 @@ class Game extends Component {
     e.preventDefault()
     clearInterval(this.timerInterval)
     const { userInputCity } = this.state
+    this.setState({ playedCity: userInputCity })
+    this.setState({userInputCity: ''})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
       method: "POST",
       credentials: "include",
@@ -181,7 +185,7 @@ class Game extends Component {
         }, 1000) 
 
     } else {
-      this.getAllMatches()
+      await this.getAllMatches()
       this.setState({letter: '✗', correctCity})
       this.incorrectTimeout = setTimeout(() => {
           this.handleLoss()
@@ -219,7 +223,7 @@ class Game extends Component {
   async componentDidUpdate(_prevProps, prevState) {
     // handles time running out
     if (this.state.time === 0 && !this.state.gameOver) {
-      this.getAllMatches()
+      if (!this.state.showCapitalCityQuestion) await this.getAllMatches()
       clearInterval(this.timerInterval)
       this.handleLoss()
     }
@@ -254,7 +258,8 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed } = this.state
+
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed, playedCity } = this.state
     const numbers = [0,1,2,3,4,5,6,7,8,9]
     if (gameOver) return <GameEndScreen
                             currentGameID={0}
@@ -263,8 +268,8 @@ class Game extends Component {
                             allMatches = {allMatches}
                             time={time}
                             correctCity={correctCity}
-                            userInputCity={userInputCity}
                             allCountriesPlayed={allCountriesPlayed}
+                            playedCity={playedCity}
                          />
     
     return (

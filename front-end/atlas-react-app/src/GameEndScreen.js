@@ -32,7 +32,7 @@ class GameEndScreen extends Component {
 
     renderReasonForLoss() {
         const { playedCountryArray, finalCountry} = this.state
-        const { time, correctCity, userInputCity, allCountriesPlayed } = this.props
+        const { time, correctCity, playedCity, allCountriesPlayed } = this.props
         if (allCountriesPlayed) {
             return ( 
             <div className="final-input-container">
@@ -46,7 +46,7 @@ class GameEndScreen extends Component {
             return (
                 <div className="final-input-container">
                     <h2>The capital of {finalCountry} is {correctCity}</h2>
-                    <h2>You played {userInputCity}</h2>
+                    <h2>You played {playedCity}</h2>
                 </div> 
             )
         } else {

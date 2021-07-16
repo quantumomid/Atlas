@@ -75,7 +75,7 @@
 	padding: 1vh 3.5vh;
 }
 .login-form button:disabled {
-    opacity: 40%;
+    opacity: 0.4;
 }
 .login-form button:active {
 	transform: scale(0.95);
