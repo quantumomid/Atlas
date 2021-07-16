@@ -39,6 +39,7 @@ class Game extends Component {
     nextPlayerLooped: false,
     correctCity: '',
     flag: '',
+    allCountriesPlayed: false,
     playedCity: '',
   }
   
@@ -209,6 +210,7 @@ class Game extends Component {
     const { aiCountryChoice, allCountriesPlayed, letter, aiLooped, nextPlayerLooped } = await response.json()
 
     if (allCountriesPlayed) {
+      this.setState({allCountriesPlayed})
       this.handleLoss() // if all countries have been played
 
     } else {
@@ -256,7 +258,8 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, playedCity } = this.state
+
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed, playedCity } = this.state
     const numbers = [0,1,2,3,4,5,6,7,8,9]
     if (gameOver) return <GameEndScreen
                             currentGameID={0}
@@ -265,6 +268,7 @@ class Game extends Component {
                             allMatches = {allMatches}
                             time={time}
                             correctCity={correctCity}
+                            allCountriesPlayed={allCountriesPlayed}
                             playedCity={playedCity}
                          />
     
