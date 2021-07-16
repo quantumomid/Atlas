@@ -8,11 +8,10 @@ const letterGenHandler = async (server, client) => {
                                         FROM countries
                                         GROUP BY letter;`)).rows                                      
     
-    // console.log(letters)
+    
 
     const [letter] = letters[Math.floor(Math.random() * letters.length)]
 
-    // console.log(letter)
 
     await server.json({ letter })
 }

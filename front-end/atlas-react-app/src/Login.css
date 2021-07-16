@@ -6,8 +6,6 @@
     height: 81.62vh;
     background-image: url(earth.png);
     background-repeat: no-repeat;
-    /* background-position: center;
-    background-size: 45%; */
     background-position: top;
     background-size: 90%;
     background-color: whitesmoke;
@@ -23,7 +21,6 @@
     height: 46vh;
     justify-content: center;
     align-items: center;
-    /* border: solid black 5px; */
     font-family: 'Montserrat', sans-serif;
     font-size: 2vh;
     background-color: #fff;
@@ -45,8 +42,6 @@
 
 .title{
     display: flex;
-    /* border: solid black 5px; */
-    /* padding: 20px; */
     font-weight: bold;
     color:hsl(133, 100%, 40%);
     align-content: center;
@@ -60,7 +55,6 @@
     width: 40vw;
     background-color: #eee;
     border: none;
-    /* border: solid black 5px; */
 	padding: 1.2vh 1.5vh;
 	margin: 1vh 0;
     border-radius: 2vh;
@@ -79,7 +73,6 @@
 	font-size: 2vh;
 	font-weight: bold;
 	padding: 1vh 3.5vh;
-	/* letter-spacing: 1vh; */
 }
 .login-form button:disabled {
     opacity: 40%;
@@ -95,7 +88,6 @@
     text-align: center;
     color: red
 }
-/*  */
 
 .register-link-message {
     color: rgb(94, 93, 93);

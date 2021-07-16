@@ -40,7 +40,6 @@ class Registration extends Component {
     const { saveScore } = this.props
     
     //data sent back from POST fetch request in backend (includes any errors and whether registration was a success)
-    // const responseData = await responseFromPostFetch(`${process.env.REACT_APP_API_URL}/users`, { username, password, passwordConfirmation})
     const postFetch = await fetch(`${process.env.REACT_APP_API_URL}/users`, 
     {
       method: 'POST', 
@@ -81,7 +80,6 @@ class Registration extends Component {
           message = {message}
           allCountries={allCountries}
         />
-      {/* <div>{message}</div> */}
       </div>
        )
     }

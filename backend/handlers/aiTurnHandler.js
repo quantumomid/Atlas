@@ -17,17 +17,13 @@ async function letterSolutionChecker(lastLetter, countryArray, client) {
 
         // turn array of arrays into 1D array of strings                                                  
         aiCountries = aiCountries.flat()                                                  
-        // console.log('aiCountries not filtered: ', aiCountries)
 
         filteredAiCountries = aiCountries.filter(country => !countryArray.includes(country))
-        console.log('aiCountries filtered: ', filteredAiCountries)
 
         if (filteredAiCountries.length > 0) {
             foundSolution = true
         
         } else {
-            // if (filteredAiCountries.length === 0) throw new Error('no possible countries remaining')
-            
             let letterIndex = alphabet.findIndex(elem => elem === lastLetter.toLowerCase())
             if (letterIndex === -1) throw new Error("How did you get here?")
             if (letterIndex === 25) letterIndex = -1 // accounts for ending with Z
@@ -49,7 +45,7 @@ async function letterSolutionChecker(lastLetter, countryArray, client) {
 async function aiTurnHandler(server, client) {
     let { lastLetter } = await server.body
     const savedLastLetter = lastLetter
-    // console.log('AI turn triggered with ', lastLetter)
+  
 
     // finds user, prioritising registered log in over temporary users
     const user = await getUserFromCookies(server, client)
@@ -58,15 +54,12 @@ async function aiTurnHandler(server, client) {
     // get current countries that have been played
     let [[countryArray]] = (await client.queryArray(`SELECT played_countries FROM current_games WHERE username = $1;`, user)).rows
     countryArray = JSON.parse(countryArray)
-    // console.log('countryArray: ', countryArray)
 
     let filteredAiCountries
     // checks if there are any solutions to this letter
     [lastLetter, filteredAiCountries] = await letterSolutionChecker(lastLetter, countryArray, client)
 
-    // if (!foundSolution) still, game ends
     if (!lastLetter) {
-        console.log('No more countries left!')
         const allCountriesPlayed = true
         await server.json({allCountriesPlayed})
 
@@ -74,11 +67,9 @@ async function aiTurnHandler(server, client) {
 
         //select random country from possible right answers
         const aiCountryChoice = filteredAiCountries[Math.floor(Math.random() * filteredAiCountries.length)]
-        console.log('ai country choice: ', aiCountryChoice)
 
         // add it to the array of played countries
         countryArray.push(aiCountryChoice)
-        // console.log('ai turn countryArray: ', countryArray)
         
         // re-stringify and update current_game table
         await client.queryObject(`UPDATE current_games
@@ -89,11 +80,8 @@ async function aiTurnHandler(server, client) {
         lastLetter = aiCountryChoice.slice(-1)
 
          // checks if there are any solutions to this letter before we send it to player
-        let [userLetter] = await letterSolutionChecker(lastLetter, countryArray, client)
-        console.log('userLetter', userLetter)
-        // if (!foundSolution) still, game ends
+        let [userLetter] = await letterSolutionChecker(lastLetter, countryArray,client)
         if (!userLetter) {    
-            console.log('No more countries left!')
             await server.json({allCountriesPlayed: true})
         } else {
             let aiLooped = false

@@ -6,11 +6,11 @@ const startGameHandler = async (server, client) => {
     // and either creating a new game or accessing one in progress
     // find logged in user, prioritising registered log ins
     const user = await getCurrentUser(server, client)
-    console.log('user:', user)
+    
 
     // if user is NEW guest, generate a temporary username for them
     const trackedName = user ? user.username : v4.generate()
-    console.log('trackedName: ', trackedName)
+  
 
     // create a temporary user with the uuid (to account for foreign key constraint on current_games)
     if (!user) {
@@ -28,16 +28,16 @@ const startGameHandler = async (server, client) => {
     }
 
     const [existingGame] = (await client.queryObject(`SELECT game_id FROM current_games WHERE username=$1;`, trackedName)).rows
-    // console.log('game: ', existingGame)
+    
 
     if (existingGame) {
         // delete game if exists
         await client.queryObject(`DELETE FROM current_games WHERE username=$1;`, trackedName)
-        console.log('deleted existing game for user:', trackedName)        
+               
     } 
 
     await client.queryObject(`INSERT INTO current_games (username, created_at, updated_at) VALUES ($1, NOW(), NOW());`, trackedName)
-    console.log('created game for user:', trackedName)
+  
 
     // delete old games from current_games    (IMPORTANT CODE FOR LATER)
     await client.queryObject("DELETE FROM current_games WHERE created_at < NOW() - interval '1 day';")

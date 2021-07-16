@@ -1,5 +1,3 @@
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
 import formatUserGameInput from "./helperFunctions/formatUserGameInput.js"
@@ -16,9 +14,7 @@ async function capitalCityCheck(server, client) {
     const capitalCityPoints = 5
 
     const { userInputCity } = await server.body
-    console.log('input city: ', userInputCity)
     const city = formatUserGameInput(userInputCity)
-    console.log('city after format: ', city)
 
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server, client)
@@ -26,10 +22,8 @@ async function capitalCityCheck(server, client) {
 
      // backend timer to prevent them hacking the frontend clock to gain more time
      const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '20 seconds';",user)).rows
-     //console.log('backendTimer length',backendTimer.length)
      
      if (backendTimer.length === 0){
-         //console.log('backendTimer',backendTimer)
          throw new Error('backend timeout')
      } 
 
@@ -43,7 +37,6 @@ async function capitalCityCheck(server, client) {
     
     const correctCityForm = formatUserGameInput(correctCity)
 
-    console.log('correct city: ', correctCity)
 
     let [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
 

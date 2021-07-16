@@ -56,4 +56,4 @@ app
     .get('/allcountries', (server) => allCountries(server, client))
     .start({ port: PORT })
 
-console.log(`Server running on http://localhost:${PORT}`)
+

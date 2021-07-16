@@ -1,5 +1,3 @@
-
-
 const dateFilters = {
     all: true,
     day: 1,

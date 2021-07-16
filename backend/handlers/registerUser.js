@@ -46,11 +46,9 @@ const registerUser = async (server, client) => {
   //make email and username non case sensitive
   email = email.toLowerCase()
   username = username.toLowerCase()
-  // console.log('registerrrrrinnnnnggg......... :)')
-  // console.log(username, password, passwordConfirmation)
+
   
   //retrieve any EXISTING user details from database for provided/typed username/email and throw error if a user already exists and send back to front-end
-  // console.log(country)
   const [countryExists] = (await client.queryArray(`
     SELECT 1 FROM countries
     WHERE country_name = $1`,
@@ -66,9 +64,6 @@ const registerUser = async (server, client) => {
   //generate encrypted password
   const passwordEncrypted  = await passwordEncryptor(password)
   
-  // TESTING
-  // console.log(password)
-  // console.log(passwordEncrypted)
   
   //save encrypted password with username into users table
   await client.queryObject(`

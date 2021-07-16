@@ -10,7 +10,6 @@ class UniqueUsernameError extends Component {
         const { username, touched } = this.props
         if(!touched) return 
 
-        // if ( username.length !== 0 && username !== prevProps.username ) {
         if ( (username !== prevProps.username) || touched !== prevProps.touched ) {
 
             const response = await fetch(
