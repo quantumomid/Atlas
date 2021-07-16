@@ -80,7 +80,7 @@ async function aiTurnHandler(server, client) {
         lastLetter = aiCountryChoice.slice(-1)
 
          // checks if there are any solutions to this letter before we send it to player
-        let [userLetter] = await letterSolutionChecker(lastLetter, countryArray)
+        let [userLetter] = await letterSolutionChecker(lastLetter, countryArray,client)
         if (!userLetter) {    
             await server.json({allCountriesPlayed: true})
         } else {

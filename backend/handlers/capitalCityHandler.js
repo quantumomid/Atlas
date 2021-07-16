@@ -1,5 +1,3 @@
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-import { config } from 'https://deno.land/x/dotenv/mod.ts'
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
 import formatUserGameInput from "./helperFunctions/formatUserGameInput.js"

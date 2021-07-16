@@ -1,4 +1,3 @@
-
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
 

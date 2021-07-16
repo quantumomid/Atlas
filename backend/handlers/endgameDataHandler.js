@@ -1,4 +1,3 @@
-
 import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 
 export default async function endgameDataHandler(server, client) {

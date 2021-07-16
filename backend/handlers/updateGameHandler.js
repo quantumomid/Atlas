@@ -55,7 +55,7 @@ const updateGameHandler = async (server, client) => {
     if (countryArray.includes(userInput)) {
         // if country has already been used this game, end the game
 
-        await insertToTable(countryArray, userInput, user)
+        await insertToTable(countryArray, userInput, user,client)
         const correct = false
         await server.json({correct, score})
 
