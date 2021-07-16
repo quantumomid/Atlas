@@ -55,5 +55,5 @@ app
     .post('/game/city', (server) => capitalCityCheck(server, client))
     .get('/allcountries', (server) => allCountries(server, client))
     .start({ port: PORT })
-
+console.log('server running on port:', PORT)
 

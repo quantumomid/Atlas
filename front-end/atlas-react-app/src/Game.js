@@ -117,6 +117,7 @@ class Game extends Component {
     clearInterval(this.timerInterval)
 
     const {userInput, letter} = this.state
+    this.setState({userInput: ''})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
       method: "POST",
       credentials: "include",
@@ -160,6 +161,7 @@ class Game extends Component {
     e.preventDefault()
     clearInterval(this.timerInterval)
     const { userInputCity } = this.state
+    this.setState({userInputCity: ''})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
       method: "POST",
       credentials: "include",
