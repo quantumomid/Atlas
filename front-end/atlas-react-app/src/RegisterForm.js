@@ -4,6 +4,7 @@ import UniqueEmailError from './UniqueEmailError'
 import './register.css'
 import Filter from 'bad-words'
 import { Link } from 'react-router-dom'
+import * as validEmailCheck from 'email-validator'
 
 function RegisterForm(props){
     const { handleSubmit, handleChange, email, username, password, passwordConfirmation, country, handleBlur, touched, message, allCountries } = props
@@ -31,7 +32,7 @@ function RegisterForm(props){
                         />
                 </label>
                 <div className = 'registerformerrormessage'>
-                <p>{emailError}</p>
+                <p>{emailError || message}</p>
                 <UniqueEmailError email={email} touched={touched.email}/>
                 </div>
 
@@ -137,6 +138,7 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
   function emailValidator(email, touched) {
     if(!touched.email) return 
     if (email.length === 0) throw new Error('Email cannot be blank')
+    if (!validEmailCheck.validate(email)) throw new Error('Invalid email')
   }
 
   function createErrorMessages(email, username, password, passwordConfirmation, touched) {  

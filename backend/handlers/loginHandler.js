@@ -1,14 +1,10 @@
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
-import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
+
 import { v4 } from "https://deno.land/std/uuid/mod.ts";
 
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
 
-export default async function loginHandler(server) {
+
+export default async function loginHandler(server, client) {
     let { usernameOrEmail, password } = await server.body
     // make username non case sensitive
     usernameOrEmail = usernameOrEmail.toLowerCase()

@@ -331,6 +331,28 @@ class Game extends Component {
               :
               <div className="letter">{letter}</div>
               }
+
+              {/* green background if correct */}
+              {letter === '✓' && 
+              <div style={{ 
+                    backgroundColor:'hsl(133, 100%, 40%)', color: 'white'}} 
+                    className="letter"
+                  >
+                    {letter}
+              </div>
+              }
+
+              {/* red background if incorrect */}
+              {letter === '✗' && 
+              <div style={{ 
+                    backgroundColor:'rgb(231, 50, 73)', color: 'white'}} 
+                    className="letter"
+                  >
+                    {letter}
+              </div>
+              }
+
+
             </div> }
             <section>
               {!needStart && !showCapitalCityQuestion && <form className="game-input-container">

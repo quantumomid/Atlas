@@ -4,13 +4,9 @@ import getUserFromCookies from "./helperFunctions/getUserFromCookies.js"
 import getCountryArray from "./helperFunctions/getCountryArray.js"
 import formatUserGameInput from "./helperFunctions/formatUserGameInput.js"
 
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
 
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
 
-async function capitalCityCheck(server) {
+async function capitalCityCheck(server, client) {
     // handles the optional capital city question
     // needs the user input for capital city, and the cookies to find the user and therefore current_game/country array
     // if the answer is right, adds another point to the score of the current_game, and returns a boolean marking it as true
@@ -23,7 +19,7 @@ async function capitalCityCheck(server) {
     const city = formatUserGameInput(userInputCity)
 
     // finds user, prioritising registered log in over temporary users
-    let user = await getUserFromCookies(server)
+    let user = await getUserFromCookies(server, client)
     if (!user) throw new Error ('No user detected')
 
      // backend timer to prevent them hacking the frontend clock to gain more time
@@ -34,7 +30,7 @@ async function capitalCityCheck(server) {
      } 
 
     // finds country (most recent in current_games)
-    const countryArray = await getCountryArray(user)
+    const countryArray = await getCountryArray(user, client)
     const [lastCountry] = countryArray.slice(-1)
 
     const [[correctCity]] = (await client.queryArray(`SELECT capital 

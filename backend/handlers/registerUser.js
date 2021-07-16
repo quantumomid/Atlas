@@ -1,13 +1,5 @@
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import { isEmail } from "https://deno.land/x/isemail/mod.ts";
-import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
-import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
-
-const DENO_ENV = Deno.env.get('DENO_ENV') ?? 'development'
-config({ path: `./.env.${DENO_ENV}`, export: true })
-const client = new Client(Deno.env.get("PG_URL"))
-await client.connect()
-
 
 async function passwordEncryptor(password) {
   const salt = await bcrypt.genSalt(8)
@@ -15,7 +7,7 @@ async function passwordEncryptor(password) {
   return passwordEncrypted
 }
 
-async function emailValidator(email) {
+async function emailValidator(email, client) {
   if (email.length === 0) throw new Error('Email cannot be blank')
   if(!isEmail(email)) throw new Error('Must be valid email')
   if (email.length > 50) throw new Error('Email must be less than 50 characters')
@@ -23,7 +15,7 @@ async function emailValidator(email) {
   if (emailCheck) throw new Error('Email already in use')
 }
 
-async function usernameValidator(username){
+async function usernameValidator(username, client){
   if (username.length === 0) throw new Error('Username cannot be blank')
   if (username.length > 20) throw new Error('Username must be less than 20 characters')
   const [usernameCheck] = (await client.queryArray(`SELECT 1 FROM users WHERE username = $1;`, username)).rows
@@ -41,13 +33,13 @@ function passwordValidator(password, passwordConfirmation) {
   if (password !== passwordConfirmation) throw new Error('Passwords must be equal')
 }
 
-async function signUpValidator(email, username, password, passwordConfirmation) {
-  await emailValidator(email)
-  await usernameValidator(username)
+async function signUpValidator(email, username, password, passwordConfirmation, client) {
+  await emailValidator(email, client)
+  await usernameValidator(username, client)
   passwordValidator(password, passwordConfirmation)
 }
 
-const registerUser = async (server) => {
+const registerUser = async (server, client) => {
   
   //retrieve typed details from form elements from front-end
   let { email, username, country, password, passwordConfirmation, saveScore } = await server.body;
@@ -64,7 +56,7 @@ const registerUser = async (server) => {
   country = countryExists ? country : null
   
   try {
-    await signUpValidator(email, username, password, passwordConfirmation)
+    await signUpValidator(email, username, password, passwordConfirmation, client)
   } catch (err) {
     return await server.json({message: err.message})
   }

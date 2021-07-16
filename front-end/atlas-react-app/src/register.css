@@ -9,7 +9,7 @@
     align-content: center;
     justify-content:center;
     font-size: 4.5vh;
-    margin-top: 3vh;
+    margin-top: 2vh;
 }
 
 .register-container *, .register-title {
@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 82vh;
+    height: 81.62vh;
     background-image: url(earth.png);
     background-repeat: no-repeat;
     background-position: top;
@@ -31,7 +31,7 @@
 .register-page .register{
     display: flex;
     flex-direction: column;
-    height: 73vh;
+    height: 75vh;
     width: 50vw;
     justify-content: center;
     align-items: center;
@@ -46,10 +46,14 @@
 	overflow: hidden;
 }
 
+.register-form button {
+    margin-top: 1vh;
+}
+
 .register-page .register-form{
     display: flex;
     flex-direction: column;
-    height: 57vh;
+    height: 62vh;
     justify-content: space-around;
     align-items: center;
     color:hsl(133, 97%, 15%);
