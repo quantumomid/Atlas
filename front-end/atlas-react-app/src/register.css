@@ -108,6 +108,8 @@
 
  .registerformerrormessage{
     color: red;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
 }
 
  .register-response{
