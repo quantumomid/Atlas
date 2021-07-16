@@ -46,7 +46,6 @@ const updateGameHandler = async (server, client) => {
     // get current score of this game
     const [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
 
-    //MAYBE MAKE A HELPER FUNCTION?? CALLED AGAIN IN GETMATCHESFORLETTER
     // find already played countries in this game
     const countryArray = await getCountryArray(user, client)
 
