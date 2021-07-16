@@ -68,6 +68,13 @@ Some of the packages we used (for installation):
 - Countdown [clock](https://www.npmjs.com/package/react-countdown-clock): for providing a visual animation to the time countdown during game play
 - [Confetti](https://www.npmjs.com/package/react-dom-confetti) animations: for displaying a visual animation whenever the user correctly names a country or its capital city
 
+### Initial designs: wireframes
+
+<details>
+    <summary>Click here to see more of the wireframes</summary>
+    <img src='./homepage_wireframe' />
+</details>
+
 ### Deployment
 
 For our frontend, we used [netlify](https://www.netlify.com) ...........
