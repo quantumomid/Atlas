@@ -28,6 +28,10 @@
     padding: 3vh 2vw;
 }
 
+.register-or-scoreboard .end-game-register h2 {
+    text-align: center;
+}
+
 .register-or-scoreboard .scoreboard {
     margin-left: 2vw;
     display: flex;
@@ -164,7 +168,8 @@
     box-shadow: 0 2vh 2vw rgba(0,0,0,0.25), 
                 0 1.5vh 0.5vw rgba(0,0,0,0.22);
     height: 62vh;
-    padding: 3vh 0.75vw;
+    /* padding: 3vh 0.75vw; */
+    padding: 3vh 1.5vw;
 }
 
 .score-and-replay .final-score {
@@ -180,7 +185,7 @@
     justify-content: center;
     align-items: center;
     padding: 0;
-    margin: 2.2vh 1vw;
+    margin: 4.2vh 1vw;
 }
 
 /* .score-and-replay button {
@@ -243,7 +248,7 @@
 
 .countries-played-and-could-container h2 {
     margin: 1.4vh 0.7vw;
-    font-size: 3.5vh;
+    font-size: 3vh;
 }
 
 .countries-played-and-could-container .country-list li:nth-child(2n) {
@@ -259,16 +264,18 @@
 }
 
 .score-and-replay h2 {
+    margin: 0.4vw;
     margin-bottom: 1vh;
-    font-size: 3.5vh;
-    color:hsl(133, 100%, 40%);
+    font-size: 3vh;
+    color: black;
+    text-align: center;
 }
 
 .final-input-container h2 {
-    margin: 0.4vw;
     font-weight: 500;
     color: black;
 }
+
 
 .end-game-register .registerationlabel, .end-game-register .buttonform, .end-game-register .signin-link-message {
     font-size: 2.3vh;
