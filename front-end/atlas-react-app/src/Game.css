@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 82vh;
+    height: 81.62vh;
     background-image: url(earth.png);
     background-repeat: no-repeat;
     background-position: top;
@@ -15,7 +15,8 @@
 .start-instructions {
     border: solid white 5px;
     padding: 1.1vh 2.1vw;
-    margin-top: 8vh;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
     text-align: center;
     width: 65%;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -40,7 +41,7 @@
     border: 0.6vh solid hsl(133, 100%, 40%) ;
     background-color: hsl(133, 100%, 40%);
     color: white;
-    border-radius: 30px;
+    border-radius: 2vw;
     margin: 1.8vh;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
@@ -137,7 +138,7 @@
     position: fixed;
     bottom: 0;
     right: 22.5%;
-    margin-bottom: 1.2vh;
+    margin-bottom: 4vh;
     width: 55.5vw;
 }
 

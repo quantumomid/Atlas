@@ -6,7 +6,7 @@
     /* border: solid white 5px; */
     justify-content: space-around;
     align-items: center;
-    height: 82vh;
+    height: 81.62vh;
     background-image: url(earth.png);
     background-color: whitesmoke;
     background-position: top;
@@ -226,7 +226,7 @@
 }
 
 .countries-played-and-could-container .country-list {
-    height: 17.5vh;
+    height: 18.6vh;
     width: 22vw;
     /* border: 1px solid black; */
     list-style-type: none;
@@ -247,7 +247,8 @@
 }
 
 .countries-played-and-could-container .country-list li:nth-child(2n) {
-    background-color: rgb(238, 238, 238) ;
+    /* background-color: rgb(238, 238, 238) ; */
+    background-color: hsl(130, 30%, 96%);
 }
 
 .final-input-container {
