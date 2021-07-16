@@ -4,8 +4,6 @@
 
 .register-page .register-title{
     display: flex;
-    /* border: solid black 5px; */
-    /* padding: 20px; */
     font-weight: bold;
     color:hsl(133, 100%, 40%);
     align-content: center;
@@ -37,7 +35,6 @@
     width: 50vw;
     justify-content: center;
     align-items: center;
-    /* border: solid black 5px; */
     font-family: 'Montserrat', sans-serif;
     font-size: 2vh;
 
@@ -69,7 +66,6 @@
     width: 40vw;
     background-color: #eee;
     border: none;
-    /* border: solid black 5px; */
     padding: 1.2vh 1.5vh;
 	margin: 0.8vh 2.5vh;
     border-radius: 3vh;
@@ -89,7 +85,6 @@
 	font-size: 2vh;
 	font-weight: bold;
 	padding: 1vh 3.5vh;
-	/* letter-spacing: 1vh; */
 }
  .register-form button:disabled {
     opacity: 40%;
@@ -116,7 +111,6 @@
     width: 41.5vw;
     background-color: #eee;
     border: none;
-    /* border: solid black 5px; */
 	padding-left: 1.5vh;
 	margin: 1.5vh 2.5vh;
     border-radius: 3vh;

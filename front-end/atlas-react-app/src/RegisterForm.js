@@ -147,18 +147,15 @@ function signUpValidator(email, username, password, passwordConfirmation, touche
         emailError = err.message
     }
     try {
-        // if (username) usernameValidator(username, touched)
         usernameValidator(username, touched)
     } catch (err) {
         usernameError = err.message
     }
     try {
-        // if (password) passwordValidator(password, touched)
         passwordValidator(password, touched)
     } catch (err) {
         passwordError = err.message
     }
-    // if (touched.passwordConfirmation && passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
     if (touched.passwordConfirmation && password !== passwordConfirmation ) passwordConfirmationError = 'Passwords must be equal'
     return [emailError, usernameError, passwordError, passwordConfirmationError]
   }

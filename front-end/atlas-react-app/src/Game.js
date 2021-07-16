@@ -77,7 +77,6 @@ class Game extends Component {
       body: JSON.stringify({letter})
     })
     const {allMatches} = await response.json()
-    console.log('allMatches: ', allMatches)
     this.setState({allMatches})
   }
 
@@ -85,7 +84,6 @@ class Game extends Component {
     // calls a random letter that a country starts with
     const response = await fetch(`${process.env.REACT_APP_API_URL}/letter`)
     const initialLetter = await response.json()
-    console.log(initialLetter.letter)
     this.setState({letter: initialLetter.letter})
   }
 
@@ -109,9 +107,6 @@ class Game extends Component {
     const { name, value } = e.target
 
     this.setState({[name]: value})
-    console.log(name, value)
-    // this.setState({userInput: e.target.value})
-    // console.log(this.state.userInput)
   }
 
   async handleSubmitUserCountry(e) {
@@ -122,7 +117,6 @@ class Game extends Component {
     clearInterval(this.timerInterval)
 
     const {userInput, letter} = this.state
-    console.log('input: ', userInput)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
       method: "POST",
       credentials: "include",
@@ -134,8 +128,6 @@ class Game extends Component {
 
     const {correct, lastLetter, score, flag} = await response.json()
     // if user input correct, returns true else returns false
-    console.log('correct: ', correct)
-    // console.log('lastLetter response:', lastLetter)
 
     // reset the input form to empty and update the lastLetter for the AI turn
     this.setState({lastLetter, score})
@@ -168,7 +160,6 @@ class Game extends Component {
     e.preventDefault()
     clearInterval(this.timerInterval)
     const { userInputCity } = this.state
-    console.log(userInputCity)
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
       method: "POST",
       credentials: "include",
@@ -179,8 +170,6 @@ class Game extends Component {
     })
 
     const { isCorrectCity, correctCity, score } = await response.json()
-    console.log('isCorrectCity: ', isCorrectCity)
-    console.log('score from cap city: ', score)
 
     if (isCorrectCity) {
       this.setState({letter: '✓', score})
@@ -214,15 +203,11 @@ class Game extends Component {
     })
     //returns country name that AI plays
     const { aiCountryChoice, allCountriesPlayed, letter, aiLooped, nextPlayerLooped } = await response.json()
-    // console.log('aiLooped: ', aiLooped, 'nextPlayerLooped: ', nextPlayerLooped)
 
-    // console.log(allCountriesPlayed) //undefined
     if (allCountriesPlayed) {
-      console.log('game ends due to no more countries')
       this.handleLoss() // if all countries have been played
 
     } else {
-      console.log('ai country pick: ', aiCountryChoice)
 
       // trigger next player turn, displaying new lastLetter
       this.setState({isPlayerTurn: true, aiCountryChoice, letter, aiLooped, nextPlayerLooped})
@@ -241,11 +226,9 @@ class Game extends Component {
     if (this.state.isPlayerTurn !== prevState.isPlayerTurn) {
       if (this.state.isPlayerTurn && !this.state.needStart) {
         // non-first player turns (don't actually need to call a function again, player turn called on submit)
-        console.log('non-first player turn is called')
 
       } else if (!this.state.isPlayerTurn) {
         // call AI turn
-        console.log('ai turn is called')
         await this.triggerAiTurn()
       }
     }
@@ -309,7 +292,6 @@ class Game extends Component {
         <div className = 'game-container'>
         {!needStart && <section className="top-game-bar">
             <div className = 'timer'>
-              {/* <div>{this.state.time}</div> */}
               {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
                 <ReactCountdownClock
                 seconds={15}
@@ -336,7 +318,6 @@ class Game extends Component {
             <div className="question-container">
               {(isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion) || (letter && nextPlayerLooped && !showCapitalCityQuestion) ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
               {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
-              {/* {letter && nextPlayerLooped && !showCapitalCityQuestion ? <div className="ai-response">No more countries beginning with the AI's last letter!</div> : <div />} */}
               {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For bonus points, name the capital city of {formatUserGameInput(userInput)}</div>}
               </div>
               <Confetti active={ letter === '✓' } config={ confettiConfig }/>

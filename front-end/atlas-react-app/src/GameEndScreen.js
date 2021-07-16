@@ -66,7 +66,6 @@ class GameEndScreen extends Component {
 
     render() {
         const { isLoggedIn, allMatches } = this.props
-        console.log('in end screen allMatches: ', allMatches)
         const { score, playedCountryArray } = this.state
         return (
             <div className='endgame-page'>

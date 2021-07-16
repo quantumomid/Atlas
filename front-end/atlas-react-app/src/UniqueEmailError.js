@@ -9,7 +9,6 @@ class UniqueEmailError extends Component {
     async componentDidUpdate(prevProps) {
         const { email, touched } = this.props
         if(!touched) return 
-        // if ( email.length !== 0 && email !== prevProps.email ) {
         if ( email !== prevProps.email || touched !== prevProps.touched ) {
 
             const response = await fetch(

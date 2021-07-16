@@ -14,14 +14,12 @@ export default class PersonalScoreBoard extends Component{
 
     async fetchScores() {
         const { dateFilter } = this.state
-        console.log(dateFilter)
         const response = await fetch(
             `${process.env.REACT_APP_API_URL}/personaltopscores/${dateFilter}`,
             {
                 credentials: 'include'
             })
         const { gameData } = await response.json()
-        console.log('fetching scores')
         this.setState({gameData})
     }
 

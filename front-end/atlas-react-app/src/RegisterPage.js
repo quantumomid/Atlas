@@ -25,12 +25,3 @@ class RegisterPage extends Component {
 }
 
 export default RegisterPage
-
-// export default function RegisterPage() {
-//     return (
-//         <div className='register-page'>
-//             <div className = 'titleform' >Register!!!</div>
-//             <Registration/>
-//         </div>
-//     )
-// }
