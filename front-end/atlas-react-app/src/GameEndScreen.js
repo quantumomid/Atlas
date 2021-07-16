@@ -32,14 +32,14 @@ class GameEndScreen extends Component {
 
     renderReasonForLoss() {
         const { playedCountryArray, finalCountry} = this.state
-        const { time, correctCity, userInputCity } = this.props
+        const { time, correctCity, playedCity } = this.props
         if (time === 0) {
             return <h2>You ran out of time!</h2>
         } else if (correctCity) {
             return (
                 <div className="final-input-container">
                     <h2>The capital of {finalCountry} is {correctCity}</h2>
-                    <h2>You played {userInputCity}</h2>
+                    <h2>You played {playedCity}</h2>
                 </div> 
             )
         } else {

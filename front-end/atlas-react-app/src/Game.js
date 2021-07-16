@@ -39,6 +39,7 @@ class Game extends Component {
     nextPlayerLooped: false,
     correctCity: '',
     flag: '',
+    playedCity: '',
   }
   
   state = this.initialState
@@ -161,6 +162,7 @@ class Game extends Component {
     e.preventDefault()
     clearInterval(this.timerInterval)
     const { userInputCity } = this.state
+    this.setState({ playedCity: userInputCity })
     this.setState({userInputCity: ''})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
       method: "POST",
@@ -254,7 +256,7 @@ class Game extends Component {
   }
 
   render() {
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity } = this.state
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, playedCity } = this.state
     const numbers = [0,1,2,3,4,5,6,7,8,9]
     if (gameOver) return <GameEndScreen
                             currentGameID={0}
@@ -263,7 +265,7 @@ class Game extends Component {
                             allMatches = {allMatches}
                             time={time}
                             correctCity={correctCity}
-                            userInputCity={userInputCity}
+                            playedCity={playedCity}
                          />
     
     return (
