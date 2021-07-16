@@ -32,7 +32,7 @@ function RegisterForm(props){
                         />
                 </label>
                 <div className = 'registerformerrormessage'>
-                <p>{emailError}</p>
+                <p>{emailError || message}</p>
                 <UniqueEmailError email={email} touched={touched.email}/>
                 </div>
 
