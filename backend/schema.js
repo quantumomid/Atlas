@@ -1,4 +1,3 @@
-// import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import { Client } from "https://deno.land/x/postgres@v0.11.3/mod.ts"
 import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
 
@@ -8,13 +7,7 @@ config({ path: `./.env.${DENO_ENV}`, export: true })
 const client = new Client(Deno.env.get("PG_URL"))
 await client.connect()
 
-// try {
-//     await Deno.remove('atlas.db')
-//   } catch {
-//     // nothing to remove
-//   }
 
-// const db = new DB('./atlas.db')
 
 await client.queryObject(
   `DROP TABLE IF EXISTS users, countries, sessions, current_games, finished_games;`

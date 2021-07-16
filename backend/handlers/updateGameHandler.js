@@ -37,10 +37,9 @@ const updateGameHandler = async (server) => {
 
     // backend timer to prevent them hacking the frontend clock to gain more time
     const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '20 seconds';",user)).rows
-    //console.log('backendTimer length',backendTimer.length)
+    
     
     if (backendTimer.length === 0){
-        //console.log('backendTimer',backendTimer)
         throw new Error('backend timeout')
     } 
 
@@ -48,8 +47,6 @@ const updateGameHandler = async (server) => {
     let { userInput, letter } = await server.body
 
     userInput = formatUserGameInput(userInput)
-    console.log('fixed userInput: ', userInput)
-    //console.log('userInput: ', userInput, 'for letter: ', letter)
 
     // basic validations mirroring front end validations
     if (typeof userInput !== 'string' || userInput.length > 60 || userInput.length === 0) throw new Error('Bad userInput.')
@@ -67,19 +64,16 @@ const updateGameHandler = async (server) => {
         // if country has already been used this game, end the game
 
         await insertToTable(countryArray, userInput, user)
-        console.log('this country has been used, ending game')
         const correct = false
         await server.json({correct, score})
 
     } else {
         await insertToTable(countryArray, userInput, user)
         // check correctness of suggested country answer (disregarding case)
-        console.log('userInput: ', userInput.toLowerCase(), 'for letter: ', letter)
         const [matches] = (await client.queryArray(`SELECT country_name 
                                                     FROM countries 
                                                     WHERE LOWER(country_name) = $1
                                                     AND LOWER(SUBSTRING(country_name, 1, 1)) = $2;`, userInput.toLowerCase(), letter.toLowerCase())).rows
-        console.log('matches: ', matches)
         if (!matches) {
             // if answer is incorrect, add to finished_games, delete from current_games, and return some response
             const correct = false
@@ -92,16 +86,12 @@ const updateGameHandler = async (server) => {
             await client.queryObject(`UPDATE current_games
                                     SET score = $1
                                     WHERE username = $2;`, score + countryPoints, user)
-            // test:                                  
-            // let [[update]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
-            // console.log('correct! updated score: ', scoreYes)
 
             const correct = true
             const lastLetter = userInput.slice(-1)
-            //console.log('lastLetter: ', lastLetter)
+            
 
             flag = (await client.queryArray(`SELECT flag FROM countries WHERE country_name = $1;`, userInput)).rows
-            console.log('flag link: ', flag)
 
             await server.json({correct, lastLetter, score: score + countryPoints, flag})
         }

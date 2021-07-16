@@ -26,12 +26,10 @@ export default async function getMatchesForLetter(server) {
         FROM countries
         WHERE LOWER(SUBSTRING(country_name, 1, 1)) = $1;`,
          letter.toLowerCase())).rows
-    // console.log('allMatches: ', allMatches)
     
     // filter out those that have been played
     allMatches = allMatches.flat()
     allMatches = allMatches.filter(country => !countryArray.includes(country))
-    console.log('filtered test allMatches: ', allMatches)
 
     await server.json({allMatches})
 }

@@ -1,4 +1,3 @@
-import { DB } from 'https://deno.land/x/sqlite/mod.ts'
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
 import { isEmail } from "https://deno.land/x/isemail/mod.ts";
 import { config } from 'https://deno.land/x/dotenv/mod.ts' // environment variables
@@ -9,7 +8,6 @@ config({ path: `./.env.${DENO_ENV}`, export: true })
 const client = new Client(Deno.env.get("PG_URL"))
 await client.connect()
 
-// const db = new DB('./atlas.db')
 
 async function passwordEncryptor(password) {
   const salt = await bcrypt.genSalt(8)
@@ -56,11 +54,9 @@ const registerUser = async (server) => {
   //make email and username non case sensitive
   email = email.toLowerCase()
   username = username.toLowerCase()
-  // console.log('registerrrrrinnnnnggg......... :)')
-  // console.log(username, password, passwordConfirmation)
+
   
   //retrieve any EXISTING user details from database for provided/typed username/email and throw error if a user already exists and send back to front-end
-  console.log(country)
   const [countryExists] = (await client.queryArray(`
     SELECT 1 FROM countries
     WHERE country_name = $1`,
@@ -76,9 +72,6 @@ const registerUser = async (server) => {
   //generate encrypted password
   const passwordEncrypted  = await passwordEncryptor(password)
   
-  // TESTING
-  // console.log(password)
-  // console.log(passwordEncrypted)
   
   //save encrypted password with username into users table
   await client.queryObject(`

@@ -20,9 +20,7 @@ async function capitalCityCheck(server) {
     const capitalCityPoints = 5
 
     const { userInputCity } = await server.body
-    console.log('input city: ', userInputCity)
     const city = formatUserGameInput(userInputCity)
-    console.log('city after format: ', city)
 
     // finds user, prioritising registered log in over temporary users
     let user = await getUserFromCookies(server)
@@ -30,10 +28,8 @@ async function capitalCityCheck(server) {
 
      // backend timer to prevent them hacking the frontend clock to gain more time
      const backendTimer = (await client.queryObject("SELECT username FROM current_games WHERE username = $1 AND updated_at > NOW() - interval '20 seconds';",user)).rows
-     //console.log('backendTimer length',backendTimer.length)
      
      if (backendTimer.length === 0){
-         //console.log('backendTimer',backendTimer)
          throw new Error('backend timeout')
      } 
 
@@ -47,7 +43,6 @@ async function capitalCityCheck(server) {
     
     const correctCityForm = formatUserGameInput(correctCity)
 
-    console.log('correct city: ', correctCity)
 
     let [[score]]  = (await client.queryArray(`SELECT score FROM current_games WHERE username = $1;`, user)).rows
 
