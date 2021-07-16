@@ -72,7 +72,7 @@ Some of the packages we used (for installation):
 
 <details>
     <summary>Click here to see more of the wireframes</summary>
-    <img src='./homepage_wireframe' />
+    <img src='./homepage_wireframe.png'>
 </details>
 
 ### Deployment
