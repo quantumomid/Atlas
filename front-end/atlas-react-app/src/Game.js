@@ -41,6 +41,7 @@ class Game extends Component {
     flag: '',
     allCountriesPlayed: false,
     playedCity: '',
+    previousCountry: '',
   }
   
   state = this.initialState
@@ -119,7 +120,7 @@ class Game extends Component {
     clearInterval(this.timerInterval)
 
     const {userInput, letter} = this.state
-    this.setState({userInput: ''})
+    this.setState({userInput: '', previousCountry: userInput})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
       method: "POST",
       credentials: "include",
@@ -259,7 +260,7 @@ class Game extends Component {
 
   render() {
 
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed, playedCity } = this.state
+    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed, playedCity, previousCountry } = this.state
     const numbers = [0,1,2,3,4,5,6,7,8,9]
     if (gameOver) return <GameEndScreen
                             currentGameID={0}
@@ -326,7 +327,7 @@ class Game extends Component {
             <div className="question-container">
               {(isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion) || (letter && nextPlayerLooped && !showCapitalCityQuestion) ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
               {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
-              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For bonus points, name the capital city of {formatUserGameInput(userInput)}</div>}
+              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For bonus points, name the capital city of {formatUserGameInput(previousCountry)}</div>}
               </div>
               <Confetti active={ letter === '✓' } config={ confettiConfig }/>
               {showCapitalCityQuestion ? 
@@ -385,7 +386,7 @@ class Game extends Component {
               {showCapitalCityQuestion && <form className="game-input-container">
                 <input className="game-input-bar"
                   type = "text" 
-                  placeholder = {`Name the capital city of ${formatUserGameInput(userInput)}`}
+                  placeholder = {`Name the capital city of ${formatUserGameInput(previousCountry)}`}
                   name="userInputCity" 
                   value={userInputCity} 
                   onChange ={(e) => this.handleUserInputChange(e)}
