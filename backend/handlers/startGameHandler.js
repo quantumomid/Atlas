@@ -30,6 +30,8 @@ const startGameHandler = async (server) => {
             name: "tempUser",
             value: trackedName,
             path: "/",
+            secure: Deno.env.get('DENO_ENV') === 'production',
+            sameSite: Deno.env.get('DENO_ENV') === 'production' ? 'none' : 'lax',
             expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24) // a day
         })
     }
