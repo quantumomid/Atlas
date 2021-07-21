@@ -292,7 +292,7 @@
 @media only screen and (max-width: 600px) {
     
     .endgame-page{
-        height: 250vh;
+        height: 230vh;
         background-image: none;
         flex-direction: column;
     }
@@ -308,18 +308,6 @@
     .endgame-page .countries-played-and-could-container {
         order: -1;
     }
-
-    /* .endgame-page :nth-child(1) {
-        order: 3;
-    }
-
-    .endgame-page :nth-child(2) {
-        order: 1;
-    }
-
-    .endgame-page :nth-child(3) {
-        order: 2;
-    } */
 
     .endgame-page .countries-played-and-could-container, .endgame-page .score-and-replay, .endgame-page .end-game-register {
         width: 85vw;

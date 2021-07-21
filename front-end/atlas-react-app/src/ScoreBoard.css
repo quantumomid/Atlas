@@ -98,3 +98,7 @@
     font-size: 1vmax;
     border: solid 0.1vmax rgb(70, 69, 69);
 }
+
+@media only screen and (max-width: 600px) {
+
+}

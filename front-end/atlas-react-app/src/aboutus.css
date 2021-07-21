@@ -168,7 +168,7 @@ article.container h3 {
     opacity: 0.5;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1000px) {
     
     .overall-container{
         background-image: none;
@@ -180,7 +180,10 @@ article.container h3 {
     }
 
     .whole-team-container img {
-        min-width: 62vw;
+        /* min-width: 62vw;
+        height: fit-content; */
+        height: 40vh;
+        min-width: 40vh;
     }
 
     .overall-member-container {

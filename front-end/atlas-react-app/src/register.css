@@ -155,6 +155,7 @@
 
     .register-page .register {
         min-width: 90vw;
+        margin-top: -5vh;
     }
 
     .register-page .register .register-inputs input {
