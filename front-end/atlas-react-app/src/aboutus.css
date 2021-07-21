@@ -167,3 +167,48 @@ article.container h3 {
 .member-container p a:active {
     opacity: 0.5;
 }
+
+@media only screen and (max-width: 600px) {
+    
+    .overall-container{
+        background-image: none;
+        height: 280vh;
+    }
+
+    .whole-team-container {
+        flex-direction: column;
+    }
+
+    .whole-team-container img {
+        min-width: 62vw;
+    }
+
+    .overall-member-container {
+        background-image: none;
+        height: 135vh;
+    }
+
+    .overall-member-container .member-profile {
+        flex-direction: column;
+        align-items: center;
+        min-width: 80vw;
+    }
+
+    .overall-member-container .member-profile img {
+        margin-top: 2vh;
+        min-width: 40vw;
+        height: fit-content;
+        border-radius: 5vh;
+    }
+
+    .overall-member-container .member-profile .member-info {
+        width: 70vw;
+        padding-top: 0vh;
+        text-align: center;
+    }
+
+    .overall-member-container .member-container .full-name {
+        margin-top: 2vh;
+    }
+
+}
