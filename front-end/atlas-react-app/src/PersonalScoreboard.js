@@ -43,7 +43,7 @@ export default class PersonalScoreBoard extends Component{
                     <option value="year">Last year</option>
 ]                </select>
             </label>
-            <div>
+            <div className="personal-scoreboard-table">
             {gameData.length === 0 ? <p>No personal scores</p> : <ScoreBoard gameData={gameData} personal={true} />}
             </div>
         </div>

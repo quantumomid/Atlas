@@ -108,3 +108,9 @@ input, select, button, th, td, label, h2 {
 button:active {
 	transform: scale(0.95);
 }
+
+@media only screen and (max-width: 600px) {
+    .app-nav-banners * {
+        font-size: 1.7vh;
+    }
+}
