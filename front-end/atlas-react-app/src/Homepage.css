@@ -173,6 +173,7 @@
 
     .homepage-container .game-description {
         min-height: 40vh;
+        margin-bottom: 4.5vh;
     }
 
     .homepage-container .game-description li {

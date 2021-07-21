@@ -254,6 +254,8 @@
 
     .start-instructions {
         font-size: 1.6vmax;
+        width: 75vw;
+        padding: 2vh;
     }
 
 }
