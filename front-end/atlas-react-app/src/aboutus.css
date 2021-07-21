@@ -215,3 +215,12 @@ article.container h3 {
     }
 
 }
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .whole-team-container article.container {
+        margin-left: -0.7vh;
+    }
+
+}
