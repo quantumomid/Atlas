@@ -146,3 +146,27 @@
 .end-game-register .signin-link-message {
     padding-bottom: 1.8vh;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .register-page {
+        background-image: none;
+    }
+
+    .register-page .register {
+        min-width: 90vw;
+    }
+
+    .register-page .register .register-inputs input {
+        width: 65vw;
+    }
+
+    .register-page .register .register-inputs select {
+        width: 70vw;
+    }
+
+    .register-page .register .registerformerrormessage {
+        margin-left: 7vw;
+    }
+
+}

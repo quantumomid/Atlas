@@ -117,4 +117,8 @@
         min-width: 65vw;
     }
 
+    .login-container .login input {
+        width: 70vw;
+    }
+
 }
