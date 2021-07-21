@@ -111,7 +111,7 @@ button:active {
 
 @media only screen and (max-width: 600px) {
     .app-nav-banners * {
-        font-size: 1.7vh;
+        font-size: 1.5vh;
         margin: 0px 2vw;
     }
 

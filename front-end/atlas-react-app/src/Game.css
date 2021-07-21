@@ -184,3 +184,61 @@
     border: none;
     color: white;
 }
+
+@media only screen and (max-width: 600px) {
+    
+    .game-page{
+        background-image: none;
+    }
+
+    .start-instructions {
+        min-height: 40vh;
+        font-size: 2.5vmin;
+    }
+
+    .game-clock-container {
+        max-height: 1vh;
+        max-width: 1vh;
+    }
+
+    .game-input-container * {
+        font-size: 0.1vh;
+    }
+
+    .player-score span {
+        height: 2vh;
+        width: 2vh;
+        margin-top: 0.5vh;
+    }
+
+    /* .game-input-container, .game-input-container .game-input-bar {
+        width: 100vw;
+    } */
+
+    /* .game-input-container {
+        width: 100vw;
+    } */
+
+    /* .game-input-container .game-input-bar {
+        font-size: 1.1vh;
+    } */
+
+    .game-input-container * {
+        margin: 0.5vw;
+        font-size: 0.1vh;
+    }
+
+    .game-input-container{
+        width: 90vw;
+        right: 5%;
+    }
+
+    .game-input-container .game-input-bar {
+        font-size: 1.8vh;
+        padding: 1.3vh;
+    }
+
+    .game-input-container .game-submit, .game-input-container .game-skip {
+        padding: 0vh 3vw;
+    }
+}

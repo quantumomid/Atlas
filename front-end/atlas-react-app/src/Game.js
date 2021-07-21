@@ -273,6 +273,25 @@ class Game extends Component {
                             playedCity={playedCity}
                          />
     
+    let reactClock
+    const isMobileDisplay = window.matchMedia(`(max-width: 600px)`)
+    console.log('is mobile?: ' + isMobileDisplay.matches)
+    if (isMobileDisplay.matches) {
+      reactClock = <ReactCountdownClock
+      seconds={15}
+      color="#019120"
+      alpha={0.9}
+      size={60}
+    />
+    } else {
+      reactClock = <ReactCountdownClock
+      seconds={15}
+      color="#019120"
+      alpha={0.9}
+      size={100}
+    />
+    }
+
     return (
       <main className = 'game-page'>
         {needStart && <div className="start-instructions">
@@ -302,20 +321,22 @@ class Game extends Component {
         {!needStart && <section className="top-game-bar">
             <div className = 'timer'>
               {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
-                <ReactCountdownClock
+                {/* <ReactCountdownClock
                 seconds={15}
                 color="#019120"
                 alpha={0.9}
                 size={100}
-                />
+                /> */}
+                { reactClock }
               </div>}
               {showCapitalCityQuestion && <div className = 'game-clock-container'>
-                <ReactCountdownClock
+                {/* <ReactCountdownClock
                   seconds={15}
                   color="#019120"
                   alpha={0.9}
                   size={100}
-                />
+                /> */}
+                { reactClock }
               </div>}
             </div>
             {/* conditionally show flow of game as is appropriate */}
