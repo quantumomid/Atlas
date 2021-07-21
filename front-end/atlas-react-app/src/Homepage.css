@@ -175,4 +175,8 @@
         min-height: 40vh;
     }
 
+    .homepage-container .game-description li {
+        font-size: 3.5vmin;
+    }
+
 }
