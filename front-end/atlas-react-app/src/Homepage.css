@@ -87,46 +87,54 @@
 
 @media only screen and (max-width: 600px) {
 
+    .homepage-container {
+        height: 155vh;
+        max-width: 99vw;
+    }
+
     .homepage-container .scoreboards{
-        /* height: 60vh; */
-        /* min-width: 90vw; */
         margin-left: 2vw;
         margin-right: 2vw;
+        margin-top: 0vh;
         padding: 0vh;
-
+        flex-direction: column;
     }
 
-    .global-scoreboard-homepage {
-        min-width: 40vw;
-    }
-    
-    .global-scoreboard-homepage .scoreboard {
-        /* width: 20vw;
-        margin-right: 0; */
-        /* min-width: 30vw; */
+    .global-scoreboard-homepage .scoreboard :first-child {
+        margin-bottom: 0vh;
     }
 
     .global-scoreboard-homepage .scoreboard .global-scoreboard {
-        max-width: 20vw;
+        width: 70vw;
+        height: 70vh;
+    }
+
+    .global-scoreboard-homepage .scoreboard .global-scoreboard th, .global-scoreboard-homepage .scoreboard .global-scoreboard td {
+        font-size: 1vmax;
+        padding: 1.2vh 0vw;
     }
 
     .global-scoreboard-homepage .global-scoreboard-filters-box {
-        width: 20vw;
+        width: 70vw;
     }
     
-    /* .global-scoreboard-homepage .global-scoreboard td */
-    
-    .homepage-container .scoreboard{
-        height: 50vh;
-        width: 33vw;
+    .homepage-container .scoreboard {
+        height: 60vh;
+        width: 70vw;
+        margin-top: 4vh;
+        margin-bottom: 4vh;
+    }
+
+    .homepage-container .scoreboard h2 {
+        font-size: 1.8vmax;
     }
 
     .homepage-container .personal-scoreboard-table {
-        max-width: 20vw;
+        width: 70vw;
     }
-    
-    .homepage-container .game-description{
-        /* height: 55vh; */
+
+    .homepage-container .global-scoreboard-homepage {
+        margin-top: 0vh;
     }
     
 }
