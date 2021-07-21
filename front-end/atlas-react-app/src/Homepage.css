@@ -85,6 +85,7 @@
     text-align: center;
 }
 
+/* styling for most phone sizes */
 @media only screen and (max-width: 600px) {
 
     .homepage-container {
@@ -92,7 +93,7 @@
     }
 
     .homepage-container {
-        height: 155vh;
+        height: 150vh;
         /* height: fit-content; */
         /* min-height: 130vh;; */
         max-width: 99vw;
@@ -165,4 +166,13 @@
         margin: 1vh;
     }
     
+}
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .homepage-container .game-description {
+        min-height: 40vh;
+    }
+
 }

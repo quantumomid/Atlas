@@ -244,3 +244,16 @@
         padding: 0vh 3vw;
     }
 }
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .game-page {
+        height: 78vh;
+    }
+
+    .start-instructions {
+        font-size: 1.6vmax;
+    }
+
+}

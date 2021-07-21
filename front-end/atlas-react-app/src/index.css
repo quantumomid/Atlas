@@ -124,3 +124,12 @@ button:active {
         max-width: 100vw;
     }
 }
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .app-nav-banners * {
+        font-size: 1.3vh;
+        margin: 0px 1vw;
+    }
+}

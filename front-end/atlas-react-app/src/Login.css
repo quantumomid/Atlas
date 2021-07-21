@@ -123,3 +123,12 @@
     }
 
 }
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .login-container .login .register-link-message {
+        font-size: 3.8vmin;
+    }
+
+}

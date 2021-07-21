@@ -334,3 +334,17 @@
         width: 50vw;
     }
 }
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .endgame-page .end-game-register h2 {
+        font-size: 6vmin;
+        padding-bottom: 2vh;
+    }
+
+    .endgame-page .end-game-register select {
+        font-size: 3.5vmin;
+    }
+
+}

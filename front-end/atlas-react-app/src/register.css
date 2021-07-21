@@ -171,3 +171,20 @@
     }
 
 }
+
+/* styling for iPhoneX */
+@media only screen and (max-width: 376px) {
+
+    .register-page .register-inputs {
+        font-size: 3.8vmin;
+    }
+
+    .register-page .register-inputs select {
+        font-size: 3.8vmin;
+    }
+
+    .register-page .signin-link-message {
+        font-size: 3.8vmin;
+    }
+
+}
