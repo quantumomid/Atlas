@@ -292,7 +292,53 @@
 @media only screen and (max-width: 600px) {
     
     .endgame-page{
+        height: 250vh;
         background-image: none;
+        flex-direction: column;
     }
 
+    .endgame-page .score-and-replay {
+        order: -2;
+    }
+
+    .endgame-page .score-and-replay button {
+        font-size: 3vh;
+    }
+
+    .endgame-page .countries-played-and-could-container {
+        order: -1;
+    }
+
+    /* .endgame-page :nth-child(1) {
+        order: 3;
+    }
+
+    .endgame-page :nth-child(2) {
+        order: 1;
+    }
+
+    .endgame-page :nth-child(3) {
+        order: 2;
+    } */
+
+    .endgame-page .countries-played-and-could-container, .endgame-page .score-and-replay, .endgame-page .end-game-register {
+        width: 85vw;
+    }
+
+    .endgame-page .register-inputs input, .endgame-page .register-inputs select {
+        width: 60vw;
+    }
+
+    .endgame-page .register-inputs select {
+        font-size: 2vh;
+    }
+
+    .endgame-page .signin-link-message {
+        padding-bottom: 5vh;
+    }
+
+    .countries-played-and-could-container .country-list {
+        text-align: center;
+        width: 50vw;
+    }
 }

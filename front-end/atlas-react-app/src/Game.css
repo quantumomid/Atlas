@@ -192,8 +192,10 @@
     }
 
     .start-instructions {
-        min-height: 40vh;
-        font-size: 2.5vmin;
+        min-height: 50vh;
+        font-size: 3vmin;
+        margin-top: 7vh;
+        margin-bottom: 3vh;
     }
 
     .game-clock-container {

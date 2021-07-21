@@ -103,7 +103,7 @@
         margin-right: 2vw;
         margin-top: 0vh;
         padding: 0vh;
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .global-scoreboard-homepage .scoreboard :first-child {
