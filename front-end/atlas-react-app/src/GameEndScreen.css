@@ -325,6 +325,10 @@
         width: 85vw;
     }
 
+    .endgame-page .end-game-register .registerformerrormessage p {
+        font-size: 1.8vh;
+    }
+
     .endgame-page .register-inputs input, .endgame-page .register-inputs select {
         width: 60vw;
     }
