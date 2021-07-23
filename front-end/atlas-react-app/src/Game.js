@@ -1,31 +1,17 @@
 import React, { Component } from 'react';
-import GameEndScreen from './GameEndScreen';
+import GameEndScreen from './GameComponents/GameEndScreen';
 import './Game.css'
-import ReactCountdownClock from 'react-countdown-clock';
-import Confetti from 'react-dom-confetti';
+import GameStart from './GameComponents/GameStart';
+import TopGameBar from './GameComponents/TopGameBar';
+import CapitalQuestion from './GameComponents/CapitalQuestion';
+import CountryQuestion from './GameComponents/CountryQuestion';
 
 const timeGiven = 15
-const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-const confettiConfig = {
-  angle: 90,
-  spread: 200,
-  startVelocity: 40,
-  elementCount: 100,
-  dragFriction: 0.2,
-  duration: 2500,
-  stagger: 1,
-  width: "10px",
-  height: "10px",
-  perspective: "500px",
-  colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
-};
 
 class Game extends Component {  
   
   initialState = {
     letter: '',
-    userInput: '',
-    userInputCity: '',
     needStart: true,
     isPlayerTurn: true,
     lastLetter: '',
@@ -35,8 +21,7 @@ class Game extends Component {
     score: 0,
     time: timeGiven,
     allMatches: [],
-    aiLooped: false,
-    nextPlayerLooped: false,
+    countryLooped: false,
     correctCity: '',
     flag: '',
     allCountriesPlayed: false,
@@ -45,10 +30,6 @@ class Game extends Component {
   }
   
   state = this.initialState
-
-  componentDidMount() {
-    this.props.setInGameStatus()
-  }
   
   handleStart() {
     this.timerInterval = setInterval(() => {
@@ -104,23 +85,12 @@ class Game extends Component {
     this.handleStart()
   }
 
-  handleUserInputChange(e) {
-    // handles user input to form element
-
-    const { name, value } = e.target
-
-    this.setState({[name]: value})
-  }
-
-  async handleSubmitUserCountry(e) {
+  async handleSubmitUserCountry(userInput) {
     // submits the completed player input to the backend to be checked
     // response marks whether or not the game continues or ends
-    
-    e.preventDefault()
     clearInterval(this.timerInterval)
-
-    const {userInput, letter} = this.state
-    this.setState({userInput: '', previousCountry: userInput})
+    const {letter} = this.state
+    this.setState({ previousCountry: userInput})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game`, {
       method: "POST",
       credentials: "include",
@@ -129,10 +99,8 @@ class Game extends Component {
       },
       body: JSON.stringify({userInput, letter})
     })
-
     const {correct, lastLetter, score, flag} = await response.json()
     // if user input correct, returns true else returns false
-
     // reset the input form to empty and update the lastLetter for the AI turn
     this.setState({lastLetter, score})
 
@@ -160,12 +128,9 @@ class Game extends Component {
     }
   }
 
-  async checkCapitalCity(e) {
-    e.preventDefault()
+  async checkCapitalCity(userInputCity) {
     clearInterval(this.timerInterval)
-    const { userInputCity } = this.state
     this.setState({ playedCity: userInputCity })
-    this.setState({userInputCity: ''})
     const response = await fetch(`${process.env.REACT_APP_API_URL}/game/city`, {
       method: "POST",
       credentials: "include",
@@ -180,7 +145,7 @@ class Game extends Component {
     if (isCorrectCity) {
       this.setState({letter: '✓', score})
       this.correctTimeout = setTimeout(() => {
-          this.setState({isPlayerTurn: false, userInputCity: '', userInput: '', showCapitalCityQuestion: false})
+          this.setState({isPlayerTurn: false, showCapitalCityQuestion: false})
           this.handleRestart()
           this.correctTimeout = 0
         }, 1000) 
@@ -208,7 +173,7 @@ class Game extends Component {
       body: JSON.stringify({lastLetter})
     })
     //returns country name that AI plays
-    const { aiCountryChoice, allCountriesPlayed, letter, aiLooped, nextPlayerLooped } = await response.json()
+    const { aiCountryChoice, allCountriesPlayed, letter, countryLooped } = await response.json()
 
     if (allCountriesPlayed) {
       this.setState({allCountriesPlayed})
@@ -217,7 +182,7 @@ class Game extends Component {
     } else {
 
       // trigger next player turn, displaying new lastLetter
-      this.setState({isPlayerTurn: true, aiCountryChoice, letter, aiLooped, nextPlayerLooped})
+      this.setState({isPlayerTurn: true, aiCountryChoice, letter, countryLooped})
     }
   }
 
@@ -245,7 +210,6 @@ class Game extends Component {
     clearInterval(this.timerInterval)
     clearTimeout(this.correctTimeout)
     clearTimeout(this.incorrectTimeout)
-    this.props.clearInGameStatus()
   }
 
   handleGameReset() {
@@ -253,17 +217,15 @@ class Game extends Component {
   }
 
   handleSkip() {
-    this.setState({isPlayerTurn: false, showCapitalCityQuestion: false, userInput: '', userInputCity: ''})
+    this.setState({isPlayerTurn: false, showCapitalCityQuestion: false})
     clearInterval(this.timerInterval)
     this.handleRestart()
   }
 
   render() {
 
-    const { needStart, letter, userInput, userInputCity, aiCountryChoice, isPlayerTurn, gameOver, time, score, allMatches, aiLooped, nextPlayerLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed, playedCity, previousCountry } = this.state
-    const numbers = [0,1,2,3,4,5,6,7,8,9]
+    const { needStart, letter, aiCountryChoice, gameOver, time, score, allMatches, countryLooped, showCapitalCityQuestion, correctCity, allCountriesPlayed, playedCity, previousCountry, flag } = this.state
     if (gameOver) return <GameEndScreen
-                            currentGameID={0}
                             isLoggedIn={this.props.isLoggedIn}
                             handleGameReset = {() => this.handleGameReset()}
                             allMatches = {allMatches}
@@ -272,141 +234,27 @@ class Game extends Component {
                             allCountriesPlayed={allCountriesPlayed}
                             playedCity={playedCity}
                          />
-    
+    if (needStart) return <GameStart
+                            handleStartGame={() => this.handleStartGame()}/>
     return (
       <main className = 'game-page'>
-        {needStart && <div className="start-instructions">
-          <h3>Welcome to Atlas game!</h3>
-          <p>
-            On clicking start game, the AI will provide you with a random letter. <br />
-            For ten points, you will need to <span className="instruction-correct">enter the name of a country beginning with that letter</span>. <br />
-            If you are correct, you can then <span className="instruction-correct">enter the name of that country's capital city</span> for a bonus five points, <span className="instruction-correct">or skip</span> if you aren't sure.<br />
-            The AI will then pick a country that starts with the last letter of your chosen country.<br />
-            You then guess again, for the last letter of the AI's pick.
-          </p>
-          <p>
-            Any <span className="instruction-error">incorrect answers</span>, or <span className="instruction-error">picking a country that has already been played by you or the AI</span>, will <span className="instruction-error">lead to game over!</span><br />
-            If there are no remaining countries starting with a letter, we move on to the next letter in the alphabet instead, repeating until all 201 countries have been played.<br />
-          </p>
-          <p>
-            <span className="instruction-error">Don't let the timer run out</span> or it's game over!
-          </p>
-          <h3>
-            Have fun!
-          </h3>
-        </div>}
-        <div className="start-button-container">
-          {needStart && <button onClick={() => this.handleStartGame()}>Start Game</button>}
-        </div>
         <div className = 'game-container'>
-        {!needStart && <section className="top-game-bar">
-            <div className = 'timer'>
-              {isPlayerTurn && !showCapitalCityQuestion && <div className = 'game-clock-container'>
-                <ReactCountdownClock
-                seconds={15}
-                color="#019120"
-                alpha={0.9}
-                size={100}
-                />
-              </div>}
-              {showCapitalCityQuestion && <div className = 'game-clock-container'>
-                <ReactCountdownClock
-                  seconds={15}
-                  color="#019120"
-                  alpha={0.9}
-                  size={100}
-                />
-              </div>}
-            </div>
-            {/* conditionally show flow of game as is appropriate */}
-            <div className="player-score">
-              <span>{score}</span>
-            </div>
-          </section>}
-          { !needStart && <div className="letter-question-container">
-            <div className="question-container">
-              {(isPlayerTurn && aiCountryChoice && aiLooped & !showCapitalCityQuestion) || (letter && nextPlayerLooped && !showCapitalCityQuestion) ? <div className="ai-response">No more countries beginning with that last letter!</div> : <div />}
-              {isPlayerTurn && aiCountryChoice && !showCapitalCityQuestion ? <div className="ai-response">The AI picked {aiCountryChoice}</div> : <div />}
-              {letter && !showCapitalCityQuestion ? <div className="main-question">Name a country beginning with:</div> : <div>For bonus points, name the capital city of {formatUserGameInput(previousCountry)}</div>}
-              </div>
-              <Confetti active={ letter === '✓' } config={ confettiConfig }/>
-              {showCapitalCityQuestion ? 
-              <div style={{ 
-                    backgroundImage: `url(${this.state.flag})`, color:'white' }} 
-                    className="letter"
-                  >
-                    {letter}
-              </div>
-              :
-              <div className="letter">{letter}</div>
-              }
-
-              {/* green background if correct */}
-              {letter === '✓' && 
-              <div style={{ 
-                    backgroundColor:'hsl(133, 100%, 40%)', color: 'white'}} 
-                    className="letter"
-                  >
-                    {letter}
-              </div>
-              }
-
-              {/* red background if incorrect */}
-              {letter === '✗' && 
-              <div style={{ 
-                    backgroundColor:'rgb(231, 50, 73)', color: 'white'}} 
-                    className="letter"
-                  >
-                    {letter}
-              </div>
-              }
-
-
-            </div> }
-            <section>
-              {!needStart && !showCapitalCityQuestion && <form className="game-input-container">
-                <input className="game-input-bar"
-                  type = "text" 
-                  placeholder = "Enter country beginning with this letter" 
-                  name="userInput" 
-                  value={userInput} 
-                  onChange ={(e) => this.handleUserInputChange(e)}
-                  autoComplete = 'off' // prevents browser remembering past inputs (cheating!)
-                  autoFocus={true}
-                />
-                <button className="game-submit"
-                  type = "submit"
-                  onClick = {(e) => this.handleSubmitUserCountry(e)}
-                  disabled = {numbers.some(number => userInput.includes(number)) || userInput === "" || !userInput.toLowerCase().split('').some(character => alphabet.includes(character)) || userInput.length > 60}
-                >
-                  Submit
-                </button>
-              </form> }
-              {/* optional capital city question: */}
-              {showCapitalCityQuestion && <form className="game-input-container">
-                <input className="game-input-bar"
-                  type = "text" 
-                  placeholder = {`Name the capital city of ${formatUserGameInput(previousCountry)}`}
-                  name="userInputCity" 
-                  value={userInputCity} 
-                  onChange ={(e) => this.handleUserInputChange(e)}
-                  autoComplete = 'off'
-                  autoFocus={true}
-                />
-                <button className="game-submit"
-                  type = "submit"
-                  onClick = {(e) => this.checkCapitalCity(e)}
-                  disabled = {numbers.some(number => userInputCity.includes(number)) || userInputCity === "" || !userInputCity.toLowerCase().split('').some(character => alphabet.includes(character)) || userInputCity.length > 60}
-                >
-                  Submit
-                </button>
-                <button className="game-skip"
-                    onClick={() => this.handleSkip()}
-                  >
-                    Skip
-                </button>
-              </form>  }
-            </section>
+          <TopGameBar
+            showCapitalCityQuestion={showCapitalCityQuestion}
+            score={score} />
+          {showCapitalCityQuestion ? <CapitalQuestion
+                                      letter={letter}
+                                      previousCountry={previousCountry}
+                                      flag={flag}
+                                      checkCapitalCity={(userInputCity) => this.checkCapitalCity(userInputCity)}
+                                      handleSkip={() => this.handleSkip()}
+                                      /> : 
+                                      <CountryQuestion
+                                      aiCountryChoice={aiCountryChoice}
+                                      countryLooped={countryLooped}
+                                      letter={letter}
+                                      handleSubmitUserCountry={(userInput) => this.handleSubmitUserCountry(userInput)}
+                                      />}
         </div>
      </main>
     )
@@ -414,17 +262,3 @@ class Game extends Component {
 }
 
 export default Game
-
-function formatUserGameInput(userInput) {
-  if (!userInput) return
-  // hard codes capitalisation for all inputs, accounting for those with 'of', 'the' and 'and' (all edge cases)
-  userInput = userInput.toLowerCase()
-  userInput = userInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-  userInput = userInput.split('').filter(elem => alphabet.includes(elem) || elem === '-' || elem === ' ').join('')
-  userInput = userInput.trim()
-  const nonCapitalizedWords = ['and', 'of', 'the', 'au', 'la']
-  userInput = userInput.split(' ').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ')
-  userInput = userInput.split('-').map(word => nonCapitalizedWords.includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join('-')
-  return userInput
-}
