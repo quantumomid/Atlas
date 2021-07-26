@@ -84,17 +84,12 @@ async function aiTurnHandler(server, client) {
         if (!userLetter) {    
             await server.json({allCountriesPlayed: true})
         } else {
-            let aiLooped = false
-            let nextPlayerLooped = false
-            if (savedLastLetter.toLowerCase() != aiCountryChoice[0].toLowerCase()) {
-                // if ai didn't have an answer to the player's last letter
-                aiLooped = true
+            let countryLooped = false
+            if (savedLastLetter.toLowerCase() != aiCountryChoice[0].toLowerCase() || userLetter.toLowerCase() != aiCountryChoice.slice(-1).toLowerCase()) {
+                // if ai didn't have an answer to the player's last letter 
+                countryLooped = true
             }
-            if (userLetter.toLowerCase() != aiCountryChoice.slice(-1).toLowerCase()) {
-                // if there are no answers to the ai's last letter
-                nextPlayerLooped = true
-            }
-            await server.json({aiCountryChoice, letter: userLetter.toUpperCase(), aiLooped, nextPlayerLooped})
+            await server.json({aiCountryChoice, letter: userLetter.toUpperCase(), countryLooped})
         }
     }
 }
